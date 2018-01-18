@@ -1,44 +1,68 @@
 import React from 'react';
-import { Button, Card, Header, Divider } from 'semantic-ui-react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { setHeaders } from '../actions/headers';
 import { setFlash } from '../actions/flash';
-import { Link } from 'react-router-dom';
-import TwitterLogin from 'react-twitter-auth';
+import { Container, Grid, Segment, Form } from 'semantic-ui-react';
+import SocialMediaRules from './SocialMediaRules';
+import { withRouter } from 'react-router-dom';
 
-class Twitter extends React.Component {
-  state = { points: 0 }
+class Social extends React.Component {
+  state = { value: '' }
 
   componentDidMount() {
-    //TODO get twitter points
+    axios.get(`/api/${this.props.service}`)
+      .then( res => {
+        this.props.dispatch(setHeaders(res.headers));
+        this.setState({ value: res.data });
+      });
   }
 
-  render() { 
-    const { points } = this.state;
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const { value } = this.state;
+    axios.post(`/api/${this.props.service}`, { [`${this.props.service}`]: value } )
+      .then( res => {
+        this.props.dispatch(setHeaders(res.headers));
+        this.props.dispatch(setFlash('Success', 'green'));
+      })
+      .catch( err => {
+        //TODO
+      })
+  }
+
+  handleChange = (e) => {
+    this.setState({ value: e.target.value });
+  }
+
+  render() {
+    const { value } = this.state;
+
     return (
-      <Card>
-        <Card.Header>
-          <Divider hidden />
-          <Header as="h1"textAlign="center">{points}</Header>
-          <Header as="h1"textAlign="center">Twitter</Header>
-        </Card.Header>
-        <Card.Content textAlign="center">
-          <p>
-            Reward
-            {' '}
-            <Link to="/point_break_down">Distribution</Link>
-          </p>
-          <Divider hidden />
-          <TwitterLogin
-            loginUrl="http://localhost:3001/api/twitter"
-            onSuccess={this.showButtons}
-            requestTokenUrl="http://localhost:3001/api/twitter/reverse"
-          />
-        </Card.Content>
-      </Card>
+      <Container>
+        <Grid stackable columns={2}>
+          <Grid.Row>
+            <Grid.Column>
+              <Segment>
+                <Form onSubmit={this.handleSubmit}>
+                  <Form.Input
+                    value={value === null ? '' : value}
+                    onChange={this.handleChange}
+                    required
+                    placeholder="Username"
+                  />
+                  <Form.Button>Save</Form.Button>
+                </Form>
+              </Segment>
+            </Grid.Column>
+            <Grid.Column>
+              <SocialMediaRules/>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      </Container>
     )
   }
 }
 
-export default connect()(Twitter);
+export default withRouter(connect()(Social));

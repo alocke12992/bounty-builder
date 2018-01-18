@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Menu } from 'semantic-ui-react';
+import { Menu, Dropdown } from 'semantic-ui-react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { handleLogout } from '../actions/auth';
@@ -11,38 +11,57 @@ class NavBar extends Component {
     if (user.id) {
       return (
         <Menu.Menu position='right'>
-          <Menu.Item
-            name='Logout'
-            onClick={() => dispatch(handleLogout(history))}
-          />
+        <Dropdown item text={user.email} style={styles.text}>
+          <Dropdown.Menu>
+            <Dropdown.Item onClick={() => history.push('/about')}>About Campaign</Dropdown.Item>
+            <Dropdown.Item
+              onClick={() => dispatch(handleLogout(history))}
+            >
+              Logout
+            </Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
         </Menu.Menu>
       );
     }
     return (
       <Menu.Menu position='right'>
-        <Link to='/register'>
-          <Menu.Item name='Register' />
-        </Link>
-        <Link to='/login'>
-          <Menu.Item name='Login' />
-        </Link>
+        <Menu.Item as={Link} to='/register' name='Register' style={styles.text}/>
+        <Menu.Item as={Link} to='/login' name='Login' style={styles.text}/>
       </Menu.Menu>
     );
   }
 
   render() {
     return (
-      <div>
-        <Menu pointing secondary>
-          <Link to='/'>
-            <Menu.Item name='home' />
-          </Link>
-          { this.rightNavs() }
-        </Menu>
-      </div>
+      <Menu pointing secondary style={styles.base}>
+        <Menu.Item>
+          <img
+            src={require('../assets/images/HN_token_transparent.png')}
+            style={styles.logo}
+            onClick={() => this.props.history.push('/')}
+            alt='HN Token'
+          />
+        </Menu.Item>
+        { this.rightNavs() }
+      </Menu>
     );
   }
 }
+
+var styles = {
+  base: {
+    background: '#3685b5',
+    height: '100px',
+  },
+  text: {
+    color: 'white'
+  },
+  logo: {
+    width: '75px',
+    height: '75px'
+  }
+};
 
 const mapStateToProps = state => {
   return { user: state.user };

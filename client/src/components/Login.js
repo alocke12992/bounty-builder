@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Header, Segment, Form, Button } from 'semantic-ui-react';
+import { Segment, Form, Button, Grid } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { handleLogin } from '../actions/auth';
 
@@ -21,37 +21,50 @@ class Login extends Component {
   render() {
     const { email, password } = this.state;
     return (
-      <Segment basic>
-        <Header as='h1' textAlign='center'>Login</Header>
-        <Form onSubmit={this.handleSubmit}>
-          <Form.Field>
-            <label htmlFor='email'>Email</label>
-            <input
-              required
-              id='email'
-              value={email}
-              placeholder='Email'
-              onChange={this.handleChange}
-            />
-          </Form.Field>
-          <Form.Field>
-            <label htmlFor='password'>Password</label>
-            <input
-              required
-              id='password'
-              value={password}
-              placeholder='Password'
-              type='password'
-              onChange={this.handleChange}
-            />
-          </Form.Field>
-          <Segment textAlign='center' basic>
-            <Button primary type='submit'>Submit</Button>
+      <Grid centered columns={2}>
+        <Grid.Column>
+          <Segment raised>
+            <div style={{textAlign: 'center'}}>
+              <img src={require('../assets/images/HN_token_transparent.png')} style={styles.logo} alt='HN Token'/>
+            </div>
+            <Form onSubmit={this.handleSubmit}>
+              <Form.Field>
+                <label htmlFor='email'>Email</label>
+                <input
+                  required
+                  id='email'
+                  value={email}
+                  placeholder='Email'
+                  onChange={this.handleChange}
+                  />
+              </Form.Field>
+              <Form.Field>
+                <label htmlFor='password'>Password</label>
+                <input
+                  required
+                  id='password'
+                  value={password}
+                  placeholder='Password'
+                  type='password'
+                  onChange={this.handleChange}
+                  />
+              </Form.Field>
+              <Segment textAlign='center' basic>
+                <Button primary type='submit'>Submit</Button>
+              </Segment>
+            </Form>
           </Segment>
-        </Form>
-      </Segment>
+        </Grid.Column>
+      </Grid>
     );
   }
 }
+
+var styles = {
+  logo: {
+    width: '120px',
+    height: '120px'
+  }
+};
 
 export default connect()(Login);

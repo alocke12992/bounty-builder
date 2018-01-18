@@ -1,9 +1,11 @@
-class Api::TwitterController < ApplicationController
+class Api::TwitterController < Api::ApiController
   def index
-    binding.pry
+    render json: current_user.twitter ? current_user.twitter : ''
   end
 
-  def reverse
-    binding.pry
+  def create
+    current_user.update(twitter: params[:twitter])
+    #TODO error handling
+    render json: current_user.twitter
   end
 end

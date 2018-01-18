@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Icon, Card, Header, Form, Image, Divider } from 'semantic-ui-react';
+import { Card, Header, Form, Image, Divider } from 'semantic-ui-react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { setHeaders } from '../actions/headers';
@@ -7,16 +7,20 @@ import { setFlash } from '../actions/flash';
 import eth from '../images/ETHEREUM.png';
 
 class Wallet extends React.Component {
-  state = { points: 0, walletAddress: '', editable: false }
+  state = { walletAddress: '', showField: false }
 
   componentDidMount() {
     axios.get('/api/wallet')
       .then( res => {
-        let editable = true;
-        if (res.data.length)
-          editable = false
+        let showField;
+        if (res.data.toString().length > 0){
+          showField = false;
+        }
+        else {
+          showField = true;
+        }
         this.props.dispatch(setHeaders(res.headers));
-        this.setState({ walletAddress: res.data, editable });
+        this.setState({ walletAddress: res.data, showField });
       });
   }
 
@@ -29,7 +33,7 @@ class Wallet extends React.Component {
     const { walletAddress } = this.state;
     axios.post('/api/wallet', { wallet: walletAddress } )
       .then( res => {
-        this.toggleEdit();
+        this.setState({showField: false});
         this.props.dispatch(setHeaders(res.headers));
         this.props.dispatch(setFlash('Wallet updated', 'green'));
       })
@@ -38,30 +42,17 @@ class Wallet extends React.Component {
       })
   }
 
-  toggleEdit = () => {
-    this.setState( state => {
-      return { editable: !state.editable }
-    });
-  }
-
-  render() { 
-    const { points, walletAddress, editable } = this.state;
-    let readOnly = {};
-    let showEdit = false;
-    if (!editable) {
-      readOnly = { disabled: true }
-      showEdit = true;
-    }
+  render() {
+    const { walletAddress, showField } = this.state;
     return (
       <Card>
         <Card.Header>
           <Divider hidden />
-          <Header as="h1"textAlign="center">{points}</Header>
           <Header as="h1"textAlign="center">Ethereum</Header>
         </Card.Header>
         <Card.Content textAlign="center">
           <p>
-            Dont't have a 
+            Dont't have a
             <a
               href="https://www.youtube.com/watch?v=phht73IvUDI"
               target="_blank"
@@ -77,20 +68,12 @@ class Wallet extends React.Component {
               onChange={this.handleChange}
               required
               placeholder="ETH address"
-              {...readOnly}
+              disabled={!showField}
             />
-            { showEdit ?
-                <Button 
-                  onClick={this.toggleEdit}
-                  type="button"
-                >
-                  Edit
-                </Button>
-                :
-                <Form.Button>Save</Form.Button>
-            }
+          { showField && <Form.Button>Save</Form.Button> }
           </Form>
           <Divider hidden />
+          <p><strong>Warning!</strong> You may only enter your Ethereum address once. After that, it will not be able to be changed.</p>
           <Image src={eth} centered alt="Ethereum logo"  size="tiny" />
           <Divider hidden />
           <p>
