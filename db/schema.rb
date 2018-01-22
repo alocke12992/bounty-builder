@@ -15,15 +15,6 @@ ActiveRecord::Schema.define(version: 20180119215949) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "blogs", force: :cascade do |t|
-    t.string "url"
-    t.boolean "accepted", default: false
-    t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_blogs_on_user_id"
-  end
-
   create_table "rewards", force: :cascade do |t|
     t.integer "value"
     t.string "source"
@@ -32,6 +23,16 @@ ActiveRecord::Schema.define(version: 20180119215949) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_rewards_on_user_id"
+  end
+
+  create_table "submissions", force: :cascade do |t|
+    t.string "url"
+    t.boolean "accepted", default: false
+    t.bigint "user_id"
+    t.string "kind"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_submissions_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -72,6 +73,6 @@ ActiveRecord::Schema.define(version: 20180119215949) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
-  add_foreign_key "blogs", "users"
   add_foreign_key "rewards", "users"
+  add_foreign_key "submissions", "users"
 end

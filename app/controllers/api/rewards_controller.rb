@@ -12,9 +12,7 @@ class Api::RewardsController < ApplicationController
   end
 
   def source_points
-    if current_user
-      render json: current_user.rewards.where(source: params[:source]).sum(:value)
-    end
+    render json: current_user.rewards.where(source: params[:source]).sum(:value)
   end
 
   private

@@ -8,6 +8,7 @@ import SocialMediaRules from './SocialMediaRules';
 import BlogRules from './BlogRules';
 import ChatRules from './ChatRules';
 import { withRouter } from 'react-router-dom';
+import Submissions from './Submissions';
 
 class Social extends React.Component {
   state = { value: '' }
@@ -67,6 +68,9 @@ class Social extends React.Component {
                   <Form.Button>Save</Form.Button>
                 </Form>
               </Segment>
+              { this.props.submissions &&
+                <Submissions kind={this.props.service}/>
+              }
             </Grid.Column>
             <Grid.Column>
               {

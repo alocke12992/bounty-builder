@@ -3,11 +3,11 @@ import { setFlash } from '../actions/flash';
 import { setHeaders } from '../actions/headers';
 
 
-export const getBlogs = (callBack = () => {}) => {
+export const getSubmissions = (kind, callBack = () => {}) => {
   return dispatch => {
-    axios.get('/api/blogs')
+    axios.get(`/api/submissions?kind=${kind}`)
       .then(res => {
-        dispatch({type: 'GET_BLOGS', blogs: res.data})
+        dispatch({type: 'GET_SUBMISSIONS', submissions: res.data})
         dispatch(setHeaders(res.headers));
       })
       .catch(error => {
@@ -16,11 +16,11 @@ export const getBlogs = (callBack = () => {}) => {
   };
 };
 
-export const addBlog = ( url, callBack = () => {}) => {
+export const addSubmission = ( url, kind, callBack = () => {}) => {
   return dispatch => {
-    axios.post('/api/blogs', { url })
+    axios.post('/api/submissions', { url, kind })
       .then(res => {
-        dispatch({type: 'ADD_BLOG', blog: res.data})
+        dispatch({type: 'ADD_SUBMISSION', submission: res.data})
         dispatch(setHeaders(res.headers));
       })
       .catch(error => {

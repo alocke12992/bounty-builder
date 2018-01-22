@@ -11,7 +11,6 @@ import Social from './Social';
 import Facebook from './Facebook';
 import Twitter from './Twitter';
 import Wallet from './Wallet';
-import Blog from './Blog';
 
 const routes = [
   { path: '/',
@@ -22,25 +21,25 @@ const routes = [
     main: () => <Facebook service="facebook"/>
   },
   { path: '/twitter',
-    main: () => <Twitter service="twitter"/>
+    main: () => <Social service="twitter" submissions={true}/>
   },
   { path: '/linkedin',
-    main: () => <Social service="linkedin"/>
+    main: () => <Social service="linkedin" submissions={true}/>
   },
   { path: '/reddit',
-    main: () => <Social service="reddit"/>
+    main: () => <Social service="reddit" submissions={true}/>
   },
   { path: '/blog',
-    main: () => <Blog service="blog"/>
+    main: () => <Social service="blog" submissions={true}/>
   },
   { path: '/influencer',
-    main: () => <Social service="influencer"/>
+    main: () => <Social service="influencer" submissions={true}/>
   },
   { path: '/telegram',
-    main: () => <Social service="telegram"/>
+    main: () => <Social service="telegram" submissions={false}/>
   },
   { path: '/discord',
-    main: () => <Social service="discord"/>
+    main: () => <Social service="discord" submissions={false}/>
   },
   { path: '/referral',
     main: () => <h2>Referral - Coming Soon</h2>

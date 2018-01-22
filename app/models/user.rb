@@ -6,5 +6,5 @@ class User < ActiveRecord::Base
   include DeviseTokenAuth::Concerns::User
 
   has_many :rewards
-  has_many :blogs
+  has_many :submissions
 end

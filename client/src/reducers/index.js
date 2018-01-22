@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
 import user from './user';
 import flash from './flash';
-import blogs from './blogs';
+import submissions from './submissions';
 
 const rootReducer = combineReducers({
   user,
   flash,
-  blogs,
+  submissions,
 });
 
 export default rootReducer;

@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     resources :telegram, only: [:index, :create]
     resources :discord, only: [:index, :create]
     resources :rewards, only: [:index, :create]
-    resources :blogs, only: [:index, :create, :update]
+    resources :submissions, only: [:index, :create, :update]
     match "rewards/source_points" => "rewards#source_points", :via => :get, :as => :source_points
     match "users/total_user_count" => "users#total_user_count", :via => :get, :as => :total_user_count
   end

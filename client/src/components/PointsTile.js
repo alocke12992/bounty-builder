@@ -5,9 +5,14 @@ import { setHeaders } from '../actions/headers';
 import { Card } from 'semantic-ui-react';
 
 class PointsTile extends React.Component {
-  state = { points: 0 }
+  state = { points: '0' }
 
-  componentDidMount() {
+  componentWillMount() {
+    this.getPoints();
+    setTimeout(function() { if(this.state.points === '0'){this.getPoints()}; }.bind(this), 1000);
+  }
+
+  getPoints = () => {
     axios.get(`/api/rewards/source_points?source=${this.props.source}`)
       .then( res => {
         this.setState({points: res.data})

@@ -1,6 +1,6 @@
 {
   "name": "create-repack-app",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "scripts": {
     "build": "cd client && npm install --only=dev && npm install && npm run build && cd ..",
     "deploy": "cp -a client/build/. public/",
@@ -8,5 +8,14 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "description": "This README would normally document whatever steps are necessary to get the application up and running.",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@phabricator.devpointstudios.com/diffusion/31/bounty.git"
+  }
 }
