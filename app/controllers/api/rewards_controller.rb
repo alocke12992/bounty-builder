@@ -1,14 +1,19 @@
 class Api::RewardsController < ApplicationController
   def index
-    render json: current_user.rewards.sum(:value)
+    render json: current_user.rewards
   end
 
   def create
-    case reward_params[:reason]
-      when "Liked SVH on Facebook"
-        current_user.rewards.create(reward_params) if current_user.rewards.where(reason: "Liked SVH on Facebook").count == 0
+    daily_rewards_count = current_user.rewards.where("created_at >= ? and source != ?", Time.zone.now.beginning_of_day, "invitation").count
+    if daily_rewards_count < 2
+      reward = current_user.rewards.create(reward_params)
+      if params[:post_id]
+        reward.post = Post.find(params[:post_id])
+      end
+      render json: reward
+    else
+      render json: { errors: "Only 2 Posts Allowed Per Day" }, status: 422
     end
-    render json: "Success"
   end
 
   def source_points
@@ -17,6 +22,6 @@ class Api::RewardsController < ApplicationController
 
   private
   def reward_params
-    params.require(:reward).permit(:value, :source, :reason)
+    params.require(:reward).permit(:value, :source, :reason, :post_id)
   end
 end

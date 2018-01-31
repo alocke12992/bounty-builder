@@ -3,7 +3,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { setHeaders } from '../actions/headers';
 import { setFlash } from '../actions/flash';
-import { Container, Grid, Segment, Form } from 'semantic-ui-react';
+import { Container, Grid, Segment, Header } from 'semantic-ui-react';
 import SocialMediaRules from './SocialMediaRules';
 import BlogRules from './BlogRules';
 import ChatRules from './ChatRules';
@@ -50,23 +50,19 @@ class Social extends React.Component {
   }
 
   render() {
-    const { value } = this.state;
-
     return (
       <Container>
         <Grid stackable columns={2}>
           <Grid.Row>
             <Grid.Column>
               <Segment>
-                <Form onSubmit={this.handleSubmit}>
-                  <Form.Input
-                    value={value === null ? '' : value}
-                    onChange={this.handleChange}
-                    required
-                    placeholder="Username"
-                  />
-                  <Form.Button>Save</Form.Button>
-                </Form>
+                <Header as='h2'>Submit Your Own Content</Header>
+                <p>If you use an influencing platform such as a blog, video site, social media etc, you may submit your own content for shares.</p>
+                <ol>
+                  <li>Create your content.</li>
+                  <li>Post a URL to your content (beginning with https)</li>
+                  <li>A moderator will review your submission and award shares according to the share rules.</li>
+                </ol>
               </Segment>
               { this.props.submissions &&
                 <Submissions kind={this.props.service}/>

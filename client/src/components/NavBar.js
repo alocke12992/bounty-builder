@@ -13,7 +13,13 @@ class NavBar extends Component {
         <Menu.Menu position='right'>
         <Dropdown item text={user.email} style={styles.text}>
           <Dropdown.Menu>
-            <Dropdown.Item onClick={() => history.push('/about')}>About Campaign</Dropdown.Item>
+            { user.role === 'admin' &&
+              <Dropdown.Item onClick={() => history.push('/admin')}>Admin</Dropdown.Item>
+            }
+            {/* (user.role === 'admin' || user.role === 'moderator') &&
+              <Dropdown.Item onClick={() => history.push('/moderate')}>Moderate</Dropdown.Item>
+            */}
+            <Dropdown.Item onClick={() => history.push('/rules')}>About Campaign</Dropdown.Item>
             <Dropdown.Item
               onClick={() => dispatch(handleLogout(history))}
             >
@@ -41,6 +47,14 @@ class NavBar extends Component {
             style={styles.logo}
             onClick={() => this.props.history.push('/')}
             alt='HN Token'
+          />
+        </Menu.Item>
+        <Menu.Item>
+          <img
+            src={require('../assets/images/health_nexus_text.svg')}
+            style={{height: '25px', width: 'auto', marginBottom: '20px'}}
+            onClick={() => this.props.history.push('/')}
+            alt='HN Text'
           />
         </Menu.Item>
         { this.rightNavs() }

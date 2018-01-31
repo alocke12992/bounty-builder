@@ -74,20 +74,9 @@ class Wallet extends React.Component {
           </Form>
           <Divider hidden />
           <p><strong>Warning!</strong> You may only enter your Ethereum address once. After that, it will not be able to be changed.</p>
+          <p>Ethereum address must not be tied to an exchange, it must be a separate, standard wallet.</p>
           <Image src={eth} centered alt="Ethereum logo"  size="tiny" />
           <Divider hidden />
-          <p>
-            Want to know what your Ethereum's worth?
-Multiply your Ethereum by today's
-            <a
-              href="https://www.coindesk.com/ethereum-price/"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              {' '}
-              price
-            </a>
-          </p>
         </Card.Content>
       </Card>
     )

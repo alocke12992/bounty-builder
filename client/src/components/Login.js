@@ -27,6 +27,7 @@ class Login extends Component {
             <div style={{textAlign: 'center'}}>
               <img src={require('../assets/images/HN_token_transparent.png')} style={styles.logo} alt='HN Token'/>
             </div>
+            <p>Welcome to the bounty program for Health Nexus, the healthcare-safe blockchain. Find more about our project here: <a href='https://token.simplyvitalhealth.com'>https://token.simplyvitalhealth.com/</a></p>
             <Form onSubmit={this.handleSubmit}>
               <Form.Field>
                 <label htmlFor='email'>Email</label>

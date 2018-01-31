@@ -12,6 +12,7 @@ export const getSubmissions = (kind, callBack = () => {}) => {
       })
       .catch(error => {
         dispatch(setHeaders(error.headers));
+        dispatch(setFlash('Error', 'red'));
       });
   };
 };
@@ -25,6 +26,7 @@ export const addSubmission = ( url, kind, callBack = () => {}) => {
       })
       .catch(error => {
         dispatch(setHeaders(error.headers));
+        dispatch(setFlash('Error', 'red'));
       });
   };
 };

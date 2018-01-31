@@ -46,7 +46,7 @@ class About extends Component {
               <li>Below is a scale of shares offered per article based off of followers:</li>
               <li><strong>Engagement Bonus:</strong> 2 shares per like/upvote</li>
             </ul>
-            <p>*Articles must contain at least 2 links to: <a href="https://tokensale.simplyvitalhealth.com">https://tokensale.simplyvitalhealth.com</a><br /> <br /> 250 shares for 100-300 followers<br /> 500 shares for 1000 followers<br /> 550 shares for 1000+<br /> 1000 shares for 10,000<br /> 2500 shares for 50,000<br /> 5000 shares for 100,000<br /> <br /> <strong>Rule 1:</strong> Low-quality articles will not be accepted<br /> <strong>Rule 2: </strong>Articles and must be original work.(You can use official images, logos, graphics posted in website, ANN thread, Facebook, and Twitter).<br /> <strong>Rule 3: </strong>Articles below 400 words will not be accepted.</p>
+            <p>*Articles must contain at least 2 links to: <a href="https://token.simplyvitalhealth.com">https://token.simplyvitalhealth.com</a><br /> <br /> 250 shares for 100-300 followers<br /> 500 shares for 1000 followers<br /> 550 shares for 1000+<br /> 1000 shares for 10,000<br /> 2500 shares for 50,000<br /> 5000 shares for 100,000<br /> <br /> <strong>Rule 1:</strong> Low-quality articles will not be accepted<br /> <strong>Rule 2: </strong>Articles and must be original work.(You can use official images, logos, graphics posted in website, ANN thread, Facebook, and Twitter).<br /> <strong>Rule 3: </strong>Articles below 400 words will not be accepted.</p>
           </Segment>
         </Grid.Column>
       </Grid>

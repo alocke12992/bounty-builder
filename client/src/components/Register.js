@@ -5,14 +5,19 @@ import { registerUser } from '../actions/auth';
 import { setFlash } from '../actions/flash';
 
 class Register extends Component {
-  state = { email: '', password: '', passwordConfirmation: '' };
+  state = { email: '', password: '', passwordConfirmation: '', invite_code: '' };
+
+  componentDidMount(){
+    if (this.props.location.search)
+      this.setState({invite_code: this.props.location.search.split('?invite_code=')[1]})
+  }
 
   handleSubmit = event => {
     event.preventDefault();
-    const { email, password, passwordConfirmation } = this.state;
+    const { email, password, passwordConfirmation, invite_code} = this.state;
     const { dispatch, history } = this.props;
     if (password === passwordConfirmation) {
-      dispatch(registerUser(email, password, passwordConfirmation, history));
+      dispatch(registerUser(email, password, passwordConfirmation, history, invite_code));
     } else dispatch(setFlash('Passwords do not match!, please try again', 'red'));
   }
 
@@ -25,7 +30,7 @@ class Register extends Component {
   }
 
   render() {
-    const { email, password, passwordConfirmation } = this.state;
+    const { email, password, passwordConfirmation, invite_code } = this.state;
 
     return (
       <Grid centered columns={2}>
@@ -34,6 +39,7 @@ class Register extends Component {
             <div style={styles.centered}>
               <img src={require('../assets/images/HN_token_transparent.png')} style={styles.logo} alt='HN Token'/>
             </div>
+            <p>Welcome to the bounty program for Health Nexus, the healthcare-safe blockchain. Find more about our project here: <a href='https://token.simplyvitalhealth.com'>https://token.simplyvitalhealth.com/</a></p>
             <Form onSubmit={this.handleSubmit}>
               <Form.Field>
                 <label htmlFor='email'>Email</label>
@@ -64,6 +70,15 @@ class Register extends Component {
                   type='password'
                   required
                   value={passwordConfirmation}
+                  onChange={this.handleChange}
+                />
+              </Form.Field>
+              <Form.Field>
+                <label>Invite Code (Fill in if you are using a referral code from a friend)</label>
+                <input
+                  id='invite_code'
+                  placeholder='Invite Code'
+                  value={invite_code}
                   onChange={this.handleChange}
                 />
               </Form.Field>

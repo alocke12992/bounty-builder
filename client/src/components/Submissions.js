@@ -4,6 +4,15 @@ import { Card, Segment, Form, Button } from 'semantic-ui-react';
 import { withRouter } from 'react-router-dom';
 import { getSubmissions, addSubmission } from '../actions/submissions';
 
+
+const truncate = (string) => {
+  if(string.length >= 30){
+    return string.substring(0,30) + '...';
+  }else{
+    return string;
+  }
+}
+
 class Submissions extends React.Component {
   state = { username: '', newSubmission: '', adding: false }
 
@@ -24,10 +33,10 @@ class Submissions extends React.Component {
 
   renderSubmissions = () => {
     return this.props.submissions.map(submission => (
-      <Card>
+      <Card key={submission.id}>
         <Card.Content>
           <Card.Header>
-            <a href={submission.url}>{ submission.url }</a>
+            <a href={submission.url}>{ truncate(submission.url) }</a>
           </Card.Header>
           <Card.Description>
             Status: { submission.accepted ? 'Accepted' : 'In Review'}

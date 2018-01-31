@@ -3,19 +3,26 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { setHeaders } from '../actions/headers';
 import { setFlash } from '../actions/flash';
-import { Header, Container, Grid, Segment, Form, List } from 'semantic-ui-react';
+import { Header, Container, Grid, Segment, Form, Button, Divider } from 'semantic-ui-react';
 import SocialMediaRules from './SocialMediaRules';
 import { withRouter } from 'react-router-dom';
-import FacebookLogin from 'react-facebook-login';
+import FacebookProvider, { Like, EmbeddedPost } from 'react-facebook';
+import { addReward } from '../actions/rewards';
+import ActionWarning from './ActionWarning';
 
-class Social extends React.Component {
-  state = { value: '' }
+class Facebook extends React.Component {
+  state = { value: '', posts: [] }
 
   componentDidMount() {
     axios.get(`/api/${this.props.service}`)
       .then( res => {
         this.props.dispatch(setHeaders(res.headers));
         this.setState({ value: res.data });
+      });
+    axios.get(`/api/posts?kind=facebook`)
+      .then( res => {
+        this.props.dispatch(setHeaders(res.headers));
+        this.setState({ posts: res.data });
       });
   }
 
@@ -36,21 +43,34 @@ class Social extends React.Component {
     this.setState({ value: e.target.value });
   }
 
-  fbResponse = (r) => {
-    if(r.friends.summary.total_count >= 200){
-      r.likes.data.forEach(function (value) {
-        if(value.name === "DevPoint Labs"){
-          axios.post('/api/rewards', { value: 20, source: 'facebook', reason: 'Liked SVH on Facebook' } )
-            .then( res => {
-              this.props.dispatch(setHeaders(res.headers));
-              this.props.dispatch(setFlash('Completed', 'green'));
-            })
-            .catch( err => {
-              //TODO
-            })
-        }
-      });
+  renderPosts = () => {
+    return this.state.posts.map( post => (
+      <Segment key={post.id} style={{margin: 10}}>
+        <EmbeddedPost href={post.url} width="500" />
+        <Divider hidden />
+        <Button
+          color='facebook'
+          disabled={this.rewardsIncludes(`Liked post ${post.id}.`) || this.state.value === ''}
+          onClick={() => this.props.dispatch(addReward(20, 'facebook', `Liked post ${post.id}.`, post.id))}
+        >
+          I liked this post.
+        </Button>
+      </Segment>
+    ))
+  }
+
+  likePage = () => {
+    this.props.dispatch(addReward(20, 'facebook', 'Liked SVH on facebook.'));
+  }
+
+  rewardsIncludes = (reason) => {
+    const { rewards } = this.props;
+    for (var i=0; i < rewards.length; i++) {
+      if (rewards[i].reason === reason) {
+        return true;
+      }
     }
+    return false;
   }
 
   render() {
@@ -71,7 +91,7 @@ class Social extends React.Component {
                   />
                   <Form.Button>Save</Form.Button>
                 </Form>
-                <hr/>
+                {/*<hr/>
                 <Header as='h2'>How to earn shares:</Header>
                 <List bulleted>
                   <List.Item>
@@ -82,7 +102,7 @@ class Social extends React.Component {
                   </List.Item>
                 </List>
                 <FacebookLogin
-                  appId="178191166116598"
+                  appId="355565764911095"
                   cookie={true}
                   xfbml={true}
                   version='2.8'
@@ -91,12 +111,27 @@ class Social extends React.Component {
                   scope="public_profile,email,user_friends,user_likes,user_posts"
                   callback={this.fbResponse.bind(this)}
                   disableMobileRedirect={true}
-                />
+                />*/}
               </Segment>
+              {/*// <Submissions kind={this.props.service}/>*/}
             </Grid.Column>
             <Grid.Column>
               <SocialMediaRules/>
             </Grid.Column>
+            <ActionWarning/>
+              <FacebookProvider appId="178191166116598">
+                <Segment>
+                  <Header as='h2'>Simply Vital Health Facebook Page:</Header>
+                  <Like href="https://www.facebook.com/SimplyVitalHealth/" colorScheme="dark" showFaces />
+                  <Divider hidden />
+                  <Button color='facebook' onClick={this.likePage} disabled={this.rewardsIncludes("Liked SVH on facebook.") || this.state.value === ''}>I liked this page.</Button>
+                </Segment>
+                { this.renderPosts() }
+              </FacebookProvider>
+          </Grid.Row>
+          <Grid.Row>
+
+
           </Grid.Row>
         </Grid>
       </Container>
@@ -104,4 +139,10 @@ class Social extends React.Component {
   }
 }
 
-export default withRouter(connect()(Social));
+const mapStateToProps = (state) => {
+  return {
+    rewards: state.rewards,
+  }
+}
+
+export default withRouter(connect(mapStateToProps)(Facebook));

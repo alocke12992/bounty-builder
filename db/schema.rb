@@ -10,10 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180119215949) do
+ActiveRecord::Schema.define(version: 20180125200036) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "discords", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "username"
+    t.boolean "approved", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_discords_on_deleted_at"
+    t.index ["user_id"], name: "index_discords_on_user_id"
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.string "url"
+    t.string "kind"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "reward_id"
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_posts_on_deleted_at"
+  end
 
   create_table "rewards", force: :cascade do |t|
     t.integer "value"
@@ -22,6 +43,9 @@ ActiveRecord::Schema.define(version: 20180119215949) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "moderator_approved", default: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_rewards_on_deleted_at"
     t.index ["user_id"], name: "index_rewards_on_user_id"
   end
 
@@ -32,7 +56,20 @@ ActiveRecord::Schema.define(version: 20180119215949) do
     t.string "kind"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_submissions_on_deleted_at"
     t.index ["user_id"], name: "index_submissions_on_user_id"
+  end
+
+  create_table "telegrams", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "username"
+    t.boolean "approved", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_telegrams_on_deleted_at"
+    t.index ["user_id"], name: "index_telegrams_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -65,14 +102,20 @@ ActiveRecord::Schema.define(version: 20180119215949) do
     t.string "reddit"
     t.string "blog"
     t.string "influencer"
-    t.string "telegram"
-    t.string "discord"
+    t.string "incoming_invite_code"
+    t.string "outgoing_invite_code"
+    t.datetime "deleted_at"
+    t.string "role", default: "user"
+    t.boolean "blocked", default: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
+    t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "discords", "users"
   add_foreign_key "rewards", "users"
   add_foreign_key "submissions", "users"
+  add_foreign_key "telegrams", "users"
 end

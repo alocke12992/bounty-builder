@@ -17,5 +17,8 @@
   "repository": {
     "type": "git",
     "url": "ssh://git@phabricator.devpointstudios.com/diffusion/31/bounty.git"
+  },
+  "dependencies": {
+    
   }
 }

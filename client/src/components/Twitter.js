@@ -3,18 +3,26 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { setHeaders } from '../actions/headers';
 import { setFlash } from '../actions/flash';
-import { Container, Grid, Segment, Form } from 'semantic-ui-react';
+import { Header, Container, Grid, Segment, Form, Button, Divider, Icon, Card } from 'semantic-ui-react';
 import SocialMediaRules from './SocialMediaRules';
 import { withRouter } from 'react-router-dom';
+import { addReward } from '../actions/rewards';
+import ActionWarning from './ActionWarning';
+import { Tweet } from 'react-twitter-widgets';
 
-class Social extends React.Component {
-  state = { value: '' }
+class LinkedIn extends React.Component {
+  state = { value: '', posts: [] }
 
   componentDidMount() {
     axios.get(`/api/${this.props.service}`)
       .then( res => {
         this.props.dispatch(setHeaders(res.headers));
         this.setState({ value: res.data });
+      });
+    axios.get(`/api/posts?kind=twitter`)
+      .then( res => {
+        this.props.dispatch(setHeaders(res.headers));
+        this.setState({ posts: res.data });
       });
   }
 
@@ -35,6 +43,38 @@ class Social extends React.Component {
     this.setState({ value: e.target.value });
   }
 
+  renderPosts = () => {
+    return this.state.posts.map( post => (
+      <Card key={post.id}>
+        <Card.Content>
+          <Tweet tweetId={post.url.split('/status/')[1]} />
+          <Divider hidden />
+          <Button
+            color='twitter'
+            disabled={this.rewardsIncludes(`Liked post ${post.id}.`) || this.state.value === ''}
+            onClick={() => this.props.dispatch(addReward(20, 'twitter', `Liked post ${post.id}.`, post.id))}
+          >
+            I liked this post.
+          </Button>
+        </Card.Content>
+      </Card>
+    ))
+  }
+
+  likePage = () => {
+    this.props.dispatch(addReward(20, 'twitter', 'Followed SVH on twitter.'));
+  }
+
+  rewardsIncludes = (reason) => {
+    const { rewards } = this.props;
+    for (var i=0; i < rewards.length; i++) {
+      if (rewards[i].reason === reason) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   render() {
     const { value } = this.state;
 
@@ -53,11 +93,48 @@ class Social extends React.Component {
                   />
                   <Form.Button>Save</Form.Button>
                 </Form>
+                {/*<hr/>
+                <Header as='h2'>How to earn shares:</Header>
+                <List bulleted>
+                  <List.Item>
+                    In order to check for new shares that you are eligible for, you <strong>must</strong> press the login with Facebook button below.
+                  </List.Item>
+                  <List.Item>
+                    You may come back and press the button multiple times, but you will only be awarded according to the share rules.
+                  </List.Item>
+                </List>
+                <FacebookLogin
+                  appId="355565764911095"
+                  cookie={true}
+                  xfbml={true}
+                  version='2.8'
+                  autoLoad={false}
+                  fields="name,email,friends,picture,likes,posts"
+                  scope="public_profile,email,user_friends,user_likes,user_posts"
+                  callback={this.fbResponse.bind(this)}
+                  disableMobileRedirect={true}
+                />*/}
               </Segment>
+              {/*// <Submissions kind={this.props.service}/>*/}
             </Grid.Column>
             <Grid.Column>
               <SocialMediaRules/>
             </Grid.Column>
+            <ActionWarning />
+          </Grid.Row>
+          <Grid.Row>
+            <Segment>
+              <Header as='h2'>Follow Simply Vital Health Twitter Page:</Header>
+              <p>Follow SVH on Twitter. After, come back and press 'I followed this page'.</p>
+              <Button color="twitter" as='a' href="https://twitter.com/SimplyVitalHQ" target='_blank'>
+                <Icon name='twitter'/> Twitter
+              </Button>
+              <Divider hidden />
+              <Button color='twitter' onClick={this.likePage} disabled={this.rewardsIncludes("Followed SVH on twitter.") || this.state.value === ''}>I followed this page.</Button>
+            </Segment>
+            <Card.Group>
+              { this.renderPosts() }
+            </Card.Group>
           </Grid.Row>
         </Grid>
       </Container>
@@ -65,4 +142,10 @@ class Social extends React.Component {
   }
 }
 
-export default withRouter(connect()(Social));
+const mapStateToProps = (state) => {
+  return {
+    rewards: state.rewards,
+  }
+}
+
+export default withRouter(connect(mapStateToProps)(LinkedIn));

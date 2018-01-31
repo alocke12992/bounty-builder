@@ -1,0 +1,55 @@
+import React, { Component } from 'react';
+import { Segment, Container } from 'semantic-ui-react';
+
+class Rules extends Component {
+  render() {
+    return (
+      <Container>
+        <Segment>
+          SimplyVital Health is leveraging technology, like blockchain, to build a decentralized healthcare ecosystem that empowers providers’ transition to payment-for-outcomes, regardless of clinical affiliation. Tools developed by SVH and other participants allow care teams to create immutable records; provide care pathway transparency; and leverage accurate, near real-time analytics across facilities. This results in greater security, efficiencies, and improved risk management, driving better patient care and a better provider experience. That’s Simply Vital Health.
+        </Segment>
+        <Segment>
+          <h1>Bounty Program Rules and Distribution</h1>
+              <p><br /> <strong>The Simply Vital Health bounty is a way for our developers and marketing team to get help with basic essential tasks and to award you with tokens for helping. </strong><br /> <br /> <strong>You can earn in many ways (and more to come) some are easy, such as following us on social media and others are more rewarding such as translating documents into other languages.</strong><br /> <br /> <strong>The Bounty Program will release 2,000,000 tokens or 1% of total token allocation</strong> on a sliding scale for users:<br /> <br /> * All users must register to the <a href="https://t.me/HealthNexus">official Telegram Channel Account</a> and to the official <a href="https://discord.gg/2Wfg524">Discord Channel </a>to be eligible for bounty program</p>
+              <ul>
+              <li>0-500 users will release 500,000 of the total token allocation</li>
+              <li>501- 1000 users will release 1,000,000</li>
+              <li>Over 2000 users on the bounty will release 2,000,000</li>
+              </ul>
+              <p><strong>Bounties will be distributed when the SimplyVital Health token sale smart contract is created and distributes HLTH tokens at the close of the token sale.</strong><br /><br /><strong>Most Important:</strong> <br />Once an ETH address is submitted, it will not be changed for any reason. Be careful when submitting your ETH address!<br />Do not submit ETH addresses from an exchange ShapeShift, mixers, or any other 3rd party service. Provide only ETH addresses to which you know your private keys (or seed phrases).<br /><br /> <strong>Individual Allocation: </strong></p>
+              <ul>
+              <li>0-150 Shares: 10% of the total bounty pool</li>
+              <li>151-500: 20% of total bounty pool</li>
+              <li>501-1000: 30% of total bounty pool</li>
+              <li>Over 1000 shares: 40% of the total bounty pool</li>
+              </ul>
+              <p><strong>Translation services:</strong><br /> <br /> <strong>Rule 1: </strong>The use of google translator or similar is not allowed. Participants using google translator will not be accepted.</p>
+              <ul>
+              <li>500 shares per translation of white paper or [ANN] Thread Need to be able to submit translations through the account</li>
+              </ul>
+              <p><strong>Rules and Terms:</strong><br /><br />1: Translations must be original, using any kind of tools such as Google are not allowed. If found the translator will be blacklisted.<br />2: We do not need any Single Post Dead Thread. If you failed to keep the thread active and up to date, your reward can be reduced to 50% of the actual payment.<br /> 3: Increasing the moderation post count by spam posts, posting false posts or paying other to ask questions in your thread is not allowed. <br />4. Simply Vital reserves the rights to add rules, or make any kind reasonable changes.<br /> <br /> <strong>Referral Program: </strong></p>
+              <ul>
+              <li>50 shares for you and a friend for referral to the bounty program</li>
+              </ul>
+              <p><strong>Telegram &amp; Discord:</strong></p>
+              <ul>
+              <li>20 Shares to Join the Telegram group &amp; Discord Group (required)</li>
+              </ul>
+              <p><strong>Social Media: Facebook, Linkedin, or Twitter </strong></p>
+              <ul>
+              <li>20 shares issued if you Follow/Subscribe/Like SVH on FB, Twitter, Linkedin, and Reddit</li>
+              </ul>
+              <p><strong>Rule 1: </strong>Accounts must be active and have a Minimum of 200 Followers.<br /> <strong>Rule 2:</strong> Users are limited to 2 posts per day<br /> <strong>Rule 3:</strong> No shares for robots<br /> <br /> <br /> <strong>Social media posts, Blog articles and Reddit Posts:</strong></p>
+              <ul>
+              <li>Everyone can take part by preparing a 400+ words blog post and publishing it online</li>
+              <li>Below is a scale of shares offered per article based off of followers:</li>
+              <li><strong>Engagement Bonus:</strong> 2 shares per like/upvote</li>
+              </ul>
+              <p>*Articles must contain at least 2 links to: <a href="https://token.simplyvitalhealth.com">https://token.simplyvitalhealth.com</a><br /> <br /> 250 shares for 100-300 followers<br /> 500 shares for 1000 followers<br /> 550 shares for 1000+<br /> 1000 shares for 10,000<br /> 2500 shares for 50,000<br /> 5000 shares for 100,000<br /> <br /> <strong>Rule 1:</strong> Low-quality articles will not be accepted<br /> <strong>Rule 2: </strong>Articles and must be original work.(You can use official images, logos, graphics posted in website, ANN thread, Facebook, and Twitter).<br /> <strong>Rule 3: </strong>Articles below 400 words will not be accepted.</p>
+        </Segment>
+      </Container>
+    );
+  }
+}
+
+export default Rules;

@@ -11,14 +11,16 @@ const logout = () => {
   return { type: 'LOGOUT' };
 };
 
-export const registerUser = (email, password, passwordConfirmation, history) => {
+export const registerUser = (email, password, passwordConfirmation, history, invite_code) => {
   return dispatch => {
-    axios.post('/api/auth', { email, password, password_confirmation: passwordConfirmation })
+    axios.post('/api/auth', { email, password, password_confirmation: passwordConfirmation, incoming_invite_code: invite_code })
       .then(res => {
         const { data: { data: user }, headers } = res;
-        dispatch(login(user));
         dispatch(setHeaders(headers));
-        history.push('/');
+        setTimeout(function(){
+          dispatch(login(user));
+          history.push('/');
+        }, 500);
       })
       .catch(res => {
         const messages =
@@ -57,9 +59,11 @@ export const handleLogin = (email, password, history) => {
     axios.post('/api/auth/sign_in', { email, password })
       .then(res => {
         const { data: { data: user }, headers } = res;
-        dispatch(login(user));
         dispatch(setHeaders(headers));
-        history.push('/');
+        setTimeout(function(){
+          dispatch(login(user));
+          history.push('/');
+        }, 500);
       })
       .catch(res => {
         const messages =

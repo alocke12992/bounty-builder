@@ -31,6 +31,8 @@ gem 'devise_token_auth'
 gem 'twitter'
 gem 'dotenv-rails'
 gem 'httparty'
+gem 'jbuilder'
+gem "paranoia", "~> 2.2"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

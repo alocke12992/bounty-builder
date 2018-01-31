@@ -15,7 +15,7 @@ class BlogRules extends Component {
           </List.Item>
           <List.Item>
             Engagement Bonus: 2 shares per like/upvote<br/>
-            *Articles must contain at least 2 links to: <a href="https://tokensale.simplyvitalhealth.com">https://tokensale.simplyvitalhealth.com</a>
+            *Articles must contain at least 2 links to: <a href="https://token.simplyvitalhealth.com">https://token.simplyvitalhealth.com</a>
           </List.Item>
           <List.Item>
             <List.Item>

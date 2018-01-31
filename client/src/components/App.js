@@ -10,11 +10,10 @@ import FetchUser from './FetchUser';
 import { Switch, Route } from 'react-router-dom';
 import Home from './Home';
 import About from './About';
+import AdminRoute from './AdminRoute';
+import NewPost from './NewPost';
 
 class App extends Component {
-  componentDidMount() {
-    document.body.style.backgroundColor = "#8bd6ab";
-  }
   render() {
     return (
       <div>
@@ -25,6 +24,8 @@ class App extends Component {
             <AuthRoute exact path='/login' component={Login} />
             <AuthRoute exact path='/register' component={Register} />
             <Route exact path='/about' component={About} />
+            <AdminRoute exact path='/admin' component={NewPost}/>
+            {/*<AdminModeratorRoute path='/moderate' component={ModeratorHome}/>*/}
             <ProtectedRoute path="/" component={Home} />
             <Route component={NoMatch} />
           </Switch>

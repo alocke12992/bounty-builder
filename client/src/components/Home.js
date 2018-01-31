@@ -2,7 +2,7 @@ import React from 'react'
 import {
   Link,
   Switch,
-  Route
+  Route,
 } from 'react-router-dom'
 import { Grid, Container, Menu } from 'semantic-ui-react';
 import Dashboard from './Dashboard';
@@ -10,7 +10,12 @@ import NoMatch from './NoMatch';
 import Social from './Social';
 import Facebook from './Facebook';
 import Twitter from './Twitter';
-import Wallet from './Wallet';
+import Translation from './Translation';
+import { getRewards } from '../actions/rewards';
+import { connect } from 'react-redux';
+import LinkedIn from './LinkedIn';
+import Reddit from './Reddit';
+import Rules from './Rules';
 
 const routes = [
   { path: '/',
@@ -21,38 +26,29 @@ const routes = [
     main: () => <Facebook service="facebook"/>
   },
   { path: '/twitter',
-    main: () => <Social service="twitter" submissions={true}/>
+    main: () => <Twitter service="twitter" submissions={true}/>
   },
   { path: '/linkedin',
-    main: () => <Social service="linkedin" submissions={true}/>
+    main: () => <LinkedIn service="linkedin" submissions={true}/>
   },
   { path: '/reddit',
-    main: () => <Social service="reddit" submissions={true}/>
-  },
-  { path: '/blog',
-    main: () => <Social service="blog" submissions={true}/>
+    main: () => <Reddit service="reddit" submissions={true}/>
   },
   { path: '/influencer',
     main: () => <Social service="influencer" submissions={true}/>
   },
-  { path: '/telegram',
-    main: () => <Social service="telegram" submissions={false}/>
-  },
-  { path: '/discord',
-    main: () => <Social service="discord" submissions={false}/>
-  },
-  { path: '/referral',
-    main: () => <h2>Referral - Coming Soon</h2>
-  },
   { path: '/translation',
-    main: () => <h2>Translations - Coming Soon</h2>
+    main: () => <Translation />
   },
-  { path: '/wallet',
-    main: () => <Wallet/>
+  { path: '/rules',
+    main: () => <Rules />
   }
 ]
 
 class Home extends React.Component{
+  componentWillMount(){
+    this.props.dispatch(getRewards());
+  }
   render(){
     const { pathname } = this.props.location;
     return(
@@ -66,13 +62,9 @@ class Home extends React.Component{
                   <Menu.Item as={Link} to='/twitter' name='Twitter' active={pathname === '/twitter'}/>
                   <Menu.Item as={Link} to='/linkedin' name='LinkedIn' active={pathname === '/linkedin'}/>
                   <Menu.Item as={Link} to='/reddit' name='Reddit' active={pathname === '/reddit'}/>
-                  <Menu.Item as={Link} to='/blog' name='Blog' active={pathname === '/blog'}/>
                   <Menu.Item as={Link} to='/influencer' name='Influencer' active={pathname === '/influencer'}/>
-                  <Menu.Item as={Link} to='/telegram' name='Telegram' active={pathname === '/telegram'}/>
-                  <Menu.Item as={Link} to='/discord' name='Discord' active={pathname === '/discord'}/>
-                  <Menu.Item as={Link} to='/referral' name='Referral' active={pathname === '/referral'}/>
                   <Menu.Item as={Link} to='/translation' name='Translation' active={pathname === '/translation'}/>
-                  <Menu.Item as={Link} to='/wallet' name='Wallet' active={pathname === '/wallet'}/>
+                  <Menu.Item as={Link} to='/rules' name='Rules and Overview' active={pathname === '/rules'}/>
                 </Menu>
               </Grid.Column>
               <Grid.Column mobile={16} tablet={16} computer={11}>
@@ -95,4 +87,4 @@ class Home extends React.Component{
   }
 }
 
-export default Home
+export default connect()(Home);

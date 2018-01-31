@@ -1,23 +1,29 @@
 import React from 'react';
-import axios from 'axios';
 import { connect } from 'react-redux';
-import { setHeaders } from '../actions/headers';
 import { Card } from 'semantic-ui-react';
 
 class PointsTile extends React.Component {
   state = { points: '0' }
 
   componentWillMount() {
-    this.getPoints();
-    setTimeout(function() { if(this.state.points === '0'){this.getPoints()}; }.bind(this), 1000);
+    this.getPoints(this.props.rewards);
   }
 
-  getPoints = () => {
-    axios.get(`/api/rewards/source_points?source=${this.props.source}`)
-      .then( res => {
-        this.setState({points: res.data})
-        this.props.dispatch(setHeaders(res.headers));
-      });
+  getPoints = (rewards = []) => {
+    var sum = 0;
+    var arrayLength = rewards.length;
+    for (var i = 0; i < arrayLength; i++) {
+      if(rewards[i].source === this.props.source){
+        sum = sum + rewards[i].value;
+      }
+    }
+    this.setState({points: sum})
+  }
+
+  componentWillReceiveProps(nextProps){
+    if(nextProps.rewards !== this.props.rewards){
+      this.getPoints(nextProps.rewards);
+    }
   }
 
   render() {
@@ -36,4 +42,10 @@ class PointsTile extends React.Component {
   }
 }
 
-export default connect()(PointsTile);
+const mapStateToProps = (state) => {
+  return {
+    rewards: state.rewards
+  }
+}
+
+export default connect(mapStateToProps)(PointsTile);
