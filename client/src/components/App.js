@@ -12,6 +12,7 @@ import Home from './Home';
 import About from './About';
 import AdminRoute from './AdminRoute';
 import NewPost from './NewPost';
+import RecoverPassword from './RecoverPassword';
 
 class App extends Component {
   render() {
@@ -23,6 +24,7 @@ class App extends Component {
           <Switch>
             <AuthRoute exact path='/login' component={Login} />
             <AuthRoute exact path='/register' component={Register} />
+            <AuthRoute exact path='/recover_password' component={RecoverPassword} />
             <Route exact path='/about' component={About} />
             <AdminRoute exact path='/admin' component={NewPost}/>
             {/*<AdminModeratorRoute path='/moderate' component={ModeratorHome}/>*/}

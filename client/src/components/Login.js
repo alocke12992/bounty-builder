@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Segment, Form, Button, Grid } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { handleLogin } from '../actions/auth';
+import { Link } from 'react-router-dom';
 
 class Login extends Component {
   state = { email: '', password: '' };
@@ -50,6 +51,7 @@ class Login extends Component {
                   onChange={this.handleChange}
                   />
               </Form.Field>
+              <Link to={'/recover_password'}>Forgot Password?</Link>
               <Segment textAlign='center' basic>
                 <Button primary type='submit'>Submit</Button>
               </Segment>

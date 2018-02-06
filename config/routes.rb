@@ -18,6 +18,10 @@ Rails.application.routes.draw do
     match "users/total_user_count" => "users#total_user_count", :via => :get, :as => :total_user_count
     match "moderator/get_pending_rewards" => "moderator#get_pending_rewards", :via => :get, :as => :get_pending_rewards
     match "moderator/approve_reward" => "moderator#approve_reward", :via => :post, :as => :approve_reward
+
+    #Password Recovery
+    post 'passwords/send_password_reset', to: 'passwords#send_password_reset'
+    post 'passwords/set_new_password', to: 'passwords#set_new_password'
   end
 
   #Do not place any routes below this one

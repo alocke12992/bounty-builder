@@ -89,3 +89,33 @@ export const validateToken = (callBack = () => {}) => {
       .catch(() => callBack());
   };
 };
+
+export const sendPasswordReset = (email, cb = () => {}) => {
+  return dispatch => {
+    axios.post('/api/passwords/send_passsword_reset', { email })
+    .then(res => {
+      dispatch(setHeaders(res.headers));
+      cb();
+    })
+    .catch(err => {
+      dispatch(setFlash('An error occurred.', 'red'));
+      dispatch(setHeaders(err.headers));
+    })
+  }
+}
+
+export const recoverPassword = (password, passwordConfirmation, token, history) => {
+  return dispatch => {
+    axios.post('/api/passwords/set_new_password', { password, token, password_confirmation: passwordConfirmation})
+    .then( res => {
+      dispatch(setHeaders(res.headers));
+      dispatch(setFlash(res.data, 'green'));
+      history.push('/login');
+    })
+    .catch( err => {
+      const messages = err.response.data.errors;
+      dispatch(setFlash(messages, 'red'));
+      dispatch(setHeaders(err.headers));
+    })
+  }
+}
