@@ -7,20 +7,13 @@ import { setFlash } from '../actions/flash';
 import eth from '../images/ETHEREUM.png';
 
 class Wallet extends React.Component {
-  state = { walletAddress: '', showField: false }
+  state = { walletAddress: '' }
 
   componentDidMount() {
     axios.get('/api/wallet')
       .then( res => {
-        let showField;
-        if (res.data.toString().length > 0){
-          showField = false;
-        }
-        else {
-          showField = true;
-        }
         this.props.dispatch(setHeaders(res.headers));
-        this.setState({ walletAddress: res.data, showField });
+        this.setState({ walletAddress: res.data });
       });
   }
 
@@ -33,17 +26,16 @@ class Wallet extends React.Component {
     const { walletAddress } = this.state;
     axios.post('/api/wallet', { wallet: walletAddress } )
       .then( res => {
-        this.setState({showField: false});
         this.props.dispatch(setHeaders(res.headers));
         this.props.dispatch(setFlash('Wallet updated', 'green'));
       })
       .catch( err => {
-        //TODO
+        this.props.dispatch(setHeaders(err.headers));
       })
   }
 
   render() {
-    const { walletAddress, showField } = this.state;
+    const { walletAddress } = this.state;
     return (
       <Card>
         <Card.Header>
@@ -68,9 +60,8 @@ class Wallet extends React.Component {
               onChange={this.handleChange}
               required
               placeholder="ETH address"
-              disabled={!showField}
             />
-          { showField && <Form.Button>Save</Form.Button> }
+          <Form.Button>Save</Form.Button>
           </Form>
           <Divider hidden />
           <p><strong>Warning!</strong> You may only enter your Ethereum address once. After that, it will not be able to be changed.</p>

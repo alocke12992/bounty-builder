@@ -4,9 +4,7 @@ class Api::WalletController < Api::ApiController
   end
 
   def create
-    if current_user.wallet == nil
-      current_user.update(wallet: params[:wallet])
-    end
+    current_user.update(wallet: params[:wallet])
     #TODO error handling
     render json: current_user.wallet
   end
