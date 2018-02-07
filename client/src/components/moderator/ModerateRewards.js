@@ -20,12 +20,12 @@ class ModerateRewards extends Component {
     return this.state.rewards.map( reward => (
       <Table.Row key={reward.id}>
         <Table.Cell>{reward.name}</Table.Cell>
-        <Table.Cell><a href={reward.url} target='_balnk'>{reward.url}</a></Table.Cell>
+        <Table.Cell><a href={reward.url} target='_blank'>{reward.url}</a></Table.Cell>
         <Table.Cell>{reward.reason}</Table.Cell>
         <Table.Cell>
           <Button color='green' onClick={() => this.confirmReward(reward.id)}>Confirm</Button>
           <Divider hidden />
-          <Button color='red'>Block User</Button>
+          <Button color='red' onClick={() => this.revokeReward(reward.id)}>Revoke</Button>
         </Table.Cell>
       </Table.Row>
     ))
@@ -40,7 +40,20 @@ class ModerateRewards extends Component {
         this.props.dispatch(setFlash('Approved', 'green'));
       })
       .catch( err => {
-        //TODO
+        this.props.dispatch(setHeaders(err.headers));
+      })
+  }
+
+  revokeReward = (id) => {
+    axios.post('/api/moderator/revoke_reward', { id } )
+      .then( res => {
+        let rewards = this.state.rewards.filter( r => r.id !== id );
+        this.setState({rewards})
+        this.props.dispatch(setHeaders(res.headers));
+        this.props.dispatch(setFlash('Reward Revoked', 'green'));
+      })
+      .catch( err => {
+        this.props.dispatch(setHeaders(err.headers));
       })
   }
 

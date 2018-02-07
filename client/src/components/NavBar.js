@@ -16,9 +16,9 @@ class NavBar extends Component {
             { user.role === 'admin' &&
               <Dropdown.Item onClick={() => history.push('/admin')}>Admin</Dropdown.Item>
             }
-            {/* (user.role === 'admin' || user.role === 'moderator') &&
+            { user.role === 'admin' &&
               <Dropdown.Item onClick={() => history.push('/moderate')}>Moderate</Dropdown.Item>
-            */}
+            }
             <Dropdown.Item onClick={() => history.push('/rules')}>About Campaign</Dropdown.Item>
             <Dropdown.Item
               onClick={() => dispatch(handleLogout(history))}

@@ -92,7 +92,7 @@ export const validateToken = (callBack = () => {}) => {
 
 export const sendPasswordReset = (email, cb = () => {}) => {
   return dispatch => {
-    axios.post('/api/passwords/send_passsword_reset', { email })
+    axios.post('/api/passwords/send_password_reset', { email })
     .then(res => {
       dispatch(setHeaders(res.headers));
       cb();

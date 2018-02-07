@@ -13,6 +13,7 @@ import About from './About';
 import AdminRoute from './AdminRoute';
 import NewPost from './NewPost';
 import RecoverPassword from './RecoverPassword';
+import ModeratorHome from './moderator/ModeratorHome';
 
 class App extends Component {
   render() {
@@ -27,7 +28,7 @@ class App extends Component {
             <AuthRoute exact path='/recover_password' component={RecoverPassword} />
             <Route exact path='/about' component={About} />
             <AdminRoute exact path='/admin' component={NewPost}/>
-            {/*<AdminModeratorRoute path='/moderate' component={ModeratorHome}/>*/}
+            <AdminRoute path='/moderate' component={ModeratorHome}/>
             <ProtectedRoute path="/" component={Home} />
             <Route component={NoMatch} />
           </Switch>

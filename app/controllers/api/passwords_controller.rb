@@ -9,9 +9,9 @@ class Api::PasswordsController < ApplicationController
   def set_new_password
     user = User.with_reset_password_token(params[:token])
     if user && user.reset_password(params[:password], params[:passwordConfirmation])
-        render json: 'Password changed successfully. Please sign in.'
+      render json: 'Password changed successfully. Please sign in.'
     else
-        unprocessable('Error changing password. Try again')
+      unprocessable('Error changing password. Try again')
     end
   end
 end

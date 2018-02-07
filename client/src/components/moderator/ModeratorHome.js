@@ -8,21 +8,27 @@ import { Grid, Container, Menu } from 'semantic-ui-react';
 import NoMatch from '../NoMatch';
 import { connect } from 'react-redux';
 import ModerateRewards from './ModerateRewards';
+import ModerateSubmissions from './ModerateSubmissions';
+import ModerateTelegrams from './ModerateTelegrams';
+import ModerateDiscords from './ModerateDiscords';
 
 const routes = [
   { path: '/moderate',
     exact: true,
-    main: () => <ModerateRewards/>
+    main: () => <ModerateRewards />
   },
   { path: '/moderate/submissions',
-    main: () => <NoMatch service="facebook"/>
+    main: () => <ModerateSubmissions />
   },
+  { path: '/moderate/telegram',
+    main: () => <ModerateTelegrams />
+  },
+  { path: '/moderate/discord',
+    main: () => <ModerateDiscords />
+  }
 ]
 
 class ModeratorHome extends React.Component{
-  // componentWillMount(){
-  //   this.props.dispatch(getRewards());
-  // }
   render(){
     const { pathname } = this.props.location;
     return(

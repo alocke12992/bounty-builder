@@ -47,6 +47,7 @@ class Dashboard extends React.Component{
           <PointsTile source="telegram" title="Telegram" />
           <PointsTile source="discord" title="Discord" />
           <PointsTile source="invitation" title="Invite" />
+          <PointsTile source="translation" title="Translation" />
         </Card.Group>
       </Container>
     )
