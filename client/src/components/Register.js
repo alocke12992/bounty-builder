@@ -3,9 +3,10 @@ import { Form, Button, Segment, Grid } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { registerUser } from '../actions/auth';
 import { setFlash } from '../actions/flash';
+var Recaptcha = require('react-recaptcha');
 
 class Register extends Component {
-  state = { email: '', password: '', passwordConfirmation: '', invite_code: '' };
+  state = { email: '', password: '', passwordConfirmation: '', invite_code: '', captchaVerified: false };
 
   componentDidMount(){
     if (this.props.location.search)
@@ -13,12 +14,14 @@ class Register extends Component {
   }
 
   handleSubmit = event => {
-    event.preventDefault();
-    const { email, password, passwordConfirmation, invite_code} = this.state;
-    const { dispatch, history } = this.props;
-    if (password === passwordConfirmation) {
-      dispatch(registerUser(email, password, passwordConfirmation, history, invite_code));
-    } else dispatch(setFlash('Passwords do not match!, please try again', 'red'));
+    if(this.state.captchaVerified){
+      event.preventDefault();
+      const { email, password, passwordConfirmation, invite_code} = this.state;
+      const { dispatch, history } = this.props;
+      if (password === passwordConfirmation) {
+        dispatch(registerUser(email, password, passwordConfirmation, history, invite_code));
+      } else dispatch(setFlash('Passwords do not match!, please try again', 'red'));
+    }
   }
 
   handleChange = event => {
@@ -29,8 +32,12 @@ class Register extends Component {
     this.setState({ [id]: value });
   }
 
+  callback = (res) => {
+    this.setState({captchaVerified: true});
+  }
+
   render() {
-    const { email, password, passwordConfirmation, invite_code } = this.state;
+    const { email, password, passwordConfirmation, invite_code, captchaVerified } = this.state;
 
     return (
       <Grid centered columns={2}>
@@ -82,8 +89,12 @@ class Register extends Component {
                   onChange={this.handleChange}
                 />
               </Form.Field>
+              <Recaptcha
+                sitekey="6Ldb40UUAAAAAIrHJQ1Y5g5HGKhpSy9KJtL9IOQd"
+                verifyCallback={this.callback}
+                />
               <Segment basic textAlign='center'>
-                <Button type='submit'>Submit</Button>
+                <Button type='submit' disabled={!captchaVerified} >Submit</Button>
               </Segment>
             </Form>
           </Segment>
