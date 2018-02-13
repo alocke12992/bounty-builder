@@ -12,4 +12,10 @@ class Api::ConfirmationsController < ApplicationController
       unprocessable("Code incorrect")
     end
   end
+
+  # def send_reminders
+    # User.where(confirmed: false).each do |user|
+    #   ConfirmationCodeMailer.confirmation_reminder_email(user).deliver
+    # end
+  # end
 end

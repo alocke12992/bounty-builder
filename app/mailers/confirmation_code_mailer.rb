@@ -5,4 +5,9 @@ class ConfirmationCodeMailer < ApplicationMailer
     @user = user
     mail(to: @user.email, subject: 'Simply Vital Health Bounty Confirmation')
   end
+
+  def confirmation_reminder_email(user)
+    @user = user
+    mail(to: @user.email, subject: 'Simply Vital Health Bounty Confirmation Reminder')
+  end
 end
