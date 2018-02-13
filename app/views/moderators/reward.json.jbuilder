@@ -1,3 +1,4 @@
+json.total_pages @rewards.total_pages
 json.rewards @rewards do |reward|
   json.id reward.id
   json.user_id reward.user.id

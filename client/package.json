@@ -19,7 +19,8 @@
     "redux-thunk": "^2.2.0",
     "semantic-ui-css": "^2.2.12",
     "semantic-ui-react": "^0.77.2",
-    "styled-components": "^2.4.0"
+    "styled-components": "^2.4.0",
+    "react-twitter-widgets": "^1.7.1"
   },
   "scripts": {
     "start": "react-scripts start",

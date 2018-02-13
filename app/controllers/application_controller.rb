@@ -6,7 +6,7 @@ class ApplicationController < ActionController::API
   def unprocessable(errors)
     render json: { errors: errors }, status: :unprocessable_entity
   end
-  
+
   protected
 
   def configure_permitted_parameters

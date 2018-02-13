@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180206224141) do
+ActiveRecord::Schema.define(version: 20180213065352) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,7 +46,9 @@ ActiveRecord::Schema.define(version: 20180206224141) do
     t.boolean "moderator_approved", default: false
     t.datetime "deleted_at"
     t.bigint "submission_id"
+    t.bigint "post_id"
     t.index ["deleted_at"], name: "index_rewards_on_deleted_at"
+    t.index ["post_id"], name: "index_rewards_on_post_id"
     t.index ["submission_id"], name: "index_rewards_on_submission_id"
     t.index ["user_id"], name: "index_rewards_on_user_id"
   end
@@ -109,6 +111,8 @@ ActiveRecord::Schema.define(version: 20180206224141) do
     t.datetime "deleted_at"
     t.string "role", default: "user"
     t.boolean "blocked", default: false
+    t.string "confirmation_code"
+    t.boolean "confirmed", default: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -117,6 +121,7 @@ ActiveRecord::Schema.define(version: 20180206224141) do
   end
 
   add_foreign_key "discords", "users"
+  add_foreign_key "rewards", "posts"
   add_foreign_key "rewards", "submissions"
   add_foreign_key "rewards", "users"
   add_foreign_key "submissions", "users"

@@ -92,7 +92,7 @@ class Register extends Component {
               <Recaptcha
                 sitekey="6Ldb40UUAAAAAIrHJQ1Y5g5HGKhpSy9KJtL9IOQd"
                 verifyCallback={this.callback}
-                />
+              />
               <Segment basic textAlign='center'>
                 <Button type='submit' disabled={!captchaVerified} >Submit</Button>
               </Segment>

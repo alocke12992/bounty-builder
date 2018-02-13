@@ -2,7 +2,7 @@ class Api::ModeratorController < Api::ApiController
   before_action :ensure_admin
 
   def get_pending_rewards
-    @rewards = Reward.where(moderator_approved: false)
+    @rewards = Reward.where(moderator_approved: false).page(params[:page])
     render 'moderators/reward.json.jbuilder'
   end
 

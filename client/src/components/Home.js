@@ -37,9 +37,9 @@ const routes = [
   { path: '/influencer',
     main: () => <Social service="influencer" submissions={true}/>
   },
-  { path: '/translation',
-    main: () => <Translation />
-  },
+  // { path: '/translation',
+  //   main: () => <Translation />
+  // },
   { path: '/rules',
     main: () => <Rules />
   }
@@ -63,8 +63,7 @@ class Home extends React.Component{
                   <Menu.Item as={Link} to='/linkedin' name='LinkedIn' active={pathname === '/linkedin'}/>
                   <Menu.Item as={Link} to='/reddit' name='Reddit' active={pathname === '/reddit'}/>
                   <Menu.Item as={Link} to='/influencer' name='Influencer' active={pathname === '/influencer'}/>
-                  <Menu.Item as={Link} to='/translation' name='Translation' active={pathname === '/translation'}/>
-                  <Menu.Item as={Link} to='/rules' name='Rules and Overview' active={pathname === '/rules'}/>
+                  { /* <Menu.Item as={Link} to='/translation' name='Translation' active={pathname === '/translation'}/>*/}                  <Menu.Item as={Link} to='/rules' name='Rules and Overview' active={pathname === '/rules'}/>
                 </Menu>
               </Grid.Column>
               <Grid.Column mobile={16} tablet={16} computer={11}>

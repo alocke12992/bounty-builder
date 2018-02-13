@@ -70,7 +70,7 @@ class ModerateTelegrams extends Component {
 
   render(){
     return(
-      <Table fixed>
+      <Table stackable>
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell>Username</Table.HeaderCell>

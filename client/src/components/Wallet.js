@@ -61,7 +61,7 @@ class Wallet extends React.Component {
               required
               placeholder="ETH address"
             />
-          <Form.Button>Save</Form.Button>
+            <Form.Button>Save</Form.Button>
           </Form>
           <Divider hidden />
           <p><strong>Warning!</strong> You may only enter your Ethereum address once. After that, it will not be able to be changed.</p>

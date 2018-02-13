@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   has_one :telegram
   has_one :discord
 
-  after_create :invite_code
+  after_create :invite_code, :confirmation
 
   private
   def invite_code
@@ -23,5 +23,11 @@ class User < ActiveRecord::Base
       end
     end
     self.outgoing_invite_code = SecureRandom.uuid
+  end
+
+  def confirmation
+    o = [('a'..'z'), ('A'..'Z')].map(&:to_a).flatten
+    self.confirmation_code = (0...8).map { o[rand(o.length)] }.join
+    ConfirmationCodeMailer.confirmation_email(self).deliver
   end
 end

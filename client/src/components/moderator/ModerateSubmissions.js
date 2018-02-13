@@ -79,7 +79,7 @@ class ModerateSubmissions extends Component {
 
   render(){
     return(
-      <Table fixed>
+      <Table stackable>
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell>Kind</Table.HeaderCell>

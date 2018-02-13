@@ -37,6 +37,19 @@ class TotalSharesTile extends React.Component {
     }
   }
 
+  barLogic = () => {
+    const { shares } = this.state;
+    if(shares <= 150){
+      this.setState({progress: (shares / 150) * 100});
+    } else if ( shares >= 151 && shares <= 500){
+      this.setState({progress: (shares / 1000) * 100});
+    } else if ( shares >= 501 && shares <= 1000){
+      this.setState({progress: (shares / 2000) * 100});
+    } else if (shares >= 1001){
+      this.setState({progress: 100});
+    }
+  }
+
   render() {
     const { progress } = this.state;
     return (
