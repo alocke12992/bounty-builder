@@ -19,7 +19,7 @@ class Api::ModeratorController < Api::ApiController
 
   def get_pending_submissions
     submissions = Submission.where(accepted: false)
-    render json: submissions
+    render json: submissions, :include => {:user => {:only => :email}}
   end
 
   def approve_submission
@@ -85,6 +85,26 @@ class Api::ModeratorController < Api::ApiController
     discord = Discord.find(params[:id])
     discord.delete
     render json: 'success'
+  end
+
+  def add_translator
+    translator = User.find_by(email: params[:email])
+    if translator
+      translator.update(translator: true)
+      head :ok
+    else
+      unprocessable("User not found")
+    end
+  end
+
+  def generate_csv
+    entries = User.where(confirmed: true).where.not(wallet: nil).page(params[:page])
+    csv_string = CSV.generate do |csv|
+      entries.each do |e|
+        csv << [e.email, e.wallet, e.rewards.sum(:value)]
+      end
+    end
+    render json: { total_pages: entries.total_pages, csv_string: csv_string}
   end
 
   private

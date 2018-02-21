@@ -13,21 +13,38 @@ class Translation extends React.Component {
           <Grid.Row>
             <Grid.Column>
               <Segment>
-                <p><strong>Bounty: </strong> 500 shares for a translation of this document into Spanish.</p>
-                <p>This bounty will only be awarded to one person.</p>
-                <a href="https://docsend.com/view/cuufmc5">Health Nexus Document</a>
-                <p>Submit a link to your translation below.</p>
+                {
+                  this.props.user.translator ?
+                  <div>
+                    <p>You have been approved to submit translations.</p>
+                  </div>
+                  :
+                  <div>
+                    <p>Please submit a sample translation using <a href='https://goo.gl/forms/XXJQ9wymSFyjm8ea2'>this link</a>.</p>
+                    <p>If you are approved to translate, you will be contacted by email.</p>
+                  </div>
+                }
               </Segment>
-              <Submissions kind={'translation'}/>
+              { this.props.user.translator &&
+                <Submissions kind={'translation'}/>
+              }
             </Grid.Column>
             <Grid.Column>
               <Segment>
                 <Header as='h2'>Translation Services</Header>
-                <p><strong>Rule 1: </strong>The use of google translator or similar is not allowed. Participants using google translator will not be accepted.</p>
+                <p>***The use of google translator or similar is not allowed. Participants using google translator will not be accepted.</p>
+                <p>&nbsp;</p>
                 <ul>
-                  <li>500 shares per translation of white paper or [ANN] Thread Need to be able to submit translations through the account</li>
+                  <li>Reward starts at 1000 shares per translation of white paper and may be increased based on quality of translation.</li>
                 </ul>
-                <p><strong>Rules and Terms:</strong><br /><br />1: Translations must be original, using any kind of tools such as Google are not allowed. If found the translator will be blacklisted.<br />2: ANN thread translator will be responsible for the moderation as well (we have additional rewards for moderation). The translator must keep the thread active by translation of official announcements, news, posts. <br />3: We do not need any Single Post Dead Thread. If you failed to keep the thread active and up to date, your reward can be reduced to 50% of the actual payment.<br /> 4: Increasing the moderation post count by spam posts, posting false posts or paying other to ask questions in your thread is not allowed. <br />5. Simply Vital reserves the rights to add rules, or make any kind reasonable changes.</p>
+                <p>&nbsp;</p>
+                <ul>
+                  <li>Users in the bounty program can reserve translation by submitting a link to a sample translation and an email.</li>
+                </ul>
+                <p>&nbsp;</p>
+                <ul>
+                  <li>User will be able to see whether translations have been accepted from the Translation tab.</li>
+                </ul>
               </Segment>
             </Grid.Column>
           </Grid.Row>
@@ -37,4 +54,8 @@ class Translation extends React.Component {
   }
 }
 
-export default withRouter(connect()(Translation));
+const mapStateToProps = (state) => {
+  return { user: state.user }
+}
+
+export default withRouter(connect(mapStateToProps)(Translation));

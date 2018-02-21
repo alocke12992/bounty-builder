@@ -82,6 +82,18 @@ class Dashboard extends React.Component{
           />
           <p>Welcome to the bounty program for Health Nexus, the healthcare-safe blockchain. Find more about our project here: <a href='https://token.simplyvitalhealth.com'>https://token.simplyvitalhealth.com/</a></p>
         </Segment>
+        <Segment>
+          <div dir="auto">DO:</div>
+          <div dir="auto">&bull;Disclose that you are receiving HLTH for growing the community &mdash; &ldquo;Disclaimer: I am receiving HLTH for growing the community.&rdquo;</div>
+          <div dir="auto">&bull;When you talk about Health Nexus, focus on the importance of the solution &mdash; reducing medical costs, giving individuals more control over their health data, opening up possibilities for innovation in medical research.</div>
+          <div dir="auto">&bull;Explain what the utility of the HTLH token is &mdash; the token is required to transfer data within the Health Nexus platform.</div>
+          <div dir="auto">&nbsp;</div>
+          <div dir="auto">DON&rsquo;T:</div>
+          <div dir="auto">&bull;Don&rsquo;t refer to HTLH token as an investment. It is a token that has utility from day 1 that allows data to be transferred within the Health Nexus platform.</div>
+          <div dir="auto">&bull;Don&rsquo;t use the terms &ldquo;ICO&rdquo; or &ldquo;initial coin offering.&rdquo; You can say &ldquo;token sale.&rdquo;</div>
+          <div dir="auto">&bull;Don&rsquo;t discuss or hint at price increasing.&nbsp;</div>
+          <div dir="auto">&bull;Don&rsquo;t discuss exchanges.</div>
+        </Segment>
         <Card.Group itemsPerRow={2}>
           <TotalUsersTile />
           <TotalSharesTile />

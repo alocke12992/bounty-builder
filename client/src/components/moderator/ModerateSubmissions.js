@@ -22,7 +22,8 @@ class ModerateSubmissions extends Component {
       return(
         <Table.Row key={submission.id}>
           <Table.Cell>{submission.kind}</Table.Cell>
-          <Table.Cell><a href={submission.url} target='_blank'>{submission.url}</a></Table.Cell>
+          <Table.Cell>{submission.user.email}</Table.Cell>
+          <Table.Cell><a href={submission.url} target='_blank'>Go to page.</a></Table.Cell>
           <Table.Cell><Input value={reward} onChange={(e) => this.handleChange(e,submission.id)}/></Table.Cell>
           <Table.Cell>
             <Button
@@ -83,6 +84,7 @@ class ModerateSubmissions extends Component {
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell>Kind</Table.HeaderCell>
+            <Table.HeaderCell>Email</Table.HeaderCell>
             <Table.HeaderCell>Url</Table.HeaderCell>
             <Table.HeaderCell>Reward Amount</Table.HeaderCell>
             <Table.HeaderCell>Actions</Table.HeaderCell>

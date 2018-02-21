@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180213065352) do
+ActiveRecord::Schema.define(version: 20180220224043) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -113,6 +113,8 @@ ActiveRecord::Schema.define(version: 20180213065352) do
     t.boolean "blocked", default: false
     t.string "confirmation_code"
     t.boolean "confirmed", default: false
+    t.integer "reminders_sent", default: 0
+    t.boolean "translator", default: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["email"], name: "index_users_on_email", unique: true

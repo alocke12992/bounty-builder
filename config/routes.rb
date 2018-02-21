@@ -30,6 +30,8 @@ Rails.application.routes.draw do
     get 'moderator/get_pending_discords', to: 'moderator#get_pending_discords'
     post 'moderator/approve_discord', to: 'moderator#approve_discord'
     post 'moderator/reject_discord', to: 'moderator#reject_discord'
+    post 'moderator/add_translator', to: 'moderator#add_translator'
+    get 'moderator/generate_csv', to: 'moderator#generate_csv'
 
     #Password Recovery
     post 'passwords/send_password_reset', to: 'passwords#send_password_reset'

@@ -13,6 +13,15 @@ class User < ActiveRecord::Base
 
   after_create :invite_code, :confirmation
 
+  def self.to_csv
+    CSV.generate do |csv|
+      csv << column_names
+      all.each do |result|
+        csv << result.attributes.values_at(*column_names)
+      end
+    end
+  end
+
   private
   def invite_code
     if self.incoming_invite_code
