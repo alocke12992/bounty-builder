@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Button, Segment, Grid } from 'semantic-ui-react';
+import { Form, Button, Segment, Grid, Image } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { sendPasswordReset, recoverPassword } from '../actions/auth';
 import { setFlash } from '../actions/flash';
@@ -41,9 +41,7 @@ class RecoverPassword extends Component {
       <Grid centered columns={2}>
         <Grid.Column>
           <Segment raised>
-            <div style={styles.centered}>
-              <img src={require('../assets/images/HN_token_transparent.png')} style={styles.logo} alt='HN Token'/>
-            </div>
+            <Image centered src={require('../assets/images/logo.svg')} style={styles.logo} alt='HN Token'/>
             { emailSent ?
               <p>An email has been sent containing password reset instructions.</p>
               :
@@ -103,12 +101,9 @@ class RecoverPassword extends Component {
 
 var styles = {
   logo: {
-    width: '120px',
-    height: '120px'
+    width: 300,
+    height: 'auto'
   },
-  centered: {
-    textAlign: 'center'
-  }
 };
 
 export default connect()(RecoverPassword);

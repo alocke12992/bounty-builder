@@ -97,6 +97,16 @@ class Api::ModeratorController < Api::ApiController
     end
   end
 
+  def add_influencer
+    influencer = User.find_by(email: params[:email])
+    if influencer
+      influencer.update(is_influencer: true)
+      head :ok
+    else
+      unprocessable("User not found")
+    end
+  end
+
   def generate_csv
     entries = User.where(confirmed: true).where.not(wallet: nil).page(params[:page])
     csv_string = CSV.generate do |csv|

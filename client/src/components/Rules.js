@@ -47,7 +47,7 @@ class Rules extends Component {
             <p><em>20 Shares: Join the Telegram group &amp; Discord Group (required)</em></p>
             <p>&nbsp;</p>
             <p><strong><em>Social Media: Facebook, Linkedin, or Twitter</em></strong></p>
-            <p><em>&nbsp;20 shares: Follow/Subscribe/Like SVH on FB, Twitter, LinkedIn, and Reddit</em></p>
+            <p><em>&nbsp;20 shares: Follow/Subscribe/Like Deconet on FB, Twitter, LinkedIn, and Reddit</em></p>
             <p>&nbsp;</p>
             <p><strong><em>Translations:</em></strong></p>
             <p><em>Reserve your translation here:</em></p>

@@ -67,7 +67,7 @@ class Dashboard extends React.Component{
             </Form>
             <Divider />
             <Recaptcha
-              sitekey="6Ldb40UUAAAAAIrHJQ1Y5g5HGKhpSy9KJtL9IOQd"
+              sitekey="6LcsL0wUAAAAAPi-dEhwqV1TI7fIopO8lP3HGN_v"
               verifyCallback={this.callback}
             />
           <Button disabled={!captchaVerified} onClick={this.resendConfirmationEmail}>Resend confirmation code</Button>

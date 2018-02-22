@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Segment, Form, Button, Grid } from 'semantic-ui-react';
+import { Segment, Form, Button, Grid, Image } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { handleLogin } from '../actions/auth';
 import { Link } from 'react-router-dom';
@@ -25,9 +25,7 @@ class Login extends Component {
       <Grid centered columns={2}>
         <Grid.Column>
           <Segment raised>
-            <div style={{textAlign: 'center'}}>
-              <img src={require('../assets/images/HN_token_transparent.png')} style={styles.logo} alt='HN Token'/>
-            </div>
+            <Image centered src={require('../assets/images/logo.svg')} style={styles.logo} alt='HN Token'/>
             <p>Welcome to the bounty program for Health Nexus, the healthcare-safe blockchain. Find more about our project here: <a href='https://token.simplyvitalhealth.com'>https://token.simplyvitalhealth.com/</a></p>
             <Form onSubmit={this.handleSubmit}>
               <Form.Field>
@@ -65,8 +63,8 @@ class Login extends Component {
 
 var styles = {
   logo: {
-    width: '120px',
-    height: '120px'
+    width: 300,
+    height: 'auto',
   }
 };
 

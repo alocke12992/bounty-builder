@@ -62,7 +62,7 @@ class LinkedIn extends React.Component {
   }
 
   likePage = () => {
-    this.props.dispatch(addReward(20, 'reddit', "Subscribed to SVH on reddit."));
+    this.props.dispatch(addReward(20, 'reddit', "Subscribed to Deconet on reddit."));
   }
 
   rewardsIncludes = (reason) => {
@@ -93,29 +93,7 @@ class LinkedIn extends React.Component {
                   />
                   <Form.Button>Save</Form.Button>
                 </Form>
-                {/*<hr/>
-                <Header as='h2'>How to earn shares:</Header>
-                <List bulleted>
-                  <List.Item>
-                    In order to check for new shares that you are eligible for, you <strong>must</strong> press the login with Facebook button below.
-                  </List.Item>
-                  <List.Item>
-                    You may come back and press the button multiple times, but you will only be awarded according to the share rules.
-                  </List.Item>
-                </List>
-                <FacebookLogin
-                  appId="355565764911095"
-                  cookie={true}
-                  xfbml={true}
-                  version='2.8'
-                  autoLoad={false}
-                  fields="name,email,friends,picture,likes,posts"
-                  scope="public_profile,email,user_friends,user_likes,user_posts"
-                  callback={this.fbResponse.bind(this)}
-                  disableMobileRedirect={true}
-                />*/}
               </Segment>
-              {/*// <Submissions kind={this.props.service}/>*/}
             </Grid.Column>
             <Grid.Column>
               <SocialMediaRules/>
@@ -125,13 +103,13 @@ class LinkedIn extends React.Component {
             <ActionWarning />
             <Grid.Column>
             <Segment>
-              <Header as='h2'>Subscribe to SVH Subreddit:</Header>
-              <p>Subscribe to SVH Subreddit. After, come back and press 'I Subscribed'.</p>
-              <Button color="orange" as='a' href="https://www.reddit.com/r/SimplyVitalHealth/" target='_blank'>
+              <Header as='h2'>Subscribe to Deconet Subreddit:</Header>
+              <p>Subscribe to Deconet Subreddit. After, come back and press 'I Subscribed'.</p>
+              <Button color="orange" as='a' href="https://www.reddit.com/r/Deconet/" target='_blank'>
                 <Icon name='reddit'/> Reddit
               </Button>
               <Divider hidden />
-              <Button color='orange' onClick={this.likePage} disabled={this.rewardsIncludes("Subscribed to SVH on reddit.") || this.state.value === ''}>I Subscribed.</Button>
+              <Button color='orange' onClick={this.likePage} disabled={this.rewardsIncludes("Subscribed to Deconet on reddit.") || this.state.value === ''}>I Subscribed.</Button>
             </Segment>
             { this.renderPosts() }
             </Grid.Column>

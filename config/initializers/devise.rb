@@ -1,3 +1,3 @@
 Devise.setup do |config|
-  config.mailer_sender = 'noreply@simplyvitalhealth.com'
+  config.mailer_sender = 'noreply@deco.network'
 end

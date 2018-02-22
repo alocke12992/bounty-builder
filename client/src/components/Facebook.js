@@ -60,7 +60,7 @@ class Facebook extends React.Component {
   }
 
   likePage = () => {
-    this.props.dispatch(addReward(20, 'facebook', 'Liked SVH on facebook.'));
+    this.props.dispatch(addReward(20, 'facebook', 'Liked Deconet on facebook.'));
   }
 
   rewardsIncludes = (reason) => {
@@ -113,7 +113,6 @@ class Facebook extends React.Component {
                   disableMobileRedirect={true}
                 />*/}
               </Segment>
-              {/*// <Submissions kind={this.props.service}/>*/}
             </Grid.Column>
             <Grid.Column>
               <SocialMediaRules/>
@@ -121,17 +120,13 @@ class Facebook extends React.Component {
             <ActionWarning/>
               <FacebookProvider appId="178191166116598">
                 <Segment>
-                  <Header as='h2'>Simply Vital Health Facebook Page:</Header>
-                  <Like href="https://www.facebook.com/SimplyVitalHealth/" colorScheme="dark" showFaces />
+                  <Header as='h2'>Deconet Facebook Page:</Header>
+                  <Like href="https://www.facebook.com/DecentralizedCodeNetwork/" colorScheme="dark" showFaces />
                   <Divider hidden />
-                  <Button color='facebook' onClick={this.likePage} disabled={this.rewardsIncludes("Liked SVH on facebook.") || this.state.value === ''}>I liked this page.</Button>
+                  <Button color='facebook' onClick={this.likePage} disabled={this.rewardsIncludes("Liked Deconet on facebook.") || this.state.value === ''}>I liked this page.</Button>
                 </Segment>
                 { this.renderPosts() }
               </FacebookProvider>
-          </Grid.Row>
-          <Grid.Row>
-
-
           </Grid.Row>
         </Grid>
       </Container>

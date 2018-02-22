@@ -6,7 +6,7 @@ class SocialMediaRules extends Component {
     return (
       <Segment>
         <p><strong><em>Social Media: Facebook, Linkedin, or Twitter</em></strong></p>
-        <p><em>&nbsp;20 shares: Follow/Subscribe/Like SVH on FB, Twitter, LinkedIn, and Reddit</em></p>
+        <p><em>&nbsp;20 shares: Follow/Subscribe/Like Deconet on FB, Twitter, LinkedIn, and Reddit</em></p>
       </Segment>
     );
   }

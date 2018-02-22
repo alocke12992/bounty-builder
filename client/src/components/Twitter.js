@@ -10,7 +10,7 @@ import { addReward } from '../actions/rewards';
 import ActionWarning from './ActionWarning';
 import { Tweet } from 'react-twitter-widgets';
 
-class LinkedIn extends React.Component {
+class Twitter extends React.Component {
   state = { value: '', posts: [] }
 
   componentDidMount() {
@@ -35,7 +35,7 @@ class LinkedIn extends React.Component {
         this.props.dispatch(setFlash('Success', 'green'));
       })
       .catch( err => {
-        //TODO
+        this.props.dispatch(setHeaders(err.headers));
       })
   }
 
@@ -62,7 +62,7 @@ class LinkedIn extends React.Component {
   }
 
   likePage = () => {
-    this.props.dispatch(addReward(20, 'twitter', 'Followed SVH on twitter.'));
+    this.props.dispatch(addReward(20, 'twitter', 'Followed Deconet on twitter.'));
   }
 
   rewardsIncludes = (reason) => {
@@ -125,12 +125,12 @@ class LinkedIn extends React.Component {
           <Grid.Row>
             <Segment>
               <Header as='h2'>Follow Simply Vital Health Twitter Page:</Header>
-              <p>Follow SVH on Twitter. After, come back and press 'I followed this page'.</p>
-              <Button color="twitter" as='a' href="https://twitter.com/SimplyVitalHQ" target='_blank'>
+              <p>Follow Deconet on Twitter. After, come back and press 'I followed this page'.</p>
+              <Button color="twitter" as='a' href="https://twitter.com/Deco_Network" target='_blank'>
                 <Icon name='twitter'/> Twitter
               </Button>
               <Divider hidden />
-              <Button color='twitter' onClick={this.likePage} disabled={this.rewardsIncludes("Followed SVH on twitter.") || this.state.value === ''}>I followed this page.</Button>
+              <Button color='twitter' onClick={this.likePage} disabled={this.rewardsIncludes("Followed Deconet on twitter.") || this.state.value === ''}>I followed this page.</Button>
             </Segment>
             <Card.Group>
               { this.renderPosts() }
@@ -148,4 +148,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default withRouter(connect(mapStateToProps)(LinkedIn));
+export default withRouter(connect(mapStateToProps)(Twitter));

@@ -31,6 +31,7 @@ Rails.application.routes.draw do
     post 'moderator/approve_discord', to: 'moderator#approve_discord'
     post 'moderator/reject_discord', to: 'moderator#reject_discord'
     post 'moderator/add_translator', to: 'moderator#add_translator'
+    post 'moderator/add_influencer', to: 'moderator#add_influencer'
     get 'moderator/generate_csv', to: 'moderator#generate_csv'
 
     #Password Recovery

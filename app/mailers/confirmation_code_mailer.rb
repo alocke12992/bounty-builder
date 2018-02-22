@@ -1,13 +1,13 @@
 class ConfirmationCodeMailer < ApplicationMailer
-  default from: "noreply@simplyvitalhealth.com"
+  default from: "noreply@deco.network"
 
   def confirmation_email(user)
     @user = user
-    mail(to: @user.email, subject: 'Simply Vital Health Bounty Confirmation')
+    mail(to: @user.email, subject: 'Deconet Bounty Confirmation')
   end
 
   def confirmation_reminder_email(user)
     @user = user
-    mail(to: @user.email, subject: 'Simply Vital Health Bounty Confirmation Reminder')
+    mail(to: @user.email, subject: 'Deconet Bounty Confirmation Reminder')
   end
 end

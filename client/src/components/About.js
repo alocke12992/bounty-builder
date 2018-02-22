@@ -8,7 +8,7 @@ class About extends Component {
         <Grid.Column>
           <Segment raised>
             <div style={{textAlign: 'center'}}>
-              <img src={require('../assets/images/HN_token_transparent.png')} style={styles.logo} alt='HN Token'/>
+              <img src={require('../assets/images/logo.svg')} style={styles.logo} alt='HN Token'/>
             </div>
             <h1>Bounty Program Rules and Distribution</h1>
             <p><br /> <br /> <br /> <strong>Bounty Program 2,000,000 tokens 1.5% of total token allocation </strong>this will be on a sliding scale for users:<br /> <br /> * All users must register to the <a href="https://t.me/HealthNexus">official Telegram Channel Account</a> and to the official <a href="https://discord.gg/2Wfg524">Discord Channel </a>to be eligible for bounty program</p>
@@ -38,7 +38,7 @@ class About extends Component {
             </ul>
             <p><strong>Social Media: Facebook, Linkedin, or Twitter </strong></p>
             <ul>
-              <li>20 shares issued if you Follow/Subscribe/Like SVH on FB, Twitter, Linkedin, and Reddit</li>
+              <li>20 shares issued if you Follow/Subscribe/Like Deconet on FB, Twitter, Linkedin, and Reddit</li>
             </ul>
             <p><strong>Rule 1: </strong>Accounts must be active and have a Minimum of 200 Followers.<br /> <strong>Rule 2:</strong> Users are limited to 2 posts per day<br /> <strong>Rule 3:</strong> No shares for robots<br /> <br /> <br /> <strong>Influencer posts, Blog articles and Reddit Posts:</strong></p>
             <ul>

@@ -43,16 +43,8 @@ class NavBar extends Component {
       <Menu pointing secondary style={styles.base}>
         <Menu.Item>
           <img
-            src={require('../assets/images/HN_token_transparent.png')}
-            style={styles.logo}
-            onClick={() => this.props.history.push('/')}
-            alt='HN Token'
-          />
-        </Menu.Item>
-        <Menu.Item>
-          <img
-            src={require('../assets/images/health_nexus_text.svg')}
-            style={{height: '25px', width: 'auto', marginBottom: '20px'}}
+            src={require('../assets/images/logo-white.svg')}
+            style={{height: '60px', width: 'auto'}}
             onClick={() => this.props.history.push('/')}
             alt='HN Text'
           />
@@ -62,10 +54,9 @@ class NavBar extends Component {
     );
   }
 }
-
 var styles = {
   base: {
-    background: '#3685b5',
+    background: '#2C83ED',
     height: '100px',
   },
   text: {

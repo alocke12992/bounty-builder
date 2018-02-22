@@ -62,7 +62,7 @@ class LinkedIn extends React.Component {
   }
 
   likePage = () => {
-    this.props.dispatch(addReward(20, 'linkedin', 'Followed SVH on linkedin.'));
+    this.props.dispatch(addReward(20, 'linkedin', 'Followed Deconet on linkedin.'));
   }
 
   rewardsIncludes = (reason) => {
@@ -93,29 +93,7 @@ class LinkedIn extends React.Component {
                   />
                   <Form.Button>Save</Form.Button>
                 </Form>
-                {/*<hr/>
-                <Header as='h2'>How to earn shares:</Header>
-                <List bulleted>
-                  <List.Item>
-                    In order to check for new shares that you are eligible for, you <strong>must</strong> press the login with Facebook button below.
-                  </List.Item>
-                  <List.Item>
-                    You may come back and press the button multiple times, but you will only be awarded according to the share rules.
-                  </List.Item>
-                </List>
-                <FacebookLogin
-                  appId="355565764911095"
-                  cookie={true}
-                  xfbml={true}
-                  version='2.8'
-                  autoLoad={false}
-                  fields="name,email,friends,picture,likes,posts"
-                  scope="public_profile,email,user_friends,user_likes,user_posts"
-                  callback={this.fbResponse.bind(this)}
-                  disableMobileRedirect={true}
-                />*/}
               </Segment>
-              {/*// <Submissions kind={this.props.service}/>*/}
             </Grid.Column>
             <Grid.Column>
               <SocialMediaRules/>
@@ -126,12 +104,12 @@ class LinkedIn extends React.Component {
             <Grid.Column>
             <Segment>
               <Header as='h2'>Follow Simply Vital Health LinkedIn Page:</Header>
-              <p>Follow SVH on LinkedIn. After, come back and press 'I followed this page'.</p>
-              <Button color="linkedin" as='a' href="https://www.linkedin.com/company/11024026/" target='_blank'>
+              <p>Follow Deconet on LinkedIn. After, come back and press 'I followed this page'.</p>
+              <Button color="linkedin" as='a' href="https://www.linkedin.com/company/11268774/" target='_blank'>
                 <Icon name='linkedin'/> LinkedIn
               </Button>
               <Divider hidden />
-              <Button color='linkedin' onClick={this.likePage} disabled={this.rewardsIncludes("Followed SVH on linkedin.") || this.state.value === ''}>I followed this page.</Button>
+              <Button color='linkedin' onClick={this.likePage} disabled={this.rewardsIncludes("Followed Deconet on linkedin.") || this.state.value === ''}>I followed this page.</Button>
             </Segment>
             { this.renderPosts() }
             </Grid.Column>

@@ -13,6 +13,7 @@ import ModerateTelegrams from './ModerateTelegrams';
 import ModerateDiscords from './ModerateDiscords';
 import ModerateApproveTranslators from './ModerateApproveTranslators';
 import GenerateCsv from './GenerateCsv';
+import ModerateApproveInfluencers from './ModerateApproveInfluencers';
 
 const routes = [
   { path: '/moderate',
@@ -33,6 +34,9 @@ const routes = [
   },
   { path: '/moderate/generate_csv',
     main: () => <GenerateCsv />
+  },
+  { path: '/moderate/influencers',
+    main: () => <ModerateApproveInfluencers />
   }
 ]
 
@@ -50,6 +54,7 @@ class ModeratorHome extends React.Component{
                   <Menu.Item as={Link} to='/moderate/telegram' name='Telegram' active={pathname === '/moderate/telegram'}/>
                   <Menu.Item as={Link} to='/moderate/discord' name='Discord' active={pathname === '/moderate/discord'}/>
                   <Menu.Item as={Link} to='/moderate/translators' name='Add Translator' active={pathname === '/moderate/translators'}/>
+                  <Menu.Item as={Link} to='/moderate/influencers' name='Add Influencer' active={pathname === '/moderate/influencers'}/>
                 </Menu>
               </Grid.Column>
               <Grid.Column mobile={16} tablet={16} computer={11}>

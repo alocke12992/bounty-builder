@@ -35,7 +35,7 @@ class GenerateCsv extends Component {
       this.setState({currentPage: this.state.currentPage + 1, csvString: this.state.csvString + res.data.csv_string})
       this.props.dispatch(setHeaders(res.headers));
       if(this.state.currentPage > totalPages ){
-        saveData(this.state.csvString, "SVHBounty" + new Date() + ".csv");
+        saveData(this.state.csvString, "DeconetBounty" + new Date() + ".csv");
         this.setState({loading: false, currentPage: 1, csvString: "Email,Wallet,Amount\n"});
       }else{
         this.fetchMore(page + 1)

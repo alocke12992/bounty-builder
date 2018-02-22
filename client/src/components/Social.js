@@ -30,23 +30,12 @@ class Social extends React.Component {
         this.props.dispatch(setFlash('Success', 'green'));
       })
       .catch( err => {
-        //TODO
+        this.props.dispatch(setHeaders(err.headers));
       })
   }
 
   handleChange = (e) => {
     this.setState({ value: e.target.value });
-  }
-
-  rules = () => {
-    const { pathname } = this.props.location;
-    if(['/facebook', '/twitter', '/linkedin'].includes(pathname)){
-      return <SocialMediaRules/>;
-    } else if (['/reddit', '/blog', '/influencer'].includes(pathname)){
-      return <BlogRules/>;
-    } else if (['/telegram', '/discord'].includes(pathname)){
-      return <ChatRules/>
-    }
   }
 
   render() {
@@ -59,19 +48,35 @@ class Social extends React.Component {
                 <Header as='h2'>Submit Your Own Content</Header>
                 <p>If you use an influencing platform such as a blog, video site, social media etc, you may submit your own content for shares.</p>
                 <ol>
+                  <li>Submit your social media account.</li>
+                    <ul>
+                      <li>If approved you will be contacted via social media.</li>
+                      <li>Any posts created without approval will not be rewarded</li>
+                    </ul>
                   <li>Create your content.</li>
                   <li>Post a URL to your content (beginning with https)</li>
                   <li>A moderator will review your submission and award shares according to the share rules.</li>
                 </ol>
               </Segment>
-              { this.props.submissions &&
-                <Submissions kind={this.props.service}/>
+              <Segment>
+                {
+                  this.props.user.is_influencer ?
+                  <div>
+                    <p>You have been approved to submit influencer posts.</p>
+                  </div>
+                  :
+                  <div>
+                    <p>Please submit your social media account <a href='https://goo.gl/forms/M73b8aQI9aMmXSjq2'>this link</a>.</p>
+                    <p>If you are approved to translate, you will be contacted by social media.</p>
+                  </div>
+                }
+              </Segment>
+              { this.props.user.is_influencer &&
+                <Submissions kind="influencer"/>
               }
             </Grid.Column>
             <Grid.Column>
-              {
-                this.rules()
-              }
+              <BlogRules />
             </Grid.Column>
           </Grid.Row>
         </Grid>
@@ -80,4 +85,8 @@ class Social extends React.Component {
   }
 }
 
-export default withRouter(connect()(Social));
+const mapStateToProps = (state) => {
+  return { user: state.user }
+}
+
+export default withRouter(connect(mapStateToProps)(Social));

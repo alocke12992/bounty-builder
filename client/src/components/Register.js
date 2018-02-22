@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Button, Segment, Grid } from 'semantic-ui-react';
+import { Form, Button, Segment, Grid, Image } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { registerUser } from '../actions/auth';
 import { setFlash } from '../actions/flash';
@@ -43,9 +43,7 @@ class Register extends Component {
       <Grid centered columns={2}>
         <Grid.Column>
           <Segment raised>
-            <div style={styles.centered}>
-              <img src={require('../assets/images/HN_token_transparent.png')} style={styles.logo} alt='HN Token'/>
-            </div>
+            <Image centered src={require('../assets/images/logo.svg')} style={styles.logo} alt='HN Token'/>
             <p>Welcome to the bounty program for Health Nexus, the healthcare-safe blockchain. Find more about our project here: <a href='https://token.simplyvitalhealth.com'>https://token.simplyvitalhealth.com/</a></p>
             <Form onSubmit={this.handleSubmit}>
               <Form.Field>
@@ -90,7 +88,7 @@ class Register extends Component {
                 />
               </Form.Field>
               <Recaptcha
-                sitekey="6Ldb40UUAAAAAIrHJQ1Y5g5HGKhpSy9KJtL9IOQd"
+                sitekey="6LcsL0wUAAAAAPi-dEhwqV1TI7fIopO8lP3HGN_v"
                 verifyCallback={this.callback}
               />
               <Segment basic textAlign='center'>
@@ -106,12 +104,9 @@ class Register extends Component {
 
 var styles = {
   logo: {
-    width: '120px',
-    height: '120px'
+    width: 300,
+    height: 'auto'
   },
-  centered: {
-    textAlign: 'center'
-  }
 };
 
 export default connect()(Register);
