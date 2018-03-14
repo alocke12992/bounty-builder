@@ -3,6 +3,17 @@ import { Segment, Form, Button, Grid, Image } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { handleLogin } from '../actions/auth';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { setFlash } from '../actions/flash';
+import { setHeaders } from '../actions/headers';
+const queryString = require('query-string');
+// var ClientOAuth2 = require('client-oauth2')
+//
+// var deconetAuth = new ClientOAuth2({
+//   clientId: '2d6dbffdce9d62562f2fe8c0be2a0284bdc36b71fda2bc4600372810fa68e5bd',
+//   authorizationUri: 'https://app.deco.network/oauth/authorize',
+//   redirectUri: 'http://localhost:3000/auth/Deconet/callback',
+// })
 
 class Login extends Component {
   state = { email: '', password: '' };
@@ -17,6 +28,10 @@ class Login extends Component {
     const { dispatch, history } = this.props;
     const { email, password } = this.state;
     dispatch(handleLogin(email, password, history));
+  }
+
+  deconetOauth = () => {
+    window.open("https://app.deco.network/oauth/authorize?response_type=code&client_id=2d6dbffdce9d62562f2fe8c0be2a0284bdc36b71fda2bc4600372810fa68e5bd&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fauth%2FDeconet%2Fcallback");
   }
 
   render() {
@@ -54,6 +69,7 @@ class Login extends Component {
                 <Button primary type='submit'>Submit</Button>
               </Segment>
             </Form>
+            <Button onClick={this.deconetOauth} style={styles.deconetButton}>Sign in with Deconet</Button>
           </Segment>
         </Grid.Column>
       </Grid>
@@ -65,6 +81,10 @@ var styles = {
   logo: {
     width: 300,
     height: 'auto',
+  },
+  deconetButton: {
+    backgroundColor: '#2678EA',
+    color: 'white'
   }
 };
 

@@ -35,10 +35,13 @@ gem 'jbuilder'
 gem "paranoia", "~> 2.2"
 gem 'kaminari'
 gem 'email_address'
+gem 'httparty'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'pry'
+  gem 'pry-byebug'
+  gem 'pry-remote'
+  gem 'pry-stack_explorer'
   # Open Mail In Development
   gem 'letter_opener'
 end

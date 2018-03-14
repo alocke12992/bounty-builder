@@ -1,16 +1,25 @@
 import React, { Component } from 'react';
-import { Form, Button, Segment, Grid, Image } from 'semantic-ui-react';
+import { Form, Button, Segment, Grid, Image, Divider } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { registerUser } from '../actions/auth';
 import { setFlash } from '../actions/flash';
 var Recaptcha = require('react-recaptcha');
+const queryString = require('query-string');
+// var ClientOAuth2 = require('client-oauth2')
+//
+// var deconetAuth = new ClientOAuth2({
+//   clientId: '2d6dbffdce9d62562f2fe8c0be2a0284bdc36b71fda2bc4600372810fa68e5bd',
+//   authorizationUri: 'https://app.deco.network/oauth/authorize',
+//   redirectUri: 'http://localhost:3000/auth/Deconet/callback',
+// })
 
 class Register extends Component {
   state = { email: '', password: '', passwordConfirmation: '', invite_code: '', captchaVerified: false };
 
   componentDidMount(){
-    if (this.props.location.search)
-      this.setState({invite_code: this.props.location.search.split('?invite_code=')[1]})
+    const parsed = queryString.parse(this.props.location.search)
+    if (parsed.invite_code)
+      this.setState({ invite_code: parsed.invite_code })
   }
 
   handleSubmit = event => {
@@ -34,6 +43,10 @@ class Register extends Component {
 
   callback = (res) => {
     this.setState({captchaVerified: true});
+  }
+
+  deconetOauth = () => {
+    window.open("https://app.deco.network/oauth/authorize?response_type=code&client_id=2d6dbffdce9d62562f2fe8c0be2a0284bdc36b71fda2bc4600372810fa68e5bd&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fauth%2FDeconet%2Fcallback&state=" + JSON.stringify({invite_code: this.state.invite_code}));
   }
 
   render() {
@@ -95,6 +108,8 @@ class Register extends Component {
                 <Button type='submit' disabled={!captchaVerified} >Submit</Button>
               </Segment>
             </Form>
+            <Divider horizontal>Or</Divider>
+            <Button fluid onClick={this.deconetOauth} style={styles.deconetButton}>Register with Deconet</Button>
           </Segment>
         </Grid.Column>
       </Grid>
@@ -107,6 +122,10 @@ var styles = {
     width: 300,
     height: 'auto'
   },
+  deconetButton: {
+    backgroundColor: '#2678EA',
+    color: 'white'
+  }
 };
 
 export default connect()(Register);

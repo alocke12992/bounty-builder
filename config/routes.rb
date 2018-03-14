@@ -41,6 +41,9 @@ Rails.application.routes.draw do
     #Confirmation Codes
     post 'confirmations/verify_confirmation', to: 'confirmations#verify_confirmation'
     get 'confirmations/resend_confirmation_email', to: 'confirmations#resend_confirmation_email'
+
+    #oauth
+    post '/oauth', to: 'oauth#create'
   end
 
   #Do not place any routes below this one

@@ -14,6 +14,7 @@ import AdminRoute from './AdminRoute';
 import NewPost from './NewPost';
 import RecoverPassword from './RecoverPassword';
 import ModeratorHome from './moderator/ModeratorHome';
+import DeconetOauth from './DeconetOauth';
 
 class App extends Component {
   render() {
@@ -23,6 +24,7 @@ class App extends Component {
         <Flash />
         <FetchUser>
           <Switch>
+            <Route exact path='/auth/Deconet/callback' component={DeconetOauth} />
             <AuthRoute exact path='/login' component={Login} />
             <AuthRoute exact path='/register' component={Register} />
             <AuthRoute exact path='/recover_password' component={RecoverPassword} />

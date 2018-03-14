@@ -16,9 +16,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "ssh://git@phabricator.devpointstudios.com/diffusion/31/bounty.git"
+    "url": "ssh://git@phabricator.devpointstudios.com/diffusion/38/bounty-deconet.git"
   },
   "dependencies": {
-    
+
   }
 }
