@@ -3,6 +3,7 @@ import { Form, Button, Segment, Grid, Image, Divider } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { registerUser } from '../actions/auth';
 import { setFlash } from '../actions/flash';
+import { baseURL } from '../utils/urls';
 var Recaptcha = require('react-recaptcha');
 const queryString = require('query-string');
 // var ClientOAuth2 = require('client-oauth2')
@@ -46,7 +47,7 @@ class Register extends Component {
   }
 
   deconetOauth = () => {
-    window.open("https://app.deco.network/oauth/authorize?response_type=code&client_id=2d6dbffdce9d62562f2fe8c0be2a0284bdc36b71fda2bc4600372810fa68e5bd&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fauth%2FDeconet%2Fcallback&state=" + JSON.stringify({invite_code: this.state.invite_code}));
+    window.open("https://app.deco.network/oauth/authorize?response_type=code&client_id=2d6dbffdce9d62562f2fe8c0be2a0284bdc36b71fda2bc4600372810fa68e5bd&redirect_uri=" + escape(baseURL()) + "%2Fauth%2FDeconet%2Fcallback&state=" + JSON.stringify({invite_code: this.state.invite_code}));
   }
 
   render() {

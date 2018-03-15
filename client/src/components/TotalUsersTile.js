@@ -17,13 +17,13 @@ class TotalUsersTile extends React.Component {
 
   barLogic = () => {
     const { users } = this.state;
-    if(users <= 500){
-      this.setState({progress: (users / 500) * 100});
-    } else if ( users >= 501 && users <= 1000){
-      this.setState({progress: (users / 1000) * 100});
-    } else if ( users >= 1001 && users <= 2000){
-      this.setState({progress: (users / 2000) * 100});
-    } else if (users >= 2001){
+    if(users <= 2500){
+      this.setState({progress: (users / 2500) * 100});
+    } else if ( users >= 2501 && users <= 5000){
+      this.setState({progress: (users / 5000) * 100});
+    } else if ( users >= 5001 && users <= 10000){
+      this.setState({progress: (users / 10000) * 100});
+    } else if (users >= 10000){
       this.setState({progress: 100});
     }
   }
@@ -41,9 +41,10 @@ class TotalUsersTile extends React.Component {
           </Card.Description>
           <Progress percent={progress} indicating />
           <ul>
-            <li>0-500 users will release 500,000 of the total token allocation</li>
-            <li>501- 1000 users will release 1,000,000</li>
-            <li>Over 2000 users on the bounty will release 2,000,000</li>
+            <li>0 - 2,500 users will release 1,000,000 of the total token allocation</li>
+            <li>2,501 - 5,000 users will release 2,500,000 tokens</li>
+            <li>5,001 - 10,000 users will release 5,000,000 tokens</li>
+            <li>Over 10,000 users on the bounty will release 7,500,000 tokens</li>
           </ul>
         </Card.Content>
       </Card>

@@ -66,7 +66,7 @@ class Social extends React.Component {
                   </div>
                   :
                   <div>
-                    <p>Please submit your social media account <a href='https://goo.gl/forms/M73b8aQI9aMmXSjq2'>this link</a>.</p>
+                    <p>Please submit your social media account by using <a href='https://goo.gl/forms/UM8pMKI3XraKqQXv2'>this link</a>.</p>
                     <p>If you are approved to translate, you will be contacted by social media.</p>
                   </div>
                 }

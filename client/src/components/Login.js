@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { setFlash } from '../actions/flash';
 import { setHeaders } from '../actions/headers';
+import { baseURL } from '../utils/urls';
 const queryString = require('query-string');
 // var ClientOAuth2 = require('client-oauth2')
 //
@@ -31,7 +32,7 @@ class Login extends Component {
   }
 
   deconetOauth = () => {
-    window.open("https://app.deco.network/oauth/authorize?response_type=code&client_id=2d6dbffdce9d62562f2fe8c0be2a0284bdc36b71fda2bc4600372810fa68e5bd&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fauth%2FDeconet%2Fcallback");
+    window.open("https://app.deco.network/oauth/authorize?response_type=code&client_id=2d6dbffdce9d62562f2fe8c0be2a0284bdc36b71fda2bc4600372810fa68e5bd&redirect_uri=" + escape(baseURL()) + "%2Fauth%2FDeconet%2Fcallback");
   }
 
   render() {

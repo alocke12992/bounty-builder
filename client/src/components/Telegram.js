@@ -37,7 +37,7 @@ class Telegram extends React.Component {
         this.props.dispatch(setFlash('Telegram updated', 'green'));
       })
       .catch( err => {
-        //TODO
+        this.props.dispatch(setHeaders(err.headers));
       })
   }
 
@@ -52,7 +52,7 @@ class Telegram extends React.Component {
         <Card.Content textAlign="center">
           <p>Join the Telegram group below. After, enter the username you joined the group with and then press Submit for Approval. This may only be done once.</p>
           <Divider hidden />
-          <Button as='a' color='twitter' href="https://t.me/HealthNexus" target="_blank">
+          <Button as='a' color='twitter' href="https://t.me/deco_network" target="_blank">
             <Icon name='telegram' /> Telegram
           </Button>
           <Divider hidden />

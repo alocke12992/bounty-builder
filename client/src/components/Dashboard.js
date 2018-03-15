@@ -80,28 +80,38 @@ class Dashboard extends React.Component{
             onClick={() => this.props.history.push('/')}
             alt='HN Token'
           />
-          <p>Welcome to the bounty program for Health Nexus, the healthcare-safe blockchain. Find more about our project here: <a href='https://token.simplyvitalhealth.com'>https://token.simplyvitalhealth.com/</a></p>
+          <p>
+            Deconet makes software development sustainable by equitably rewarding contributors using the the economic infrastructure and technology of the blockchain.
+          </p>
+          <p>
+            The Deconet bounty program aims to include the global developer community and innovation partners in building a more rewarding and more innovative economic system for the creators and maintainers of today’s digital infrastructure.
+          </p>
         </Segment>
         <Segment>
-          <div dir="auto">DO:</div>
-          <div dir="auto">&bull;Disclose that you are receiving HLTH for growing the community &mdash; &ldquo;Disclaimer: I am receiving HLTH for growing the community.&rdquo;</div>
-          <div dir="auto">&bull;When you talk about Health Nexus, focus on the importance of the solution &mdash; reducing medical costs, giving individuals more control over their health data, opening up possibilities for innovation in medical research.</div>
-          <div dir="auto">&bull;Explain what the utility of the HTLH token is &mdash; the token is required to transfer data within the Health Nexus platform.</div>
-          <div dir="auto">&nbsp;</div>
-          <div dir="auto">DON&rsquo;T:</div>
-          <div dir="auto">&bull;Don&rsquo;t refer to HTLH token as an investment. It is a token that has utility from day 1 that allows data to be transferred within the Health Nexus platform.</div>
-          <div dir="auto">&bull;Don&rsquo;t use the terms &ldquo;ICO&rdquo; or &ldquo;initial coin offering.&rdquo; You can say &ldquo;token sale.&rdquo;</div>
-          <div dir="auto">&bull;Don&rsquo;t discuss or hint at price increasing.&nbsp;</div>
-          <div dir="auto">&bull;Don&rsquo;t discuss exchanges.</div>
+          <div>
+            <p style={{marginBottom: '11.0pt', lineHeight: '142%'}}><strong><span style={{fontSize: '10.5pt', lineHeight: '142%'}}>DO:</span></strong></p>
+            <ul>
+              <li style={{marginBottom: '11.0pt', lineHeight: '142%'}}><strong><span style={{fontSize: '10.5pt', lineHeight: '142%'}}>Disclose that you are receiving DCO for growing the community: </span></strong><span style={{fontSize: '10.5pt', lineHeight: '142%'}}>“Disclaimer: I am receiving DCO for growing the community.”</span></li>
+              <li style={{marginBottom: '11.0pt', lineHeight: '142%'}}><strong><span style={{fontSize: '10.5pt', lineHeight: '142%'}}>When you talk about Deconet, focus on the importance of the solution: </span></strong><span style={{fontSize: '10.5pt', lineHeight: '142%'}}>creating a sustainable economic backbone for open source development and paving a path to more distributed, remote, and gig-based work.</span></li>
+              <li style={{marginBottom: '11.0pt', lineHeight: '142%'}}><strong><span style={{fontSize: '10.5pt', lineHeight: '142%'}}>Explain what the utility of the DCO token is:</span></strong><span style={{fontSize: '10.5pt', lineHeight: '142%'}}> the token is used to access and power the crowd curation element of Deconet’s software platform. Also, companies and blockchain projects can use the token to create challenges for the Deconet community. </span></li>
+            </ul>
+            <p style={{marginBottom: '11.0pt', lineHeight: '142%'}}><strong><span style={{fontSize: '10.5pt', lineHeight: '142%'}}>DON’T:</span></strong></p>
+            <ul>
+              <li style={{marginBottom: '11.0pt', lineHeight: '142%'}}><strong><span style={{fontSize: '10.5pt', lineHeight: '142%'}}>Don’t refer to DCO token as an investment: </span></strong><span style={{fontSize: '10.5pt', lineHeight: '142%'}}>the Deconet token has utility from day one, allowing the crowd to access and curate software projects on the Deconet platform.</span></li>
+              <li style={{marginBottom: '11.0pt', lineHeight: '142%'}}><strong><span style={{fontSize: '10.5pt', lineHeight: '142%'}}>Don’t use the terms “ICO” or “initial coin offering.” </span></strong><span style={{fontSize: '10.5pt', lineHeight: '142%'}}>You can say “token generation”.</span></li>
+              <li style={{marginBottom: '11.0pt', lineHeight: '142%'}}><strong><span style={{fontSize: '10.5pt', lineHeight: '142%'}}>Don’t discuss or hint at price increasing. </span></strong></li>
+              <li style={{marginBottom: '11.0pt', lineHeight: '142%'}}><strong><span style={{fontSize: '10.5pt', lineHeight: '142%'}}>Don’t discuss exchanges.</span></strong></li>
+            </ul>
+          </div>
         </Segment>
         <Card.Group itemsPerRow={2}>
           <TotalUsersTile />
           <TotalSharesTile />
         </Card.Group>
-        <Card.Group itemsPerRow={3}>
+        <Card.Group itemsPerRow={2}>
           <ChatRules/>
           <Telegram/>
-          <Discord/>
+          {/*<Discord/>*/}
         </Card.Group>
         <Card.Group itemsPerRow={1}>
           <Wallet />
@@ -115,7 +125,7 @@ class Dashboard extends React.Component{
           <PointsTile source="reddit" title="Reddit" />
           <PointsTile source="influencer" title="Influencer" />
           <PointsTile source="telegram" title="Telegram" />
-          <PointsTile source="discord" title="Discord" />
+          {/*<PointsTile source="discord" title="Discord" />*/}
           <PointsTile source="invitation" title="Invite" />
           <PointsTile source="translation" title="Translation" />
         </Card.Group>

@@ -20,7 +20,7 @@ class Translation extends React.Component {
                   </div>
                   :
                   <div>
-                    <p>Please submit a sample translation using <a href='https://goo.gl/forms/XXJQ9wymSFyjm8ea2'>this link</a>.</p>
+                    <p>Please submit a sample translation using <a href='https://goo.gl/forms/Tdqnd3won6vuhz3E3'>this link</a>.</p>
                     <p>If you are approved to translate, you will be contacted by email.</p>
                   </div>
                 }
