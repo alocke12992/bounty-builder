@@ -39,7 +39,6 @@ gem 'httparty'
 
 group :development, :test do
   gem 'pry'
-  # need these?
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   # gem 'pry-byebug'
   # gem 'pry-remote'
