@@ -38,10 +38,11 @@ gem 'email_address'
 gem 'httparty'
 
 group :development, :test do
+  gem 'pry'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'pry-byebug'
-  gem 'pry-remote'
-  gem 'pry-stack_explorer'
+  # gem 'pry-byebug'
+  # gem 'pry-remote'
+  # gem 'pry-stack_explorer'
   # Open Mail In Development
   gem 'letter_opener'
 end
