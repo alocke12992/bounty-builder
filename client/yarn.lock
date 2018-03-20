@@ -2,12 +2,6 @@
 # yarn lockfile v1
 
 
-"@zalando/oauth2-client-js@0.0.18":
-  version "0.0.18"
-  resolved "https://registry.yarnpkg.com/@zalando/oauth2-client-js/-/oauth2-client-js-0.0.18.tgz#2d65839b14cf14b256ab753ce154073c888fd855"
-  dependencies:
-    uuid "^3.0.0"
-
 abab@^1.0.3:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/abab/-/abab-1.0.4.tgz#5faad9c2c07f60dd76770f71cf025b62a63cfd4e"
@@ -5062,7 +5056,7 @@ pluralize@^7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/pluralize/-/pluralize-7.0.0.tgz#298b89df8b93b0221dbf421ad2b1b1ea23fc6777"
 
-popsicle@^9.1.0, popsicle@^9.2.0:
+popsicle@^9.1.0:
   version "9.2.0"
   resolved "https://registry.yarnpkg.com/popsicle/-/popsicle-9.2.0.tgz#adc9fc808644739b360ff063426545cdfe58e0b4"
   dependencies:
