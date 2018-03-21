@@ -1,102 +1,103 @@
 import React from 'react'
-import {
-  Link,
-  Switch,
-  Route,
-} from 'react-router-dom'
-import { Grid, Container, Menu, Responsive } from 'semantic-ui-react';
 import Dashboard from './Dashboard';
-import NoMatch from './NoMatch';
-import Social from './Social';
 import Facebook from './Facebook';
-import Twitter from './Twitter';
-import Translation from './Translation';
-import { getRewards } from '../actions/rewards';
-import { connect } from 'react-redux';
 import LinkedIn from './LinkedIn';
+import NoMatch from './NoMatch';
 import Reddit from './Reddit';
 import Rules from './Rules';
+import Social from './Social';
+import Translation from './Translation';
+import Twitter from './Twitter';
+import { connect } from 'react-redux';
+import { Container, Grid, Menu } from 'semantic-ui-react';
+import { getRewards } from '../actions/rewards';
+import { Link, Route, Switch, } from 'react-router-dom'
 
 const routes = [
-  {
+  { 
+    name: 'Dashboard',
     path: '/',
     exact: true,
-    main: () => <Dashboard />
+    main: () => <Dashboard/>
   },
-  {
+  { 
+    name: 'Facebook',
     path: '/facebook',
-    main: () => <Facebook service="facebook" />
+    main: () => <Facebook service="facebook"/>
   },
-  {
+  { 
+    name: 'Twitter',
     path: '/twitter',
-    main: () => <Twitter service="twitter" submissions={ true } />
+    main: () => <Twitter service="twitter" submissions={true}/>
   },
-  {
+  { 
+    name: 'LinkedIn',
     path: '/linkedin',
-    main: () => <LinkedIn service="linkedin" submissions={ true } />
+    main: () => <LinkedIn service="linkedin" submissions={true}/>
   },
-  {
+  { 
+    name: 'Reddit',
     path: '/reddit',
-    main: () => <Reddit service="reddit" submissions={ true } />
+    main: () => <Reddit service="reddit" submissions={true}/>
   },
-  {
+  { 
+    name: 'Influencer',
     path: '/influencer',
-    main: () => <Social service="influencer" submissions={ true } />
+    main: () => <Social service="influencer" submissions={true}/>
   },
-  {
+  { 
+    name: 'Translation',
     path: '/translation',
     main: () => <Translation />
   },
-  {
+  { 
+    name: 'Rules and Overview',
     path: '/rules',
     main: () => <Rules />
   }
 ]
 
-class Home extends React.Component {
-  componentWillMount() {
-    this.props.dispatch( getRewards() );
+class Home extends React.Component{
+  componentWillMount(){
+    this.props.dispatch(getRewards());
   }
+
   render() {
     const { pathname } = this.props.location;
-    return (
+    return(
       <Container>
-        <Grid stackable>
-          <Grid.Row>
-            <Grid.Column mobile={ 16 } tablet={ 16 } computer={ 5 }>
-              <Menu pointing vertical>
-                <Menu.Item as={ Link } to='/' name='Dashboard' active={ pathname === '/' } />
-                <Menu.Item as={ Link } to='/facebook' name='Facebook' active={ pathname === '/facebook' } />
-                <Menu.Item as={ Link } to='/twitter' name='Twitter' active={ pathname === '/twitter' } />
-                <Menu.Item as={ Link } to='/linkedin' name='LinkedIn' active={ pathname === '/linkedin' } />
-                <Menu.Item as={ Link } to='/reddit' name='Reddit' active={ pathname === '/reddit' } />
-                <Menu.Item as={ Link } to='/influencer' name='Influencer' active={ pathname === '/influencer' } />
-                <Menu.Item as={ Link } to='/translation' name='Translation' active={ pathname === '/translation' } />
-                <Menu.Item as={ Link } to='/rules' name='Rules and Overview' active={ pathname === '/rules' } />
-              </Menu>
-            </Grid.Column>
-            <Grid.Column mobile={ 16 } tablet={ 16 } computer={ 11 }>
-              <Switch>
-                { routes.map( ( route, index ) => (
-                  <Route
-                    key={ index }
-                    path={ route.path }
-                    exact={ route.exact }
-                    component={ route.main }
-                  />
-                ) ) }
-                <Route component={ NoMatch } />
-              </Switch>
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
+          <Grid stackable>
+            <Grid.Row>
+              <Grid.Column mobile={16} tablet={16} computer={5}>
+                <Menu pointing vertical size='large'>
+                  {routes.map((route) => (
+                    <Menu.Item 
+                      as={Link} 
+                      to={route.path} 
+                      name={route.name} 
+                      active={pathname === route.path} 
+                    />
+                  ))}
+                </Menu>
+              </Grid.Column>
+              <Grid.Column mobile={16} tablet={16} computer={11}>
+                <Switch>
+                  {routes.map((route, index) => (
+                    <Route
+                      key={index}
+                      path={route.path}
+                      exact={route.exact}
+                      component={route.main}
+                      />
+                  ))}
+                  <Route component={NoMatch} />
+                </Switch>
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
       </Container>
     )
   }
 }
 
-const mapStateToProps = ( state, props ) => {
-
-}
-
-export default connect()( Home );
+export default connect()(Home);
