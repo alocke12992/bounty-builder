@@ -1,11 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
-import registerServiceWorker, { unregister } from './registerServiceWorker';
+import registerServiceWorker, {
+  unregister,
+} from './registerServiceWorker';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store';
 import 'semantic-ui-css/semantic.min.css';
+import 'react-quill/dist/quill.snow.css';
 
 ReactDOM.render(
   <Provider store={store}>
@@ -13,17 +16,13 @@ ReactDOM.render(
       <App />
     </BrowserRouter>
   </Provider>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );
 
-
-navigator.serviceWorker.getRegistrations().then(
-
-  function(registrations) {
-
-      for(let registration of registrations) {
-          registration.unregister();
-
-      }
-
-});
+navigator.serviceWorker
+  .getRegistrations()
+  .then(function(registrations) {
+    for (let registration of registrations) {
+      registration.unregister();
+    }
+  });
