@@ -1,32 +1,22 @@
 import React from 'react';
 import ReactQuill from 'react-quill';
-import {
-  Divider,
-  Form,
-  Segment,
-  Button,
-} from 'semantic-ui-react';
+import { Button, Divider, Form, Segment, } from 'semantic-ui-react';
 
 class TextContent extends React.Component {
-  state = { text: '', content: '', edit: false };
+  state = { content: '', edit: false, text: '', };
 
   toggleForm = () => {
-    this.setState({
-      edit: !this.state.edit,
-    });
+    this.setState({ edit: !this.state.edit, });
   };
 
   handleChange = value => {
-    this.setState({ text: value });
+    this.setState({ text: value, });
   };
 
   handleSubmit = e => {
     e.preventDefault();
-    const { text, content } = this.state;
-    this.setState({
-      content: text,
-      text: '',
-    });
+    const { content, text,} = this.state;
+    this.setState({ content: text, text: '', });
   };
 
   showForm = () => {
@@ -46,12 +36,12 @@ class TextContent extends React.Component {
   };
 
   render() {
-    const { content, edit, text } = this.state;
+    const { content, edit, text, } = this.state;
     return (
       <Segment>
-        {edit && this.showForm()}
+        { edit && this.showForm() }
         <Button onClick={this.toggleForm}>
-          {edit ? 'Back' : 'Edit'}
+          { edit ? 'Back' : 'Edit' }
         </Button>
         <Divider hidden />
         <div
@@ -59,13 +49,13 @@ class TextContent extends React.Component {
             __html: content,
           }}
         />
-        {/* <img
+        <img
           src={require('../assets/images/logo.svg')}
           style={{ height: '75px', width: 'auto' }}
           onClick={() => this.props.history.push('/')}
           alt="HN Token"
-        /> */}
-        {/* <p>
+        />
+        <p>
           Deconet makes software development
           sustainable by equitably rewarding
           contributors using the the economic
@@ -79,7 +69,7 @@ class TextContent extends React.Component {
           rewarding and more innovative economic
           system for the creators and maintainers of
           today’s digital infrastructure.
-        </p> */}
+        </p>
       </Segment>
     );
   }

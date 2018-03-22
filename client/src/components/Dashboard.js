@@ -1,36 +1,36 @@
 import React from 'react';
 import axios from 'axios';
 import ChatRules from './ChatRules';
-import { connect } from 'react-redux';
 import Discord from './Discord';
 import Invite from './Invite';
 import PointsTile from './PointsTile';
 import ReactQuill from 'react-quill';
-import { setHeaders } from '../actions/headers';
-import { setFlash } from '../actions/flash';
 import styled from 'styled-components';
 import Telegram from './Telegram';
 import TextContent from './TextContent';
 import TotalUsersTile from './TotalUsersTile';
 import TotalSharesTile from './TotalSharesTile';
-import {
-  Container,
-  Card,
-  Segment,
-  Header,
-  Form,
-  Button,
-  Divider,
-} from 'semantic-ui-react';
 import Wallet from './Wallet';
+import { connect } from 'react-redux';
+import { setFlash } from '../actions/flash';
+import { setHeaders } from '../actions/headers';
+import {
+  Button,
+  Card,
+  Container,
+  Divider,
+  Form,
+  Header,
+  Segment,
+} from 'semantic-ui-react';
 
 var Recaptcha = require('react-recaptcha');
 
 class Dashboard extends React.Component {
   state = {
-    loading: true,
-    confirmationCode: '',
     captchaVerified: false,
+    confirmationCode: '',
+    loading: true,
   };
 
   callback = res => {
@@ -88,16 +88,17 @@ class Dashboard extends React.Component {
 
   render() {
     const {
-      confirmationCode,
       captchaVerified,
+      confirmationCode,
+      edit,
+      property,
       textHeader,
       textRules,
-      property,
-      edit,
     } = this.state;
+
     return (
       <Container>
-        {!this.props.user.confirmed && (
+        { !this.props.user.confirmed && (
           <Segment color="red">
             <p>
               Your account needs to be confirmed.
