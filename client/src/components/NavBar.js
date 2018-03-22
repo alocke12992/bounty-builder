@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Menu, Dropdown } from 'semantic-ui-react';
-import { Link, withRouter } from 'react-router-dom';
+import styled from 'styled-components'
 import { connect } from 'react-redux';
 import { handleLogout } from '../actions/auth';
+import { Menu, Dropdown } from 'semantic-ui-react';
+import { Link, withRouter } from 'react-router-dom';
 
 class NavBar extends Component {
   rightNavs = () => {
@@ -55,10 +56,12 @@ class NavBar extends Component {
     );
   }
 }
+
 var styles = {
+
   base: {
-    background: '#2C83ED',
     height: '100px',
+    background: '#2c83ed',
   },
   text: {
     color: 'white'
@@ -68,6 +71,7 @@ var styles = {
     height: '75px'
   }
 };
+
 
 const mapStateToProps = state => {
   return { user: state.user };
