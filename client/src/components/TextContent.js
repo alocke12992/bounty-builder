@@ -1,30 +1,30 @@
 import React from 'react';
 import ReactQuill from 'react-quill';
-import { Button, Divider, Form, Segment, } from 'semantic-ui-react';
+import { Button, Divider, Form, Segment, Responsive, Container } from 'semantic-ui-react';
 
 class TextContent extends React.Component {
   state = { content: '', edit: false, text: '', };
 
   toggleForm = () => {
-    this.setState({ edit: !this.state.edit, });
+    this.setState( { edit: !this.state.edit, } );
   };
 
   handleChange = value => {
-    this.setState({ text: value, });
+    this.setState( { text: value, } );
   };
 
   handleSubmit = e => {
     e.preventDefault();
-    const { content, text,} = this.state;
-    this.setState({ content: text, text: '', });
+    const { content, text, } = this.state;
+    this.setState( { content: text, text: '', } );
   };
 
   showForm = () => {
     return (
-      <Form onSubmit={this.handleSubmit}>
+      <Form onSubmit={ this.handleSubmit }>
         <ReactQuill
-          value={this.state.text}
-          onChange={this.handleChange}
+          value={ this.state.text }
+          onChange={ this.handleChange }
         />
         <Divider hidden />
         <Form.Button color="green">
@@ -40,21 +40,22 @@ class TextContent extends React.Component {
     return (
       <Segment>
         { edit && this.showForm() }
-        <Button onClick={this.toggleForm}>
+        <Button onClick={ this.toggleForm }>
           { edit ? 'Back' : 'Edit' }
         </Button>
         <Divider hidden />
         <div
-          dangerouslySetInnerHTML={{
+          dangerouslySetInnerHTML={ {
             __html: content,
-          }}
+          } }
         />
-        <img
-          src={require('../assets/images/logo.svg')}
-          style={{ height: '75px', width: 'auto' }}
-          onClick={() => this.props.history.push('/')}
-          alt="HN Token"
-        />
+        <Responsive as={ Container } minWidth={ 768 }>
+          <img
+            src={ require( '../assets/images/logo.svg' ) }
+            style={ { height: '75px', width: 'auto' } }
+            alt="HN Token"
+          />
+        </Responsive>
         <p>
           Deconet makes software development
           sustainable by equitably rewarding
@@ -62,7 +63,7 @@ class TextContent extends React.Component {
           infrastructure and technology of the
           blockchain.
           </p>
-          <p>
+        <p>
           The Deconet bounty program aims to include
           the global developer community and
           innovation partners in building a more

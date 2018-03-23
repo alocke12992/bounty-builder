@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import styled from 'styled-components'
 import { connect } from 'react-redux';
 import { handleLogout } from '../actions/auth';
-import { Menu, Dropdown } from 'semantic-ui-react';
 import { Link, withRouter } from 'react-router-dom';
+import { Menu, Dropdown, Responsive, Segment, Icon } from 'semantic-ui-react';
 
 class NavBar extends Component {
+
   rightNavs = () => {
     const { user, dispatch, history } = this.props;
 
@@ -40,9 +41,29 @@ class NavBar extends Component {
     );
   }
 
+
   render() {
+    const { user, dispatch, history } = this.props;
     return (
+
       <Menu pointing secondary style={ styles.base }>
+        <Responsive as={ Dropdown } maxWidth={ 767 } item icon='content' inverted simple>
+          <Dropdown.Menu>
+            { user.role === 'admin' &&
+              <Dropdown.Item onClick={ () => history.push( '/admin' ) }>Admin</Dropdown.Item>
+            }
+            { user.role === 'admin' &&
+              <Dropdown.Item onClick={ () => history.push( '/moderate' ) }>Moderate</Dropdown.Item>
+            }
+            <Dropdown.Item onClick={ () => history.push( '/settings' ) }>Settings</Dropdown.Item>
+            <Dropdown.Item onClick={ () => history.push( '/rules' ) }>About Campaign</Dropdown.Item>
+            <Dropdown.Item
+              onClick={ () => dispatch( handleLogout( history ) ) }
+            >
+              Logout
+            </Dropdown.Item>
+          </Dropdown.Menu>
+        </Responsive>
         <Menu.Item>
           <img
             src={ require( '../assets/images/logo-white.svg' ) }
@@ -51,7 +72,9 @@ class NavBar extends Component {
             alt='HN Text'
           />
         </Menu.Item>
-        { this.rightNavs() }
+        <Responsive as='div' minWidth={ 768 }>
+          { this.rightNavs() }
+        </Responsive>
       </Menu>
     );
   }

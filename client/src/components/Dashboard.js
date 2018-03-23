@@ -22,9 +22,10 @@ import {
   Form,
   Header,
   Segment,
+  Responsive,
 } from 'semantic-ui-react';
 
-var Recaptcha = require('react-recaptcha');
+var Recaptcha = require( 'react-recaptcha' );
 
 class Dashboard extends React.Component {
   state = {
@@ -34,56 +35,56 @@ class Dashboard extends React.Component {
   };
 
   callback = res => {
-    this.setState({ captchaVerified: true });
+    this.setState( { captchaVerified: true } );
   };
 
   handleSubmit = e => {
     e.preventDefault();
     const { confirmationCode } = this.state;
     axios
-      .post('/api/confirmations/verify_confirmation', {
+      .post( '/api/confirmations/verify_confirmation', {
         confirmation_code: confirmationCode,
-      })
-      .then(res => {
-        this.props.dispatch(setHeaders(res.headers));
-        this.props.dispatch({ type: 'LOGOUT' });
+      } )
+      .then( res => {
+        this.props.dispatch( setHeaders( res.headers ) );
+        this.props.dispatch( { type: 'LOGOUT' } );
         this.props.dispatch(
           setFlash(
             'Account Confirmed. Please log in again.',
             'green',
           ),
         );
-      })
-      .catch(err => {
-        this.props.dispatch({ type: 'LOGOUT' });
+      } )
+      .catch( err => {
+        this.props.dispatch( { type: 'LOGOUT' } );
         this.props.dispatch(
           setFlash(
             'The confirmation code was incorrect.',
             'red',
           ),
         );
-        this.props.dispatch(setHeaders(err.headers));
-        this.setState({ captchaVerified: false });
-      });
+        this.props.dispatch( setHeaders( err.headers ) );
+        this.setState( { captchaVerified: false } );
+      } );
   };
 
   resendConfirmationEmail = () => {
     axios
       .get(
         '/api/confirmations/resend_confirmation_email',
-      )
-      .then(res => {
-        this.props.dispatch(setHeaders(res.headers));
+    )
+      .then( res => {
+        this.props.dispatch( setHeaders( res.headers ) );
         this.props.dispatch(
           setFlash(
             'Email Sent. Please check your junk folder if email does not arrive.',
             'green',
           ),
         );
-      })
-      .catch(err => {
-        this.props.dispatch(setHeaders(err.headers));
-      });
+      } )
+      .catch( err => {
+        this.props.dispatch( setHeaders( err.headers ) );
+      } );
   };
 
   render() {
@@ -105,13 +106,13 @@ class Dashboard extends React.Component {
               Please check your email for a
               confirmation code and enter it here.
             </p>
-            <Form onSubmit={this.handleSubmit}>
+            <Form onSubmit={ this.handleSubmit }>
               <Form.Input
-                value={confirmationCode}
-                onChange={e =>
-                  this.setState({
+                value={ confirmationCode }
+                onChange={ e =>
+                  this.setState( {
                     confirmationCode: e.target.value,
-                  })
+                  } )
                 }
                 required
                 placeholder="Confirmation Code"
@@ -121,78 +122,78 @@ class Dashboard extends React.Component {
             <Divider />
             <Recaptcha
               sitekey="6LcsL0wUAAAAAPi-dEhwqV1TI7fIopO8lP3HGN_v"
-              verifyCallback={this.callback}
+              verifyCallback={ this.callback }
             />
             <Button
-              disabled={!captchaVerified}
-              onClick={this.resendConfirmationEmail}>
+              disabled={ !captchaVerified }
+              onClick={ this.resendConfirmationEmail }>
               Resend confirmation code
             </Button>
           </Segment>
-        )}
+        ) }
         <TextContent />
         <Segment>
           <div>
             <p
-              style={{
+              style={ {
                 marginBottom: '11.0pt',
                 lineHeight: '142%',
-              }}>
+              } }>
               <strong>
                 <span
-                  style={{
+                  style={ {
                     fontSize: '10.5pt',
                     lineHeight: '142%',
-                  }}>
+                  } }>
                   DO:
                 </span>
               </strong>
             </p>
             <ul>
               <li
-                style={{
+                style={ {
                   marginBottom: '11.0pt',
                   lineHeight: '142%',
-                }}>
+                } }>
                 <strong>
                   <span
-                    style={{
+                    style={ {
                       fontSize: '10.5pt',
                       lineHeight: '142%',
-                    }}>
+                    } }>
                     Disclose that you are receiving DCO
-                    for growing the community:{' '}
+                    for growing the community:{ ' ' }
                   </span>
                 </strong>
                 <span
-                  style={{
+                  style={ {
                     fontSize: '10.5pt',
                     lineHeight: '142%',
-                  }}>
+                  } }>
                   “Disclaimer: I am receiving DCO for
                   growing the community.”
                 </span>
               </li>
               <li
-                style={{
+                style={ {
                   marginBottom: '11.0pt',
                   lineHeight: '142%',
-                }}>
+                } }>
                 <strong>
                   <span
-                    style={{
+                    style={ {
                       fontSize: '10.5pt',
                       lineHeight: '142%',
-                    }}>
+                    } }>
                     When you talk about Deconet, focus
-                    on the importance of the solution:{' '}
+                    on the importance of the solution:{ ' ' }
                   </span>
                 </strong>
                 <span
-                  style={{
+                  style={ {
                     fontSize: '10.5pt',
                     lineHeight: '142%',
-                  }}>
+                  } }>
                   creating a sustainable economic
                   backbone for open source development
                   and paving a path to more
@@ -201,71 +202,71 @@ class Dashboard extends React.Component {
                 </span>
               </li>
               <li
-                style={{
+                style={ {
                   marginBottom: '11.0pt',
                   lineHeight: '142%',
-                }}>
+                } }>
                 <strong>
                   <span
-                    style={{
+                    style={ {
                       fontSize: '10.5pt',
                       lineHeight: '142%',
-                    }}>
+                    } }>
                     Explain what the utility of the DCO
                     token is:
                   </span>
                 </strong>
                 <span
-                  style={{
+                  style={ {
                     fontSize: '10.5pt',
                     lineHeight: '142%',
-                  }}>
-                  {' '}
+                  } }>
+                  { ' ' }
                   the token is used to access and power
                   the crowd curation element of
                   Deconet’s software platform. Also,
                   companies and blockchain projects can
                   use the token to create challenges
-                  for the Deconet community.{' '}
+                  for the Deconet community.{ ' ' }
                 </span>
               </li>
             </ul>
             <p
-              style={{
+              style={ {
                 marginBottom: '11.0pt',
                 lineHeight: '142%',
-              }}>
+              } }>
               <strong>
                 <span
-                  style={{
+                  style={ {
                     fontSize: '10.5pt',
                     lineHeight: '142%',
-                  }}>
+                  } }>
                   DON’T:
                 </span>
               </strong>
             </p>
             <ul>
               <li
-                style={{
+                style={ {
                   marginBottom: '11.0pt',
                   lineHeight: '142%',
-                }}>
+                } }>
                 <strong>
                   <span
-                    style={{
+                    style={ {
                       fontSize: '10.5pt',
                       lineHeight: '142%',
-                    }}>
+                    } }>
                     Don’t refer to DCO token as an
-                    investment:{' '}
+                    investment:{ ' ' }
                   </span>
                 </strong>
                 <span
-                  style={{
+                  style={ {
                     fontSize: '10.5pt',
                     lineHeight: '142%',
-                  }}>
+                  } }>
                   the Deconet token has utility from
                   day one, allowing the crowd to access
                   and curate software projects on the
@@ -273,55 +274,55 @@ class Dashboard extends React.Component {
                 </span>
               </li>
               <li
-                style={{
+                style={ {
                   marginBottom: '11.0pt',
                   lineHeight: '142%',
-                }}>
+                } }>
                 <strong>
                   <span
-                    style={{
+                    style={ {
                       fontSize: '10.5pt',
                       lineHeight: '142%',
-                    }}>
+                    } }>
                     Don’t use the terms “ICO” or
-                    “initial coin offering.”{' '}
+                    “initial coin offering.”{ ' ' }
                   </span>
                 </strong>
                 <span
-                  style={{
+                  style={ {
                     fontSize: '10.5pt',
                     lineHeight: '142%',
-                  }}>
+                  } }>
                   You can say “token generation”.
                 </span>
               </li>
               <li
-                style={{
+                style={ {
                   marginBottom: '11.0pt',
                   lineHeight: '142%',
-                }}>
+                } }>
                 <strong>
                   <span
-                    style={{
+                    style={ {
                       fontSize: '10.5pt',
                       lineHeight: '142%',
-                    }}>
+                    } }>
                     Don’t discuss or hint at price
-                    increasing.{' '}
+                    increasing.{ ' ' }
                   </span>
                 </strong>
               </li>
               <li
-                style={{
+                style={ {
                   marginBottom: '11.0pt',
                   lineHeight: '142%',
-                }}>
+                } }>
                 <strong>
                   <span
-                    style={{
+                    style={ {
                       fontSize: '10.5pt',
                       lineHeight: '142%',
-                    }}>
+                    } }>
                     Don’t discuss exchanges.
                   </span>
                 </strong>
@@ -329,68 +330,121 @@ class Dashboard extends React.Component {
             </ul>
           </div>
         </Segment>
-        <Card.Group itemsPerRow={2}>
-          <TotalUsersTile />
-          <TotalSharesTile />
-        </Card.Group>
-        <Card.Group itemsPerRow={2}>
-          <ChatRules />
-          <Telegram />
-          {/*<Discord/>*/}
-        </Card.Group>
-        <Card.Group itemsPerRow={1}>
+        <Responsive as={ Segment } minWidth={ 767 }>
+          <Card.Group itemsPerRow={ 2 }>
+            <TotalUsersTile />
+            <TotalSharesTile />
+          </Card.Group>
+        </Responsive>
+        <Responsive as={ Segment } maxWidth={ 767 }>
+          <Card.Group itemsPerRow={ 1 }>
+            <TotalUsersTile />
+            <TotalSharesTile />
+          </Card.Group>
+        </Responsive>
+        <Responsive Responsive as={ Segment } minWidth={ 767 }>
+          <Card.Group itemsPerRow={ 2 }>
+            <ChatRules />
+            <Telegram />
+            {/*<Discord/>*/ }
+          </Card.Group>
+        </Responsive>
+        <Responsive as={ Segment } maxWidth={ 767 }>
+          <Card.Group itemsPerRow={ 1 }>
+            <ChatRules />
+            <Telegram />
+            {/*<Discord/>*/ }
+          </Card.Group>
+        </Responsive>
+        <Card.Group itemsPerRow={ 1 }>
           <Wallet />
         </Card.Group>
         <Invite />
         <Segment>
           <Header>Totals</Header>
         </Segment>
-        <Card.Group itemsPerRow={3}>
-          <PointsTile
-            source="facebook"
-            title="Facebook"
-          />
-          <PointsTile
-            source="twitter"
-            title="Twitter"
-          />
-          <PointsTile
-            source="linkedin"
-            title="LinkedIn"
-          />
-          <PointsTile source="reddit" title="Reddit" />
-          <PointsTile
-            source="influencer"
-            title="Influencer"
-          />
-          <PointsTile
-            source="telegram"
-            title="Telegram"
-          />
-          {/*<PointsTile source="discord" title="Discord" />*/}
-          <PointsTile
-            source="invitation"
-            title="Invite"
-          />
-          <PointsTile
-            source="translation"
-            title="Translation"
-          />
-        </Card.Group>
+        <Responsive as={ Segment } maxWidth={ 767 }>
+          <Card.Group itemsPerRow={ 2 }>
+            <PointsTile
+              source="facebook"
+              title="Facebook"
+            />
+            <PointsTile
+              source="twitter"
+              title="Twitter"
+            />
+            <PointsTile
+              source="linkedin"
+              title="LinkedIn"
+            />
+            <PointsTile source="reddit" title="Reddit" />
+            <PointsTile
+              source="influencer"
+              title="Influencer"
+            />
+            <PointsTile
+              source="telegram"
+              title="Telegram"
+            />
+            {/*<PointsTile source="discord" title="Discord" />*/ }
+            <PointsTile
+              source="invitation"
+              title="Invite"
+            />
+            <PointsTile
+              source="translation"
+              title="Translation"
+            />
+          </Card.Group>
+        </Responsive>
+        <Responsive Responsive as={ Segment } minWidth={ 767 }>
+          <Card.Group itemsPerRow={ 4 }>
+            <PointsTile
+              source="facebook"
+              title="Facebook"
+            />
+            <PointsTile
+              source="twitter"
+              title="Twitter"
+            />
+            <PointsTile
+              source="linkedin"
+              title="LinkedIn"
+            />
+            <PointsTile source="reddit" title="Reddit" />
+            <PointsTile
+              source="influencer"
+              title="Influencer"
+            />
+            <PointsTile
+              source="telegram"
+              title="Telegram"
+            />
+            {/*<PointsTile source="discord" title="Discord" />*/ }
+            <PointsTile
+              source="invitation"
+              title="Invite"
+            />
+            <PointsTile
+              source="translation"
+              title="Translation"
+            />
+          </Card.Group>
+        </Responsive>
       </Container>
     );
   }
 }
 
 const Text = styled.p`
-  color: blue;
-`;
+      color: blue;
+    `;
 const logo = image => {
-  require(`../assets/images/${image}`);
+  require( `../assets/images/${ image }` );
 };
 
 const imageSize = size => {
-  switch (size) {
+  switch ( size ) {
     case 'large':
       return '150px';
     case 'small':
@@ -403,12 +457,12 @@ const imageSize = size => {
 };
 
 const Image = styled.img`
-  width: auto;
-  height: ${props =>
-    imageSize(props.isize)} !important;
-`;
+      width: auto;
+  height: ${ props =>
+    imageSize( props.isize ) } !important;
+    `;
 const mapStateToProps = state => {
   return { user: state.user };
 };
 
-export default connect(mapStateToProps)(Dashboard);
+export default connect( mapStateToProps )( Dashboard );
