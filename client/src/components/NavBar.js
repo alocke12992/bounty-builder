@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { connect } from 'react-redux';
 import { handleLogout } from '../actions/auth';
 import { Link, withRouter } from 'react-router-dom';
-import { Menu, Dropdown, Responsive, Segment, Icon } from 'semantic-ui-react';
+import { Menu, Dropdown, Responsive, Segment, Icon, Container, Image } from 'semantic-ui-react';
 
 class NavBar extends Component {
 
@@ -65,14 +65,24 @@ class NavBar extends Component {
           </Dropdown.Menu>
         </Responsive>
         <Menu.Item>
-          <img
+          <Responsive
+            as={ Image }
             src={ require( '../assets/images/logo-white.svg' ) }
             style={ { height: '60px', width: 'auto' } }
             onClick={ () => this.props.history.push( '/' ) }
             alt='HN Text'
+            minWidth={ 768 }
+          />
+          <Responsive
+            as={ Image }
+            src={ require( '../assets/images/logo-white.svg' ) }
+            style={ { height: '50px', width: 'auto' } }
+            onClick={ () => this.props.history.push( '/' ) }
+            alt='HN Text'
+            maxWidth={ 767 }
           />
         </Menu.Item>
-        <Responsive as='div' minWidth={ 768 }>
+        <Responsive as={ Container } minWidth={ 768 }>
           { this.rightNavs() }
         </Responsive>
       </Menu>

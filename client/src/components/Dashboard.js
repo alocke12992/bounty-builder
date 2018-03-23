@@ -330,31 +330,23 @@ class Dashboard extends React.Component {
             </ul>
           </div>
         </Segment>
-        <Responsive as={ Segment } minWidth={ 767 }>
-          <Card.Group itemsPerRow={ 2 }>
-            <TotalUsersTile />
-            <TotalSharesTile />
-          </Card.Group>
+        <Responsive as={ Card.Group } minWidth={ 767 } itemsPerRow={ 2 }>
+          <TotalUsersTile />
+          <TotalSharesTile />
         </Responsive>
-        <Responsive as={ Segment } maxWidth={ 767 }>
-          <Card.Group itemsPerRow={ 1 }>
-            <TotalUsersTile />
-            <TotalSharesTile />
-          </Card.Group>
+        <Responsive as={ Card.Group } maxWidth={ 767 } itemsPerRow={ 1 }>
+          <TotalUsersTile />
+          <TotalSharesTile />
         </Responsive>
-        <Responsive Responsive as={ Segment } minWidth={ 767 }>
-          <Card.Group itemsPerRow={ 2 }>
-            <ChatRules />
-            <Telegram />
-            {/*<Discord/>*/ }
-          </Card.Group>
+        <Responsive Responsive as={ Card.Group } minWidth={ 767 } itemsPerRow={ 2 }>
+          <ChatRules />
+          <Telegram />
+          {/*<Discord/>*/ }
         </Responsive>
-        <Responsive as={ Segment } maxWidth={ 767 }>
-          <Card.Group itemsPerRow={ 1 }>
-            <ChatRules />
-            <Telegram />
-            {/*<Discord/>*/ }
-          </Card.Group>
+        <Responsive as={ Card.Group } maxWidth={ 767 } itemsPerRow={ 1 }>
+          <ChatRules />
+          <Telegram />
+          {/*<Discord/>*/ }
         </Responsive>
         <Card.Group itemsPerRow={ 1 }>
           <Wallet />
@@ -363,73 +355,69 @@ class Dashboard extends React.Component {
         <Segment>
           <Header>Totals</Header>
         </Segment>
-        <Responsive as={ Segment } maxWidth={ 767 }>
-          <Card.Group itemsPerRow={ 2 }>
-            <PointsTile
-              source="facebook"
-              title="Facebook"
-            />
-            <PointsTile
-              source="twitter"
-              title="Twitter"
-            />
-            <PointsTile
-              source="linkedin"
-              title="LinkedIn"
-            />
-            <PointsTile source="reddit" title="Reddit" />
-            <PointsTile
-              source="influencer"
-              title="Influencer"
-            />
-            <PointsTile
-              source="telegram"
-              title="Telegram"
-            />
-            {/*<PointsTile source="discord" title="Discord" />*/ }
-            <PointsTile
-              source="invitation"
-              title="Invite"
-            />
-            <PointsTile
-              source="translation"
-              title="Translation"
-            />
-          </Card.Group>
+        <Responsive as={ Card.Group } maxWidth={ 767 } itemsPerRow={ 2 }>
+          <PointsTile
+            source="facebook"
+            title="Facebook"
+          />
+          <PointsTile
+            source="twitter"
+            title="Twitter"
+          />
+          <PointsTile
+            source="linkedin"
+            title="LinkedIn"
+          />
+          <PointsTile source="reddit" title="Reddit" />
+          <PointsTile
+            source="influencer"
+            title="Influencer"
+          />
+          <PointsTile
+            source="telegram"
+            title="Telegram"
+          />
+          {/*<PointsTile source="discord" title="Discord" />*/ }
+          <PointsTile
+            source="invitation"
+            title="Invite"
+          />
+          <PointsTile
+            source="translation"
+            title="Translation"
+          />
         </Responsive>
-        <Responsive Responsive as={ Segment } minWidth={ 767 }>
-          <Card.Group itemsPerRow={ 4 }>
-            <PointsTile
-              source="facebook"
-              title="Facebook"
-            />
-            <PointsTile
-              source="twitter"
-              title="Twitter"
-            />
-            <PointsTile
-              source="linkedin"
-              title="LinkedIn"
-            />
-            <PointsTile source="reddit" title="Reddit" />
-            <PointsTile
-              source="influencer"
-              title="Influencer"
-            />
-            <PointsTile
-              source="telegram"
-              title="Telegram"
-            />
-            {/*<PointsTile source="discord" title="Discord" />*/ }
-            <PointsTile
-              source="invitation"
-              title="Invite"
-            />
-            <PointsTile
-              source="translation"
-              title="Translation"
-            />
-          </Card.Group>
+        <Responsive Responsive as={ Card.Group } minWidth={ 767 } itemsPerRow={ 4 }>
+          <PointsTile
+            source="facebook"
+            title="Facebook"
+          />
+          <PointsTile
+            source="twitter"
+            title="Twitter"
+          />
+          <PointsTile
+            source="linkedin"
+            title="LinkedIn"
+          />
+          <PointsTile source="reddit" title="Reddit" />
+          <PointsTile
+            source="influencer"
+            title="Influencer"
+          />
+          <PointsTile
+            source="telegram"
+            title="Telegram"
+          />
+          {/*<PointsTile source="discord" title="Discord" />*/ }
+          <PointsTile
+            source="invitation"
+            title="Invite"
+          />
+          <PointsTile
+            source="translation"
+            title="Translation"
+          />
         </Responsive>
       </Container>
     );

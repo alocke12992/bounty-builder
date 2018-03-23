@@ -4,7 +4,7 @@ import {
   Switch,
   Route,
 } from 'react-router-dom'
-import { Grid, Container, Menu } from 'semantic-ui-react';
+import { Grid, Container, Menu, Responsive } from 'semantic-ui-react';
 import Dashboard from './Dashboard';
 import NoMatch from './NoMatch';
 import Social from './Social';
@@ -64,7 +64,7 @@ class Home extends React.Component {
         <Grid stackable>
           <Grid.Row>
             <Grid.Column mobile={ 16 } tablet={ 16 } computer={ 5 }>
-              <Menu pointing vertical size='large'>
+              <Menu pointing vertical>
                 <Menu.Item as={ Link } to='/' name='Dashboard' active={ pathname === '/' } />
                 <Menu.Item as={ Link } to='/facebook' name='Facebook' active={ pathname === '/facebook' } />
                 <Menu.Item as={ Link } to='/twitter' name='Twitter' active={ pathname === '/twitter' } />

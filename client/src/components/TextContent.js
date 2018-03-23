@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactQuill from 'react-quill';
-import { Button, Divider, Form, Segment, Responsive, Container } from 'semantic-ui-react';
+import { Button, Divider, Form, Segment, Responsive, Container, Image } from 'semantic-ui-react';
 
 class TextContent extends React.Component {
   state = { content: '', edit: false, text: '', };
@@ -49,13 +49,20 @@ class TextContent extends React.Component {
             __html: content,
           } }
         />
-        <Responsive as={ Container } minWidth={ 768 }>
-          <img
-            src={ require( '../assets/images/logo.svg' ) }
-            style={ { height: '75px', width: 'auto' } }
-            alt="HN Token"
-          />
-        </Responsive>
+        <Responsive
+          as={ Image }
+          minWidth={ 768 }
+          src={ require( '../assets/images/logo.svg' ) }
+          style={ { height: '75px', width: 'auto' } }
+          alt="HN Token"
+        />
+        <Responsive
+          as={ Image }
+          maxWidth={ 767 }
+          src={ require( '../assets/images/logo.svg' ) }
+          style={ { height: '60px', width: 'auto' } }
+          alt="HN Token"
+        />
         <p>
           Deconet makes software development
           sustainable by equitably rewarding
