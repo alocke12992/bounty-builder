@@ -1,11 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import ChatRules from './ChatRules';
-import Discord from './Discord';
 import Invite from './Invite';
 import PointsTile from './PointsTile';
-import ReactQuill from 'react-quill';
-import styled from 'styled-components';
 import Telegram from './Telegram';
 import TextContent from './TextContent';
 import TotalUsersTile from './TotalUsersTile';
@@ -91,10 +88,6 @@ class Dashboard extends React.Component {
     const {
       captchaVerified,
       confirmationCode,
-      edit,
-      property,
-      textHeader,
-      textRules,
     } = this.state;
 
     return (
@@ -424,31 +417,9 @@ class Dashboard extends React.Component {
   }
 }
 
-const Text = styled.p`
-      color: blue;
-    `;
-const logo = image => {
-  require( `../assets/images/${ image }` );
-};
 
-const imageSize = size => {
-  switch ( size ) {
-    case 'large':
-      return '150px';
-    case 'small':
-      return '50px';
-    case 'mini':
-      return '25px';
-    default:
-      return '75px';
-  }
-};
 
-const Image = styled.img`
-      width: auto;
-  height: ${ props =>
-    imageSize( props.isize ) } !important;
-    `;
+
 const mapStateToProps = state => {
   return { user: state.user };
 };

@@ -4,9 +4,7 @@ import { connect } from 'react-redux';
 import { setHeaders } from '../actions/headers';
 import { setFlash } from '../actions/flash';
 import { Container, Grid, Segment, Header } from 'semantic-ui-react';
-import SocialMediaRules from './SocialMediaRules';
 import BlogRules from './BlogRules';
-import ChatRules from './ChatRules';
 import { withRouter } from 'react-router-dom';
 import Submissions from './Submissions';
 

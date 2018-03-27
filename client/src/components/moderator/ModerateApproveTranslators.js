@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Header, Button, Divider, Input, Card, Form } from 'semantic-ui-react';
+import { Header, Divider, Card, Form } from 'semantic-ui-react';
 import axios from 'axios';
 import { setHeaders } from '../../actions/headers';
 import { setFlash } from '../../actions/flash';

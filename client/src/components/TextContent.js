@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactQuill from 'react-quill';
-import { Button, Divider, Form, Segment, Responsive, Container, Image } from 'semantic-ui-react';
+import { Button, Divider, Form, Segment, Responsive, Image } from 'semantic-ui-react';
 
 class TextContent extends React.Component {
   state = { content: '', edit: false, text: '', };
@@ -15,9 +15,7 @@ class TextContent extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    const { content, text, } = this.state;
-    this.setState( { content: text, text: '', } );
-  };
+   };
 
   showForm = () => {
     return (
@@ -36,7 +34,7 @@ class TextContent extends React.Component {
   };
 
   render() {
-    const { content, edit, text, } = this.state;
+    const { content, edit } = this.state;
     return (
       <Segment>
         { edit && this.showForm() }

@@ -3,11 +3,9 @@ import { Segment, Form, Button, Grid, Image } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { handleLogin } from '../actions/auth';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
-import { setFlash } from '../actions/flash';
-import { setHeaders } from '../actions/headers';
 import { baseURL } from '../utils/urls';
-const queryString = require('query-string');
+
+//const queryString = require('query-string');
 // var ClientOAuth2 = require('client-oauth2')
 //
 // var deconetAuth = new ClientOAuth2({

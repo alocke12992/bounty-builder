@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Form, Button, Segment, Grid, Image } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { sendPasswordReset, recoverPassword } from '../actions/auth';
-import { setFlash } from '../actions/flash';
 
 class RecoverPassword extends Component {
   state = { email: '', emailSent: false, password: '', passwordConfirmation: '', token: '' };
@@ -35,7 +34,7 @@ class RecoverPassword extends Component {
   }
 
   render() {
-    const { email, emailSent, password, passwordConfirmation, history, token } = this.state;
+    const { email, emailSent, password, passwordConfirmation, token } = this.state;
 
     return (
       <Grid centered columns={2}>

@@ -26,6 +26,16 @@ ActiveRecord::Schema.define(version: 20180322224923) do
     t.index ["user_id"], name: "index_discords_on_user_id"
   end
 
+  create_table "posts", force: :cascade do |t|
+    t.string "url"
+    t.string "kind"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "reward_id"
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_posts_on_deleted_at"
+  end
+
   create_table "rewards", force: :cascade do |t|
     t.integer "value"
     t.string "source"
@@ -130,7 +140,6 @@ ActiveRecord::Schema.define(version: 20180322224923) do
     t.boolean "translator", default: false
     t.boolean "is_influencer", default: false
     t.jsonb "api_token"
-    t.jsonb "github"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -139,6 +148,7 @@ ActiveRecord::Schema.define(version: 20180322224923) do
   end
 
   add_foreign_key "discords", "users"
+  add_foreign_key "rewards", "posts"
   add_foreign_key "rewards", "submissions"
   add_foreign_key "rewards", "users"
   add_foreign_key "submissions", "users"

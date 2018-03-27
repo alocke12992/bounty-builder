@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { SketchPicker } from 'react-color';
 import { Segment, Button, Grid, Divider } from 'semantic-ui-react';

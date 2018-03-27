@@ -56,8 +56,8 @@ class About extends Component {
 
 var styles = {
   logo: {
-    width: '120px',
-    height: '120px'
+    width: 'auto',
+    height: '90px',
   }
 };
 

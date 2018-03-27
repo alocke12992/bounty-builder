@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Container, Segment, Button } from 'semantic-ui-react';
 import axios from 'axios';
 import { setHeaders } from '../../actions/headers';
-import { setFlash } from '../../actions/flash';
 import { connect } from 'react-redux';
 
 const saveData = (function () {
