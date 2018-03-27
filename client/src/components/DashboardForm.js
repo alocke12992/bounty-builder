@@ -9,7 +9,6 @@ import {
   Header,
   Segment,
 } from 'semantic-ui-react';
-
 class DashboardForm extends React.Component {
   state = {
     description: '',
@@ -22,11 +21,11 @@ class DashboardForm extends React.Component {
     invitation_link: '',
   };
 
-  handleChange = (value, name) => {
-    this.setState({ [name]: value });
+  handleChange = ( value, name ) => {
+    this.setState( { [name]: value } );
   };
 
-  handleSubmit = (e) => {
+  handleSubmit = ( e ) => {
     e.preventDefault();
   };
 
@@ -50,15 +49,15 @@ class DashboardForm extends React.Component {
           Dashboard
         </Header>
         <Divider hidden />
-        <Form onSubmit={this.handleSubmit}>
+        <Form onSubmit={ this.handleSubmit }>
           <Header as="h4" color="violet">
             Description
           </Header>
           <Form.Field>
             <ReactQuill
-              value={this.state.description}
-              onChange={(value) =>
-                this.handleChange(value, 'description')
+              value={ this.state.description }
+              onChange={ ( value ) =>
+                this.handleChange( value, 'description' )
               }
             />
             <Divider hidden />
@@ -68,9 +67,9 @@ class DashboardForm extends React.Component {
               Regulations
             </Header>
             <ReactQuill
-              value={this.state.regulations}
-              onChange={(value) =>
-                this.handleChange(value, 'regulations')
+              value={ this.state.regulations }
+              onChange={ ( value ) =>
+                this.handleChange( value, 'regulations' )
               }
             />
             <Divider hidden />
@@ -80,9 +79,9 @@ class DashboardForm extends React.Component {
               Number of Users
             </Header>
             <ReactQuill
-              value={this.state.num_users}
-              onChange={(value) =>
-                this.handleChange(value, 'num_users')
+              value={ this.state.num_users }
+              onChange={ ( value ) =>
+                this.handleChange( value, 'num_users' )
               }
             />
             <Divider hidden />
@@ -92,9 +91,9 @@ class DashboardForm extends React.Component {
               Number of Shares
             </Header>
             <ReactQuill
-              value={this.state.num_shares}
-              onChange={(value) =>
-                this.handleChange(value, 'num_shares')
+              value={ this.state.num_shares }
+              onChange={ ( value ) =>
+                this.handleChange( value, 'num_shares' )
               }
             />
             <Divider hidden />
@@ -104,9 +103,9 @@ class DashboardForm extends React.Component {
               Telegram
             </Header>
             <ReactQuill
-              value={this.state.telegram}
-              onChange={(value) =>
-                this.handleChange(value, 'telegram')
+              value={ this.state.telegram }
+              onChange={ ( value ) =>
+                this.handleChange( value, 'telegram' )
               }
             />
             <Divider hidden />
@@ -116,8 +115,8 @@ class DashboardForm extends React.Component {
               Invite to Telegram
             </Header>
             <ReactQuill
-              value={this.state.telegram_invite}
-              onChange={(value) =>
+              value={ this.state.telegram_invite }
+              onChange={ ( value ) =>
                 this.handleChange(
                   value,
                   'telegram_invite',
@@ -131,8 +130,8 @@ class DashboardForm extends React.Component {
               Etherium Wallet
             </Header>
             <ReactQuill
-              value={this.state.etherium_wallet}
-              onChange={(value) =>
+              value={ this.state.etherium_wallet }
+              onChange={ ( value ) =>
                 this.handleChange(
                   value,
                   'etherium_wallet',
@@ -146,8 +145,8 @@ class DashboardForm extends React.Component {
               Invitation Link
             </Header>
             <ReactQuill
-              value={this.state.invitation_link}
-              onChange={(value) =>
+              value={ this.state.invitation_link }
+              onChange={ ( value ) =>
                 this.handleChange(
                   value,
                   'invitation_link',
@@ -166,13 +165,12 @@ class DashboardForm extends React.Component {
       </Container>
     );
   };
-
   render() {
     return (
       <Grid>
         <Grid.Row>
-          <Grid.Column width={16}>
-            {this.dashboard()}
+          <Grid.Column width={ 16 }>
+            { this.dashboard() }
           </Grid.Column>
         </Grid.Row>
       </Grid>

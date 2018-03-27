@@ -15,8 +15,9 @@ import NoMatch from './NoMatch';
 import ProtectedRoute from './ProtectedRoute';
 import RecoverPassword from './RecoverPassword';
 import Register from './Register';
-import Settings from './Settings'
+import Settings from './Settings';
 import { Route, Switch } from 'react-router-dom';
+
 
 class App extends Component {
   render() {

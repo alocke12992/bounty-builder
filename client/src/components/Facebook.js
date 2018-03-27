@@ -1,72 +1,72 @@
 import React from 'react';
-import axios from 'axios';
-import { connect } from 'react-redux';
-import { setHeaders } from '../actions/headers';
-import { setFlash } from '../actions/flash';
-import { Header, Container, Grid, Segment, Form, Button, Divider } from 'semantic-ui-react';
-import SocialMediaRules from './SocialMediaRules';
-import { withRouter } from 'react-router-dom';
-import FacebookProvider, { Like, EmbeddedPost } from 'react-facebook';
-import { addReward } from '../actions/rewards';
 import ActionWarning from './ActionWarning';
+import axios from 'axios';
+import FacebookProvider, { Like, EmbeddedPost } from 'react-facebook';
+import SocialMediaRules from './SocialMediaRules';
+import { addReward } from '../actions/rewards';
+import { connect } from 'react-redux';
+import { setFlash } from '../actions/flash';
+import { setHeaders } from '../actions/headers';
+import { withRouter } from 'react-router-dom';
+import { Button, Container, Divider, Form, Grid, Header, Segment } from 'semantic-ui-react';
 
 class Facebook extends React.Component {
   state = { value: '', posts: [] }
 
   componentDidMount() {
-    axios.get(`/api/${this.props.service}`)
+    axios.get( `/api/${ this.props.service }` )
       .then( res => {
-        this.props.dispatch(setHeaders(res.headers));
-        this.setState({ value: res.data });
-      });
-    axios.get(`/api/posts?kind=facebook`)
+        this.props.dispatch( setHeaders( res.headers ) );
+        this.setState( { value: res.data } );
+      } );
+    axios.get( `/api/posts?kind=facebook` )
       .then( res => {
-        this.props.dispatch(setHeaders(res.headers));
-        this.setState({ posts: res.data });
-      });
+        this.props.dispatch( setHeaders( res.headers ) );
+        this.setState( { posts: res.data } );
+      } );
   }
 
-  handleSubmit = (e) => {
+  handleSubmit = ( e ) => {
     e.preventDefault();
     const { value } = this.state;
-    axios.post(`/api/${this.props.service}`, { [`${this.props.service}`]: value } )
+    axios.post( `/api/${ this.props.service }`, { [`${ this.props.service }`]: value } )
       .then( res => {
-        this.props.dispatch(setHeaders(res.headers));
-        this.props.dispatch(setFlash('Success', 'green'));
-      })
+        this.props.dispatch( setHeaders( res.headers ) );
+        this.props.dispatch( setFlash( 'Success', 'green' ) );
+      } )
       .catch( err => {
         //TODO
-      })
+      } )
   }
 
-  handleChange = (e) => {
-    this.setState({ value: e.target.value });
+  handleChange = ( e ) => {
+    this.setState( { value: e.target.value } );
   }
 
   renderPosts = () => {
     return this.state.posts.map( post => (
-      <Segment key={post.id} style={{margin: 10}}>
-        <EmbeddedPost href={post.url} width="500" />
+      <Segment key={ post.id } style={ { margin: 10 } }>
+        <EmbeddedPost href={ post.url } width="500" />
         <Divider hidden />
         <Button
           color='facebook'
-          disabled={this.rewardsIncludes(`Liked post ${post.id}.`) || this.state.value === ''}
-          onClick={() => this.props.dispatch(addReward(20, 'facebook', `Liked post ${post.id}.`, post.id))}
+          disabled={ this.rewardsIncludes( `Liked post ${ post.id }.` ) || this.state.value === '' }
+          onClick={ () => this.props.dispatch( addReward( 20, 'facebook', `Liked post ${ post.id }.`, post.id ) ) }
         >
           I liked this post.
         </Button>
       </Segment>
-    ))
+    ) )
   }
 
   likePage = () => {
-    this.props.dispatch(addReward(20, 'facebook', 'Liked Deconet on facebook.'));
+    this.props.dispatch( addReward( 20, 'facebook', 'Liked Deconet on facebook.' ) );
   }
 
-  rewardsIncludes = (reason) => {
+  rewardsIncludes = ( reason ) => {
     const { rewards } = this.props;
-    for (var i=0; i < rewards.length; i++) {
-      if (rewards[i].reason === reason) {
+    for ( var i = 0; i < rewards.length; i++ ) {
+      if ( rewards[i].reason === reason ) {
         return true;
       }
     }
@@ -78,14 +78,14 @@ class Facebook extends React.Component {
 
     return (
       <Container>
-        <Grid stackable columns={2}>
+        <Grid stackable columns={ 2 }>
           <Grid.Row>
             <Grid.Column>
               <Segment>
-                <Form onSubmit={this.handleSubmit}>
+                <Form onSubmit={ this.handleSubmit }>
                   <Form.Input
-                    value={value === null ? '' : value}
-                    onChange={this.handleChange}
+                    value={ value === null ? '' : value }
+                    onChange={ this.handleChange }
                     required
                     placeholder="Username"
                   />
@@ -115,18 +115,20 @@ class Facebook extends React.Component {
               </Segment>
             </Grid.Column>
             <Grid.Column>
-              <SocialMediaRules/>
+              <SocialMediaRules />
             </Grid.Column>
-            <ActionWarning/>
-              <FacebookProvider appId="178191166116598">
-                <Segment>
+            <ActionWarning />
+            <Grid.Column mobile={ 16 }>
+              <Segment>
+                <FacebookProvider appId="178191166116598">
                   <Header as='h2'>Deconet Facebook Page:</Header>
                   <Like href="https://www.facebook.com/DecentralizedCodeNetwork/" colorScheme="dark" showFaces />
                   <Divider hidden />
-                  <Button color='facebook' onClick={this.likePage} disabled={this.rewardsIncludes("Liked Deconet on facebook.") || this.state.value === ''}>I liked this page.</Button>
-                </Segment>
-                { this.renderPosts() }
-              </FacebookProvider>
+                  <Button color='facebook' onClick={ this.likePage } disabled={ this.rewardsIncludes( "Liked Deconet on facebook." ) || this.state.value === '' }>I liked this page.</Button>
+                  { this.renderPosts() }
+                </FacebookProvider>
+              </Segment>
+            </Grid.Column>
           </Grid.Row>
         </Grid>
       </Container>
@@ -134,10 +136,10 @@ class Facebook extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ( state ) => {
   return {
     rewards: state.rewards,
   }
 }
 
-export default withRouter(connect(mapStateToProps)(Facebook));
+export default withRouter( connect( mapStateToProps )( Facebook ) );
