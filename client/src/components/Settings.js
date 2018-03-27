@@ -85,9 +85,9 @@ class Settings extends React.Component {
           />
         </Menu>
         <Divider hidden />
-        { activeItem === 'color_picker' &&
-          this.colorPicker() }
         <Segment>
+          { activeItem === 'color_picker' &&
+            this.colorPicker() }
           { activeItem === 'dashboard' &&
             this.dashboard() }
           { activeItem === 'provider' &&

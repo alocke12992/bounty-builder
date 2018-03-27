@@ -95,17 +95,24 @@ class ColorPicker extends React.Component {
           <Grid.Column>
             <Divider hidden />
             <Grid.Row>
-              <Button
+              <StyledButton
+                themecolor={ buttonColor }
                 onClick={ this.toggleNav }
-              >NavBar</Button>
+              >NavBar</StyledButton>
             </Grid.Row>
             <Divider hidden />
             <Grid.Row>
-              <Button onClick={ this.toggleButton }>Buttons</Button>
+              <StyledButton
+                themecolor={ buttonColor }
+                onClick={ this.toggleButton }
+              >Buttons</StyledButton>
             </Grid.Row>
             <Divider hidden />
             <Grid.Row>
-              <Button onClick={ this.toggleBackground }>Background</Button>
+              <StyledButton
+                themecolor={ buttonColor }
+                onClick={ this.toggleBackground }
+              >Background</StyledButton>
             </Grid.Row>
           </Grid.Column>
         </Grid.Row>
@@ -113,6 +120,10 @@ class ColorPicker extends React.Component {
     )
   }
 }
+
+const StyledButton = styled( Button ) `
+  background-color: ${( props ) => props.themecolor } !important;
+`
 const Wrapper = styled.section`
   padding: 4em;
   background: ${( props ) => props.color };
