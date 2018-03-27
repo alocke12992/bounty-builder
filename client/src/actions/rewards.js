@@ -2,7 +2,6 @@ import axios from 'axios';
 import { setFlash } from '../actions/flash';
 import { setHeaders } from '../actions/headers';
 
-
 export const getRewards = (callBack = () => {}) => {
   return dispatch => {
     axios.get(`/api/rewards`)

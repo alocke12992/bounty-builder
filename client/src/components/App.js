@@ -4,6 +4,7 @@ import AdminRoute from './AdminRoute';
 import AuthRoute from './AuthRoute';
 import DeconetOauth from './DeconetOauth';
 import DevRoute from './DevRoute';
+import FetchSettings from './FetchSettings';
 import FetchUser from './FetchUser';
 import Flash from './Flash';
 import Home from './Home';
@@ -27,16 +28,7 @@ class App extends Component {
         <Flash />
         <FetchUser>
           <Switch>
-            <Route exact path='/auth/Deconet/callback' component={ DeconetOauth } />
-            <AuthRoute exact path='/login' component={ Login } />
-            <AuthRoute exact path='/register' component={ Register } />
-            <AuthRoute exact path='/recover_password' component={ RecoverPassword } />
-            <Route exact path='/about' component={ About } />
-            <DevRoute exact path='/settings' component={ Settings } />
-            <AdminRoute exact path='/admin' component={ NewPost } />
-            <AdminRoute path='/moderate' component={ ModeratorHome } />
-            <ProtectedRoute path="/" component={ Home } />
-            <Route component={ NoMatch } />
+            <FetchSettings />
           </Switch>
         </FetchUser>
       </div>

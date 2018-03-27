@@ -129,6 +129,7 @@ class NavBar extends Component {
       history,
       backgroundColor,
     } = this.props;
+    
     return (
       <StyledMenu
         pointing
@@ -222,5 +223,5 @@ const mapStateToProps = ( state ) => {
 };
 
 export default withRouter(
-  connect( mapStateToProps )( NavBar ),
+  connect( mapStateToProps )( NavBar )
 );

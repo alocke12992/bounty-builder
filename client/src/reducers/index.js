@@ -1,20 +1,22 @@
 import { combineReducers } from 'redux';
-import user from './user';
 import flash from './flash';
-import submissions from './submissions';
 import rewards from './rewards';
 import navColor from './navColor'
 import buttonColor from './buttonColor'
 import backgroundColor from './backgroundColor'
+import settings from './settings';
+import submissions from './submissions';
+import user from './user';
 
 const rootReducer = combineReducers( {
-  user,
   flash,
-  submissions,
   rewards,
   navColor,
   backgroundColor,
   buttonColor,
+  settings,
+  submissions,
+  user,
 } );
 
 export default rootReducer;
