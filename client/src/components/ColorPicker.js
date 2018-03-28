@@ -2,148 +2,180 @@ import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { SketchPicker } from 'react-color';
-import { Button, Divider, Grid, Segment, } from 'semantic-ui-react';
+import {
+  Button,
+  Divider,
+  Grid,
+  Segment,
+} from 'semantic-ui-react';
 
 class ColorPicker extends React.Component {
   state = {
     editBackground: false,
-    editButton: false,
-    editNav: false,
-  };
-
-  backgroundChange = (backgroundColor) => {
-    const { dispatch } = this.props
-    dispatch({ type: 'BACKGROUND_COLOR', backgroundColor: backgroundColor.hex })
-  };
-
-  buttonChange = (buttonColor) => {
-    const { dispatch } = this.props
-    dispatch({ type: 'BUTTON_COLOR', buttonColor: buttonColor.hex })
-  };
-
-  navChange = (navColor) => {
-    const { dispatch } = this.props
-    dispatch({ type: 'NAV_COLOR', navColor: navColor.hex })
-  };
-
-  toggleBackground = () => {
-    this.setState( state => {
-      return { editBackground: !state.editBackground, editNav: false, editButton: false, }
-    } )
-  };
-
-  toggleButton = () => {
-    this.setState( state => {
-      return { editButton: !state.editButton, editNav: false, editBackground: false, }
-    } )
   };
 
   toggleNav = () => {
-    this.setState(state => {
-      return { editNav: !state.editNav, editButton: false, editBackground: false, }
-    })
+    this.setState((state) => {
+      return {
+        editNav: !state.editNav,
+        editButton: false,
+        editBackground: false,
+      };
+    });
+  };
+  toggleButton = () => {
+    this.setState((state) => {
+      return {
+        editButton: !state.editButton,
+        editNav: false,
+        editBackground: false,
+      };
+    });
+  };
+  toggleBackground = () => {
+    this.setState((state) => {
+      return {
+        editBackground: !state.editBackground,
+        editNav: false,
+        editButton: false,
+      };
+    });
+  };
+
+  navChange = (navColor) => {
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'NAV_COLOR',
+      navColor: navColor.hex,
+    });
+  };
+
+  backgroundChange = (backgroundColor) => {
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'BACKGROUND_COLOR',
+      backgroundColor: backgroundColor.hex,
+    });
+  };
+
+  buttonChange = (buttonColor) => {
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'BUTTON_COLOR',
+      buttonColor: buttonColor.hex,
+    });
   };
 
   render() {
-    const { editNav, editButton, editBackground } = this.state
-    const { navColor, buttonColor, backgroundColor } = this.props;
+    const {
+      editNav,
+      editButton,
+      editBackground,
+    } = this.state;
+    const {
+      navColor,
+      buttonColor,
+      backgroundColor,
+    } = this.props;
     return (
       <Grid>
-        <Grid.Row columns={ 2 }>
+        <Grid.Row columns={2}>
           <Grid.Column>
-            { editNav ?
+            {editNav ? (
               <div>
                 <SketchPicker
-                  color={ navColor }
-                  onChangeComplete={ this.navChange }
+                  color={navColor}
+                  onChangeComplete={this.navChange}
                 />
                 <Segment>
-                  <Wrapper color={ navColor }>
+                  <Wrapper color={navColor}>
                     <h1>Nav Color</h1>
                   </Wrapper>
                 </Segment>
               </div>
-              : <div></div>
-            }
-            { editButton ?
+            ) : (
+              <div />
+            )}
+            {editButton ? (
               <div>
                 <SketchPicker
-                  color={ buttonColor }
-                  onChangeComplete={ this.buttonChange }
+                  color={buttonColor}
+                  onChangeComplete={this.buttonChange}
                 />
                 <Segment>
-                  <Wrapper color={ buttonColor }>
+                  <Wrapper color={buttonColor}>
                     <h1>Button Color</h1>
                   </Wrapper>
                 </Segment>
               </div>
-              : <div></div>
-            }
-            { editBackground ?
+            ) : (
+              <div />
+            )}
+            {editBackground ? (
               <div>
                 <SketchPicker
-                  color={ backgroundColor }
-                  onChangeComplete={ this.backgroundChange }
+                  color={backgroundColor}
+                  onChangeComplete={
+                    this.backgroundChange
+                  }
                 />
                 <Segment>
-                  <Wrapper color={ backgroundColor }>
+                  <Wrapper color={backgroundColor}>
                     <h1>Background Color</h1>
                   </Wrapper>
                 </Segment>
               </div>
-              : <div></div>
-            }
+            ) : (
+              <div />
+            )}
           </Grid.Column>
           <Grid.Column>
             <Divider hidden />
             <Grid.Row>
               <StyledButton
-                themecolor={ buttonColor }
-                onClick={ this.toggleNav }
-              >
+                themecolor={buttonColor}
+                onClick={this.toggleNav}>
                 NavBar
               </StyledButton>
             </Grid.Row>
             <Divider hidden />
             <Grid.Row>
               <StyledButton
-                themecolor={ buttonColor }
-                onClick={ this.toggleButton }
-              >
+                themecolor={buttonColor}
+                onClick={this.toggleButton}>
                 Buttons
               </StyledButton>
             </Grid.Row>
             <Divider hidden />
             <Grid.Row>
               <StyledButton
-                themecolor={ buttonColor }
-                onClick={ this.toggleBackground }
-              >
+                themecolor={buttonColor}
+                onClick={this.toggleBackground}>
                 Background
               </StyledButton>
             </Grid.Row>
           </Grid.Column>
         </Grid.Row>
       </Grid>
-    )
+    );
   }
 }
 
-const mapStateToProps = ( state ) => {
-  return { 
+const StyledButton = styled(Button)`
+  background-color: ${(props) =>
+    props.themecolor} !important;
+`;
+const Wrapper = styled.section`
+  padding: 4em;
+  background: ${(props) => props.color};
+`;
+
+const mapStateToProps = (state) => {
+  return {
+    navColor: state.navColor,
+    buttonColor: state.buttonColor,
     backgroundColor: state.backgroundColor,
-    buttonColor: state.buttonColor, 
-    navColor: state.navColor, 
   };
 };
 
-const StyledButton = styled(Button)`
-  background-color: ${( props ) => props.themecolor } !important;
-`;
-
-const Wrapper = styled.section`
-  padding: 4em;
-  background: ${( props ) => props.color };
-`;
-
-export default connect( mapStateToProps )( ColorPicker );
+export default connect(mapStateToProps)(ColorPicker);

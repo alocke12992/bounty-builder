@@ -1,6 +1,7 @@
 import React from 'react';
 import ColorPicker from './ColorPicker';
 import DashboardForm from './DashboardForm';
+import { fetchSettings } from '../actions/settings';
 import InfluencerForm from './InfluencerForm';
 import ProviderForm from './ProviderForm';
 import RulesForm from './RulesForm';
@@ -18,11 +19,11 @@ import {
 class Settings extends React.Component {
   state = { activeItem: 'color_picker' };
 
-  handleItemClick = ( e, { name } ) =>
-    this.setState( { activeItem: name } );
+  handleItemClick = (e, { name }) =>
+    this.setState({ activeItem: name });
 
   colorPicker = () => {
-    return <ColorPicker />
+    return <ColorPicker />;
   };
 
   dashboard = () => {
@@ -55,52 +56,52 @@ class Settings extends React.Component {
         <Menu attached="top" pointing>
           <Menu.Item
             name="color_picker"
-            active={ activeItem === 'color_picker' }
-            onClick={ this.handleItemClick }
+            active={activeItem === 'color_picker'}
+            onClick={this.handleItemClick}
           />
           <Menu.Item
             name="dashboard"
-            active={ activeItem === 'dashboard' }
-            onClick={ this.handleItemClick }
+            active={activeItem === 'dashboard'}
+            onClick={this.handleItemClick}
           />
           <Menu.Item
             name="provider"
-            active={ activeItem === 'provider' }
-            onClick={ this.handleItemClick }
+            active={activeItem === 'provider'}
+            onClick={this.handleItemClick}
           />
           <Menu.Item
             name="rules"
-            active={ activeItem === 'rules' }
-            onClick={ this.handleItemClick }
+            active={activeItem === 'rules'}
+            onClick={this.handleItemClick}
           />
           <Menu.Item
             name="influencer"
-            active={ activeItem === 'influencer' }
-            onClick={ this.handleItemClick }
+            active={activeItem === 'influencer'}
+            onClick={this.handleItemClick}
           />
           <Menu.Item
             name="translation"
-            active={ activeItem === 'translation' }
-            onClick={ this.handleItemClick }
+            active={activeItem === 'translation'}
+            onClick={this.handleItemClick}
           />
         </Menu>
         <Divider hidden />
         <Segment>
-          { activeItem === 'color_picker' &&
-            this.colorPicker() }
-          { activeItem === 'dashboard' &&
-            this.dashboard() }
-          { activeItem === 'provider' &&
-            this.provider() }
-          { activeItem === 'rules' && this.rules() }
-          { activeItem === 'influencer' &&
-            this.influencer() }
-          { activeItem === 'translation' &&
-            this.translation() }
+          {activeItem === 'color_picker' &&
+            this.colorPicker()}
+          {activeItem === 'dashboard' &&
+            this.dashboard()}
+          {activeItem === 'provider' &&
+            this.provider()}
+          {activeItem === 'rules' && this.rules()}
+          {activeItem === 'influencer' &&
+            this.influencer()}
+          {activeItem === 'translation' &&
+            this.translation()}
         </Segment>
       </Container>
     );
   }
 }
 
-export default connect()( Settings );
+export default connect()(Settings);

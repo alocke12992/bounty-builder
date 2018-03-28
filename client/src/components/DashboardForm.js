@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactQuill from 'react-quill';
+import { connect } from 'react-redux';
+import { updateSettings } from '../actions/settings';
 import {
   Button,
   Container,
@@ -11,29 +13,46 @@ import {
 } from 'semantic-ui-react';
 
 class DashboardForm extends React.Component {
-  state = {
-    description: '',
-    etherium_wallet: '',
-    invitation_link: '',
-    num_shares: '',
-    num_users: '',
+  initialState = {
+    dash_description: '',
     regulations: '',
+    num_users: '',
+    num_shares: '',
     telegram: '',
     telegram_invite: '',
+    etherium: '',
+    invitation_link: '',
+    id: null,
+  };
+
+  state = { ...this.initialState };
+
+  componentWillMount() {
+    this.setState({ ...this.props });
+  }
+
+  handleChange = (value, name) => {
+    this.setState({ [name]: value });
+  };
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const dashboard = { ...this.state };
+    const { dispatch } = this.props;
+    dispatch(updateSettings(dashboard));
   };
 
   dashboard = () => {
     const {
-      description,
-      etherium_wallet,
-      invitation_link,
-      num_shares,
-      num_users,
+      dash_description,
       regulations,
+      num_users,
+      num_shares,
       telegram,
       telegram_invite,
-    } = this.state;
-
+      etherium,
+      invitation_link,
+    } = this.props;
     return (
       <Container>
         <Header
@@ -49,9 +68,12 @@ class DashboardForm extends React.Component {
           </Header>
           <Form.Field>
             <ReactQuill
-              value={this.state.description}
+              value={this.state.dash_description}
               onChange={(value) =>
-                this.handleChange(value, 'description')
+                this.handleChange(
+                  value,
+                  'dash_description',
+                )
               }
             />
             <Divider hidden />
@@ -124,12 +146,9 @@ class DashboardForm extends React.Component {
               Etherium Wallet
             </Header>
             <ReactQuill
-              value={this.state.etherium_wallet}
+              value={this.state.etherium}
               onChange={(value) =>
-                this.handleChange(
-                  value,
-                  'etherium_wallet',
-                )
+                this.handleChange(value, 'etherium')
               }
             />
             <Divider hidden />
@@ -160,20 +179,12 @@ class DashboardForm extends React.Component {
     );
   };
 
-  handleChange = ( value, name ) => {
-    this.setState( { [name]: value } );
-  };
-
-  handleSubmit = ( e ) => {
-    e.preventDefault();
-  };
-
   render() {
     return (
       <Grid>
         <Grid.Row>
-          <Grid.Column width={ 16 }>
-            { this.dashboard() }
+          <Grid.Column width={16}>
+            {this.dashboard()}
           </Grid.Column>
         </Grid.Row>
       </Grid>
@@ -181,4 +192,29 @@ class DashboardForm extends React.Component {
   }
 }
 
-export default DashboardForm;
+const mapStateToProps = (state) => {
+  const {
+    dash_description,
+    regulations,
+    num_users,
+    num_shares,
+    telegram,
+    telegram_invite,
+    etherium,
+    invitation_link,
+    id,
+  } = state.settings;
+  return {
+    dash_description,
+    regulations,
+    num_users,
+    num_shares,
+    telegram,
+    telegram_invite,
+    etherium,
+    invitation_link,
+    id,
+  };
+};
+
+export default connect(mapStateToProps)(DashboardForm);
