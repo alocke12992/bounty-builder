@@ -22,7 +22,10 @@ const DevRoute = ({ role, isAuthenticated, component: Component, ...rest }) => (
 );
 
 const mapStateToProps = state => {
-  return { isAuthenticated: state.user.id, role: state.user.role };
+  return { 
+    isAuthenticated: state.user.id, 
+    role: state.user.role 
+  };
 };
 
 export default connect(mapStateToProps)(DevRoute);

@@ -6,7 +6,7 @@ class FetchUser extends Component {
   state = { loaded: false };
 
   componentDidMount() {
-    const { isAuthenticated, dispatch } = this.props;
+    const { dispatch, isAuthenticated, } = this.props;
     if (isAuthenticated) this.loaded();
     else dispatch(validateToken(this.loaded));
   }

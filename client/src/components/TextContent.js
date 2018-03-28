@@ -1,13 +1,17 @@
 import React from 'react';
 import ReactQuill from 'react-quill';
-import { Button, Divider, Form, Segment, Responsive, Image } from 'semantic-ui-react';
+import { 
+  Button, 
+  Container, 
+  Divider, 
+  Form, 
+  Image, 
+  Responsive, 
+  Segment, 
+} from 'semantic-ui-react';
 
 class TextContent extends React.Component {
   state = { content: '', edit: false, text: '', };
-
-  toggleForm = () => {
-    this.setState( { edit: !this.state.edit, } );
-  };
 
   handleChange = value => {
     this.setState( { text: value, } );
@@ -33,8 +37,13 @@ class TextContent extends React.Component {
     );
   };
 
+  toggleForm = () => {
+    this.setState({ edit: !this.state.edit, });
+  };
+
   render() {
-    const { content, edit } = this.state;
+    const { content, edit, text, } = this.state;
+    
     return (
       <Segment>
         { edit && this.showForm() }

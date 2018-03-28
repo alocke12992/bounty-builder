@@ -11,7 +11,7 @@ import { withRouter } from 'react-router-dom';
 import { Button, Container, Divider, Form, Grid, Header, Segment } from 'semantic-ui-react';
 
 class Facebook extends React.Component {
-  state = { value: '', posts: [] }
+  state = { posts: [], value: '', };
 
   componentDidMount() {
     axios.get( `/api/${ this.props.service }` )
@@ -24,7 +24,11 @@ class Facebook extends React.Component {
         this.props.dispatch( setHeaders( res.headers ) );
         this.setState( { posts: res.data } );
       } );
-  }
+  };
+
+  handleChange = (e) => {
+    this.setState({ value: e.target.value });
+  };
 
   handleSubmit = ( e ) => {
     e.preventDefault();
@@ -37,11 +41,11 @@ class Facebook extends React.Component {
       .catch( err => {
         //TODO
       } )
-  }
+  };
 
-  handleChange = ( e ) => {
-    this.setState( { value: e.target.value } );
-  }
+  likePage = () => {
+    this.props.dispatch(addReward(20, 'facebook', 'Liked Deconet on facebook.'));
+  };
 
   renderPosts = () => {
     return this.state.posts.map( post => (
@@ -57,11 +61,7 @@ class Facebook extends React.Component {
         </Button>
       </Segment>
     ) )
-  }
-
-  likePage = () => {
-    this.props.dispatch( addReward( 20, 'facebook', 'Liked Deconet on facebook.' ) );
-  }
+  };
 
   rewardsIncludes = ( reason ) => {
     const { rewards } = this.props;
@@ -71,7 +71,7 @@ class Facebook extends React.Component {
       }
     }
     return false;
-  }
+  };
 
   render() {
     const { value } = this.state;

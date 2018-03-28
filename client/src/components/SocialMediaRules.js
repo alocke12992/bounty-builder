@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Segment } from 'semantic-ui-react';
 
-class SocialMediaRules extends Component {
+class SocialMediaRules extends React.Component {
   render() {
     return (
       <Segment>

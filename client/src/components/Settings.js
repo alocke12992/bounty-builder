@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import ColorPicker from './ColorPicker';
 import DashboardForm from './DashboardForm';
 import InfluencerForm from './InfluencerForm';
@@ -7,6 +6,7 @@ import ProviderForm from './ProviderForm';
 import RulesForm from './RulesForm';
 import styled from 'styled-components';
 import TranslationForm from './TranslationForm';
+import { connect } from 'react-redux';
 import {
   Container,
   Divider,
@@ -29,6 +29,10 @@ class Settings extends React.Component {
     return <DashboardForm />;
   };
 
+  influencer = () => {
+    return <InfluencerForm />;
+  };
+
   provider = () => {
     return <ProviderForm />;
   };
@@ -36,11 +40,7 @@ class Settings extends React.Component {
   rules = () => {
     return <RulesForm />;
   };
-
-  influencer = () => {
-    return <InfluencerForm />;
-  };
-
+  
   translation = () => {
     return <TranslationForm />;
   };

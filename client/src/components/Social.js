@@ -1,15 +1,17 @@
 import React from 'react';
 import axios from 'axios';
-import { connect } from 'react-redux';
-import { setHeaders } from '../actions/headers';
-import { setFlash } from '../actions/flash';
-import { Container, Grid, Segment, Header } from 'semantic-ui-react';
 import BlogRules from './BlogRules';
-import { withRouter } from 'react-router-dom';
+import ChatRules from './ChatRules';
+import SocialMediaRules from './SocialMediaRules';
 import Submissions from './Submissions';
+import { connect } from 'react-redux';
+import { setFlash } from '../actions/flash';
+import { setHeaders } from '../actions/headers';
+import { withRouter } from 'react-router-dom';
+import { Container, Grid, Header, Segment, } from 'semantic-ui-react';
 
 class Social extends React.Component {
-  state = { value: '' }
+  state = { value: '' };
 
   componentDidMount() {
     axios.get(`/api/${this.props.service}`)
@@ -17,7 +19,11 @@ class Social extends React.Component {
         this.props.dispatch(setHeaders(res.headers));
         this.setState({ value: res.data });
       });
-  }
+  };
+
+  handleChange = (e) => {
+    this.setState({ value: e.target.value });
+  };
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -30,11 +36,7 @@ class Social extends React.Component {
       .catch( err => {
         this.props.dispatch(setHeaders(err.headers));
       })
-  }
-
-  handleChange = (e) => {
-    this.setState({ value: e.target.value });
-  }
+  };
 
   render() {
     return (
@@ -85,6 +87,6 @@ class Social extends React.Component {
 
 const mapStateToProps = (state) => {
   return { user: state.user }
-}
+};
 
 export default withRouter(connect(mapStateToProps)(Social));

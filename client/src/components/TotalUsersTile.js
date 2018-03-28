@@ -5,7 +5,7 @@ import { setHeaders } from '../actions/headers';
 import { Card, Progress } from 'semantic-ui-react';
 
 class TotalUsersTile extends React.Component {
-  state = { users: 0, progress: 0 }
+  state = { progress: 0, users: 0, };
 
   componentDidMount() {
     axios.get('/api/users/total_user_count')
@@ -13,7 +13,7 @@ class TotalUsersTile extends React.Component {
         this.setState({users: res.data}, () => this.barLogic());
         this.props.dispatch(setHeaders(res.headers));
       });
-  }
+  };
 
   barLogic = () => {
     const { users } = this.state;
@@ -26,10 +26,11 @@ class TotalUsersTile extends React.Component {
     } else if (users >= 10000){
       this.setState({progress: 100});
     }
-  }
+  };
 
   render() {
     const { progress } = this.state;
+
     return (
       <Card>
         <Card.Content>
@@ -50,6 +51,6 @@ class TotalUsersTile extends React.Component {
       </Card>
     )
   }
-}
+};
 
 export default connect()(TotalUsersTile);

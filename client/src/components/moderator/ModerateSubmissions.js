@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Table, Button, Divider, Input } from 'semantic-ui-react';
+import React from 'react';
 import axios from 'axios';
-import { setHeaders } from '../../actions/headers';
+import { connect } from 'react-redux';
 import { setFlash } from '../../actions/flash';
+import { setHeaders } from '../../actions/headers';
+import { Button, Divider, Input, Table, } from 'semantic-ui-react';
 
-class ModerateSubmissions extends Component {
-  state = { submissions: [], reward: '' }
+class ModerateSubmissions extends React.Component {
+  state = { reward: '', submissions: [] };
 
   componentDidMount() {
     axios.get('/api/moderator/get_pending_submissions')
@@ -14,7 +14,37 @@ class ModerateSubmissions extends Component {
         this.props.dispatch(setHeaders(res.headers));
         this.setState({ submissions: res.data});
       });
-  }
+  };
+
+  confirmReward = (id, reward) => {
+    axios.post('/api/moderator/approve_submission', { id, reward })
+      .then(res => {
+        let submissions = this.state.submissions.filter(r => r.id !== id);
+        this.setState({ submissions })
+        this.props.dispatch(setHeaders(res.headers));
+        this.props.dispatch(setFlash('Approved', 'green'));
+      })
+      .catch(err => {
+        this.props.dispatch(setHeaders(err.headers));
+      })
+  };
+
+  handleChange = (e, id) => {
+    this.setState({ ['reward' + id]: e.target.value });
+  };
+
+  rejectSubmission = (id) => {
+    axios.post('/api/moderator/reject_submission', { id })
+      .then(res => {
+        let submissions = this.state.submissions.filter(r => r.id !== id);
+        this.setState({ submissions })
+        this.props.dispatch(setHeaders(res.headers));
+        this.props.dispatch(setFlash('Submission Rejected', 'green'));
+      })
+      .catch(err => {
+        this.props.dispatch(setHeaders(err.headers));
+      })
+  };
 
   renderRows = () => {
     return this.state.submissions.map( submission => {
@@ -44,39 +74,7 @@ class ModerateSubmissions extends Component {
         </Table.Row>
       )
     });
-  }
-
-
-  handleChange = (e, id) => {
-    this.setState({ [ 'reward' + id]: e.target.value });
-  }
-
-  confirmReward = (id, reward) => {
-    axios.post('/api/moderator/approve_submission', { id, reward } )
-      .then( res => {
-        let submissions = this.state.submissions.filter( r => r.id !== id );
-        this.setState({submissions})
-        this.props.dispatch(setHeaders(res.headers));
-        this.props.dispatch(setFlash('Approved', 'green'));
-      })
-      .catch( err => {
-        this.props.dispatch(setHeaders(err.headers));
-      })
-  }
-
-  rejectSubmission = (id) => {
-    axios.post('/api/moderator/reject_submission', { id } )
-      .then( res => {
-        let submissions = this.state.submissions.filter( r => r.id !== id );
-        this.setState({submissions})
-        this.props.dispatch(setHeaders(res.headers));
-        this.props.dispatch(setFlash('Submission Rejected', 'green'));
-      })
-      .catch( err => {
-        this.props.dispatch(setHeaders(err.headers));
-      })
-  }
-
+  };
 
   render(){
     return(

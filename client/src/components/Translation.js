@@ -1,8 +1,8 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { Container, Grid, Segment, Header } from 'semantic-ui-react';
-import { withRouter } from 'react-router-dom';
 import Submissions from './Submissions';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { Container, Grid, Header, Segment, } from 'semantic-ui-react';
 
 class Translation extends React.Component {
 

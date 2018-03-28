@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Header, Divider, Card, Form } from 'semantic-ui-react';
+import React from 'react';
 import axios from 'axios';
-import { setHeaders } from '../../actions/headers';
+import { connect } from 'react-redux';
 import { setFlash } from '../../actions/flash';
+import { setHeaders } from '../../actions/headers';
+import { Button, Card, Divider, Form, Header, Input, } from 'semantic-ui-react';
 
-class ModerateApproveInfluencers extends Component {
-  state = { submissions: [], reward: '' }
+class ModerateApproveInfluencers extends React.Component {
+  state = { reward: '', submissions: [] }
 
   approveInfluencer = (email) => {
     axios.post('/api/moderator/add_influencer', { email } )

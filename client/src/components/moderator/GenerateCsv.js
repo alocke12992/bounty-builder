@@ -1,25 +1,11 @@
-import React, { Component } from 'react';
-import { Container, Segment, Button } from 'semantic-ui-react';
+import React from 'react';
 import axios from 'axios';
-import { setHeaders } from '../../actions/headers';
 import { connect } from 'react-redux';
+import { setFlash } from '../../actions/flash';
+import { setHeaders } from '../../actions/headers';
+import { Button, Container, Segment, } from 'semantic-ui-react';
 
-const saveData = (function () {
-    const a = document.createElement("a");
-    document.body.appendChild(a);
-    a.style = "display: none";
-    return function (data, fileName) {
-        const blob = new Blob([data], {type: "octet/stream"}),
-            url = window.URL.createObjectURL(blob);
-        a.href = url;
-        a.download = fileName;
-        a.click();
-        window.URL.revokeObjectURL(url);
-    };
-}());
-
-class GenerateCsv extends Component {
-
+class GenerateCsv extends React.Component {
   state = { loading: false, csvString: "Email,Wallet,Amount\n", currentPage: 1}
 
   download = () => {
@@ -54,5 +40,19 @@ class GenerateCsv extends Component {
     )
   }
 }
+
+const saveData = (function () {
+  const a = document.createElement("a");
+  document.body.appendChild(a);
+  a.style = "display: none";
+  return function (data, fileName) {
+    const blob = new Blob([data], { type: "octet/stream" }),
+      url = window.URL.createObjectURL(blob);
+    a.href = url;
+    a.download = fileName;
+    a.click();
+    window.URL.revokeObjectURL(url);
+  };
+}());
 
 export default connect()(GenerateCsv);

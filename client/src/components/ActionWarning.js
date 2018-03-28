@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Segment } from 'semantic-ui-react';
 
-class ActionWarning extends Component {
+class ActionWarning extends React.Component {
   render() {
     return (
       <Segment as='h1' textAlign='center'>

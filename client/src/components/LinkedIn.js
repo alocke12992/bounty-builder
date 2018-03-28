@@ -1,16 +1,25 @@
 import React from 'react';
-import axios from 'axios';
-import { connect } from 'react-redux';
-import { setHeaders } from '../actions/headers';
-import { setFlash } from '../actions/flash';
-import { Header, Container, Grid, Segment, Form, Button, Divider, Icon } from 'semantic-ui-react';
-import SocialMediaRules from './SocialMediaRules';
-import { withRouter } from 'react-router-dom';
-import { addReward } from '../actions/rewards';
 import ActionWarning from './ActionWarning';
+import axios from 'axios';
+import SocialMediaRules from './SocialMediaRules';
+import { addReward } from '../actions/rewards';
+import { connect } from 'react-redux';
+import { setFlash } from '../actions/flash';
+import { setHeaders } from '../actions/headers';
+import { withRouter } from 'react-router-dom';
+import { 
+  Button, 
+  Container, 
+  Divider, 
+  Form, 
+  Grid, 
+  Header, 
+  Icon, 
+  Segment, 
+} from 'semantic-ui-react';
 
 class LinkedIn extends React.Component {
-  state = { value: '', posts: [] }
+  state = { posts: [], value: '', };
 
   componentDidMount() {
     axios.get(`/api/${this.props.service}`)
@@ -23,7 +32,11 @@ class LinkedIn extends React.Component {
         this.props.dispatch(setHeaders(res.headers));
         this.setState({ posts: res.data });
       });
-  }
+  };
+
+  handleChange = (e) => {
+    this.setState({ value: e.target.value });
+  };
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -36,11 +49,11 @@ class LinkedIn extends React.Component {
       .catch( err => {
         //TODO
       })
-  }
+  };
 
-  handleChange = (e) => {
-    this.setState({ value: e.target.value });
-  }
+  likePage = () => {
+    this.props.dispatch(addReward(20, 'linkedin', 'Followed Deconet on linkedin.'));
+  };
 
   renderPosts = () => {
     return this.state.posts.map( post => (
@@ -59,11 +72,7 @@ class LinkedIn extends React.Component {
         </Button>
       </Segment>
     ))
-  }
-
-  likePage = () => {
-    this.props.dispatch(addReward(20, 'linkedin', 'Followed Deconet on linkedin.'));
-  }
+  };
 
   rewardsIncludes = (reason) => {
     const { rewards } = this.props;
@@ -121,9 +130,7 @@ class LinkedIn extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return {
-    rewards: state.rewards,
-  }
+  return { rewards: state.rewards, };
 }
 
 export default withRouter(connect(mapStateToProps)(LinkedIn));

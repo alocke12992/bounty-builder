@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { Header, List, Card } from 'semantic-ui-react';
+import React from 'react';
+import { Card, Header, List, } from 'semantic-ui-react';
 
-class ChatRules extends Component {
+class ChatRules extends React.Component {
   render() {
     return (
       <Card>

@@ -11,7 +11,7 @@ import {
 } from 'semantic-ui-react';
 
 class ProviderForm extends React.Component {
-  state = { social_media: '', rules: '' };
+  state = { rules: '', social_media: '', };
 
   handleChange = (value, name) => {
     this.setState({ [name]: value });

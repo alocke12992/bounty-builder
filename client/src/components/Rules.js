@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { Segment, Container } from 'semantic-ui-react';
+import React from 'react';
+import { Container, Segment, } from 'semantic-ui-react';
 
-class Rules extends Component {
+class Rules extends React.Component {
   render() {
     return (
       <Container>

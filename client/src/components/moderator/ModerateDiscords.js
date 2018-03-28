@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Table, Button, Divider } from 'semantic-ui-react';
+import React from 'react';
 import axios from 'axios';
-import { setHeaders } from '../../actions/headers';
+import { connect } from 'react-redux';
 import { setFlash } from '../../actions/flash';
+import { setHeaders } from '../../actions/headers';
+import { Button, Divider, Input, Table, } from 'semantic-ui-react';
 
-class ModerateDiscords extends Component {
-  state = { discords: [] }
+class ModerateDiscords extends React.Component {
+  state = { discords: [] };
 
   componentDidMount() {
     axios.get('/api/moderator/get_pending_discords')
@@ -14,7 +14,33 @@ class ModerateDiscords extends Component {
         this.props.dispatch(setHeaders(res.headers));
         this.setState({ discords: res.data});
       });
-  }
+  };
+
+  confirmReward = (id) => {
+    axios.post('/api/moderator/approve_discord', { id })
+      .then(res => {
+        let discords = this.state.discords.filter(r => r.id !== id);
+        this.setState({ discords })
+        this.props.dispatch(setHeaders(res.headers));
+        this.props.dispatch(setFlash('Approved', 'green'));
+      })
+      .catch(err => {
+        this.props.dispatch(setHeaders(err.headers));
+      })
+  };
+
+  rejectSubmission = (id) => {
+    axios.post('/api/moderator/reject_discord', { id })
+      .then(res => {
+        let discords = this.state.discords.filter(r => r.id !== id);
+        this.setState({ discords })
+        this.props.dispatch(setHeaders(res.headers));
+        this.props.dispatch(setFlash('Discord Rejected', 'green'));
+      })
+      .catch(err => {
+        this.props.dispatch(setHeaders(err.headers));
+      })
+  };
 
   renderRows = () => {
     return this.state.discords.map( discord => {
@@ -39,33 +65,7 @@ class ModerateDiscords extends Component {
         </Table.Row>
       )
     });
-  }
-
-  confirmReward = (id) => {
-    axios.post('/api/moderator/approve_discord', { id } )
-      .then( res => {
-        let discords = this.state.discords.filter( r => r.id !== id );
-        this.setState({discords})
-        this.props.dispatch(setHeaders(res.headers));
-        this.props.dispatch(setFlash('Approved', 'green'));
-      })
-      .catch( err => {
-        this.props.dispatch(setHeaders(err.headers));
-      })
-  }
-
-  rejectSubmission = (id) => {
-    axios.post('/api/moderator/reject_discord', { id } )
-      .then( res => {
-        let discords = this.state.discords.filter( r => r.id !== id );
-        this.setState({discords})
-        this.props.dispatch(setHeaders(res.headers));
-        this.props.dispatch(setFlash('Discord Rejected', 'green'));
-      })
-      .catch( err => {
-        this.props.dispatch(setHeaders(err.headers));
-      })
-  }
+  };
 
   render(){
     return(

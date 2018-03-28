@@ -1,44 +1,47 @@
 import React from 'react';
+import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { SketchPicker } from 'react-color';
-import { Segment, Button, Grid, Divider } from 'semantic-ui-react';
+import { Button, Divider, Grid, Segment, } from 'semantic-ui-react';
 
 class ColorPicker extends React.Component {
   state = {
-    editNav: false,
-    editButton: false,
     editBackground: false,
-  }
+    editButton: false,
+    editNav: false,
+  };
 
-  toggleNav = () => {
-    this.setState( state => {
-      return { editNav: !state.editNav, editButton: false, editBackground: false, }
-    } )
-  }
-  toggleButton = () => {
-    this.setState( state => {
-      return { editButton: !state.editButton, editNav: false, editBackground: false, }
-    } )
-  }
+  backgroundChange = (backgroundColor) => {
+    const { dispatch } = this.props
+    dispatch({ type: 'BACKGROUND_COLOR', backgroundColor: backgroundColor.hex })
+  };
+
+  buttonChange = (buttonColor) => {
+    const { dispatch } = this.props
+    dispatch({ type: 'BUTTON_COLOR', buttonColor: buttonColor.hex })
+  };
+
+  navChange = (navColor) => {
+    const { dispatch } = this.props
+    dispatch({ type: 'NAV_COLOR', navColor: navColor.hex })
+  };
+
   toggleBackground = () => {
     this.setState( state => {
       return { editBackground: !state.editBackground, editNav: false, editButton: false, }
     } )
-  }
-
-  navChange = ( navColor ) => {
-    const { dispatch } = this.props
-    dispatch( { type: 'NAV_COLOR', navColor: navColor.hex } )
   };
 
-  backgroundChange = ( backgroundColor ) => {
-    const { dispatch } = this.props
-    dispatch( { type: 'BACKGROUND_COLOR', backgroundColor: backgroundColor.hex } )
+  toggleButton = () => {
+    this.setState( state => {
+      return { editButton: !state.editButton, editNav: false, editBackground: false, }
+    } )
   };
 
-  buttonChange = ( buttonColor ) => {
-    const { dispatch } = this.props
-    dispatch( { type: 'BUTTON_COLOR', buttonColor: buttonColor.hex } )
+  toggleNav = () => {
+    this.setState(state => {
+      return { editNav: !state.editNav, editButton: false, editBackground: false, }
+    })
   };
 
   render() {
@@ -97,21 +100,27 @@ class ColorPicker extends React.Component {
               <StyledButton
                 themecolor={ buttonColor }
                 onClick={ this.toggleNav }
-              >NavBar</StyledButton>
+              >
+                NavBar
+              </StyledButton>
             </Grid.Row>
             <Divider hidden />
             <Grid.Row>
               <StyledButton
                 themecolor={ buttonColor }
                 onClick={ this.toggleButton }
-              >Buttons</StyledButton>
+              >
+                Buttons
+              </StyledButton>
             </Grid.Row>
             <Divider hidden />
             <Grid.Row>
               <StyledButton
                 themecolor={ buttonColor }
                 onClick={ this.toggleBackground }
-              >Background</StyledButton>
+              >
+                Background
+              </StyledButton>
             </Grid.Row>
           </Grid.Column>
         </Grid.Row>
@@ -120,16 +129,21 @@ class ColorPicker extends React.Component {
   }
 }
 
-const StyledButton = styled( Button ) `
+const mapStateToProps = ( state ) => {
+  return { 
+    backgroundColor: state.backgroundColor,
+    buttonColor: state.buttonColor, 
+    navColor: state.navColor, 
+  };
+};
+
+const StyledButton = styled(Button)`
   background-color: ${( props ) => props.themecolor } !important;
-`
+`;
+
 const Wrapper = styled.section`
   padding: 4em;
   background: ${( props ) => props.color };
 `;
-
-const mapStateToProps = ( state ) => {
-  return { navColor: state.navColor, buttonColor: state.buttonColor, backgroundColor: state.backgroundColor };
-};
 
 export default connect( mapStateToProps )( ColorPicker );

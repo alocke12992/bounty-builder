@@ -11,59 +11,17 @@ import Twitter from './Twitter';
 import { connect } from 'react-redux';
 import { Container, Grid, Menu } from 'semantic-ui-react';
 import { getRewards } from '../actions/rewards';
-import { Link, Route, Switch, } from 'react-router-dom'
-
-const routes = [
-  {
-    name: 'Dashboard',
-    path: '/',
-    exact: true,
-    main: () => <Dashboard />
-  },
-  {
-    name: 'Facebook',
-    path: '/facebook',
-    main: () => <Facebook service="facebook" />
-  },
-  {
-    name: 'Twitter',
-    path: '/twitter',
-    main: () => <Twitter service="twitter" submissions={ true } />
-  },
-  {
-    name: 'LinkedIn',
-    path: '/linkedin',
-    main: () => <LinkedIn service="linkedin" submissions={ true } />
-  },
-  {
-    name: 'Reddit',
-    path: '/reddit',
-    main: () => <Reddit service="reddit" submissions={ true } />
-  },
-  {
-    name: 'Influencer',
-    path: '/influencer',
-    main: () => <Social service="influencer" submissions={ true } />
-  },
-  {
-    name: 'Translation',
-    path: '/translation',
-    main: () => <Translation />
-  },
-  {
-    name: 'Rules and Overview',
-    path: '/rules',
-    main: () => <Rules />
-  }
-]
+import { Link, Route, Switch, } from 'react-router-dom';
 
 class Home extends React.Component {
+
   componentWillMount() {
     this.props.dispatch( getRewards() );
-  }
+  };
 
   render() {
     const { pathname } = this.props.location;
+    
     return (
       <Container>
         <Grid stackable>
@@ -99,6 +57,50 @@ class Home extends React.Component {
       </Container>
     )
   }
-}
+};
+
+const routes = [
+  {
+    name: 'Dashboard',
+    path: '/',
+    exact: true,
+    main: () => <Dashboard />
+  },
+  {
+    name: 'Facebook',
+    path: '/facebook',
+    main: () => <Facebook service="facebook" />
+  },
+  {
+    name: 'Twitter',
+    path: '/twitter',
+    main: () => <Twitter service="twitter" submissions={true} />
+  },
+  {
+    name: 'LinkedIn',
+    path: '/linkedin',
+    main: () => <LinkedIn service="linkedin" submissions={true} />
+  },
+  {
+    name: 'Reddit',
+    path: '/reddit',
+    main: () => <Reddit service="reddit" submissions={true} />
+  },
+  {
+    name: 'Influencer',
+    path: '/influencer',
+    main: () => <Social service="influencer" submissions={true} />
+  },
+  {
+    name: 'Translation',
+    path: '/translation',
+    main: () => <Translation />
+  },
+  {
+    name: 'Rules and Overview',
+    path: '/rules',
+    main: () => <Rules />
+  }
+];
 
 export default connect()( Home );

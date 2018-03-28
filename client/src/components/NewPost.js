@@ -1,23 +1,16 @@
-import React, { Component } from 'react';
-import { Container, Form, Segment, Select, Divider } from 'semantic-ui-react';
-import { connect } from 'react-redux';
+import React  from 'react';
 import axios from 'axios';
-import { setHeaders } from '../actions/headers';
+import { connect } from 'react-redux';
 import { setFlash } from '../actions/flash';
+import { setHeaders } from '../actions/headers';
+import { Container, Divider, Form, Segment, Select, } from 'semantic-ui-react';
 
-const options = [
-  { key: 'facebook', text: 'Facebook', value: 'facebook' },
-  { key: 'twitter', text: 'Twitter', value: 'twitter' },
-  { key: 'linkedin', text: 'LinkedIn', value: 'linkedin' },
-  { key: 'reddit', text: 'Reddit', value: 'reddit' }
-]
-
-class NewPost extends Component {
-  state = { url: '', kind: ''}
+class NewPost extends React.Component {
+  state = { kind: '', url: '', };
 
   handleChange = (e) => {
     this.setState({ url: e.target.value });
-  }
+  };
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -31,7 +24,7 @@ class NewPost extends Component {
       .catch( err => {
         //TODO
       })
-  }
+  };
 
   render() {
     const { url, kind } = this.state;
@@ -58,6 +51,13 @@ class NewPost extends Component {
       </Container>
     );
   }
-}
+};
+
+const options = [
+  { key: 'facebook', text: 'Facebook', value: 'facebook' },
+  { key: 'twitter', text: 'Twitter', value: 'twitter' },
+  { key: 'linkedin', text: 'LinkedIn', value: 'linkedin' },
+  { key: 'reddit', text: 'Reddit', value: 'reddit' }
+];
 
 export default connect()(NewPost);

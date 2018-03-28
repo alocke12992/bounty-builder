@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Table, Button, Divider } from 'semantic-ui-react';
+import React from 'react';
 import axios from 'axios';
-import { setHeaders } from '../../actions/headers';
+import { connect } from 'react-redux';
 import { setFlash } from '../../actions/flash';
+import { setHeaders } from '../../actions/headers';
+import { Button, Divider, Loader, Table, } from 'semantic-ui-react';
 
-class ModerateRewards extends Component {
-  state = { rewards: [], page: 1, totalPages: 0 }
+class ModerateRewards extends React.Component {
+  state = { page: 1, rewards: [], totalPages: 0 }
 
   componentDidMount() {
     axios.get(`/api/moderator/get_pending_rewards?page=${this.state.page}`)
@@ -14,7 +14,33 @@ class ModerateRewards extends Component {
         this.props.dispatch(setHeaders(res.headers));
         this.setState({ rewards: res.data.rewards, totalPages: res.data.total_pages});
       });
-  }
+  };
+
+  blockUser = (id, rewardId) => {
+    axios.post('/api/moderator/block_user', { id })
+      .then(res => {
+        let rewards = this.state.rewards.filter(r => r.id !== rewardId);
+        this.setState({ rewards })
+        this.props.dispatch(setHeaders(res.headers));
+        this.props.dispatch(setFlash('User Blocked', 'green'));
+      })
+      .catch(err => {
+        //TODO
+      })
+  };
+
+  confirmReward = (id) => {
+    axios.post('/api/moderator/approve_reward', { id })
+      .then(res => {
+        let rewards = this.state.rewards.filter(r => r.id !== id);
+        this.setState({ rewards })
+        this.props.dispatch(setHeaders(res.headers));
+        this.props.dispatch(setFlash('Approved', 'green'));
+      })
+      .catch(err => {
+        this.props.dispatch(setHeaders(err.headers));
+      })
+  };
 
   loadMore = () => {
     const page = this.state.page + 1;
@@ -25,7 +51,7 @@ class ModerateRewards extends Component {
         })
         this.props.dispatch(setHeaders(res.headers));
       })
-  }
+  };
 
   renderRows = () => {
     return this.state.rewards.map( reward => (
@@ -40,20 +66,7 @@ class ModerateRewards extends Component {
         </Table.Cell>
       </Table.Row>
     ))
-  }
-
-  confirmReward = (id) => {
-    axios.post('/api/moderator/approve_reward', { id } )
-      .then( res => {
-        let rewards = this.state.rewards.filter( r => r.id !== id );
-        this.setState({rewards})
-        this.props.dispatch(setHeaders(res.headers));
-        this.props.dispatch(setFlash('Approved', 'green'));
-      })
-      .catch( err => {
-        this.props.dispatch(setHeaders(err.headers));
-      })
-  }
+  };
 
   revokeReward = (id) => {
     axios.post('/api/moderator/revoke_reward', { id } )
@@ -66,20 +79,7 @@ class ModerateRewards extends Component {
       .catch( err => {
         this.props.dispatch(setHeaders(err.headers));
       })
-  }
-
-  blockUser = (id, rewardId) => {
-    axios.post('/api/moderator/block_user', { id } )
-      .then( res => {
-        let rewards = this.state.rewards.filter( r => r.id !== rewardId );
-        this.setState({rewards})
-        this.props.dispatch(setHeaders(res.headers));
-        this.props.dispatch(setFlash('User Blocked', 'green'));
-      })
-      .catch( err => {
-        //TODO
-      })
-  }
+  };
 
   render(){
     let { page, totalPages } = this.state;

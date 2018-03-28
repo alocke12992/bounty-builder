@@ -1,37 +1,39 @@
-import React, { Component } from 'react';
-import { Segment, Form, Button, Grid, Image } from 'semantic-ui-react';
+import React from 'react';
+import axios from 'axios';
 import { connect } from 'react-redux';
+import { baseURL } from '../utils/urls';
 import { handleLogin } from '../actions/auth';
 import { Link } from 'react-router-dom';
-import { baseURL } from '../utils/urls';
-
-//const queryString = require('query-string');
-// var ClientOAuth2 = require('client-oauth2')
+import { setHeaders } from '../actions/headers';
+import { setFlash } from '../actions/flash';
+import { Button, Form, Grid, Image, Segment, } from 'semantic-ui-react';
+const queryString = require('query-string');
+// var ClientOAuth2 = require('client-oauth2');
 //
 // var deconetAuth = new ClientOAuth2({
 //   clientId: '2d6dbffdce9d62562f2fe8c0be2a0284bdc36b71fda2bc4600372810fa68e5bd',
 //   authorizationUri: 'https://app.deco.network/oauth/authorize',
 //   redirectUri: 'http://localhost:3000/auth/Deconet/callback',
-// })
+// });
 
-class Login extends Component {
+class Login extends React.Component {
   state = { email: '', password: '' };
+
+  deconetOauth = () => {
+    window.open("https://app.deco.network/oauth/authorize?response_type=code&client_id=2d6dbffdce9d62562f2fe8c0be2a0284bdc36b71fda2bc4600372810fa68e5bd&redirect_uri=" + escape(baseURL()) + "%2Fauth%2FDeconet%2Fcallback");
+  };
 
   handleChange = event => {
     const { id, value } = event.target;
     this.setState({ [id]: value });
-  }
+  };
 
   handleSubmit = event => {
     event.preventDefault();
     const { dispatch, history } = this.props;
     const { email, password } = this.state;
     dispatch(handleLogin(email, password, history));
-  }
-
-  deconetOauth = () => {
-    window.open("https://app.deco.network/oauth/authorize?response_type=code&client_id=2d6dbffdce9d62562f2fe8c0be2a0284bdc36b71fda2bc4600372810fa68e5bd&redirect_uri=" + escape(baseURL()) + "%2Fauth%2FDeconet%2Fcallback");
-  }
+  };
 
   render() {
     const { email, password } = this.state;
@@ -77,14 +79,14 @@ class Login extends Component {
 }
 
 var styles = {
-  logo: {
-    width: 300,
-    height: 'auto',
-  },
   deconetButton: {
     backgroundColor: '#2678EA',
     color: 'white'
-  }
+  },
+  logo: {
+    height: 'auto',
+    width: 300,
+  },
 };
 
 export default connect()(Login);

@@ -1,6 +1,6 @@
 import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { Redirect, Route, } from 'react-router-dom';
 
 const AdminRoute = ({ role, isAuthenticated, component: Component, ...rest }) => (
   <Route
@@ -20,7 +20,10 @@ const AdminRoute = ({ role, isAuthenticated, component: Component, ...rest }) =>
 );
 
 const mapStateToProps = state => {
-  return { isAuthenticated: state.user.id, role: state.user.role };
+  return { 
+    isAuthenticated: state.user.id,
+    role: state.user.role 
+  };
 };
 
 export default connect(mapStateToProps)(AdminRoute);

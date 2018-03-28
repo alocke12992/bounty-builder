@@ -1,7 +1,7 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { Container, Grid, Segment, Header } from 'semantic-ui-react';
 import { baseURL } from '../utils/urls';
+import { connect } from 'react-redux';
+import { Container, Grid, Header, Segment, } from 'semantic-ui-react';
 
 class Invite extends React.Component {
 
@@ -25,11 +25,12 @@ class Invite extends React.Component {
       </Container>
     )
   }
-}
+};
 
 const mapStateToProps = (state) => {
   return {
     invite_code: state.user.outgoing_invite_code
   }
-}
+};
+
 export default connect(mapStateToProps)(Invite);

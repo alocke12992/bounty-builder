@@ -1,13 +1,19 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { Card } from 'semantic-ui-react';
+import { connect } from 'react-redux';
 
 class PointsTile extends React.Component {
-  state = { points: '0' }
+  state = { points: '0' };
 
   componentWillMount() {
     this.getPoints(this.props.rewards);
-  }
+  };
+  
+  componentWillReceiveProps(nextProps){
+    if(nextProps.rewards !== this.props.rewards){
+      this.getPoints(nextProps.rewards);
+    }
+  };
 
   getPoints = (rewards = []) => {
     var sum = 0;
@@ -18,12 +24,6 @@ class PointsTile extends React.Component {
       }
     }
     this.setState({points: sum})
-  }
-
-  componentWillReceiveProps(nextProps){
-    if(nextProps.rewards !== this.props.rewards){
-      this.getPoints(nextProps.rewards);
-    }
   }
 
   render() {
@@ -43,9 +43,7 @@ class PointsTile extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return {
-    rewards: state.rewards
-  }
+  return { rewards: state.rewards, };
 }
 
 export default connect(mapStateToProps)(PointsTile);

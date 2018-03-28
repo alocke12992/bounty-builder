@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { Segment, Grid } from 'semantic-ui-react';
+import React from 'react';
+import { Grid, Segment, } from 'semantic-ui-react';
 
-class About extends Component {
+class About extends React.Component {
   render() {
     return (
       <Grid centered columns={2}>
@@ -56,8 +56,8 @@ class About extends Component {
 
 var styles = {
   logo: {
-    width: 'auto',
-    height: '90px',
+    height: '120px',
+    width: '120px',
   }
 };
 

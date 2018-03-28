@@ -1,12 +1,12 @@
 import React from 'react';
-import { Card, Header, Form, Divider, Button, Icon } from 'semantic-ui-react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { setHeaders } from '../actions/headers';
 import { setFlash } from '../actions/flash';
+import { setHeaders } from '../actions/headers';
+import { Button, Card, Divider, Form, Header, Icon } from 'semantic-ui-react';
 
 class Telegram extends React.Component {
-  state = { username: '', showField: false }
+  state = { showField: false, username: '', };
 
   componentDidMount() {
     axios.get('/api/telegram')
@@ -21,11 +21,11 @@ class Telegram extends React.Component {
         this.props.dispatch(setHeaders(res.headers));
         this.setState({ username: res.data ? res.data.username : '', showField });
       });
-  }
+  };
 
   handleChange = (e) => {
     this.setState({ username: e.target.value });
-  }
+  };
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -39,10 +39,11 @@ class Telegram extends React.Component {
       .catch( err => {
         this.props.dispatch(setHeaders(err.headers));
       })
-  }
+  };
 
   render() {
-    const { username, showField } = this.state;
+    const { showField, username, } = this.state;
+    
     return (
       <Card>
         <Card.Header>

@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Segment } from 'semantic-ui-react';
 
-class BlogRules extends Component {
+class BlogRules extends React.Component {
   render() {
     return (
       <Segment>

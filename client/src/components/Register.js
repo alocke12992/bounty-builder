@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import { Form, Button, Segment, Grid, Image, Divider } from 'semantic-ui-react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { registerUser } from '../actions/auth';
 import { setFlash } from '../actions/flash';
 import { baseURL } from '../utils/urls';
+import { Button, Divider, Form, Grid, Image, Segment, } from 'semantic-ui-react';
 var Recaptcha = require('react-recaptcha');
 const queryString = require('query-string');
 // var ClientOAuth2 = require('client-oauth2')
@@ -14,14 +14,36 @@ const queryString = require('query-string');
 //   redirectUri: 'http://localhost:3000/auth/Deconet/callback',
 // })
 
-class Register extends Component {
-  state = { email: '', password: '', passwordConfirmation: '', invite_code: '', captchaVerified: false };
+class Register extends React.Component {
+  state = { 
+    captchaVerified: false, 
+    email: '', 
+    invite_code: '', 
+    password: '', 
+    passwordConfirmation: '', 
+  };
 
   componentDidMount(){
     const parsed = queryString.parse(this.props.location.search)
     if (parsed.invite_code)
       this.setState({ invite_code: parsed.invite_code })
-  }
+  };
+
+  callback = (res) => {
+    this.setState({ captchaVerified: true });
+  };
+
+  deconetOauth = () => {
+    window.open("https://app.deco.network/oauth/authorize?response_type=code&client_id=2d6dbffdce9d62562f2fe8c0be2a0284bdc36b71fda2bc4600372810fa68e5bd&redirect_uri=" + escape(baseURL()) + "%2Fauth%2FDeconet%2Fcallback&state=" + JSON.stringify({ invite_code: this.state.invite_code }));
+  };
+
+  handleChange = event => {
+    // use e to grab the id off the element also the value and set state
+    // const { id, value } = event.target;
+    const id = event.target.id;
+    const value = event.target.value;
+    this.setState({ [id]: value });
+  };
 
   handleSubmit = event => {
     if(this.state.captchaVerified){
@@ -32,26 +54,10 @@ class Register extends Component {
         dispatch(registerUser(email, password, passwordConfirmation, history, invite_code));
       } else dispatch(setFlash('Passwords do not match!, please try again', 'red'));
     }
-  }
-
-  handleChange = event => {
-    // use e to grab the id off the element also the value and set state
-    // const { id, value } = event.target;
-    const id = event.target.id;
-    const value = event.target.value;
-    this.setState({ [id]: value });
-  }
-
-  callback = (res) => {
-    this.setState({captchaVerified: true});
-  }
-
-  deconetOauth = () => {
-    window.open("https://app.deco.network/oauth/authorize?response_type=code&client_id=2d6dbffdce9d62562f2fe8c0be2a0284bdc36b71fda2bc4600372810fa68e5bd&redirect_uri=" + escape(baseURL()) + "%2Fauth%2FDeconet%2Fcallback&state=" + JSON.stringify({invite_code: this.state.invite_code}));
-  }
+  };
 
   render() {
-    const { email, password, passwordConfirmation, invite_code, captchaVerified } = this.state;
+    const { captchaVerified, email, invite_code, password, passwordConfirmation, } = this.state;
 
     return (
       <Grid centered columns={2}>
@@ -119,14 +125,14 @@ class Register extends Component {
 }
 
 var styles = {
-  logo: {
-    width: 300,
-    height: 'auto'
-  },
   deconetButton: {
     backgroundColor: '#2678EA',
-    color: 'white'
-  }
+    color: 'white',
+  },
+  logo: {
+    height: 'auto',
+    width: 300,
+  },
 };
 
 export default connect()(Register);

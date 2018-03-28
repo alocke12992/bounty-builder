@@ -1,12 +1,13 @@
-import React, { Component } from 'react';
-import { Container, Segment, Grid } from 'semantic-ui-react';
-import { connect } from 'react-redux';
+import React from 'react';
 import axios from 'axios';
-import { setFlash } from '../actions/flash';
+import { connect } from 'react-redux';
 import { setHeaders } from '../actions/headers';
+import { setFlash } from '../actions/flash';
+import { Container, Grid, Segment, } from 'semantic-ui-react';
 const queryString = require('query-string');
 
-class DeconetOauth extends Component {
+class DeconetOauth extends React.Component {
+  
   componentDidMount(){
     const parsed = queryString.parse(this.props.location.search);
     const { dispatch, history } = this.props;

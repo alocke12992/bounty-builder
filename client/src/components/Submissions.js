@@ -1,17 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Card, Segment, Form, Button } from 'semantic-ui-react';
 import { withRouter } from 'react-router-dom';
-import { getSubmissions, addSubmission } from '../actions/submissions';
-
-
-const truncate = (string) => {
-  if(string.length >= 30){
-    return string.substring(0,30) + '...';
-  }else{
-    return string;
-  }
-}
+import { addSubmission, getSubmissions, } from '../actions/submissions';
+import { Button, Card, Form, Segment, } from 'semantic-ui-react';
 
 class Submissions extends React.Component {
   state = { username: '', newSubmission: '', adding: false }
@@ -52,6 +43,7 @@ class Submissions extends React.Component {
 
   render() {
     const { adding } = this.state;
+    
     return (
       <div>
         <Segment>
@@ -80,6 +72,14 @@ const mapStateToProps = (state) => {
   return {
     submissions: state.submissions,
   }
-}
+};
+
+const truncate = (string) => {
+  if (string.length >= 30) {
+    return string.substring(0, 30) + '...';
+  } else {
+    return string;
+  }
+};
 
 export default withRouter(connect(mapStateToProps)(Submissions));

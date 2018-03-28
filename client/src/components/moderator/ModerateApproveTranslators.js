@@ -1,16 +1,12 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Header, Divider, Card, Form } from 'semantic-ui-react';
+import React from 'react';
 import axios from 'axios';
-import { setHeaders } from '../../actions/headers';
+import { connect } from 'react-redux';
 import { setFlash } from '../../actions/flash';
+import { setHeaders } from '../../actions/headers';
+import { Button, Card, Divider, Form, Header, Input, } from 'semantic-ui-react';
 
-class ModerateApproveTranslators extends Component {
-  state = { submissions: [], reward: '' }
-
-  handleChange = (e, id) => {
-    this.setState({ [ 'reward' + id]: e.target.value });
-  }
+class ModerateApproveTranslators extends React.Component {
+  state = { reward: '', submissions: [], }
 
   approveTranslator = (email) => {
     axios.post('/api/moderator/add_translator', { email } )
@@ -23,11 +19,17 @@ class ModerateApproveTranslators extends Component {
         this.props.dispatch(setHeaders(err.headers));
         this.props.dispatch(setFlash('An error occurred, please make sure the email is correct.', 'red'));
       })
-  }
+  };
 
+  // TODO: Duplicate?
+  handleChange = (e, id) => {
+    this.setState({ [ 'reward' + id]: e.target.value });
+  };
+
+  // TODO: Duplicate?
   handleChange = (e) => {
     this.setState({ email: e.target.value });
-  }
+  };
 
   render() {
     const { email } = this.state;

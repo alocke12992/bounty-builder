@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Table, Button, Divider } from 'semantic-ui-react';
+import React from 'react';
 import axios from 'axios';
-import { setHeaders } from '../../actions/headers';
+import { connect } from 'react-redux';
 import { setFlash } from '../../actions/flash';
+import { setHeaders } from '../../actions/headers';
+import { Button, Divider, Input, Table, } from 'semantic-ui-react';
 
-class ModerateTelegrams extends Component {
-  state = { telegrams: [] }
+class ModerateTelegrams extends React.Component {
+  state = { telegrams: [] };
 
   componentDidMount() {
     axios.get('/api/moderator/get_pending_telegrams')
@@ -14,7 +14,33 @@ class ModerateTelegrams extends Component {
         this.props.dispatch(setHeaders(res.headers));
         this.setState({ telegrams: res.data});
       });
-  }
+  };
+
+  confirmReward = (id) => {
+    axios.post('/api/moderator/approve_telegram', { id })
+      .then(res => {
+        let telegrams = this.state.telegrams.filter(r => r.id !== id);
+        this.setState({ telegrams })
+        this.props.dispatch(setHeaders(res.headers));
+        this.props.dispatch(setFlash('Approved', 'green'));
+      })
+      .catch(err => {
+        this.props.dispatch(setHeaders(err.headers));
+      })
+  };
+
+  rejectSubmission = (id) => {
+    axios.post('/api/moderator/reject_telegram', { id })
+      .then(res => {
+        let telegrams = this.state.telegrams.filter(r => r.id !== id);
+        this.setState({ telegrams })
+        this.props.dispatch(setHeaders(res.headers));
+        this.props.dispatch(setFlash('Telegram Rejected', 'green'));
+      })
+      .catch(err => {
+        this.props.dispatch(setHeaders(err.headers));
+      })
+  };
 
   renderRows = () => {
     return this.state.telegrams.map( telegram => {
@@ -39,34 +65,7 @@ class ModerateTelegrams extends Component {
         </Table.Row>
       )
     });
-  }
-
-  confirmReward = (id) => {
-    axios.post('/api/moderator/approve_telegram', { id } )
-      .then( res => {
-        let telegrams = this.state.telegrams.filter( r => r.id !== id );
-        this.setState({telegrams})
-        this.props.dispatch(setHeaders(res.headers));
-        this.props.dispatch(setFlash('Approved', 'green'));
-      })
-      .catch( err => {
-        this.props.dispatch(setHeaders(err.headers));
-      })
-  }
-
-  rejectSubmission = (id) => {
-    axios.post('/api/moderator/reject_telegram', { id } )
-      .then( res => {
-        let telegrams = this.state.telegrams.filter( r => r.id !== id );
-        this.setState({telegrams})
-        this.props.dispatch(setHeaders(res.headers));
-        this.props.dispatch(setFlash('Telegram Rejected', 'green'));
-      })
-      .catch( err => {
-        this.props.dispatch(setHeaders(err.headers));
-      })
-  }
-
+  };
 
   render(){
     return(

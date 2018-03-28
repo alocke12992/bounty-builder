@@ -1,13 +1,13 @@
 import React from 'react';
-import { Card, Header, Form, Image, Divider } from 'semantic-ui-react';
 import axios from 'axios';
-import { connect } from 'react-redux';
-import { setHeaders } from '../actions/headers';
-import { setFlash } from '../actions/flash';
 import eth from '../images/ETHEREUM.png';
+import { connect } from 'react-redux';
+import { setFlash } from '../actions/flash';
+import { setHeaders } from '../actions/headers';
+import { Card, Divider, Form, Header, Image, } from 'semantic-ui-react';
 
 class Wallet extends React.Component {
-  state = { walletAddress: '' }
+  state = { walletAddress: '' };
 
   componentDidMount() {
     axios.get('/api/wallet')
@@ -15,11 +15,11 @@ class Wallet extends React.Component {
         this.props.dispatch(setHeaders(res.headers));
         this.setState({ walletAddress: res.data });
       });
-  }
+  };
 
   handleChange = (e) => {
     this.setState({ walletAddress: e.target.value });
-  }
+  };
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -32,10 +32,11 @@ class Wallet extends React.Component {
       .catch( err => {
         this.props.dispatch(setHeaders(err.headers));
       })
-  }
+  };
 
   render() {
     const { walletAddress } = this.state;
+    
     return (
       <Card>
         <Card.Header>

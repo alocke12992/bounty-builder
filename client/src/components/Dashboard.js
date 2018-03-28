@@ -3,10 +3,11 @@ import axios from 'axios';
 import ChatRules from './ChatRules';
 import Invite from './Invite';
 import PointsTile from './PointsTile';
+import styled from 'styled-components';
 import Telegram from './Telegram';
-import TextContent from './TextContent';
-import TotalUsersTile from './TotalUsersTile';
 import TotalSharesTile from './TotalSharesTile';
+import TotalUsersTile from './TotalUsersTile';
+import TextContent from './TextContent';
 import Wallet from './Wallet';
 import { connect } from 'react-redux';
 import { setFlash } from '../actions/flash';
@@ -21,7 +22,6 @@ import {
   Segment,
   Responsive,
 } from 'semantic-ui-react';
-
 var Recaptcha = require( 'react-recaptcha' );
 
 class Dashboard extends React.Component {
@@ -417,11 +417,34 @@ class Dashboard extends React.Component {
   }
 }
 
-
-
-
 const mapStateToProps = state => {
   return { user: state.user };
 };
+
+const Image = styled.img`
+  height: ${ props => imageSize(props.isize)} !important;
+  width: auto;
+`;
+
+const imageSize = size => {
+  switch ( size ) {
+    case 'large':
+      return '150px';
+    case 'small':
+      return '50px';
+    case 'mini':
+      return '25px';
+    default:
+      return '75px';
+  }
+};
+
+const logo = image => {
+  require( `../assets/images/${ image }` );
+};
+
+const Text = styled.p`
+  color: blue;
+`;
 
 export default connect( mapStateToProps )( Dashboard );

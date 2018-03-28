@@ -12,44 +12,6 @@ import {
 } from 'semantic-ui-react';
 
 class NavBar extends Component {
-  routes = [
-    {
-      name: 'Dashboard',
-      path: '/',
-    },
-    {
-      name: 'Settings',
-      path: '/settings',
-    },
-    {
-      name: 'About Campaign',
-      path: '/rules',
-    },
-    {
-      name: 'Facebook',
-      path: '/facebook',
-    },
-    {
-      name: 'Twitter',
-      path: '/twitter',
-    },
-    {
-      name: 'LinkedIn',
-      path: '/linkedin',
-    },
-    {
-      name: 'Reddit',
-      path: '/reddit',
-    },
-    {
-      name: 'Influencer',
-      path: '/influencer',
-    },
-    {
-      name: 'Translation',
-      path: '/translation',
-    },
-  ];
 
   logout = ( { dispatch, history } ) => {
     return (
@@ -61,8 +23,9 @@ class NavBar extends Component {
       </Dropdown.Item>
     );
   };
+
   rightNavs = () => {
-    const { user, dispatch, history } = this.props;
+    const { dispatch, history, user, } = this.props;
 
     if ( user.id ) {
       return (
@@ -155,7 +118,7 @@ class NavBar extends Component {
                 Moderate
               </Dropdown.Item>
             ) }
-            { this.routes.map( ( route, i ) => {
+            { routes.map( ( route, i ) => {
               return (
                 <Dropdown.Item
                   key={ i }
@@ -197,30 +160,68 @@ class NavBar extends Component {
       </StyledMenu>
     );
   }
-}
+};
+
+const mapStateToProps = (state) => {
+  return {
+    backgroundColor: state.navColor,
+    user: state.user,
+  };
+};
+
+const routes = [
+  {
+    name: 'Dashboard',
+    path: '/',
+  },
+  {
+    name: 'Settings',
+    path: '/settings',
+  },
+  {
+    name: 'About Campaign',
+    path: '/rules',
+  },
+  {
+    name: 'Facebook',
+    path: '/facebook',
+  },
+  {
+    name: 'Twitter',
+    path: '/twitter',
+  },
+  {
+    name: 'LinkedIn',
+    path: '/linkedin',
+  },
+  {
+    name: 'Reddit',
+    path: '/reddit',
+  },
+  {
+    name: 'Influencer',
+    path: '/influencer',
+  },
+  {
+    name: 'Translation',
+    path: '/translation',
+  },
+];
 
 var styles = {
+  logo: {
+    height: '75px',
+    width: '75px',
+  },
   text: {
     color: 'white',
   },
-  logo: {
-    width: '75px',
-    height: '75px',
-  },
 };
 
-const StyledMenu = styled( Menu ) `
-  background: ${( props ) =>
-    props.themecolor } !important;
+const StyledMenu = styled(Menu)`
+  background: ${( props ) => props.themecolor } !important;
   height: '100px';
 `;
-
-const mapStateToProps = ( state ) => {
-  return {
-    user: state.user,
-    backgroundColor: state.navColor,
-  };
-};
 
 export default withRouter(
   connect( mapStateToProps )( NavBar )

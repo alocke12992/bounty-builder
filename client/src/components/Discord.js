@@ -1,12 +1,12 @@
 import React from 'react';
-import { Card, Header, Form, Divider, Button, Icon } from 'semantic-ui-react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { setHeaders } from '../actions/headers';
 import { setFlash } from '../actions/flash';
+import { setHeaders } from '../actions/headers';
+import { Button, Card, Header, Form, Divider, Icon, } from 'semantic-ui-react';
 
 class Discord extends React.Component {
-  state = { username: '', showField: false }
+  state = { showField: false, username: '', };
 
   componentDidMount() {
     axios.get('/api/discord')

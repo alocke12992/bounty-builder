@@ -11,7 +11,7 @@ import {
 } from 'semantic-ui-react';
 
 class TranslationForm extends React.Component {
-  state = { rules: '', link: '' };
+  state = { link: '', rules: '', };
 
   handleChange = (value, name) => {
     this.setState({ [name]: value });

@@ -1,29 +1,16 @@
-import React, { Component } from 'react';
-import { Form, Button, Segment, Grid, Image } from 'semantic-ui-react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { sendPasswordReset, recoverPassword } from '../actions/auth';
+import { setFlash } from '../actions/flash';
+import { recoverPassword, sendPasswordReset, } from '../actions/auth';
+import { Button, Grid, Form, Image, Segment, } from 'semantic-ui-react';
 
-class RecoverPassword extends Component {
+class RecoverPassword extends React.Component {
   state = { email: '', emailSent: false, password: '', passwordConfirmation: '', token: '' };
 
   componentDidMount(){
     if (this.props.location.search)
       this.setState({token: this.props.location.search.split('?token=')[1]})
-  }
-
-  handleSubmit = event => {
-    event.preventDefault();
-    const { email } = this.state;
-    const { dispatch } = this.props;
-    dispatch(sendPasswordReset(email,() => this.setState({emailSent: true})));
-  }
-
-  handleNewPasswordSubmit = event => {
-    event.preventDefault();
-    const { password, passwordConfirmation, token } = this.state;
-    const { dispatch, history } = this.props;
-    dispatch(recoverPassword(password, passwordConfirmation, token, history));
-  }
+  };
 
   handleChange = event => {
     // use e to grab the id off the element also the value and set state
@@ -31,7 +18,21 @@ class RecoverPassword extends Component {
     const id = event.target.id;
     const value = event.target.value;
     this.setState({ [id]: value });
-  }
+  };
+
+  handleNewPasswordSubmit = event => {
+    event.preventDefault();
+    const { password, passwordConfirmation, token } = this.state;
+    const { dispatch, history } = this.props;
+    dispatch(recoverPassword(password, passwordConfirmation, token, history));
+  };
+
+  handleSubmit = event => {
+    event.preventDefault();
+    const { email } = this.state;
+    const { dispatch } = this.props;
+    dispatch(sendPasswordReset(email,() => this.setState({emailSent: true})));
+  };
 
   render() {
     const { email, emailSent, password, passwordConfirmation, token } = this.state;
@@ -100,8 +101,8 @@ class RecoverPassword extends Component {
 
 var styles = {
   logo: {
+    height: 'auto',
     width: 300,
-    height: 'auto'
   },
 };
 

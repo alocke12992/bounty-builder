@@ -1,48 +1,20 @@
 import React from 'react'
-import {
-  Link,
-  Switch,
-  Route
-} from 'react-router-dom'
-import { Grid, Container, Menu } from 'semantic-ui-react';
-import NoMatch from '../NoMatch';
-import { connect } from 'react-redux';
+import GenerateCsv from './GenerateCsv';
+import ModerateApproveInfluencers from './ModerateApproveInfluencers';
+import ModerateApproveTranslators from './ModerateApproveTranslators';
+import ModerateDiscords from './ModerateDiscords';
 import ModerateRewards from './ModerateRewards';
 import ModerateSubmissions from './ModerateSubmissions';
 import ModerateTelegrams from './ModerateTelegrams';
-import ModerateDiscords from './ModerateDiscords';
-import ModerateApproveTranslators from './ModerateApproveTranslators';
-import GenerateCsv from './GenerateCsv';
-import ModerateApproveInfluencers from './ModerateApproveInfluencers';
-
-const routes = [
-  { path: '/moderate',
-    exact: true,
-    main: () => <ModerateRewards />
-  },
-  { path: '/moderate/submissions',
-    main: () => <ModerateSubmissions />
-  },
-  { path: '/moderate/telegram',
-    main: () => <ModerateTelegrams />
-  },
-  { path: '/moderate/discord',
-    main: () => <ModerateDiscords />
-  },
-  { path: '/moderate/translators',
-    main: () => <ModerateApproveTranslators />
-  },
-  { path: '/moderate/generate_csv',
-    main: () => <GenerateCsv />
-  },
-  { path: '/moderate/influencers',
-    main: () => <ModerateApproveInfluencers />
-  }
-]
+import NoMatch from '../NoMatch';
+import { connect } from 'react-redux';
+import { Link, Route, Switch, } from 'react-router-dom'
+import { Container, Grid, Menu, } from 'semantic-ui-react';
 
 class ModeratorHome extends React.Component{
   render(){
     const { pathname } = this.props.location;
+    
     return(
       <Container>
           <Grid stackable>
@@ -76,5 +48,37 @@ class ModeratorHome extends React.Component{
     )
   }
 }
+
+const routes = [
+  {
+    path: '/moderate',
+    exact: true,
+    main: () => <ModerateRewards />
+  },
+  {
+    path: '/moderate/submissions',
+    main: () => <ModerateSubmissions />
+  },
+  {
+    path: '/moderate/telegram',
+    main: () => <ModerateTelegrams />
+  },
+  {
+    path: '/moderate/discord',
+    main: () => <ModerateDiscords />
+  },
+  {
+    path: '/moderate/translators',
+    main: () => <ModerateApproveTranslators />
+  },
+  {
+    path: '/moderate/generate_csv',
+    main: () => <GenerateCsv />
+  },
+  {
+    path: '/moderate/influencers',
+    main: () => <ModerateApproveInfluencers />
+  }
+]
 
 export default connect()(ModeratorHome);
