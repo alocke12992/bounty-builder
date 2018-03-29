@@ -3,25 +3,34 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { setFlash } from '../actions/flash';
 import { setHeaders } from '../actions/headers';
-import { Button, Card, Divider, Form, Header, Icon } from 'semantic-ui-react';
+import {
+  Button,
+  Card,
+  Container,
+  Divider,
+  Form,
+  Header,
+  Icon,
+} from 'semantic-ui-react';
 
 class Telegram extends React.Component {
-  state = { showField: false, username: '', };
+  state = { showField: false, username: '' };
 
   componentDidMount() {
-    axios.get('/api/telegram')
-      .then( res => {
-        let showField;
-        if (res.data == null){
-          showField = true;
-        }
-        else {
-          showField = false;
-        }
-        this.props.dispatch(setHeaders(res.headers));
-        this.setState({ username: res.data ? res.data.username : '', showField });
+    axios.get('/api/telegram').then((res) => {
+      let showField;
+      if (res.data == null) {
+        showField = true;
+      } else {
+        showField = false;
+      }
+      this.props.dispatch(setHeaders(res.headers));
+      this.setState({
+        username: res.data ? res.data.username : '',
+        showField,
       });
-  };
+    });
+  }
 
   handleChange = (e) => {
     this.setState({ username: e.target.value });
@@ -30,31 +39,50 @@ class Telegram extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const { username } = this.state;
-    axios.post('/api/telegram', { username } )
-      .then( res => {
-        this.setState({showField: false});
+    axios
+      .post('/api/telegram', { username })
+      .then((res) => {
+        this.setState({ showField: false });
         this.props.dispatch(setHeaders(res.headers));
-        this.props.dispatch(setFlash('Telegram updated', 'green'));
+        this.props.dispatch(
+          setFlash('Telegram updated', 'green'),
+        );
       })
-      .catch( err => {
+      .catch((err) => {
         this.props.dispatch(setHeaders(err.headers));
-      })
+      });
+  };
+
+  createMarkup = (html) => {
+    return { __html: html };
   };
 
   render() {
-    const { showField, username, } = this.state;
-    
+    const { showField, username } = this.state;
+    const { telegram_invite } = this.props;
+
     return (
       <Card>
         <Card.Header>
           <Divider hidden />
-          <Header as="h1" textAlign="center">Telegram</Header>
+          <Header as="h1" textAlign="center">
+            Telegram
+          </Header>
         </Card.Header>
+        <Divider hidden />
         <Card.Content textAlign="center">
-          <p>Join the Telegram group below. After, enter the username you joined the group with and then press Submit for Approval. This may only be done once.</p>
+          <Container
+            dangerouslySetInnerHTML={this.createMarkup(
+              telegram_invite,
+            )}
+          />
           <Divider hidden />
-          <Button as='a' color='twitter' href="https://t.me/deco_network" target="_blank">
-            <Icon name='telegram' /> Telegram
+          <Button
+            as="a"
+            color="twitter"
+            href="https://t.me/deco_network"
+            target="_blank">
+            <Icon name="telegram" /> Telegram
           </Button>
           <Divider hidden />
           <Form onSubmit={this.handleSubmit}>
@@ -65,12 +93,20 @@ class Telegram extends React.Component {
               placeholder="Telegram Username"
               disabled={!showField}
             />
-          { showField && <Form.Button>Submit for Approval</Form.Button> }
+            {showField && (
+              <Form.Button>Submit for Approval</Form.Button>
+            )}
           </Form>
         </Card.Content>
       </Card>
-    )
+    );
   }
 }
 
-export default connect()(Telegram);
+const mapStateToProps = (state) => {
+  return {
+    telegram_invite: state.settings.telegram_invite,
+  };
+};
+
+export default connect(mapStateToProps)(Telegram);

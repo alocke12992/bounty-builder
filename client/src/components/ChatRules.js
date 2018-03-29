@@ -1,24 +1,36 @@
 import React from 'react';
-import { Card, Header, List, } from 'semantic-ui-react';
+import { connect } from 'react-redux';
+import {
+  Card,
+  Container,
+  Header,
+  List,
+} from 'semantic-ui-react';
 
 class ChatRules extends React.Component {
+  createMarkup = (html) => {
+    return { __html: html };
+  };
+
   render() {
+    const { telegram } = this.props;
     return (
       <Card>
         <Card.Content>
-          <Header as='h2'>Telegram:</Header>
-          <List bulleted>
-            <List.Item>
-              All users must register to the <a href="https://t.me/deco_network">official Telegram Channel Account </a>to be eligible for bounty program.
-            </List.Item>
-            <List.Item>
-              20 Shares to Join the Telegram group (required)
-            </List.Item>
-          </List>
+          <Header as="h2">Telegram:</Header>
+          <Container
+            dangerouslySetInnerHTML={this.createMarkup(
+              telegram,
+            )}
+          />
         </Card.Content>
       </Card>
     );
   }
 }
 
-export default ChatRules;
+const mapStateToProps = (state) => {
+  return { telegram: state.settings.telegram };
+};
+
+export default connect(mapStateToProps)(ChatRules);
