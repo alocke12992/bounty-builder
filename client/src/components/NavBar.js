@@ -13,11 +13,11 @@ import {
 
 class NavBar extends Component {
 
-  logout = ( { dispatch, history } ) => {
+  logout = ({ dispatch, history }) => {
     return (
       <Dropdown.Item
         onClick={ () =>
-          dispatch( handleLogout( history ) )
+          dispatch(handleLogout(history))
         }>
         Logout
       </Dropdown.Item>
@@ -27,7 +27,7 @@ class NavBar extends Component {
   rightNavs = () => {
     const { dispatch, history, user, } = this.props;
 
-    if ( user.id ) {
+    if (user.id) {
       return (
         <Menu.Menu position="right">
           <Dropdown
@@ -38,7 +38,7 @@ class NavBar extends Component {
               { user.role === 'admin' && (
                 <Dropdown.Item
                   onClick={ () =>
-                    history.push( '/admin' )
+                    history.push('/admin')
                   }>
                   Admin
                 </Dropdown.Item>
@@ -46,22 +46,22 @@ class NavBar extends Component {
               { user.role === 'admin' && (
                 <Dropdown.Item
                   onClick={ () =>
-                    history.push( '/moderate' )
+                    history.push('/moderate')
                   }>
                   Moderate
                 </Dropdown.Item>
               ) }
               <Dropdown.Item
                 onClick={ () =>
-                  history.push( '/settings' )
+                  history.push('/settings')
                 }>
                 Settings
               </Dropdown.Item>
               <Dropdown.Item
-                onClick={ () => history.push( '/rules' ) }>
+                onClick={ () => history.push('/rules') }>
                 About Campaign
               </Dropdown.Item>
-              { this.logout( { dispatch, history } ) }
+              { this.logout({ dispatch, history }) }
             </Dropdown.Menu>
           </Dropdown>
         </Menu.Menu>
@@ -92,7 +92,7 @@ class NavBar extends Component {
       history,
       backgroundColor,
     } = this.props;
-    
+
     return (
       <StyledMenu
         pointing
@@ -106,49 +106,49 @@ class NavBar extends Component {
           <Dropdown.Menu>
             { user.role === 'admin' && (
               <Dropdown.Item
-                onClick={ () => history.push( '/admin' ) }>
+                onClick={ () => history.push('/admin') }>
                 Admin
               </Dropdown.Item>
             ) }
             { user.role === 'admin' && (
               <Dropdown.Item
                 onClick={ () =>
-                  history.push( '/moderate' )
+                  history.push('/moderate')
                 }>
                 Moderate
               </Dropdown.Item>
             ) }
-            { routes.map( ( route, i ) => {
+            { routes.map((route, i) => {
               return (
                 <Dropdown.Item
                   key={ i }
                   onClick={ () =>
-                    history.push( `${ route.path }` )
+                    history.push(`${ route.path }`)
                   }>
                   { route.name }
                 </Dropdown.Item>
               );
-            } ) }
-            { this.logout( { dispatch, history } ) }
+            }) }
+            { this.logout({ dispatch, history }) }
           </Dropdown.Menu>
         </Responsive>
         <Menu.Item>
           <Responsive
             as={ Image }
-            src={ require( '../assets/images/logo-white.svg' ) }
+            src={ require('../assets/images/logo-white.svg') }
             style={ { height: '60px', width: 'auto' } }
             onClick={ () =>
-              this.props.history.push( '/' )
+              this.props.history.push('/')
             }
             alt="HN Text"
             minWidth={ 768 }
           />
           <Responsive
             as={ Image }
-            src={ require( '../assets/images/logo-white.svg' ) }
+            src={ require('../assets/images/logo-white.svg') }
             style={ { height: '50px', width: 'auto' } }
             onClick={ () =>
-              this.props.history.push( '/' )
+              this.props.history.push('/')
             }
             alt="HN Text"
             maxWidth={ 767 }
@@ -163,8 +163,9 @@ class NavBar extends Component {
 };
 
 const mapStateToProps = (state) => {
+  const { settings } = state
   return {
-    backgroundColor: state.navColor,
+    backgroundColor: settings.primary_color,
     user: state.user,
   };
 };
@@ -218,11 +219,11 @@ var styles = {
   },
 };
 
-const StyledMenu = styled(Menu)`
-  background: ${( props ) => props.themecolor } !important;
+const StyledMenu = styled(Menu) `
+  background: ${(props) => props.themecolor } !important;
   height: '100px';
 `;
 
 export default withRouter(
-  connect( mapStateToProps )( NavBar )
+  connect(mapStateToProps)(NavBar)
 );

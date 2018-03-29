@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { setFlash } from '../actions/flash';
-import { setHeaders } from '../actions/headers';
+import {setFlash} from '../actions/flash';
+import {setHeaders} from '../actions/headers';
 
 export const UPDATE_SETTINGS = 'UPDATE_SETTINGS';
 export const FETCH_SETTINGS = 'FETCH_SETTINGS';

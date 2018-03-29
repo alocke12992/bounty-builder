@@ -41,6 +41,7 @@ class Api::SettingsController < ApplicationController
         :translation_link, 
         :logo_url, 
         :primary_color,
+        :button_color,
       )
   end 
 

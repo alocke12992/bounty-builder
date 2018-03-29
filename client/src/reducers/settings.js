@@ -8,7 +8,7 @@ const settings = (state = {}, action) => {
     case FETCH_SETTINGS:
       return action.settings;
     case UPDATE_SETTINGS:
-      return action.settings;
+      return action.settings
     default:
       return state;
   }
