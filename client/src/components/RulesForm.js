@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactQuill from 'react-quill';
+import { updateSettings } from '../actions/settings';
 import {
   Button,
   Container,
@@ -9,9 +10,20 @@ import {
   Header,
   Segment,
 } from 'semantic-ui-react';
+import { connect } from 'react-redux';
 
 class RulesForm extends React.Component {
-  state = { main: '', regulations: '' };
+  initialState = {
+    rules_main: '',
+    regulations: '',
+    id: null,
+  }
+
+  state = { ...this.initialState };
+
+  componentWillMount() {
+    this.setState({ ...this.props });
+  }
 
   handleChange = (value, name) => {
     this.setState({ [name]: value });
@@ -19,10 +31,18 @@ class RulesForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    const rules = { ...this.state };
+    const { dispatch } = this.props;
+    dispatch(updateSettings( rules ));
+    this.setState({ rules });
   };
 
   rules = () => {
-    const { main, regulations } = this.state;
+    const { 
+      rules_main,
+      regulation, 
+    } = this.props;
+      
     return (
       <Container>
         <Header
@@ -38,9 +58,9 @@ class RulesForm extends React.Component {
               Main Content
             </Header>
             <ReactQuill
-              value={this.state.main}
+              value={this.state.rules_main}
               onChange={(value) =>
-                this.handleChange(value, 'main')
+                this.handleChange(value, 'rules_main')
               }
             />
             <Divider hidden />
@@ -81,4 +101,17 @@ class RulesForm extends React.Component {
   }
 }
 
-export default RulesForm;
+const mapStateToProps = (state) => {
+  const {
+    rules_main,
+    regulations,
+    id,
+  } = state.settings
+  return {
+    rules_main,
+    regulations,
+    id,
+  }
+}
+
+export default connect(mapStateToProps)(RulesForm);

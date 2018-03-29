@@ -33,7 +33,6 @@ class Api::SettingsController < ApplicationController
       end
   end  
 
-
   private 
 
   def set_setting

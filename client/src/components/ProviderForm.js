@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactQuill from 'react-quill';
+import { updateSettings } from '../actions/settings';
 import {
   Button,
   Container,
@@ -9,9 +10,20 @@ import {
   Header,
   Segment,
 } from 'semantic-ui-react';
+import { connect } from 'react-redux';
 
 class ProviderForm extends React.Component {
-  state = { rules: '', social_media: '', };
+  initialState = {
+    provider_social_media: '',
+    provider_rules: '',
+    id: null,
+  }
+
+  state = { ...this.initialState };
+
+  componentWillMount() {
+    this.setState({ ...this.props });
+  }
 
   handleChange = (value, name) => {
     this.setState({ [name]: value });
@@ -19,10 +31,18 @@ class ProviderForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    const provider = { ...this.state };
+    const { dispatch } = this.props;
+    dispatch(updateSettings( provider ));
+    this.setState({ provider });
   };
 
   provider = () => {
-    const { social_media, rules } = this.state;
+    const { 
+      provider_social_media,
+      provider_rules,
+    } = this.props;
+      
     return (
       <Container>
         <Header
@@ -38,11 +58,11 @@ class ProviderForm extends React.Component {
               Social Media
             </Header>
             <ReactQuill
-              value={this.state.social_media}
+              value={this.state.provider_social_media}
               onChange={(value) =>
                 this.handleChange(
                   value,
-                  'social_media',
+                  'provider_social_media',
                 )
               }
             />
@@ -53,9 +73,9 @@ class ProviderForm extends React.Component {
               Rules
             </Header>
             <ReactQuill
-              value={this.state.rules}
+              value={this.state.provider_rules}
               onChange={(value) =>
-                this.handleChange(value, 'rules')
+                this.handleChange(value, 'provider_rules')
               }
             />
             <Divider hidden />
@@ -84,4 +104,18 @@ class ProviderForm extends React.Component {
   }
 }
 
-export default ProviderForm;
+
+
+const mapStateToProps = (state) => {
+  const {
+    provider_social_media,
+    provider_rules,
+    id,
+  } = state.settings
+  return {
+    provider_social_media,
+    provider_rules,
+    id,  
+  }
+}
+export default connect(mapStateToProps)(ProviderForm);

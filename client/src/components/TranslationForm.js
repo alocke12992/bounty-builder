@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactQuill from 'react-quill';
+import { updateSettings } from '../actions/settings';
 import {
   Button,
   Container,
@@ -9,9 +10,20 @@ import {
   Header,
   Segment,
 } from 'semantic-ui-react';
+import { connect } from 'react-redux';
 
 class TranslationForm extends React.Component {
-  state = { link: '', rules: '', };
+  initialState = {
+    translation_rules: '',
+    translation_link: '',
+    id: null,
+  }
+
+  state = { ...this.initialState };
+
+  componentWillMount(){
+    this.setState({ ...this.props });
+  }
 
   handleChange = (value, name) => {
     this.setState({ [name]: value });
@@ -19,10 +31,18 @@ class TranslationForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    const translation = { ...this.state };
+    const { dispatch } = this.props;
+    dispatch(updateSettings( translation ));
+    this.setState({ translation });
   };
 
   translation = () => {
-    const { rules, link } = this.state;
+    const { 
+      translation_rules, 
+      translation_link 
+    } = this.props;
+
     return (
       <Container>
         <Header
@@ -38,9 +58,9 @@ class TranslationForm extends React.Component {
               Rules
             </Header>
             <ReactQuill
-              value={this.state.rules}
+              value={this.state.translation_rules}
               onChange={(value) =>
-                this.handleChange(value, 'rules')
+                this.handleChange(value, 'translation_rules')
               }
             />
             <Divider hidden />
@@ -50,9 +70,9 @@ class TranslationForm extends React.Component {
               Link
             </Header>
             <ReactQuill
-              value={this.state.link}
+              value={this.state.translation_link}
               onChange={(value) =>
-                this.handleChange(value, 'link')
+                this.handleChange(value, 'translation_link')
               }
             />
             <Divider hidden />
@@ -81,4 +101,19 @@ class TranslationForm extends React.Component {
   }
 }
 
-export default TranslationForm;
+const mapStateToProps = (state) => {
+  const {
+    translation_rules,
+    translation_link,
+    id,
+  } = state.settings
+  return {
+    translation_rules,
+    translation_link,
+    id,
+  }
+
+}
+
+
+export default connect(mapStateToProps)(TranslationForm);

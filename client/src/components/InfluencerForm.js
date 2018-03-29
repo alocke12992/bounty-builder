@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactQuill from 'react-quill';
+import { updateSettings } from '../actions/settings';
 import {
   Button,
   Container,
@@ -9,9 +10,21 @@ import {
   Header,
   Segment,
 } from 'semantic-ui-react';
+import { connect } from 'react-redux';
 
 class InfluencerForm extends React.Component {
-  state = { rules: '', shares: '', link: '' };
+  initialState = {
+    influencer_rules: '',
+    influencer_shares: '',
+    influencer_link: '',
+    id: null,
+  }
+
+  state = { ...this.initialState };
+
+  componentWillMount() {
+    this.setState({ ...this.props });
+  }
 
   handleChange = (value, name) => {
     this.setState({ [name]: value });
@@ -19,10 +32,19 @@ class InfluencerForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    const influencer = { ...this.state };
+    const { dispatch } = this.props;
+    dispatch(updateSettings(influencer));
+    this.setState({ influencer });
   };
 
-  influencer = () => {
-    const { rules, shares, link } = this.state;
+    influencer = () => {
+    const { 
+      influencer_rules,
+      influencer_shares, 
+      influencer_link,
+    } = this.props;
+
     return (
       <Container>
         <Header
@@ -38,9 +60,9 @@ class InfluencerForm extends React.Component {
               Rules
             </Header>
             <ReactQuill
-              value={this.state.rules}
+              value={this.state.influencer_rules}
               onChange={(value) =>
-                this.handleChange(value, 'rules')
+                this.handleChange(value, 'influencer_rules')
               }
             />
             <Divider hidden />
@@ -50,9 +72,9 @@ class InfluencerForm extends React.Component {
               Shares
             </Header>
             <ReactQuill
-              value={this.state.shares}
+              value={this.state.influencer_shares}
               onChange={(value) =>
-                this.handleChange(value, 'shares')
+                this.handleChange(value, 'influencer_shares')
               }
             />
             <Divider hidden />
@@ -62,9 +84,9 @@ class InfluencerForm extends React.Component {
               Link
             </Header>
             <ReactQuill
-              value={this.state.link}
+              value={this.state.influencer_link}
               onChange={(value) =>
-                this.handleChange(value, 'link')
+                this.handleChange(value, 'influencer_link')
               }
             />
             <Divider hidden />
@@ -93,4 +115,19 @@ class InfluencerForm extends React.Component {
   }
 }
 
-export default InfluencerForm;
+const mapStateToProps = (state) => {
+  const {
+    influencer_rules,
+    influencer_shares,
+    influencer_link,
+    id,
+  } = state.settings
+  return {
+    influencer_rules,
+    influencer_shares,
+    influencer_link,
+    id,
+  }
+}
+
+export default connect(mapStateToProps)(InfluencerForm);
