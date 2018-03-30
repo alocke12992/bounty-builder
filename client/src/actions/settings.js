@@ -35,8 +35,8 @@ export const updateLogo = (file, id) => {
         dispatch({
           type: UPDATE_SETTINGS,
           settings: res.data,
-          headers: res.headers,
         })
+        dispatch(setHeaders(res.headers))
       })
   }
 }

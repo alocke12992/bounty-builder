@@ -1,13 +1,13 @@
 import React from 'react';
-import ColorPicker from './ColorPicker';
+import ThemeOptions from './ThemeOptions';
 import DashboardForm from './DashboardForm';
-import { fetchSettings } from '../actions/settings';
+import {fetchSettings} from '../actions/settings';
 import InfluencerForm from './InfluencerForm';
 import ProviderForm from './ProviderForm';
 import RulesForm from './RulesForm';
 import styled from 'styled-components';
 import TranslationForm from './TranslationForm';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import {
   Container,
   Divider,
@@ -17,13 +17,13 @@ import {
 } from 'semantic-ui-react';
 
 class Settings extends React.Component {
-  state = { activeItem: 'color_picker' };
+  state = {activeItem: 'theme_options'};
 
-  handleItemClick = (e, { name }) =>
-    this.setState({ activeItem: name });
+  handleItemClick = (e, {name}) =>
+    this.setState({activeItem: name});
 
-  colorPicker = () => {
-    return <ColorPicker />;
+  themeOptions = () => {
+    return <ThemeOptions />;
   };
 
   dashboard = () => {
@@ -41,13 +41,13 @@ class Settings extends React.Component {
   rules = () => {
     return <RulesForm />;
   };
-  
+
   translation = () => {
     return <TranslationForm />;
   };
 
   render() {
-    const { activeItem } = this.state;
+    const {activeItem} = this.state;
 
     return (
       <Container>
@@ -55,8 +55,8 @@ class Settings extends React.Component {
         <Divider hidden />
         <Menu attached="top" pointing>
           <Menu.Item
-            name="color_picker"
-            active={activeItem === 'color_picker'}
+            name="theme_options"
+            active={activeItem === 'theme_otions'}
             onClick={this.handleItemClick}
           />
           <Menu.Item
@@ -87,8 +87,8 @@ class Settings extends React.Component {
         </Menu>
         <Divider hidden />
         <Segment>
-          {activeItem === 'color_picker' &&
-            this.colorPicker()}
+          {activeItem === 'theme_options' &&
+            this.themeOptions()}
           {activeItem === 'dashboard' &&
             this.dashboard()}
           {activeItem === 'provider' &&
