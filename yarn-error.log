@@ -1,14 +1,14 @@
 Arguments: 
-  /usr/local/bin/node /Users/alocke/.yarn/bin/yarn.js start
+  /Users/alocke/.nvm/versions/node/v9.2.0/bin/node /Users/alocke/.yarn/bin/yarn.js start
 
 PATH: 
-  /Users/alocke/.yarn/bin:/Users/alocke/.config/yarn/global/node_modules/.bin:~/.npm-global/bin:/Users/alocke/.rbenv/shims:/Users/alocke/arc/arcanist/bin:/Applications/Postgres.app/Contents/Versions/10/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+  /Users/alocke/.yarn/bin:/Users/alocke/.config/yarn/global/node_modules/.bin:/Users/alocke/.nvm/versions/node/v9.2.0/bin:~/.npm-global/bin:/Users/alocke/.rbenv/shims:/Users/alocke/arc/arcanist/bin:/Applications/Postgres.app/Contents/Versions/10/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 
 Yarn version: 
   1.5.1
 
 Node version: 
-  9.5.0
+  9.2.0
 
 Platform: 
   darwin x64

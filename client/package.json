@@ -9,6 +9,7 @@
     "react": "^16.2.0",
     "react-color": "^2.14.0",
     "react-dom": "^16.2.0",
+    "react-dropzone": "^4.2.9",
     "react-facebook": "^4.2.1",
     "react-facebook-login": "^3.7.2",
     "react-quill": "^1.2.6",

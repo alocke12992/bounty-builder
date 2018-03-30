@@ -46,6 +46,9 @@ Rails.application.routes.draw do
 
     #oauth
     post '/oauth', to: 'oauth#create'
+
+    #logo 
+    put '/settings/:id/update_logo', to: 'settings#update_logo'
   end
 
   #Do not place any routes below this one

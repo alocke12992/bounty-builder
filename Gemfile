@@ -36,6 +36,7 @@ gem "paranoia", "~> 2.2"
 gem 'kaminari'
 gem 'email_address'
 gem 'httparty'
+gem 'aws-sdk'
 
 group :development, :test do
   gem 'pry'
@@ -45,6 +46,7 @@ group :development, :test do
   # gem 'pry-stack_explorer'
   # Open Mail In Development
   gem 'letter_opener'
+   gem 'dotenv-rails'
 end
 
 group :development do
