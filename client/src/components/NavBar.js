@@ -24,6 +24,38 @@ class NavBar extends React.Component {
     );
   };
 
+  adminRouteMap = () => {
+    const { history, user } = this.props
+    return adminRoutes.map( (adminRoute, i) => {
+      return (
+        <Dropdown.Item
+          key={i}
+          onClick={() =>
+            history.push(`${adminRoute.path}`)
+          }
+        >
+          {adminRoute.name}
+        </Dropdown.Item>
+      )
+    })
+  }
+
+  devRouteMap = () => {
+    const { history, user } = this.props
+    return devRoutes.map( (devRoute, i) => {
+      return (       
+        <Dropdown.Item
+          key={i}
+          onClick={() =>
+            history.push(`${devRoute.path}`)
+          }
+        >
+          {devRoute.name}
+        </Dropdown.Item>
+      )
+    })
+  }
+
   rightNavs = () => {
     const { dispatch, history, user, } = this.props;
 
@@ -33,30 +65,11 @@ class NavBar extends React.Component {
           <Dropdown
             item
             text={user.email}
-            style={styles.text}>
+            style={styles.text}
+          >
             <Dropdown.Menu>
-              {user.role === 'admin' && (
-                <Dropdown.Item
-                  onClick={() =>
-                    history.push('/admin')
-                  }>
-                  Admin
-                </Dropdown.Item>
-              )}
-              {user.role === 'admin' && (
-                <Dropdown.Item
-                  onClick={() =>
-                    history.push('/moderate')
-                  }>
-                  Moderate
-                </Dropdown.Item>
-              )}
-              <Dropdown.Item
-                onClick={() =>
-                  history.push('/settings')
-                }>
-                Settings
-              </Dropdown.Item>
+              { user.role === 'dev' && this.devRouteMap() }
+              { ((user.role === 'dev') || (user.role === 'admin')) && this.adminRouteMap() }
               <Dropdown.Item
                 onClick={() => history.push('/rules')}>
                 About Campaign
@@ -105,20 +118,8 @@ class NavBar extends React.Component {
           item
           icon="content">
           <Dropdown.Menu>
-            {user.role === 'admin' && (
-              <Dropdown.Item
-                onClick={() => history.push('/admin')}>
-                Admin
-              </Dropdown.Item>
-            )}
-            {user.role === 'admin' && (
-              <Dropdown.Item
-                onClick={() =>
-                  history.push('/moderate')
-                }>
-                Moderate
-              </Dropdown.Item>
-            )}
+            { user.role === 'dev' && this.devRouteMap() }
+            { ((user.role === 'dev') || (user.role === 'admin')) && this.adminRouteMap() }
             {routes.map((route, i) => {
               return (
                 <Dropdown.Item
@@ -172,14 +173,28 @@ const mapStateToProps = (state) => {
   };
 };
 
+const devRoutes = [
+  {
+    name: 'Settings',
+    path: '/settings',
+  },
+]
+
+const adminRoutes = [
+  {
+    name: 'Admin',
+    path: '/admin',
+  },
+  {
+    name: 'Moderate',
+    path: '/moderate',
+  },
+]
+
 const routes = [
   {
     name: 'Dashboard',
     path: '/',
-  },
-  {
-    name: 'Settings',
-    path: '/settings',
   },
   {
     name: 'About Campaign',
