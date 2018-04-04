@@ -33,9 +33,9 @@ class Api::SettingsController < ApplicationController
   end  
 
   private 
-
+  
   def set_setting
-    @setting = Setting.current(params[:id])
+    @setting = Setting.find(params[:id])
   end 
 
   def setting_params
@@ -59,7 +59,7 @@ class Api::SettingsController < ApplicationController
         :logo_url, 
         :primary_color,
         :button_color,
-        :video_contest
+        :video_contest,
         :facebook,
         :twitter,
         :linkedin,

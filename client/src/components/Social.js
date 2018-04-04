@@ -11,7 +11,14 @@ import { withRouter } from 'react-router-dom';
 import { Container, Grid, Header, Segment, } from 'semantic-ui-react';
 
 class Social extends React.Component {
-  state = { value: '' };
+  initialState = {
+    influencer_rules: '',
+    influencer_shares: '',
+    influencer_link: '',
+    id: null,
+  }
+
+  state = { ...this.initialState };
 
   componentDidMount() {
     axios.get(`/api/${this.props.service}`)
@@ -38,30 +45,50 @@ class Social extends React.Component {
       })
   };
 
+  createMarkup = (html) => {
+    return { __html: html };
+  };
+
+  influencer = () => {
+    const { 
+      influencer_rules,
+      influencer_shares, 
+      influencer_link,
+    } = this.props;
+  }
+
   render() {
+    const { 
+      influencer_rules,
+      influencer_shares, 
+      influencer_link,
+    } = this.props;
     return (
       <Container>
         <Grid stackable columns={2}>
           <Grid.Row>
             <Grid.Column>
               <Segment>
+                <Container
+                  dangerouslySetInnerHTML={this.createMarkup(
+                    influencer_rules,
+                  )}
+                />
               </Segment>
               <Segment>
-                {
-                  this.props.user.is_influencer ?
-                  <div>
-                    <p>You have been approved to submit influencer posts.</p>
-                  </div>
-                  :
-                  <div>
-                    <p>Please submit your social media account by using <a href='https://goo.gl/forms/UM8pMKI3XraKqQXv2'>this link</a>.</p>
-                    <p>If you are approved to translate, you will be contacted by social media.</p>
-                  </div>
-                }
+                <Container
+                    dangerouslySetInnerHTML={this.createMarkup(
+                      influencer_shares,
+                    )}
+                  />
               </Segment>
-              { this.props.user.is_influencer &&
-                <Submissions kind="influencer"/>
-              }
+              <Segment>
+                  <Container
+                    dangerouslySetInnerHTML={this.createMarkup(
+                      influencer_link,
+                    )}
+                  />
+                </Segment>
             </Grid.Column>
             <Grid.Column>
               <BlogRules />
@@ -74,7 +101,19 @@ class Social extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { user: state.user }
+  const {
+    influencer_rules,
+    influencer_shares,
+    influencer_link,
+    id,
+  } = state.settings
+  return {
+    user: state.user,
+    influencer_rules,
+    influencer_shares,
+    influencer_link,
+    id,
+  }
 };
 
 export default withRouter(connect(mapStateToProps)(Social));
