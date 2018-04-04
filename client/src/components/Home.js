@@ -8,6 +8,7 @@ import Rules from './Rules';
 import Social from './Social';
 import Translation from './Translation';
 import Twitter from './Twitter';
+import VideoContest from './VideoContest';
 import { connect } from 'react-redux';
 import { Container, Grid, Menu } from 'semantic-ui-react';
 import { getRewards } from '../actions/rewards';
@@ -95,6 +96,11 @@ const routes = [
     name: 'Translation',
     path: '/translation',
     main: () => <Translation />
+  },
+  {
+    name: 'Video Contest',
+    path: '/contest',
+    main: () => <VideoContest />
   },
   {
     name: 'Rules and Overview',

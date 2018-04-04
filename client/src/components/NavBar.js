@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import {connect} from 'react-redux';
-import {handleLogout} from '../actions/auth';
-import {Link, withRouter} from 'react-router-dom';
+import { connect } from 'react-redux';
+import { handleLogout } from '../actions/auth';
+import { Link, withRouter } from 'react-router-dom';
 import {
   Container,
   Dropdown,
@@ -11,7 +11,7 @@ import {
   Responsive,
 } from 'semantic-ui-react';
 
-class NavBar extends Component {
+class NavBar extends React.Component {
 
   logout = ({dispatch, history}) => {
     return (
@@ -25,7 +25,7 @@ class NavBar extends Component {
   };
 
   rightNavs = () => {
-    const {dispatch, history, user, } = this.props;
+    const { dispatch, history, user, } = this.props;
 
     if (user.id) {
       return (

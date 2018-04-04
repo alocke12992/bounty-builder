@@ -2,8 +2,7 @@ class Api::SettingsController < ApplicationController
   before_action :set_setting, only: [:update, :update_logo]
 
   def index 
-    settings = Setting.all.first
-    render json: settings
+    render json: Setting.current
   end
 
   def update_logo
@@ -36,7 +35,7 @@ class Api::SettingsController < ApplicationController
   private 
 
   def set_setting
-    @setting = Setting.find(params[:id])
+    @setting = Setting.current(params[:id])
   end 
 
   def setting_params
@@ -60,6 +59,7 @@ class Api::SettingsController < ApplicationController
         :logo_url, 
         :primary_color,
         :button_color,
+        :video_contest
       )
   end 
 
