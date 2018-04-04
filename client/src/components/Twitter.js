@@ -92,7 +92,7 @@ class Twitter extends React.Component {
       <Container>
         <Grid stackable columns={2}>
           <Grid.Row>
-            <Grid.Column>
+            <Grid.Column width={8}>
               <Segment>
                 <Form onSubmit={this.handleSubmit}>
                   <Form.Input
@@ -127,24 +127,28 @@ class Twitter extends React.Component {
               </Segment>
               {/*// <Submissions kind={this.props.service}/>*/}
             </Grid.Column>
-            <Grid.Column>
+            <Grid.Column width={8}>
               <SocialMediaRules/>
             </Grid.Column>
-            <ActionWarning />
-          </Grid.Row>
-          <Grid.Row>
-            <Segment>
-              <Header as='h2'>Follow Simply Vital Health Twitter Page:</Header>
-              <p>Follow Deconet on Twitter. After, come back and press 'I followed this page'.</p>
-              <Button color="twitter" as='a' href="https://twitter.com/Deco_Network" target='_blank'>
-                <Icon name='twitter'/> Twitter
-              </Button>
+            <Grid.Column width={16}>
               <Divider hidden />
-              <Button color='twitter' onClick={this.likePage} disabled={this.rewardsIncludes("Followed Deconet on twitter.") || this.state.value === ''}>I followed this page.</Button>
-            </Segment>
-            <Card.Group>
-              { this.renderPosts() }
-            </Card.Group>
+              <ActionWarning />
+            </Grid.Column>
+            <Grid.Column mobile={16}>
+              <Divider hidden />
+              <Segment>
+                <Header as='h2'>Follow Simply Vital Health Twitter Page:</Header>
+                  <p>Follow Deconet on Twitter. After, come back and press 'I followed this page'.</p>
+                <Button color="twitter" as='a' href="https://twitter.com/Deco_Network" target='_blank'>
+                  <Icon name='twitter'/> Twitter
+                </Button>
+                <Divider hidden />
+                <Button color='twitter' onClick={this.likePage} disabled={this.rewardsIncludes("Followed Deconet on twitter.") || this.state.value === ''}>I followed this page.</Button>
+              </Segment>
+              <Card.Group>
+                { this.renderPosts() }
+              </Card.Group>
+            </Grid.Column>
           </Grid.Row>
         </Grid>
       </Container>

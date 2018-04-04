@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180403215502) do
+ActiveRecord::Schema.define(version: 20180403220922) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,6 +76,10 @@ ActiveRecord::Schema.define(version: 20180403215502) do
     t.datetime "updated_at", null: false
     t.string "button_color", default: "#50e3c2"
     t.text "video_contest", default: "<h2>Video Contest</h2><p><br></p><p><strong style=\"font-size: 11pt; font-family: arial, helvetica, sans-serif; color: rgb(0, 0, 0);\">Video Contest rules:</strong></p><p><br></p><p><span style=\"font-size: 11pt; font-family: arial, helvetica, sans-serif; color: rgb(0, 0, 0);\">Answer the question:</span></p><p><br></p><p><span style=\"font-size: 11pt; font-family: arial, helvetica, sans-serif; color: rgb(0, 0, 0);\">What would you do with the power of Neureal?</span></p><ul><li><span style=\"font-size: 11pt; font-family: arial, helvetica, sans-serif; color: rgb(0, 0, 0);\">Videos must be 150 seconds or shorter.</span></li><li><span style=\"font-size: 11pt; font-family: arial, helvetica, sans-serif; color: rgb(0, 0, 0);\">Video must include brief explanation of what Neureal is in your own words.</span></li><li><span style=\"font-size: 11pt; font-family: arial, helvetica, sans-serif; color: rgb(0, 0, 0);\">Video may contain no offensive material.</span></li></ul><p><br></p><p><span style=\"font-size: 11pt; font-family: arial, helvetica, sans-serif; color: rgb(0, 0, 0);\">The Neureal core team will select 10 finalists and the community will vote on the grand prize winner.</span></p><p><br></p><p><span style=\"font-size: 11pt; font-family: arial, helvetica, sans-serif; color: rgb(0, 0, 0);\">By entering the contest, you grant Neureal and its subsidiaries permission to use your video and all content, including your name, likeness, slogans, and descriptions, in corporate and promotional materials.</s<<span style=\"font-size: 18px;\">&nbsp;</s<<em style=\"font-size: 11pt; font-family: arial, helvetica, sans-serif; color: rgb(0, 0, 0);\">Submission window for entries begins March 28th and runs until the end of the Neureal public token sale. Finalists will be announced on the final day of the token sale and winners will be announced 60 days after the completion of the token sale.<<<span style=\"font-size: 18px;\">&nbsp;</s<<strong style=\"font-size: 11pt; font-family: arial, helvetica, sans-serif; color: rgb(0, 0, 0);\">Prizes:</str<<<span style=\"font-size: 11pt; font-family: arial, helvetica, sans-serif; color: rgb(0, 0, 0);\">Ten finalists will each receive 100 NEUREAL tokens to use toward the execution of their vision and how they’d use the power of Neureal.</s<<<span style=\"font-size: 11pt; font-family: arial, helvetica, sans-serif; color: rgb(0, 0, 0);\">One grand prize winner receives 1000 NEUREAL tokens to use toward the execution of their vision and how they’d use the power of Neureal, and the Neureal foundation will help in executing their Oracle(s) once Neureal is released to the public (estimated2 years from close of the TGE).</s<u<li><span style=\"font-size: 11pt; font-family: arial, helvetica, sans-serif; color: rgb(0, 0, 0);\">A folder will be posted in the Neureal Telegram containing any graphics for our project you may want.</spa<</ul>"
+    t.boolean "facebook", default: false
+    t.boolean "twitter", default: false
+    t.boolean "linkedin", default: false
+    t.boolean "reddit", default: false
   end
 
   create_table "submissions", force: :cascade do |t|

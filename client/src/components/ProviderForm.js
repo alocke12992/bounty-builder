@@ -3,6 +3,7 @@ import ReactQuill from 'react-quill';
 import { updateSettings } from '../actions/settings';
 import {
   Button,
+  Checkbox,
   Container,
   Divider,
   Form,
@@ -13,16 +14,25 @@ import {
 import { connect } from 'react-redux';
 
 class ProviderForm extends React.Component {
-  initialState = {
-    provider_social_media: '',
-    provider_rules: '',
-    id: null,
-  }
-
-  state = { ...this.initialState };
 
   componentWillMount() {
     this.setState({ ...this.props });
+  }
+
+  toggleFacebook = () => {
+    this.setState({ facebook: !this.state.facebook })
+  }
+
+  toggleTwitter = () => {
+    this.setState({ twitter: !this.state.twitter })
+  }
+
+  toggleLinkedIn = () => {
+    this.setState({ linkedin: !this.state.linkedin })
+  }
+
+  toggleReddit = () => {
+    this.setState({ reddit: !this.state.reddit })
   }
 
   handleChange = (value, name) => {
@@ -41,6 +51,10 @@ class ProviderForm extends React.Component {
     const { 
       provider_social_media,
       provider_rules,
+      facebook,
+      twitter,
+      linkedin,
+      reddit,
     } = this.props;
       
     return (
@@ -80,6 +94,38 @@ class ProviderForm extends React.Component {
             />
             <Divider hidden />
           </Form.Field>
+          <Segment>
+            <Header as="h4" color="blue">
+              Check Providers
+            </Header>
+            <Form.Group inline>
+              <Form.Field
+                checked={this.state.facebook === true ? true : false }
+                control={Checkbox} 
+                label="Facebook"
+                onChange={this.toggleFacebook}
+              />
+              <Form.Field 
+                checked={this.state.twitter === true ? true : false }
+                control={Checkbox} 
+                label="Twitter" 
+                onChange={this.toggleTwitter}
+              />
+              <Form.Field 
+                checked={this.state.linkedin === true ? true : false }
+                control={Checkbox} 
+                label="LinkedIn" 
+                onChange={this.toggleLinkedIn}
+              />
+              <Form.Field 
+                checked={this.state.reddit === true ? true : false }
+                control={Checkbox} 
+                label="Reddit" 
+                onChange={this.toggleReddit}
+              />
+            </Form.Group>
+          </Segment>
+          <Divider hidden />
           <Form.Button
             size="normal"
             floated="right"
@@ -111,11 +157,19 @@ const mapStateToProps = (state) => {
     provider_social_media,
     provider_rules,
     id,
+    facebook,
+    twitter,
+    linkedin,
+    reddit,
   } = state.settings
   return {
     provider_social_media,
     provider_rules,
-    id,  
+    id,
+    facebook,
+    twitter,
+    linkedin,
+    reddit,
   }
 }
 export default connect(mapStateToProps)(ProviderForm);

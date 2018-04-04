@@ -60,6 +60,10 @@ class Api::SettingsController < ApplicationController
         :primary_color,
         :button_color,
         :video_contest
+        :facebook,
+        :twitter,
+        :linkedin,
+        :reddit
       )
   end 
 

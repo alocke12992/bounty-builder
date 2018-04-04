@@ -45,18 +45,6 @@ class Social extends React.Component {
           <Grid.Row>
             <Grid.Column>
               <Segment>
-                <Header as='h2'>Submit Your Own Content</Header>
-                <p>If you use an influencing platform such as a blog, video site, social media etc, you may submit your own content for shares.</p>
-                <ol>
-                  <li>Submit your social media account.</li>
-                    <ul>
-                      <li>If approved you will be contacted via social media.</li>
-                      <li>Any posts created without approval will not be rewarded</li>
-                    </ul>
-                  <li>Create your content.</li>
-                  <li>Post a URL to your content (beginning with https)</li>
-                  <li>A moderator will review your submission and award shares according to the share rules.</li>
-                </ol>
               </Segment>
               <Segment>
                 {

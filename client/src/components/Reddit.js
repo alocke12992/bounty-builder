@@ -82,7 +82,7 @@ class LinkedIn extends React.Component {
       <Container>
         <Grid stackable columns={2}>
           <Grid.Row>
-            <Grid.Column>
+            <Grid.Column width={8}>
               <Segment>
                 <Form onSubmit={this.handleSubmit}>
                   <Form.Input
@@ -95,16 +95,18 @@ class LinkedIn extends React.Component {
                 </Form>
               </Segment>
             </Grid.Column>
-            <Grid.Column>
+            <Grid.Column width={8}>
               <SocialMediaRules/>
             </Grid.Column>
-          </Grid.Row>
-          <Grid.Row>
-            <ActionWarning />
-            <Grid.Column>
+            <Grid.Column width={16}>
+              <Divider hidden />
+              <ActionWarning />
+            </Grid.Column>
+            <Grid.Column mobile={16}>
+            <Divider hidden />
             <Segment>
               <Header as='h2'>Subscribe to Deconet Subreddit:</Header>
-              <p>Subscribe to Deconet Subreddit. After, come back and press 'I Subscribed'.</p>
+                <p>Subscribe to Deconet Subreddit. After, come back and press 'I Subscribed'.</p>
               <Button color="orange" as='a' href="https://www.reddit.com/r/Deconet/" target='_blank'>
                 <Icon name='reddit'/> Reddit
               </Button>
