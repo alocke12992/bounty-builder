@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactQuill from 'react-quill';
+import { toolbar } from './Settings'
 import { updateSettings } from '../actions/settings';
 import {
   Button,
@@ -58,6 +59,7 @@ class InfluencerForm extends React.Component {
             </Header>
             <ReactQuill
               value={influencer_rules}
+              modules={{ toolbar }}
               onChange={(value) =>
                 this.handleChange(
                   value,
@@ -73,6 +75,7 @@ class InfluencerForm extends React.Component {
             </Header>
             <ReactQuill
               value={influencer_shares}
+              modules={{ toolbar }}
               onChange={(value) =>
                 this.handleChange(
                   value,
@@ -88,6 +91,7 @@ class InfluencerForm extends React.Component {
             </Header>
             <ReactQuill
               value={influencer_link}
+              modules={{ toolbar }}
               onChange={(value) =>
                 this.handleChange(
                   value,

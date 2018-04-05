@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactQuill from 'react-quill';
 import { connect } from 'react-redux';
+import { toolbar } from './Settings'
 import { updateSettings } from '../actions/settings';
 import {
   Button,
@@ -66,6 +67,7 @@ class DashboardForm extends React.Component {
           <Form.Field>
             <ReactQuill
               value={dash_description}
+              modules={{ toolbar }}
               onChange={(value) =>
                 this.handleChange(
                   value,
@@ -81,6 +83,7 @@ class DashboardForm extends React.Component {
             </Header>
             <ReactQuill
               value={regulations}
+              modules={{ toolbar }}
               onChange={(value) =>
                 this.handleChange(value, 'regulations')
               }
@@ -93,6 +96,7 @@ class DashboardForm extends React.Component {
             </Header>
             <ReactQuill
               value={num_users}
+              modules={{ toolbar }}
               onChange={(value) =>
                 this.handleChange(value, 'num_users')
               }
@@ -105,6 +109,7 @@ class DashboardForm extends React.Component {
             </Header>
             <ReactQuill
               value={num_shares}
+              modules={{ toolbar }}
               onChange={(value) =>
                 this.handleChange(value, 'num_shares')
               }
@@ -117,6 +122,7 @@ class DashboardForm extends React.Component {
             </Header>
             <ReactQuill
               value={telegram}
+              modules={{ toolbar }}
               onChange={(value) =>
                 this.handleChange(value, 'telegram')
               }
@@ -129,6 +135,7 @@ class DashboardForm extends React.Component {
             </Header>
             <ReactQuill
               value={telegram_invite}
+              modules={{ toolbar }}
               onChange={(value) =>
                 this.handleChange(
                   value,
@@ -144,6 +151,7 @@ class DashboardForm extends React.Component {
             </Header>
             <ReactQuill
               value={etherium}
+              modules={{ toolbar }}
               onChange={(value) =>
                 this.handleChange(value, 'etherium')
               }
@@ -156,6 +164,7 @@ class DashboardForm extends React.Component {
             </Header>
             <ReactQuill
               value={invitation_link}
+              modules={{ toolbar }}
               onChange={(value) =>
                 this.handleChange(
                   value,

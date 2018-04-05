@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactQuill from 'react-quill';
+import { connect } from 'react-redux';
+import { toolbar } from './Settings'
 import { updateSettings } from '../actions/settings';
 import {
   Button,
@@ -10,7 +12,6 @@ import {
   Header,
   Segment,
 } from 'semantic-ui-react';
-import { connect } from 'react-redux';
 
 class RulesForm extends React.Component {
   state = {
@@ -53,6 +54,7 @@ class RulesForm extends React.Component {
             </Header>
             <ReactQuill
               value={rules_main}
+              modules={{ toolbar }}
               onChange={(value) =>
                 this.handleChange(value, 'rules_main')
               }
@@ -65,6 +67,7 @@ class RulesForm extends React.Component {
             </Header>
             <ReactQuill
               value={regulations}
+              modules={{ toolbar }}
               onChange={(value) =>
                 this.handleChange(value, 'regulations')
               }

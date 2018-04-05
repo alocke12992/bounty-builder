@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactQuill from 'react-quill';
+import { toolbar } from './Settings'
 import { updateSettings } from '../actions/settings';
 import {
   Button,
@@ -74,6 +75,7 @@ class ProviderForm extends React.Component {
             </Header>
             <ReactQuill
               value={provider_social_media}
+              modules={{ toolbar }}
               onChange={(value) =>
                 this.handleChange(
                   value,
@@ -89,6 +91,7 @@ class ProviderForm extends React.Component {
             </Header>
             <ReactQuill
               value={provider_rules}
+              modules={{ toolbar }}
               onChange={(value) =>
                 this.handleChange(value, 'provider_rules')
               }
