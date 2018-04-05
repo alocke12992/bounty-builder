@@ -3,19 +3,19 @@ import axios from 'axios';
 import ChatRules from './ChatRules';
 import Invite from './Invite';
 import PointsTile from './PointsTile';
-import styled from 'styled-components';
 import Telegram from './Telegram';
 import TotalSharesTile from './TotalSharesTile';
 import TotalUsersTile from './TotalUsersTile';
 import Wallet from './Wallet';
-import { connect } from 'react-redux';
-import { setFlash } from '../actions/flash';
-import { setHeaders } from '../actions/headers';
+import {connect} from 'react-redux';
+import {setFlash} from '../actions/flash';
+import {setHeaders} from '../actions/headers';
 import {
   Button,
   Card,
   Container,
   Divider,
+  Image,
   Form,
   Header,
   Segment,
@@ -31,19 +31,19 @@ class Dashboard extends React.Component {
   };
 
   callback = (res) => {
-    this.setState({ captchaVerified: true });
+    this.setState({captchaVerified: true});
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const { confirmationCode } = this.state;
+    const {confirmationCode} = this.state;
     axios
       .post('/api/confirmations/verify_confirmation', {
         confirmation_code: confirmationCode,
       })
       .then((res) => {
         this.props.dispatch(setHeaders(res.headers));
-        this.props.dispatch({ type: 'LOGOUT' });
+        this.props.dispatch({type: 'LOGOUT'});
         this.props.dispatch(
           setFlash(
             'Account Confirmed. Please log in again.',
@@ -52,7 +52,7 @@ class Dashboard extends React.Component {
         );
       })
       .catch((err) => {
-        this.props.dispatch({ type: 'LOGOUT' });
+        this.props.dispatch({type: 'LOGOUT'});
         this.props.dispatch(
           setFlash(
             'The confirmation code was incorrect.',
@@ -60,7 +60,7 @@ class Dashboard extends React.Component {
           ),
         );
         this.props.dispatch(setHeaders(err.headers));
-        this.setState({ captchaVerified: false });
+        this.setState({captchaVerified: false});
       });
   };
 
@@ -82,7 +82,7 @@ class Dashboard extends React.Component {
   };
 
   createMarkup = (html) => {
-    return { __html: html };
+    return {__html: html};
   };
 
   render() {
@@ -91,7 +91,7 @@ class Dashboard extends React.Component {
       confirmationCode,
     } = this.state;
 
-    const { dash_description, regulations } = this.props;
+    const {dash_description, regulations, logo} = this.props;
 
     return (
       <Container>
@@ -130,19 +130,16 @@ class Dashboard extends React.Component {
         <Segment>
           <Responsive
             as={Image}
-            minWidth={768}
-            src={require('../assets/images/logo.svg')}
-            style={{ height: '75px', width: 'auto' }}
+            minWidth={992}
+            src={logo}
+            style={{height: '85px', width: 'auto'}}
             alt="HN Token"
+            centered
           />
           <Responsive
-            as={Image}
-            maxWidth={767}
-            src={require('../assets/images/logo.svg')}
-            style={{ height: '60px', width: 'auto' }}
-            alt="HN Token"
+            as={Divider}
+            minWidth={992}
           />
-          <Divider />
           <Container
             dangerouslySetInnerHTML={this.createMarkup(
               dash_description,
@@ -241,40 +238,15 @@ class Dashboard extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  const { user } = state;
-  const { dash_description, regulations } = state.settings;
+  const {user, settings} = state;
+  const {dash_description, regulations} = state.settings;
 
   return {
     user,
     dash_description,
     regulations,
+    logo: settings.logo_url
   };
 };
-
-const Image = styled.img`
-  height: ${(props) => imageSize(props.isize)} !important;
-  width: auto;
-`;
-
-const imageSize = (size) => {
-  switch (size) {
-    case 'large':
-      return '150px';
-    case 'small':
-      return '50px';
-    case 'mini':
-      return '25px';
-    default:
-      return '75px';
-  }
-};
-
-const logo = (image) => {
-  require(`../assets/images/${image}`);
-};
-
-const Text = styled.p`
-  color: blue;
-`;
 
 export default connect(mapStateToProps)(Dashboard);
