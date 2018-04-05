@@ -64,6 +64,44 @@ class Dashboard extends React.Component {
       });
   };
 
+  renderConfirmationSegment = () => {
+    const { captchaVerified, confirmationCode, } = this.state;
+
+    return(
+      <Segment color="red">
+        <p>
+          Your account needs to be confirmed. Please
+          check your email for a confirmation code and
+          enter it here.
+        </p>
+        <Form onSubmit={this.handleSubmit}>
+          <Form.Input
+            value={confirmationCode}
+            onChange={(e) =>
+              this.setState({
+                confirmationCode: e.target.value,
+              })
+            }
+            required
+            placeholder="Confirmation Code"
+          />
+          <Form.Button>Submit</Form.Button>
+        </Form>
+        <Divider />
+        <Recaptcha
+          sitekey="6LcsL0wUAAAAAPi-dEhwqV1TI7fIopO8lP3HGN_v"
+          verifyCallback={this.callback}
+        />
+        <Button
+          disabled={!captchaVerified}
+          onClick={this.resendConfirmationEmail}
+        >
+          Resend confirmation code
+        </Button>
+      </Segment>
+    );
+  };
+
   resendConfirmationEmail = () => {
     axios
       .get('/api/confirmations/resend_confirmation_email')
@@ -86,47 +124,15 @@ class Dashboard extends React.Component {
   };
 
   render() {
-    const {
-      captchaVerified,
-      confirmationCode,
-    } = this.state;
-
-    const {dash_description, regulations, logo} = this.props;
+    const { captchaVerified, confirmationCode, } = this.state;
+    const { dash_description, regulations, logo, } = this.props;
 
     return (
       <Container>
-        {!this.props.user.confirmed && (
-          <Segment color="red">
-            <p>
-              Your account needs to be confirmed. Please
-              check your email for a confirmation code and
-              enter it here.
-            </p>
-            <Form onSubmit={this.handleSubmit}>
-              <Form.Input
-                value={confirmationCode}
-                onChange={(e) =>
-                  this.setState({
-                    confirmationCode: e.target.value,
-                  })
-                }
-                required
-                placeholder="Confirmation Code"
-              />
-              <Form.Button>Submit</Form.Button>
-            </Form>
-            <Divider />
-            <Recaptcha
-              sitekey="6LcsL0wUAAAAAPi-dEhwqV1TI7fIopO8lP3HGN_v"
-              verifyCallback={this.callback}
-            />
-            <Button
-              disabled={!captchaVerified}
-              onClick={this.resendConfirmationEmail}>
-              Resend confirmation code
-            </Button>
-          </Segment>
-        )}
+        {/* ---  Confirmation Code  --- */}
+        {/* {!this.props.user.confirmed && (
+          this.renderConfirmationSegment() 
+        )} */}
         <Segment>
           <Responsive
             as={Image}

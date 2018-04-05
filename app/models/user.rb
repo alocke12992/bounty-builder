@@ -61,7 +61,7 @@ class User < ActiveRecord::Base
     o = [('a'..'z'), ('A'..'Z')].map(&:to_a).flatten
     self.confirmation_code = (0...8).map { o[rand(o.length)] }.join
     if self.provider == "email"
-      ConfirmationCodeMailer.confirmation_email(self).deliver
+      # ConfirmationCodeMailer.confirmation_email(self).deliver
     end
   end
 end
