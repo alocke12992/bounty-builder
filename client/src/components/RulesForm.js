@@ -13,15 +13,12 @@ import {
 import { connect } from 'react-redux';
 
 class RulesForm extends React.Component {
-  initialState = {
+  state = {
     rules_main: '',
     regulations: '',
-    id: null,
-  }
+  };
 
-  state = { ...this.initialState };
-
-  componentWillMount() {
+  componentDidMount() {
     this.setState({ ...this.props });
   }
 
@@ -33,16 +30,13 @@ class RulesForm extends React.Component {
     e.preventDefault();
     const rules = { ...this.state };
     const { dispatch } = this.props;
-    dispatch(updateSettings( rules ));
+    dispatch(updateSettings(rules));
     this.setState({ rules });
   };
 
   rules = () => {
-    const { 
-      rules_main,
-      regulation, 
-    } = this.props;
-      
+    const { rules_main, regulations } = this.state;
+
     return (
       <Container>
         <Header
@@ -58,7 +52,7 @@ class RulesForm extends React.Component {
               Main Content
             </Header>
             <ReactQuill
-              value={this.state.rules_main}
+              value={rules_main}
               onChange={(value) =>
                 this.handleChange(value, 'rules_main')
               }
@@ -70,7 +64,7 @@ class RulesForm extends React.Component {
               Regulations
             </Header>
             <ReactQuill
-              value={this.state.regulations}
+              value={regulations}
               onChange={(value) =>
                 this.handleChange(value, 'regulations')
               }
@@ -106,12 +100,12 @@ const mapStateToProps = (state) => {
     rules_main,
     regulations,
     id,
-  } = state.settings
+  } = state.settings;
   return {
     rules_main,
     regulations,
     id,
-  }
-}
+  };
+};
 
 export default connect(mapStateToProps)(RulesForm);

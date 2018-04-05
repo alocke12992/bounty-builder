@@ -13,7 +13,7 @@ import {
 } from 'semantic-ui-react';
 
 class DashboardForm extends React.Component {
-  initialState = {
+  state = {
     dash_description: '',
     regulations: '',
     num_users: '',
@@ -22,12 +22,9 @@ class DashboardForm extends React.Component {
     telegram_invite: '',
     etherium: '',
     invitation_link: '',
-    id: null,
   };
 
-  state = { ...this.initialState };
-
-  componentWillMount() {
+  componentDidMount() {
     this.setState({ ...this.props });
   }
 
@@ -52,7 +49,7 @@ class DashboardForm extends React.Component {
       telegram_invite,
       etherium,
       invitation_link,
-    } = this.props;
+    } = this.state;
     return (
       <Container>
         <Header
@@ -68,7 +65,7 @@ class DashboardForm extends React.Component {
           </Header>
           <Form.Field>
             <ReactQuill
-              value={this.state.dash_description}
+              value={dash_description}
               onChange={(value) =>
                 this.handleChange(
                   value,
@@ -83,7 +80,7 @@ class DashboardForm extends React.Component {
               Regulations
             </Header>
             <ReactQuill
-              value={this.state.regulations}
+              value={regulations}
               onChange={(value) =>
                 this.handleChange(value, 'regulations')
               }
@@ -95,7 +92,7 @@ class DashboardForm extends React.Component {
               Number of Users
             </Header>
             <ReactQuill
-              value={this.state.num_users}
+              value={num_users}
               onChange={(value) =>
                 this.handleChange(value, 'num_users')
               }
@@ -107,7 +104,7 @@ class DashboardForm extends React.Component {
               Number of Shares
             </Header>
             <ReactQuill
-              value={this.state.num_shares}
+              value={num_shares}
               onChange={(value) =>
                 this.handleChange(value, 'num_shares')
               }
@@ -119,7 +116,7 @@ class DashboardForm extends React.Component {
               Telegram
             </Header>
             <ReactQuill
-              value={this.state.telegram}
+              value={telegram}
               onChange={(value) =>
                 this.handleChange(value, 'telegram')
               }
@@ -131,7 +128,7 @@ class DashboardForm extends React.Component {
               Invite to Telegram
             </Header>
             <ReactQuill
-              value={this.state.telegram_invite}
+              value={telegram_invite}
               onChange={(value) =>
                 this.handleChange(
                   value,
@@ -146,7 +143,7 @@ class DashboardForm extends React.Component {
               Etherium Wallet
             </Header>
             <ReactQuill
-              value={this.state.etherium}
+              value={etherium}
               onChange={(value) =>
                 this.handleChange(value, 'etherium')
               }
@@ -158,7 +155,7 @@ class DashboardForm extends React.Component {
               Invitation Link
             </Header>
             <ReactQuill
-              value={this.state.invitation_link}
+              value={invitation_link}
               onChange={(value) =>
                 this.handleChange(
                   value,

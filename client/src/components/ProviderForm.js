@@ -14,26 +14,30 @@ import {
 import { connect } from 'react-redux';
 
 class ProviderForm extends React.Component {
+  state = {
+    provider_social_media: '',
+    provider_rules: '',
+  };
 
-  componentWillMount() {
+  componentDidMount() {
     this.setState({ ...this.props });
   }
 
   toggleFacebook = () => {
-    this.setState({ facebook: !this.state.facebook })
-  }
+    this.setState({ facebook: !this.state.facebook });
+  };
 
   toggleTwitter = () => {
-    this.setState({ twitter: !this.state.twitter })
-  }
+    this.setState({ twitter: !this.state.twitter });
+  };
 
   toggleLinkedIn = () => {
-    this.setState({ linkedin: !this.state.linkedin })
-  }
+    this.setState({ linkedin: !this.state.linkedin });
+  };
 
   toggleReddit = () => {
-    this.setState({ reddit: !this.state.reddit })
-  }
+    this.setState({ reddit: !this.state.reddit });
+  };
 
   handleChange = (value, name) => {
     this.setState({ [name]: value });
@@ -43,26 +47,23 @@ class ProviderForm extends React.Component {
     e.preventDefault();
     const provider = { ...this.state };
     const { dispatch } = this.props;
-    dispatch(updateSettings( provider ));
+    dispatch(updateSettings(provider));
     this.setState({ provider });
   };
 
   provider = () => {
-    const { 
+    const {
       provider_social_media,
       provider_rules,
       facebook,
       twitter,
       linkedin,
       reddit,
-    } = this.props;
-      
+    } = this.state;
+
     return (
       <Container>
-        <Header
-          as="h1"
-          color="blue"
-          textAlign="center">
+        <Header as="h1" color="blue" textAlign="center">
           Provider
         </Header>
         <Divider hidden />
@@ -72,7 +73,7 @@ class ProviderForm extends React.Component {
               Social Media
             </Header>
             <ReactQuill
-              value={this.state.provider_social_media}
+              value={provider_social_media}
               onChange={(value) =>
                 this.handleChange(
                   value,
@@ -87,7 +88,7 @@ class ProviderForm extends React.Component {
               Rules
             </Header>
             <ReactQuill
-              value={this.state.provider_rules}
+              value={provider_rules}
               onChange={(value) =>
                 this.handleChange(value, 'provider_rules')
               }
@@ -100,27 +101,27 @@ class ProviderForm extends React.Component {
             </Header>
             <Form.Group inline>
               <Form.Field
-                checked={this.state.facebook === true ? true : false }
-                control={Checkbox} 
+                checked={facebook === true}
+                control={Checkbox}
                 label="Facebook"
                 onChange={this.toggleFacebook}
               />
-              <Form.Field 
-                checked={this.state.twitter === true ? true : false }
-                control={Checkbox} 
-                label="Twitter" 
+              <Form.Field
+                checked={twitter === true}
+                control={Checkbox}
+                label="Twitter"
                 onChange={this.toggleTwitter}
               />
-              <Form.Field 
-                checked={this.state.linkedin === true ? true : false }
-                control={Checkbox} 
-                label="LinkedIn" 
+              <Form.Field
+                checked={linkedin === true}
+                control={Checkbox}
+                label="LinkedIn"
                 onChange={this.toggleLinkedIn}
               />
-              <Form.Field 
-                checked={this.state.reddit === true ? true : false }
-                control={Checkbox} 
-                label="Reddit" 
+              <Form.Field
+                checked={reddit === true}
+                control={Checkbox}
+                label="Reddit"
                 onChange={this.toggleReddit}
               />
             </Form.Group>
@@ -150,26 +151,24 @@ class ProviderForm extends React.Component {
   }
 }
 
-
-
 const mapStateToProps = (state) => {
   const {
     provider_social_media,
     provider_rules,
-    id,
     facebook,
     twitter,
     linkedin,
     reddit,
-  } = state.settings
+    id,
+  } = state.settings;
   return {
     provider_social_media,
     provider_rules,
-    id,
     facebook,
     twitter,
     linkedin,
     reddit,
-  }
-}
+    id,
+  };
+};
 export default connect(mapStateToProps)(ProviderForm);

@@ -63,7 +63,7 @@ class Api::SettingsController < ApplicationController
         :facebook,
         :twitter,
         :linkedin,
-        :reddit
+        :reddit,
       )
   end 
 

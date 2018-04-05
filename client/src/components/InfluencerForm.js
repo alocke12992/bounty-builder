@@ -13,16 +13,13 @@ import {
 import { connect } from 'react-redux';
 
 class InfluencerForm extends React.Component {
-  initialState = {
+  state = {
     influencer_rules: '',
     influencer_shares: '',
     influencer_link: '',
-    id: null,
-  }
+  };
 
-  state = { ...this.initialState };
-
-  componentWillMount() {
+  componentDidMount() {
     this.setState({ ...this.props });
   }
 
@@ -38,12 +35,12 @@ class InfluencerForm extends React.Component {
     this.setState({ influencer });
   };
 
-    influencer = () => {
-    const { 
+  influencer = () => {
+    const {
       influencer_rules,
-      influencer_shares, 
+      influencer_shares,
       influencer_link,
-    } = this.props;
+    } = this.state;
 
     return (
       <Container>
@@ -60,9 +57,12 @@ class InfluencerForm extends React.Component {
               Rules
             </Header>
             <ReactQuill
-              value={this.state.influencer_rules}
+              value={influencer_rules}
               onChange={(value) =>
-                this.handleChange(value, 'influencer_rules')
+                this.handleChange(
+                  value,
+                  'influencer_rules',
+                )
               }
             />
             <Divider hidden />
@@ -72,9 +72,12 @@ class InfluencerForm extends React.Component {
               Shares
             </Header>
             <ReactQuill
-              value={this.state.influencer_shares}
+              value={influencer_shares}
               onChange={(value) =>
-                this.handleChange(value, 'influencer_shares')
+                this.handleChange(
+                  value,
+                  'influencer_shares',
+                )
               }
             />
             <Divider hidden />
@@ -84,9 +87,12 @@ class InfluencerForm extends React.Component {
               Link
             </Header>
             <ReactQuill
-              value={this.state.influencer_link}
+              value={influencer_link}
               onChange={(value) =>
-                this.handleChange(value, 'influencer_link')
+                this.handleChange(
+                  value,
+                  'influencer_link',
+                )
               }
             />
             <Divider hidden />
@@ -121,13 +127,15 @@ const mapStateToProps = (state) => {
     influencer_shares,
     influencer_link,
     id,
-  } = state.settings
+  } = state.settings;
   return {
     influencer_rules,
     influencer_shares,
     influencer_link,
     id,
-  }
-}
+  };
+};
 
-export default connect(mapStateToProps)(InfluencerForm);
+export default connect(mapStateToProps)(
+  InfluencerForm,
+);

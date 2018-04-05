@@ -13,15 +13,12 @@ import {
 import { connect } from 'react-redux';
 
 class TranslationForm extends React.Component {
-  initialState = {
+  state = {
     translation_rules: '',
     translation_link: '',
-    id: null,
-  }
+  };
 
-  state = { ...this.initialState };
-
-  componentWillMount(){
+  componentDidMount() {
     this.setState({ ...this.props });
   }
 
@@ -33,22 +30,19 @@ class TranslationForm extends React.Component {
     e.preventDefault();
     const translation = { ...this.state };
     const { dispatch } = this.props;
-    dispatch(updateSettings( translation ));
+    dispatch(updateSettings(translation));
     this.setState({ translation });
   };
 
   translation = () => {
-    const { 
-      translation_rules, 
-      translation_link 
-    } = this.props;
+    const {
+      translation_rules,
+      translation_link,
+    } = this.state;
 
     return (
       <Container>
-        <Header
-          as="h1"
-          color="orange"
-          textAlign="center">
+        <Header as="h1" color="orange" textAlign="center">
           Translation
         </Header>
         <Divider hidden />
@@ -58,9 +52,12 @@ class TranslationForm extends React.Component {
               Rules
             </Header>
             <ReactQuill
-              value={this.state.translation_rules}
+              value={translation_rules}
               onChange={(value) =>
-                this.handleChange(value, 'translation_rules')
+                this.handleChange(
+                  value,
+                  'translation_rules',
+                )
               }
             />
             <Divider hidden />
@@ -70,9 +67,12 @@ class TranslationForm extends React.Component {
               Link
             </Header>
             <ReactQuill
-              value={this.state.translation_link}
+              value={translation_link}
               onChange={(value) =>
-                this.handleChange(value, 'translation_link')
+                this.handleChange(
+                  value,
+                  'translation_link',
+                )
               }
             />
             <Divider hidden />
@@ -106,13 +106,12 @@ const mapStateToProps = (state) => {
     translation_rules,
     translation_link,
     id,
-  } = state.settings
+  } = state.settings;
   return {
     translation_rules,
     translation_link,
     id,
-  }
-
-}
+  };
+};
 
 export default connect(mapStateToProps)(TranslationForm);
