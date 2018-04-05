@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 import registerServiceWorker, { unregister, } from './registerServiceWorker';
 import 'semantic-ui-css/semantic.min.css';
 import 'react-quill/dist/quill.snow.css';
+import './assets/stylesheets/quill-css-fix.css'
 
 ReactDOM.render(
   <Provider store={store}>
