@@ -12,23 +12,28 @@ import { setFlash } from '../actions/flash';
 import { setHeaders } from '../actions/headers';
 import { withRouter } from 'react-router-dom';
 import {
+  Accordion,
   Button,
   Container,
   Divider,
   Form,
   Grid,
   Header,
+  Icon,
+  Image,
   Segment,
 } from 'semantic-ui-react';
 
 class Facebook extends React.Component {
-  state = { posts: [], value: '' };
+  state = { posts: [], value: '', activeIndex: 0 };
 
   componentDidMount() {
-    axios.get(`/api/${this.props.service}`).then((res) => {
-      this.props.dispatch(setHeaders(res.headers));
-      this.setState({ value: res.data });
-    });
+    axios
+      .get(`/api/${this.props.service}`)
+      .then((res) => {
+        this.props.dispatch(setHeaders(res.headers));
+        this.setState({ value: res.data });
+      });
     axios.get(`/api/posts?kind=facebook`).then((res) => {
       this.props.dispatch(setHeaders(res.headers));
       this.setState({ posts: res.data });
@@ -103,8 +108,16 @@ class Facebook extends React.Component {
     return false;
   };
 
+  handleClick = (e, titleProps) => {
+    const { index } = titleProps;
+    const { activeIndex } = this.state;
+    const newIndex = activeIndex === index ? -1 : index;
+
+    this.setState({ activeIndex: newIndex });
+  };
+
   render() {
-    const { value } = this.state;
+    const { value, activeIndex } = this.state;
 
     return (
       <Container>
@@ -117,31 +130,10 @@ class Facebook extends React.Component {
                     value={value === null ? '' : value}
                     onChange={this.handleChange}
                     required
-                    placeholder="Username"
+                    placeholder="Add URL Link to Profile"
                   />
                   <Form.Button>Save</Form.Button>
                 </Form>
-                {/*<hr/>
-                <Header as='h2'>How to earn shares:</Header>
-                <List bulleted>
-                  <List.Item>
-                    In order to check for new shares that you are eligible for, you <strong>must</strong> press the login with Facebook button below.
-                  </List.Item>
-                  <List.Item>
-                    You may come back and press the button multiple times, but you will only be awarded according to the share rules.
-                  </List.Item>
-                </List>
-                <FacebookLogin
-                  appId="355565764911095"
-                  cookie={true}
-                  xfbml={true}
-                  version='2.8'
-                  autoLoad={false}
-                  fields="name,email,friends,picture,likes,posts"
-                  scope="public_profile,email,user_friends,user_likes,user_posts"
-                  callback={this.fbResponse.bind(this)}
-                  disableMobileRedirect={true}
-                />*/}
               </Segment>
             </Grid.Column>
             <Grid.Column width={8}>
@@ -149,14 +141,35 @@ class Facebook extends React.Component {
             </Grid.Column>
             <Grid.Column width={16}>
               <Divider hidden />
-              <ActionWarning />
+              <Segment>
+                <Accordion fluid>
+                  <Accordion.Content
+                    active={activeIndex === 0}>
+                    <ActionWarning />
+                  </Accordion.Content>
+                  <Accordion.Title
+                    active={activeIndex === 1}
+                    index={1}
+                    onClick={this.handleClick}>
+                    <Icon name="dropdown" />
+                    How do I find my profile link?
+                  </Accordion.Title>
+                  <Accordion.Content
+                    active={activeIndex === 1}>
+                    <Image
+                      src={require('../assets/images/facebookexample.jpg')}
+                      alt="facebook profile example"
+                    />
+                  </Accordion.Content>
+                </Accordion>
+              </Segment>
             </Grid.Column>
             <Grid.Column mobile={16}>
               <Divider hidden />
               <Segment>
                 <FacebookProvider appId="178191166116598">
                   <Header as="h2">
-                    Deconet Facebook Page:
+                    Follow INSERT NAME HERE Facebook Page:
                   </Header>
                   <Like
                     href="https://www.facebook.com/DecentralizedCodeNetwork/"

@@ -54,6 +54,12 @@ class Home extends React.Component {
         main: () => <Dashboard />,
       },
       {
+        name: 'Rules and Overview',
+        path: '/rules',
+        active: true,
+        main: () => <Rules />,
+      },
+      {
         name: 'Influencer',
         path: '/influencer',
         active: true,
@@ -75,12 +81,6 @@ class Home extends React.Component {
         path: '/contest',
         active: true,
         main: () => <VideoContest />,
-      },
-      {
-        name: 'Rules and Overview',
-        path: '/rules',
-        active: true,
-        main: () => <Rules />,
       },
       {
         name: 'Facebook',

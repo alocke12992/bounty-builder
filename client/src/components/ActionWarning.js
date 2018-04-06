@@ -1,16 +1,15 @@
 import React from 'react';
-import GenerateHtml from './GenerateHtml'
+import GenerateHtml from './GenerateHtml';
 import { connect } from 'react-redux';
-import { Segment } from 'semantic-ui-react';
+import { Container } from 'semantic-ui-react';
 
 class ActionWarning extends React.Component {
- 
   render() {
     const { provider_rules } = this.props;
     return (
-      <Segment>
+      <Container>
         <GenerateHtml text={provider_rules} />
-      </Segment>
+      </Container>
     );
   }
 }

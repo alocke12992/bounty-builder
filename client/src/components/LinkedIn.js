@@ -7,32 +7,34 @@ import { connect } from 'react-redux';
 import { setFlash } from '../actions/flash';
 import { setHeaders } from '../actions/headers';
 import { withRouter } from 'react-router-dom';
-import { 
-  Button, 
-  Container, 
-  Divider, 
-  Form, 
-  Grid, 
-  Header, 
-  Icon, 
-  Segment, 
+import {
+  Accordion,
+  Button,
+  Container,
+  Divider,
+  Form,
+  Grid,
+  Header,
+  Icon,
+  Image,
+  Segment,
 } from 'semantic-ui-react';
 
 class LinkedIn extends React.Component {
-  state = { posts: [], value: '', };
+  state = { posts: [], value: '', activeIndex: 0 };
 
   componentDidMount() {
-    axios.get(`/api/${this.props.service}`)
-      .then( res => {
+    axios
+      .get(`/api/${this.props.service}`)
+      .then((res) => {
         this.props.dispatch(setHeaders(res.headers));
         this.setState({ value: res.data });
       });
-    axios.get(`/api/posts?kind=linkedin`)
-      .then( res => {
-        this.props.dispatch(setHeaders(res.headers));
-        this.setState({ posts: res.data });
-      });
-  };
+    axios.get(`/api/posts?kind=linkedin`).then((res) => {
+      this.props.dispatch(setHeaders(res.headers));
+      this.setState({ posts: res.data });
+    });
+  }
 
   handleChange = (e) => {
     this.setState({ value: e.target.value });
@@ -41,51 +43,84 @@ class LinkedIn extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const { value } = this.state;
-    axios.post(`/api/${this.props.service}`, { [`${this.props.service}`]: value } )
-      .then( res => {
+    axios
+      .post(`/api/${this.props.service}`, {
+        [`${this.props.service}`]: value,
+      })
+      .then((res) => {
         this.props.dispatch(setHeaders(res.headers));
         this.props.dispatch(setFlash('Success', 'green'));
       })
-      .catch( err => {
+      .catch((err) => {
         //TODO
-      })
+      });
   };
 
   likePage = () => {
-    this.props.dispatch(addReward(20, 'linkedin', 'Followed Deconet on linkedin.'));
+    this.props.dispatch(
+      addReward(
+        20,
+        'linkedin',
+        'Followed Deconet on linkedin.',
+      ),
+    );
   };
 
   renderPosts = () => {
-    return this.state.posts.map( post => (
+    return this.state.posts.map((post) => (
       <Segment key={post.id}>
-        <Header as='h3'>LinkedIn Post:</Header>
-        <Button color='linkedin' as='a' href={post.url} target='_blank'>
-          <Icon name='linkedin' /> Go to Post
+        <Header as="h3">LinkedIn Post:</Header>
+        <Button
+          color="linkedin"
+          as="a"
+          href={post.url}
+          target="_blank">
+          <Icon name="linkedin" /> Go to Post
         </Button>
         <Divider hidden />
         <Button
-          color='linkedin'
-          disabled={this.rewardsIncludes(`Liked post ${post.id}.`) || this.state.value === ''}
-          onClick={() => this.props.dispatch(addReward(20, 'linkedin', `Liked post ${post.id}.`, post.id))}
-        >
+          color="linkedin"
+          disabled={
+            this.rewardsIncludes(
+              `Liked post ${post.id}.`,
+            ) || this.state.value === ''
+          }
+          onClick={() =>
+            this.props.dispatch(
+              addReward(
+                20,
+                'linkedin',
+                `Liked post ${post.id}.`,
+                post.id,
+              ),
+            )
+          }>
           I liked this post.
         </Button>
       </Segment>
-    ))
+    ));
   };
 
   rewardsIncludes = (reason) => {
     const { rewards } = this.props;
-    for (var i=0; i < rewards.length; i++) {
+    for (var i = 0; i < rewards.length; i++) {
       if (rewards[i].reason === reason) {
         return true;
       }
     }
     return false;
-  }
+  };
+
+  handleClick = (e, titleProps) => {
+    const { index } = titleProps;
+    const { activeIndex } = this.state;
+    const newIndex = activeIndex === index ? -1 : index;
+
+    this.setState({ activeIndex: newIndex });
+  };
 
   render() {
-    const { value } = this.state;
+    const { value, activeIndex } = this.state;
 
     return (
       <Container>
@@ -98,41 +133,83 @@ class LinkedIn extends React.Component {
                     value={value === null ? '' : value}
                     onChange={this.handleChange}
                     required
-                    placeholder="Username"
+                    placeholder="Add URL Link to Profile"
                   />
                   <Form.Button>Save</Form.Button>
                 </Form>
               </Segment>
             </Grid.Column>
             <Grid.Column width={8}>
-              <SocialMediaRules/>
+              <SocialMediaRules />
             </Grid.Column>
             <Grid.Column width={16}>
               <Divider hidden />
-              <ActionWarning />
+              <Segment>
+                <Accordion fluid>
+                  <Accordion.Content
+                    active={activeIndex === 0}>
+                    <ActionWarning />
+                  </Accordion.Content>
+                  <Accordion.Title
+                    active={activeIndex === 1}
+                    index={1}
+                    onClick={this.handleClick}>
+                    <Icon name="dropdown" />
+                    How do I find my profile link?
+                  </Accordion.Title>
+                  <Accordion.Content
+                    active={activeIndex === 1}>
+                    <Image
+                      src={require('../assets/images/linkedinexample.jpg')}
+                      alt="linkedin profile example"
+                    />
+                  </Accordion.Content>
+                </Accordion>
+              </Segment>
             </Grid.Column>
             <Grid.Column mobile={16}>
               <Divider hidden />
               <Segment>
-                <Header as='h2'>Follow Simply Vital Health LinkedIn Page:</Header>
-                  <p>Follow Deconet on LinkedIn. After, come back and press 'I followed this page'.</p>
-                <Button color="linkedin" as='a' href="https://www.linkedin.com/company/11268774/" target='_blank'>
-                  <Icon name='linkedin'/> LinkedIn
-                </Button>
+                <Header as="h2">
+                  Follow INSERT NAME HERE LinkedIn Page:
+                </Header>
+                <p>
+                  Follow INSERT NAME HERE on LinkedIn.
+                  After, come back and press 'I followed
+                  this page'.
+                </p>
                 <Divider hidden />
-                <Button color='linkedin' onClick={this.likePage} disabled={this.rewardsIncludes("Followed Deconet on linkedin.") || this.state.value === ''}>I followed this page.</Button>
+                <Button
+                  color="linkedin"
+                  as="a"
+                  href="https://www.linkedin.com/company/11268774/"
+                  target="_blank">
+                  <Icon name="linkedin" /> LinkedIn
+                </Button>
+                <Button
+                  color="linkedin"
+                  onClick={this.likePage}
+                  disabled={
+                    this.rewardsIncludes(
+                      'Followed Deconet on linkedin.',
+                    ) || this.state.value === ''
+                  }>
+                  I followed this page.
+                </Button>
               </Segment>
-              { this.renderPosts() }
+              {this.renderPosts()}
             </Grid.Column>
           </Grid.Row>
         </Grid>
       </Container>
-    )
+    );
   }
 }
 
 const mapStateToProps = (state) => {
-  return { rewards: state.rewards, };
-}
+  return { rewards: state.rewards };
+};
 
-export default withRouter(connect(mapStateToProps)(LinkedIn));
+export default withRouter(
+  connect(mapStateToProps)(LinkedIn),
+);

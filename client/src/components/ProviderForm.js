@@ -69,6 +69,36 @@ class ProviderForm extends React.Component {
         </Header>
         <Divider hidden />
         <Form onSubmit={this.handleSubmit}>
+          <Header as="h4" color="blue">
+            Enable Providers
+          </Header>
+          <Form.Group inline>
+            <Form.Field
+              checked={facebook === true}
+              control={Checkbox}
+              label="Facebook"
+              onChange={this.toggleFacebook}
+            />
+            <Form.Field
+              checked={twitter === true}
+              control={Checkbox}
+              label="Twitter"
+              onChange={this.toggleTwitter}
+            />
+            <Form.Field
+              checked={linkedin === true}
+              control={Checkbox}
+              label="LinkedIn"
+              onChange={this.toggleLinkedIn}
+            />
+            <Form.Field
+              checked={reddit === true}
+              control={Checkbox}
+              label="Reddit"
+              onChange={this.toggleReddit}
+            />
+          </Form.Group>
+          <Divider />
           <Form.Field>
             <Header as="h4" color="blue">
               Social Media
@@ -98,37 +128,6 @@ class ProviderForm extends React.Component {
             />
             <Divider hidden />
           </Form.Field>
-          <Segment>
-            <Header as="h4" color="blue">
-              Check Providers
-            </Header>
-            <Form.Group inline>
-              <Form.Field
-                checked={facebook === true}
-                control={Checkbox}
-                label="Facebook"
-                onChange={this.toggleFacebook}
-              />
-              <Form.Field
-                checked={twitter === true}
-                control={Checkbox}
-                label="Twitter"
-                onChange={this.toggleTwitter}
-              />
-              <Form.Field
-                checked={linkedin === true}
-                control={Checkbox}
-                label="LinkedIn"
-                onChange={this.toggleLinkedIn}
-              />
-              <Form.Field
-                checked={reddit === true}
-                control={Checkbox}
-                label="Reddit"
-                onChange={this.toggleReddit}
-              />
-            </Form.Group>
-          </Segment>
           <Divider hidden />
           <Form.Button
             size="normal"

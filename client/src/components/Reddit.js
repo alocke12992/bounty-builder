@@ -7,22 +7,29 @@ import { connect } from 'react-redux';
 import { setFlash } from '../actions/flash';
 import { setHeaders } from '../actions/headers';
 import { withRouter } from 'react-router-dom';
-import { Button, Container, Divider, Form, Grid, Header, Icon, Segment, } from 'semantic-ui-react';
+import {
+  Button,
+  Container,
+  Divider,
+  Form,
+  Grid,
+  Header,
+  Icon,
+  Segment,
+} from 'semantic-ui-react';
 
 class LinkedIn extends React.Component {
-  state = { posts: [], value: '', };
+  state = { posts: [], value: '' };
 
   componentDidMount() {
-    axios.get(`/api/${this.props.service}`)
-      .then( res => {
-        this.props.dispatch(setHeaders(res.headers));
-        this.setState({ value: res.data });
-      });
-    axios.get(`/api/posts?kind=reddit`)
-      .then( res => {
-        this.props.dispatch(setHeaders(res.headers));
-        this.setState({ posts: res.data });
-      });
+    axios.get(`/api/${this.props.service}`).then((res) => {
+      this.props.dispatch(setHeaders(res.headers));
+      this.setState({ value: res.data });
+    });
+    axios.get(`/api/posts?kind=reddit`).then((res) => {
+      this.props.dispatch(setHeaders(res.headers));
+      this.setState({ posts: res.data });
+    });
   }
 
   handleChange = (e) => {
@@ -32,18 +39,27 @@ class LinkedIn extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const { value } = this.state;
-    axios.post(`/api/${this.props.service}`, { [`${this.props.service}`]: value } )
-      .then( res => {
+    axios
+      .post(`/api/${this.props.service}`, {
+        [`${this.props.service}`]: value,
+      })
+      .then((res) => {
         this.props.dispatch(setHeaders(res.headers));
         this.props.dispatch(setFlash('Success', 'green'));
       })
-      .catch( err => {
+      .catch((err) => {
         //TODO
-      })
+      });
   };
 
   likePage = () => {
-    this.props.dispatch(addReward(20, 'reddit', "Subscribed to Deconet on reddit."));
+    this.props.dispatch(
+      addReward(
+        20,
+        'reddit',
+        'Subscribed to Deconet on reddit.',
+      ),
+    );
   };
 
   rewardsIncludes = (reason) => {
@@ -57,22 +73,38 @@ class LinkedIn extends React.Component {
   };
 
   renderPosts = () => {
-    return this.state.posts.map( post => (
+    return this.state.posts.map((post) => (
       <Segment key={post.id}>
-        <Header as='h3'>Reddit Post:</Header>
-        <Button color='orange' as='a' href={post.url} target='_blank'>
-          <Icon name='reddit' /> Go to Post
+        <Header as="h3">Reddit Post:</Header>
+        <Button
+          color="orange"
+          as="a"
+          href={post.url}
+          target="_blank">
+          <Icon name="reddit" /> Go to Post
         </Button>
         <Divider hidden />
         <Button
-          color='orange'
-          disabled={this.rewardsIncludes(`Liked post ${post.id}.`) || this.state.value === ''}
-          onClick={() => this.props.dispatch(addReward(20, 'reddit', `Liked post ${post.id}.`, post.id))}
-        >
+          color="orange"
+          disabled={
+            this.rewardsIncludes(
+              `Liked post ${post.id}.`,
+            ) || this.state.value === ''
+          }
+          onClick={() =>
+            this.props.dispatch(
+              addReward(
+                20,
+                'reddit',
+                `Liked post ${post.id}.`,
+                post.id,
+              ),
+            )
+          }>
           I liked this post.
         </Button>
       </Segment>
-    ))
+    ));
   };
 
   render() {
@@ -96,36 +128,56 @@ class LinkedIn extends React.Component {
               </Segment>
             </Grid.Column>
             <Grid.Column width={8}>
-              <SocialMediaRules/>
+              <SocialMediaRules />
             </Grid.Column>
             <Grid.Column width={16}>
               <Divider hidden />
-              <ActionWarning />
+              <Segment>
+                <ActionWarning />
+              </Segment>
             </Grid.Column>
             <Grid.Column mobile={16}>
-            <Divider hidden />
-            <Segment>
-              <Header as='h2'>Subscribe to Deconet Subreddit:</Header>
-                <p>Subscribe to Deconet Subreddit. After, come back and press 'I Subscribed'.</p>
-              <Button color="orange" as='a' href="https://www.reddit.com/r/Deconet/" target='_blank'>
-                <Icon name='reddit'/> Reddit
-              </Button>
               <Divider hidden />
-              <Button color='orange' onClick={this.likePage} disabled={this.rewardsIncludes("Subscribed to Deconet on reddit.") || this.state.value === ''}>I Subscribed.</Button>
-            </Segment>
-            { this.renderPosts() }
+              <Segment>
+                <Header as="h2">
+                  Subscribe to INSERT NAME HERE Subreddit:
+                </Header>
+                <p>
+                  Subscribe to INSERT NAME HERE Subreddit.
+                  After, come back and press 'I Subscribed'.
+                </p>
+                <Divider hidden />
+                <Button
+                  color="orange"
+                  as="a"
+                  href="https://www.reddit.com/r/Deconet/"
+                  target="_blank">
+                  <Icon name="reddit" /> Reddit
+                </Button>
+                <Button
+                  color="orange"
+                  onClick={this.likePage}
+                  disabled={
+                    this.rewardsIncludes(
+                      'Subscribed to Deconet on reddit.',
+                    ) || this.state.value === ''
+                  }>
+                  I Subscribed.
+                </Button>
+              </Segment>
+              {this.renderPosts()}
             </Grid.Column>
           </Grid.Row>
         </Grid>
       </Container>
-    )
+    );
   }
 }
 
 const mapStateToProps = (state) => {
   return {
     rewards: state.rewards,
-  }
+  };
 };
 
 export default withRouter(connect(mapStateToProps)(LinkedIn));
