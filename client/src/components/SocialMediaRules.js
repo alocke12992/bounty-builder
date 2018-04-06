@@ -1,21 +1,16 @@
 import React from 'react';
+import GenerateHtml from './GenerateHtml';
 import { connect } from 'react-redux';
 import { Segment } from 'semantic-ui-react';
 
 class SocialMediaRules extends React.Component {
-  createMarkup = (html) => {
-    return { __html: html };
-  };
-
   render() {
     const { provider_social_media } = this.props;
 
     return (
-      <Segment
-        dangerouslySetInnerHTML={this.createMarkup(
-          provider_social_media,
-        )}
-      />
+      <Segment>
+       <GenerateHtml text={provider_social_media} />
+      </Segment>
     );
   }
 }

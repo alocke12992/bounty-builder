@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import BlogRules from './BlogRules';
 import ChatRules from './ChatRules';
+import GenerateHtml from './GenerateHtml'
 import SocialMediaRules from './SocialMediaRules';
 import Submissions from './Submissions';
 import { connect } from 'react-redux';
@@ -19,10 +20,6 @@ class VideoContest extends React.Component {
         this.props.dispatch(setHeaders(res.headers));
         this.setState({ value: res.data });
       });
-  };
-
-  createMarkup = (html) => {
-    return { __html: html };
   };
 
   handleChange = (e) => {
@@ -50,11 +47,7 @@ class VideoContest extends React.Component {
             <Grid.Column>
               <Segment>
                 <div>
-                  <Container
-                    dangerouslySetInnerHTML={this.createMarkup(
-                      this.props.settings.video_contest
-                    )}
-                  />
+                 <GenerateHtml text={this.props.settings.video_contest} />
                   <p>&nbsp;</p>
                   <p style={{ lineHeight: '1.56', marginTop: '10pt', marginBottom: '0pt' }}><span style={{ fontFamily: 'arial, helvetica, sans-serif', color: '#000000' }}><strong><span style={{ fontSize: '11pt', backgroundColor: 'transparent', fontVariant: 'normal', textDecoration: 'none', verticalAlign: 'baseline', whiteSpace: 'pre-wrap' }}>*Participants are responsible for knowing the participation rules in their countries and cannot participate if entry is prohibited.*</span></strong></span></p>
                 </div>

@@ -7,11 +7,9 @@ import {
   Header,
   Segment,
 } from 'semantic-ui-react';
+import GenerateHtml from './GenerateHtml';
 
 class Invite extends React.Component {
-  createMarkup = (html) => {
-    return { __html: html };
-  };
 
   render() {
     const { invitation_link } = this.props;
@@ -21,11 +19,7 @@ class Invite extends React.Component {
           <Grid.Row>
             <Grid.Column>
               <Segment>
-                <Container
-                  dangerouslySetInnerHTML={this.createMarkup(
-                    invitation_link,
-                  )}
-                />
+                <GenerateHtml text={invitation_link} />
               </Segment>
             </Grid.Column>
           </Grid.Row>

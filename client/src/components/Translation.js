@@ -1,4 +1,5 @@
 import React from 'react';
+import GenerateHtml from './GenerateHtml';
 import Submissions from './Submissions';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -12,11 +13,6 @@ class Translation extends React.Component {
 
   state = { ...this.initialState };
 
-
-  createMarkup = (html) => {
-    return { __html: html };
-  };
-
   render() {
     const { 
       translation_rules, 
@@ -29,11 +25,7 @@ class Translation extends React.Component {
           <Grid.Row>
             <Grid.Column>
               <Segment>
-              <Container
-                  dangerouslySetInnerHTML={this.createMarkup(
-                    translation_link,
-                  )}
-                />
+                <GenerateHtml text={translation_rules} />
               </Segment>
               { this.props.user.translator &&
                 <Submissions kind={'translation'}/>
@@ -41,11 +33,7 @@ class Translation extends React.Component {
             </Grid.Column>
             <Grid.Column>
               <Segment>
-                <Container
-                  dangerouslySetInnerHTML={this.createMarkup(
-                    translation_rules,
-                  )}
-                />
+                <GenerateHtml text={translation_link} />
             </Segment>
             </Grid.Column>
           </Grid.Row>

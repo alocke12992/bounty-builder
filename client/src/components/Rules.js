@@ -1,4 +1,5 @@
 import React from 'react';
+import GenerateHtml from './GenerateHtml';
 import { Container, Segment, } from 'semantic-ui-react';
 import { connect } from 'react-redux'
 
@@ -11,10 +12,6 @@ class Rules extends React.Component {
 
   state = { ...this.initialState};
 
-  createMarkup = (html) => {
-    return { __html: html };
-  };
-
   render() {
     const {
       rules_main,
@@ -24,11 +21,7 @@ class Rules extends React.Component {
     return (
       <Container>
         <Segment>
-          <Container
-              dangerouslySetInnerHTML={this.createMarkup(
-                rules_main,
-              )}
-            />
+         <GenerateHtml text={rules_main} />
         </Segment>
       </Container>
     );

@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import eth from '../images/ETHEREUM.png';
+import GenerateHtml from './GenerateHtml';
 import { connect } from 'react-redux';
 import { setFlash } from '../actions/flash';
 import { setHeaders } from '../actions/headers';
@@ -43,10 +44,6 @@ class Wallet extends React.Component {
       });
   };
 
-  createMarkup = (html) => {
-    return { __html: html };
-  };
-
   render() {
     const { walletAddress } = this.state;
     const { etherium } = this.props;
@@ -80,11 +77,7 @@ class Wallet extends React.Component {
             <Form.Button>Save</Form.Button>
           </Form>
           <Divider hidden />
-          <Container
-            dangerouslySetInnerHTML={this.createMarkup(
-              etherium,
-            )}
-          />
+           <GenerateHtml text={etherium} />
           <Image
             src={eth}
             centered

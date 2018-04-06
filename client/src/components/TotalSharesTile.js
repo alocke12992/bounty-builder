@@ -1,4 +1,5 @@
 import React from 'react';
+import GenerateHtml from './GenerateHtml';
 import { connect } from 'react-redux';
 import {
   Card,
@@ -54,10 +55,6 @@ class TotalSharesTile extends React.Component {
     }
   };
 
-  createMarkup = (html) => {
-    return { __html: html };
-  };
-
   render() {
     const { progress } = this.state;
     const { num_shares } = this.props;
@@ -70,11 +67,7 @@ class TotalSharesTile extends React.Component {
             <strong>{this.state.shares}</strong>
           </Card.Description>
           <Progress percent={progress} indicating />
-          <Container
-            dangerouslySetInnerHTML={this.createMarkup(
-              num_shares,
-            )}
-          />
+          <GenerateHtml text={num_shares} />
         </Card.Content>
       </Card>
     );

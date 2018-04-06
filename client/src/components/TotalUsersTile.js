@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import GenerateHtml from './GenerateHtml';
 import { connect } from 'react-redux';
 import { setHeaders } from '../actions/headers';
 import {
@@ -33,10 +34,6 @@ class TotalUsersTile extends React.Component {
     }
   };
 
-  createMarkup = (html) => {
-    return { __html: html };
-  };
-
   render() {
     const { progress } = this.state;
     const { num_users } = this.props;
@@ -49,11 +46,7 @@ class TotalUsersTile extends React.Component {
             <strong>{this.state.users}</strong>
           </Card.Description>
           <Progress percent={progress} indicating />
-          <Container
-            dangerouslySetInnerHTML={this.createMarkup(
-              num_users,
-            )}
-          />
+          <GenerateHtml text={num_users} />
         </Card.Content>
       </Card>
     );

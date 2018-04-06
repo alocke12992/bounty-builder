@@ -1,21 +1,16 @@
 import React from 'react';
+import GenerateHtml from './GenerateHtml'
 import { connect } from 'react-redux';
 import { Segment } from 'semantic-ui-react';
 
 class ActionWarning extends React.Component {
-  createMarkup = (html) => {
-    return { __html: html };
-  };
-
+ 
   render() {
     const { provider_rules } = this.props;
-
     return (
-      <Segment
-        dangerouslySetInnerHTML={this.createMarkup(
-          provider_rules,
-        )}
-      />
+      <Segment>
+        <GenerateHtml text={provider_rules} />
+      </Segment>
     );
   }
 }

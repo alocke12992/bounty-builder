@@ -12,6 +12,7 @@ import {
   Header,
   Icon,
 } from 'semantic-ui-react';
+import GenerateHtml from './GenerateHtml';
 
 class Telegram extends React.Component {
   state = { showField: false, username: '' };
@@ -53,10 +54,6 @@ class Telegram extends React.Component {
       });
   };
 
-  createMarkup = (html) => {
-    return { __html: html };
-  };
-
   render() {
     const { showField, username } = this.state;
     const { telegram_invite } = this.props;
@@ -71,11 +68,7 @@ class Telegram extends React.Component {
         </Card.Header>
         <Divider hidden />
         <Card.Content textAlign="center">
-          <Container
-            dangerouslySetInnerHTML={this.createMarkup(
-              telegram_invite,
-            )}
-          />
+          <GenerateHtml text={telegram_invite} />
           <Divider hidden />
           <Button
             as="a"

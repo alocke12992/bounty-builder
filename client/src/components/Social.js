@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import BlogRules from './BlogRules';
 import ChatRules from './ChatRules';
+import GenerateHtml from './GenerateHtml';
 import SocialMediaRules from './SocialMediaRules';
 import Submissions from './Submissions';
 import { connect } from 'react-redux';
@@ -45,49 +46,26 @@ class Social extends React.Component {
       })
   };
 
-  createMarkup = (html) => {
-    return { __html: html };
-  };
-
-  influencer = () => {
-    const { 
-      influencer_rules,
-      influencer_shares, 
-      influencer_link,
-    } = this.props;
-  }
-
   render() {
     const { 
       influencer_rules,
       influencer_shares, 
       influencer_link,
     } = this.props;
+
     return (
       <Container>
         <Grid stackable columns={2}>
           <Grid.Row>
             <Grid.Column>
               <Segment>
-                <Container
-                  dangerouslySetInnerHTML={this.createMarkup(
-                    influencer_rules,
-                  )}
-                />
+               <GenerateHtml text={influencer_rules} />
               </Segment>
               <Segment>
-                <Container
-                    dangerouslySetInnerHTML={this.createMarkup(
-                      influencer_shares,
-                    )}
-                  />
+                <GenerateHtml text={influencer_shares} />
               </Segment>
               <Segment>
-                  <Container
-                    dangerouslySetInnerHTML={this.createMarkup(
-                      influencer_link,
-                    )}
-                  />
+                 <GenerateHtml text={influencer_link} />
                 </Segment>
             </Grid.Column>
             <Grid.Column>
@@ -107,12 +85,11 @@ const mapStateToProps = (state) => {
     influencer_link,
     id,
   } = state.settings
+
   return {
-    user: state.user,
     influencer_rules,
     influencer_shares,
     influencer_link,
-    id,
   }
 };
 

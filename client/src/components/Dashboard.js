@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import ChatRules from './ChatRules';
+import GenerateHtml from './GenerateHtml';
 import Invite from './Invite';
 import PointsTile from './PointsTile';
 import Telegram from './Telegram';
@@ -119,10 +120,6 @@ class Dashboard extends React.Component {
       });
   };
 
-  createMarkup = (html) => {
-    return {__html: html};
-  };
-
   render() {
     const { captchaVerified, confirmationCode, } = this.state;
     const { dash_description, regulations, logo, } = this.props;
@@ -146,18 +143,11 @@ class Dashboard extends React.Component {
             as={Divider}
             minWidth={992}
           />
-          <Container
-            dangerouslySetInnerHTML={this.createMarkup(
-              dash_description,
-            )}
-          />
+          <Divider />
+          <GenerateHtml text={dash_description} />
         </Segment>
         <Segment>
-          <Container
-            dangerouslySetInnerHTML={this.createMarkup(
-              regulations,
-            )}
-          />
+         <GenerateHtml text={regulations} />
         </Segment>
         <Responsive
           as={Card.Group}

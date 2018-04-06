@@ -1,4 +1,5 @@
 import React from 'react';
+import GenerateHtml from './GenerateHtml';
 import { connect } from 'react-redux';
 import {
   Card,
@@ -8,9 +9,6 @@ import {
 } from 'semantic-ui-react';
 
 class ChatRules extends React.Component {
-  createMarkup = (html) => {
-    return { __html: html };
-  };
 
   render() {
     const { telegram } = this.props;
@@ -18,11 +16,7 @@ class ChatRules extends React.Component {
       <Card>
         <Card.Content>
           <Header as="h2">Telegram:</Header>
-          <Container
-            dangerouslySetInnerHTML={this.createMarkup(
-              telegram,
-            )}
-          />
+          <GenerateHtml text={telegram} />
         </Card.Content>
       </Card>
     );
