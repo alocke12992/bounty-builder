@@ -28,41 +28,51 @@ class Dashboard extends React.Component {
   state = {
     captchaVerified: false,
     confirmationCode: '',
+    liveStreamConfirmationCode: '',
     loading: true,
+    showLiveStreamForm: true,
   };
 
   callback = (res) => {
     this.setState({captchaVerified: true});
   };
 
+  handleLiveStreamSubmit = (e) => {
+    e.preventDefault();
+    const { liveStreamConfirmationCode } = this.state;
+    const { dispatch } = this.props;
+
+    axios.post('/api/confirm_live_stream_code', { code: liveStreamConfirmationCode })
+      .then(res => {
+        dispatch(setHeaders(res.headers));
+        dispatch({ type: 'LOGIN', user: res.data });
+        dispatch(setFlash('Code Confirmed.', 'green'));
+        this.setState({ showLiveStreamForm: false });
+      })
+      .catch(err => {
+        dispatch(setHeaders(err.headers));
+        dispatch({ type: 'LOGOUT' });
+        dispatch(setFlash('The confirmation code was incorrect. For account security, you have been logged out.', 'red'));
+      })
+  };
+
   handleSubmit = (e) => {
     e.preventDefault();
-    const {confirmationCode} = this.state;
-    axios
-      .post('/api/confirmations/verify_confirmation', {
-        confirmation_code: confirmationCode,
+    const { confirmationCode } = this.state;
+    const { dispatch } = this.props;
+
+    axios.post('/api/confirmations/verify_confirmation', { confirmation_code: confirmationCode })
+      .then(res => {
+        dispatch(setHeaders(res.headers));
+        dispatch({ type: 'LOGOUT' })
+        dispatch(setFlash('Account Confirmed. Please log in again.', 'green'));
       })
-      .then((res) => {
-        this.props.dispatch(setHeaders(res.headers));
-        this.props.dispatch({type: 'LOGOUT'});
-        this.props.dispatch(
-          setFlash(
-            'Account Confirmed. Please log in again.',
-            'green',
-          ),
-        );
+      .catch(err => {
+        dispatch({ type: 'LOGOUT' });
+        dispatch(setFlash('The confirmation code was incorrect.', 'red'));
+        dispatch(setHeaders(err.headers));
+        this.setState({ captchaVerified: false });
       })
-      .catch((err) => {
-        this.props.dispatch({type: 'LOGOUT'});
-        this.props.dispatch(
-          setFlash(
-            'The confirmation code was incorrect.',
-            'red',
-          ),
-        );
-        this.props.dispatch(setHeaders(err.headers));
-        this.setState({captchaVerified: false});
-      });
   };
 
   renderConfirmationSegment = () => {
@@ -121,7 +131,12 @@ class Dashboard extends React.Component {
   };
 
   render() {
-    const { captchaVerified, confirmationCode, } = this.state;
+    const { 
+      captchaVerified, 
+      confirmationCode, 
+      liveStreamConfirmationCode, 
+      showLiveStreamForm, 
+    } = this.state;
     const { dash_description, regulations, logo, } = this.props;
 
     return (
@@ -130,6 +145,20 @@ class Dashboard extends React.Component {
         {/* {!this.props.user.confirmed && (
           this.renderConfirmationSegment() 
         )} */}
+        { !this.props.user.live_stream_confirmed && showLiveStreamForm &&
+          <Segment color='red'>
+            <p><strong>All participants must enter a code from the weekly live stream to receive any earned rewards.</strong></p>
+            <Form onSubmit={this.handleLiveStreamSubmit}>
+              <Form.Input
+                value={liveStreamConfirmationCode}
+                onChange={(e) => this.setState({ liveStreamConfirmationCode: e.target.value })}
+                required
+                placeholder="Live Stream Code"
+              />
+              <Form.Button>Submit</Form.Button>
+            </Form>
+          </Segment>
+        }
         <Segment>
           <Responsive
             as={Image}

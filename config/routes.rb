@@ -49,6 +49,10 @@ Rails.application.routes.draw do
 
     #logo 
     put '/settings/:id/update_logo', to: 'settings#update_logo'
+
+    #live stream
+    resources :live_streams, only: [:index, :update]
+    post '/confirm_live_stream_code', to: 'live_streams#confirm_live_stream_code'
   end
 
   #Do not place any routes below this one
