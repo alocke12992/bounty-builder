@@ -1,7 +1,8 @@
 import React, {Component, Fragment} from 'react';
 import LaptopNavBar from './LaptopNavBar';
 import MobileNavBar from './MobileNavBar';
-import {Responsive} from 'semantic-ui-react';
+import TabletNavBar from './TabletNavBar';
+import {Responsive, Container} from 'semantic-ui-react';
 
 class NavBar extends Component {
 
@@ -11,13 +12,22 @@ class NavBar extends Component {
         <Responsive
           as='div'
           minWidth={992}
+          style={{marginBottom: '25px'}}
         >
           <LaptopNavBar />
         </Responsive>
         <Responsive
           as='div'
           maxWidth={991}
-          style={{marginBottom: '50px'}}
+          minWidth={768}
+          style={{marginBottom: '100px'}}
+        >
+          <TabletNavBar />
+        </Responsive>
+        <Responsive
+          as='div'
+          maxWidth={767}
+          style={{marginBottom: '65px'}}
         >
           <MobileNavBar />
         </Responsive>

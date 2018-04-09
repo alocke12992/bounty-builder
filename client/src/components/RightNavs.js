@@ -81,7 +81,9 @@ class RightNavs extends React.Component {
             as={Dropdown}
             style={styles.text}
           >
-            <Dropdown.Menu>
+            <Dropdown.Menu
+              style={{left: '-125px', zIndex: '1'}}
+            >
               {user.role === 'dev' && this.devRouteMap()}
               {((user.role === 'dev') || (user.role === 'admin')) && this.adminRouteMap()}
               <Dropdown.Item
@@ -90,8 +92,8 @@ class RightNavs extends React.Component {
               </Dropdown.Item>
               {this.logout({dispatch, history})}
             </Dropdown.Menu>
-          </Responsive>
-        </Menu.Menu>
+          </Responsive >
+        </Menu.Menu >
       );
     }
     return (

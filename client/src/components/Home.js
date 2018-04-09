@@ -9,18 +9,18 @@ import Social from './Social';
 import Translation from './Translation';
 import Twitter from './Twitter';
 import VideoContest from './VideoContest';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import {
   Container,
   Grid,
   Menu,
   Responsive,
 } from 'semantic-ui-react';
-import { getRewards } from '../actions/rewards';
-import { Link, Route, Switch } from 'react-router-dom';
+import {getRewards} from '../actions/rewards';
+import {Link, Route, Switch} from 'react-router-dom';
 
 class Home extends React.Component {
-  state = { currentRoutes: [] };
+  state = {currentRoutes: []};
 
   componentDidMount() {
     this.props.dispatch(getRewards());
@@ -28,13 +28,13 @@ class Home extends React.Component {
   }
 
   setActive = (routes) => {
-    const { currentRoutes } = this.state;
+    const {currentRoutes} = this.state;
     const activeRoutes = [];
     routes.map(
       (route) =>
         route.active === true && activeRoutes.push(route),
     );
-    this.setState({ currentRoutes: activeRoutes });
+    this.setState({currentRoutes: activeRoutes});
   };
 
   toggleRoutes = () => {
@@ -120,8 +120,8 @@ class Home extends React.Component {
   };
 
   render() {
-    const { pathname } = this.props.location;
-    const { currentRoutes } = this.state;
+    const {pathname} = this.props.location;
+    const {currentRoutes} = this.state;
 
     return (
       <Container>
@@ -131,7 +131,13 @@ class Home extends React.Component {
               mobile={16}
               tablet={16}
               computer={5}>
-              <Menu pointing vertical size="large">
+              <Responsive
+                minWidth={992}
+                as={Menu}
+                pointing
+                vertical
+                size="large"
+              >
                 {currentRoutes.map((route, index) => (
                   <Menu.Item
                     key={index}
@@ -141,7 +147,7 @@ class Home extends React.Component {
                     active={pathname === route.path}
                   />
                 ))}
-              </Menu>
+              </Responsive>
             </Grid.Column>
             <Grid.Column
               mobile={16}

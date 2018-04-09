@@ -1,0 +1,8 @@
+.ui.menu:after {
+    content: '';
+    display: none;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+

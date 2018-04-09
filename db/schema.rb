@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20180406221322) do
-=======
-ActiveRecord::Schema.define(version: 20180406213939) do
->>>>>>> updated default schema values to empty strings, updated default setting model values to actually be visually appealing
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,23 +26,10 @@ ActiveRecord::Schema.define(version: 20180406213939) do
     t.index ["user_id"], name: "index_discords_on_user_id"
   end
 
-<<<<<<< HEAD
   create_table "live_streams", force: :cascade do |t|
     t.string "code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-=======
->>>>>>> updated default schema values to empty strings, updated default setting model values to actually be visually appealing
-  create_table "posts", force: :cascade do |t|
-    t.string "url"
-    t.string "kind"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "reward_id"
-    t.datetime "deleted_at"
-    t.index ["deleted_at"], name: "index_posts_on_deleted_at"
   end
 
   create_table "rewards", force: :cascade do |t|
@@ -87,17 +70,13 @@ ActiveRecord::Schema.define(version: 20180406213939) do
     t.string "primary_color", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-<<<<<<< HEAD
-    t.string "button_color", default: "#50e3c2"
-    t.text "video_contest", default: "<h2>Video Contest</h2><p><br></p><p><strong style=\"font-size: 11pt; font-family: arial, helvetica, sans-serif; color: rgb(0, 0, 0);\">Video Contest rules:</strong></p><p><br></p><p><span style=\"font-size: 11pt; font-family: arial, helvetica, sans-serif; color: rgb(0, 0, 0);\">Answer the question:</span></p><p><br></p><p><span style=\"font-size: 11pt; font-family: arial, helvetica, sans-serif; color: rgb(0, 0, 0);\">What would you do with the power of Neureal?</span></p><ul><li><span style=\"font-size: 11pt; font-family: arial, helvetica, sans-serif; color: rgb(0, 0, 0);\">Videos must be 150 seconds or shorter.</span></li><li><span style=\"font-size: 11pt; font-family: arial, helvetica, sans-serif; color: rgb(0, 0, 0);\">Video must include brief explanation of what Neureal is in your own words.</span></li><li><span style=\"font-size: 11pt; font-family: arial, helvetica, sans-serif; color: rgb(0, 0, 0);\">Video may contain no offensive material.</span></li></ul><p><br></p><p><span style=\"font-size: 11pt; font-family: arial, helvetica, sans-serif; color: rgb(0, 0, 0);\">The Neureal core team will select 10 finalists and the community will vote on the grand prize winner.</span></p><p><br></p><p><span style=\"font-size: 11pt; font-family: arial, helvetica, sans-serif; color: rgb(0, 0, 0);\">By entering the contest, you grant Neureal and its subsidiaries permission to use your video and all content, including your name, likeness, slogans, and descriptions, in corporate and promotional materials.</s<<span style=\"font-size: 18px;\">&nbsp;</s<<em style=\"font-size: 11pt; font-family: arial, helvetica, sans-serif; color: rgb(0, 0, 0);\">Submission window for entries begins March 28th and runs until the end of the Neureal public token sale. Finalists will be announced on the final day of the token sale and winners will be announced 60 days after the completion of the token sale.<<<span style=\"font-size: 18px;\">&nbsp;</s<<strong style=\"font-size: 11pt; font-family: arial, helvetica, sans-serif; color: rgb(0, 0, 0);\">Prizes:</str<<<span style=\"font-size: 11pt; font-family: arial, helvetica, sans-serif; color: rgb(0, 0, 0);\">Ten finalists will each receive 100 NEUREAL tokens to use toward the execution of their vision and how they’d use the power of Neureal.</s<<<span style=\"font-size: 11pt; font-family: arial, helvetica, sans-serif; color: rgb(0, 0, 0);\">One grand prize winner receives 1000 NEUREAL tokens to use toward the execution of their vision and how they’d use the power of Neureal, and the Neureal foundation will help in executing their Oracle(s) once Neureal is released to the public (estimated2 years from close of the TGE).</s<u<li><span style=\"font-size: 11pt; font-family: arial, helvetica, sans-serif; color: rgb(0, 0, 0);\">A folder will be posted in the Neureal Telegram containing any graphics for our project you may want.</spa<</ul>"
-=======
     t.string "button_color", default: ""
     t.text "video_contest", default: ""
->>>>>>> updated default schema values to empty strings, updated default setting model values to actually be visually appealing
     t.boolean "facebook", default: false
     t.boolean "twitter", default: false
     t.boolean "linkedin", default: false
     t.boolean "reddit", default: false
+    t.string "about", default: ""
   end
 
   create_table "submissions", force: :cascade do |t|
@@ -164,10 +143,8 @@ ActiveRecord::Schema.define(version: 20180406213939) do
     t.boolean "translator", default: false
     t.boolean "is_influencer", default: false
     t.jsonb "api_token"
-<<<<<<< HEAD
+    t.jsonb "github"
     t.boolean "live_stream_confirmed", default: false
-=======
->>>>>>> updated default schema values to empty strings, updated default setting model values to actually be visually appealing
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -176,7 +153,6 @@ ActiveRecord::Schema.define(version: 20180406213939) do
   end
 
   add_foreign_key "discords", "users"
-  add_foreign_key "rewards", "posts"
   add_foreign_key "rewards", "submissions"
   add_foreign_key "rewards", "users"
   add_foreign_key "submissions", "users"

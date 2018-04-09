@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import StyledMenu from '../styledcomponents/StyledMenu';
+import styled from 'styled-components';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import RightNavs from './RightNavs'
@@ -10,7 +10,7 @@ import {
   Container,
 } from 'semantic-ui-react';
 
-class MobileNavBar extends Component {
+class TabletNavBar extends Component {
   render() {
     const {
       history,
@@ -19,8 +19,7 @@ class MobileNavBar extends Component {
     } = this.props;
 
     return (
-      <Menu
-        as={StyledMenu}
+      <StyledMenu
         secondary
         fixed='top'
         themecolor={backgroundColor}
@@ -30,6 +29,7 @@ class MobileNavBar extends Component {
           icon='content'
         >
           <Dropdown.Menu
+            style={{overflow: 'visible !important'}}
           >
             {routes.map((route, i) => {
               return (
@@ -47,7 +47,7 @@ class MobileNavBar extends Component {
         <div>
           <Image
             src={logo}
-            style={{height: '50px'}}
+            style={{height: '70px'}}
             onClick={() =>
               this.props.history.push('/')
             }
@@ -57,7 +57,7 @@ class MobileNavBar extends Component {
         <div>
           <RightNavs />
         </div>
-      </Menu>
+      </StyledMenu>
     );
   }
 };
@@ -106,6 +106,17 @@ const routes = [
   },
 ];
 
+const StyledMenu = styled.div`
+  background: ${(props) => props.themecolor} !important;
+  justify-content: space-around !important;
+  align-items: center !important;
+  display: flex !important;
+  position: fixed !important;
+  top: 0 !important;
+  width: 100% !important;
+  z-index: 1;
+`;
+
 export default withRouter(
-  connect(mapStateToProps)(MobileNavBar)
+  connect(mapStateToProps)(TabletNavBar)
 );

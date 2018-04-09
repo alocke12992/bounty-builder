@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import StyledLogo from '../styledcomponents/StyledLogo';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import RightNavs from './RightNavs';
@@ -23,14 +24,12 @@ class LaptopNavBar extends React.Component {
         themecolor={backgroundColor}>
         <Menu.Item>
           <Responsive
-            as={Image}
+            as={StyledLogo}
             src={logo}
-            style={{height: '60px', width: 'auto'}}
             onClick={() =>
               this.props.history.push('/')
             }
             alt="HN Text"
-            minWidth={768}
           />
         </Menu.Item>
         <Responsive as={Container} minWidth={768}>
@@ -50,7 +49,7 @@ const mapStateToProps = (state) => {
 
 const StyledMenu = styled(Menu) `
   background: ${(props) => props.themecolor} !important;
-  height: '100px';
+    align-items;
 `;
 export default withRouter(
   connect(mapStateToProps)(LaptopNavBar)
