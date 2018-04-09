@@ -7,6 +7,7 @@ import ProviderForm from './ProviderForm';
 import RulesForm from './RulesForm';
 import styled from 'styled-components';
 import TranslationForm from './TranslationForm';
+import VideoContestForm from './VideoContestForm';
 import {connect} from 'react-redux';
 import {
   Container,
@@ -46,6 +47,10 @@ class Settings extends React.Component {
     return <TranslationForm />;
   };
 
+  videoContest = () => {
+    return <VideoContestForm />;
+  }
+
   render() {
     const {activeItem} = this.state;
 
@@ -84,6 +89,11 @@ class Settings extends React.Component {
             active={activeItem === 'translation'}
             onClick={this.handleItemClick}
           />
+          <Menu.Item
+            name="video_contest"
+            active={activeItem === 'video_contest'}
+            onClick={this.handleItemClick}
+          />
         </Menu>
         <Divider hidden />
         <Segment>
@@ -98,6 +108,8 @@ class Settings extends React.Component {
             this.influencer()}
           {activeItem === 'translation' &&
             this.translation()}
+          {activeItem === 'video_contest' && 
+            this.videoContest()}
         </Segment>
       </Container>
     );
