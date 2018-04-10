@@ -7,12 +7,8 @@ import ProviderForm from './ProviderForm';
 import RulesForm from './RulesForm';
 import styled from 'styled-components';
 import TranslationForm from './TranslationForm';
-<<<<<<< HEAD
 import VideoContestForm from './VideoContestForm';
-import {connect} from 'react-redux';
-=======
 import { connect } from 'react-redux';
->>>>>>> Add message to succesfully submitting forms
 import {
   Container,
   Divider,
@@ -53,7 +49,7 @@ class Settings extends React.Component {
 
   videoContest = () => {
     return <VideoContestForm />;
-  }
+  };
 
   render() {
     const { activeItem } = this.state;
@@ -112,7 +108,7 @@ class Settings extends React.Component {
             this.influencer()}
           {activeItem === 'translation' &&
             this.translation()}
-          {activeItem === 'video_contest' && 
+          {activeItem === 'video_contest' &&
             this.videoContest()}
         </Segment>
       </Container>
