@@ -1,14 +1,18 @@
 import React from 'react';
 import ThemeOptions from './ThemeOptions';
 import DashboardForm from './DashboardForm';
-import {fetchSettings} from '../actions/settings';
+import { fetchSettings } from '../actions/settings';
 import InfluencerForm from './InfluencerForm';
 import ProviderForm from './ProviderForm';
 import RulesForm from './RulesForm';
 import styled from 'styled-components';
 import TranslationForm from './TranslationForm';
+<<<<<<< HEAD
 import VideoContestForm from './VideoContestForm';
 import {connect} from 'react-redux';
+=======
+import { connect } from 'react-redux';
+>>>>>>> Add message to succesfully submitting forms
 import {
   Container,
   Divider,
@@ -18,10 +22,10 @@ import {
 } from 'semantic-ui-react';
 
 class Settings extends React.Component {
-  state = {activeItem: 'theme_options'};
+  state = { activeItem: 'theme_options' };
 
-  handleItemClick = (e, {name}) =>
-    this.setState({activeItem: name});
+  handleItemClick = (e, { name }) =>
+    this.setState({ activeItem: name });
 
   themeOptions = () => {
     return <ThemeOptions />;
@@ -52,11 +56,13 @@ class Settings extends React.Component {
   }
 
   render() {
-    const {activeItem} = this.state;
+    const { activeItem } = this.state;
 
     return (
       <Container>
-        <Header as="h1">Settings</Header>
+        <Header as="h1" color="blue">
+          Settings
+        </Header>
         <Divider hidden />
         <Menu attached="top" pointing>
           <Menu.Item
@@ -99,10 +105,8 @@ class Settings extends React.Component {
         <Segment>
           {activeItem === 'theme_options' &&
             this.themeOptions()}
-          {activeItem === 'dashboard' &&
-            this.dashboard()}
-          {activeItem === 'provider' &&
-            this.provider()}
+          {activeItem === 'dashboard' && this.dashboard()}
+          {activeItem === 'provider' && this.provider()}
           {activeItem === 'rules' && this.rules()}
           {activeItem === 'influencer' &&
             this.influencer()}
@@ -118,14 +122,14 @@ class Settings extends React.Component {
 
 export const toolbar = [
   ['bold', 'italic', 'underline', 'strike'],
-  [{ 'header': 1 }, { 'header': 2 }],
-  [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-  [{ 'script': 'sub'}, { 'script': 'super' }],
-  [{ 'indent': '-1'}, { 'indent': '+1' }],
-  [{ 'direction': 'rtl' }],
-  [{ 'color': [] }, { 'background': [] }],
-  [{ 'font': [] }],
-  [{ 'align': [] }],
+  [{ header: 1 }, { header: 2 }],
+  [{ list: 'ordered' }, { list: 'bullet' }],
+  [{ script: 'sub' }, { script: 'super' }],
+  [{ indent: '-1' }, { indent: '+1' }],
+  [{ direction: 'rtl' }],
+  [{ color: [] }, { background: [] }],
+  [{ font: [] }],
+  [{ align: [] }],
   ['clean'],
 ];
 

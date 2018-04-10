@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactQuill from 'react-quill';
 import { connect } from 'react-redux';
-import { toolbar } from './Settings'
+import { setFlash } from '../actions/flash';
+import { toolbar } from './Settings';
 import { updateSettings } from '../actions/settings';
 import {
   Button,
@@ -32,7 +33,12 @@ class TranslationForm extends React.Component {
     const translation = { ...this.state };
     const { dispatch } = this.props;
     dispatch(updateSettings(translation));
-    this.setState({ translation });
+    dispatch(
+      setFlash(
+        'Your changes to the Translation have been submitted and saved.',
+        'blue',
+      ),
+    );
   };
 
   translation = () => {
@@ -43,13 +49,13 @@ class TranslationForm extends React.Component {
 
     return (
       <Container>
-        <Header as="h1" color="orange" textAlign="center">
+        <Header as="h1" color="blue" textAlign="center">
           Translation
         </Header>
         <Divider hidden />
         <Form onSubmit={this.handleSubmit}>
           <Form.Field>
-            <Header as="h4" color="orange">
+            <Header as="h4" color="blue">
               Rules
             </Header>
             <ReactQuill
@@ -65,7 +71,7 @@ class TranslationForm extends React.Component {
             <Divider hidden />
           </Form.Field>
           <Form.Field>
-            <Header as="h4" color="orange">
+            <Header as="h4" color="blue">
               Link
             </Header>
             <ReactQuill
@@ -83,7 +89,7 @@ class TranslationForm extends React.Component {
           <Form.Button
             size="normal"
             floated="right"
-            color="green">
+            color="blue">
             Submit All Changes
           </Form.Button>
         </Form>
@@ -93,13 +99,15 @@ class TranslationForm extends React.Component {
 
   render() {
     return (
-      <Grid>
-        <Grid.Row>
-          <Grid.Column width={16}>
-            {this.translation()}
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
+      <Container>
+        <Grid>
+          <Grid.Row>
+            <Grid.Column width={16}>
+              {this.translation()}
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      </Container>
     );
   }
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactQuill from 'react-quill';
-import { toolbar } from './Settings'
+import { setFlash } from '../actions/flash';
+import { toolbar } from './Settings';
 import { updateSettings } from '../actions/settings';
 import {
   Button,
@@ -33,7 +34,12 @@ class InfluencerForm extends React.Component {
     const influencer = { ...this.state };
     const { dispatch } = this.props;
     dispatch(updateSettings(influencer));
-    this.setState({ influencer });
+    dispatch(
+      setFlash(
+        'Your changes to the Influencer have been submitted and saved.',
+        'blue',
+      ),
+    );
   };
 
   influencer = () => {
@@ -45,16 +51,13 @@ class InfluencerForm extends React.Component {
 
     return (
       <Container>
-        <Header
-          as="h1"
-          color="olive"
-          textAlign="center">
+        <Header as="h1" color="blue" textAlign="center">
           Influencer
         </Header>
         <Divider hidden />
         <Form onSubmit={this.handleSubmit}>
           <Form.Field>
-            <Header as="h4" color="olive">
+            <Header as="h4" color="blue">
               Rules
             </Header>
             <ReactQuill
@@ -70,7 +73,7 @@ class InfluencerForm extends React.Component {
             <Divider hidden />
           </Form.Field>
           <Form.Field>
-            <Header as="h4" color="olive">
+            <Header as="h4" color="blue">
               Shares
             </Header>
             <ReactQuill
@@ -86,7 +89,7 @@ class InfluencerForm extends React.Component {
             <Divider hidden />
           </Form.Field>
           <Form.Field>
-            <Header as="h4" color="olive">
+            <Header as="h4" color="blue">
               Link
             </Header>
             <ReactQuill
@@ -104,7 +107,7 @@ class InfluencerForm extends React.Component {
           <Form.Button
             size="normal"
             floated="right"
-            color="green">
+            color="blue">
             Submit All Changes
           </Form.Button>
         </Form>
@@ -114,13 +117,15 @@ class InfluencerForm extends React.Component {
 
   render() {
     return (
-      <Grid>
-        <Grid.Row>
-          <Grid.Column width={16}>
-            {this.influencer()}
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
+      <Container>
+        <Grid>
+          <Grid.Row>
+            <Grid.Column width={16}>
+              {this.influencer()}
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      </Container>
     );
   }
 }
@@ -140,6 +145,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(
-  InfluencerForm,
-);
+export default connect(mapStateToProps)(InfluencerForm);

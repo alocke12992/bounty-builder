@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactQuill from 'react-quill';
 import { connect } from 'react-redux';
-import { toolbar } from './Settings'
+import { setFlash } from '../actions/flash';
+import { toolbar } from './Settings';
 import { updateSettings } from '../actions/settings';
 import {
   Button,
@@ -38,6 +39,12 @@ class DashboardForm extends React.Component {
     const dashboard = { ...this.state };
     const { dispatch } = this.props;
     dispatch(updateSettings(dashboard));
+    dispatch(
+      setFlash(
+        'Your changes to the Dashboard have been submitted and saved.',
+        'blue',
+      ),
+    );
   };
 
   dashboard = () => {
@@ -53,15 +60,12 @@ class DashboardForm extends React.Component {
     } = this.state;
     return (
       <Container>
-        <Header
-          as="h1"
-          color="violet"
-          textAlign="center">
+        <Header as="h1" color="blue" textAlign="center">
           Dashboard
         </Header>
         <Divider hidden />
         <Form onSubmit={this.handleSubmit}>
-          <Header as="h4" color="violet">
+          <Header as="h4" color="blue">
             Description
           </Header>
           <Form.Field>
@@ -78,7 +82,7 @@ class DashboardForm extends React.Component {
             <Divider hidden />
           </Form.Field>
           <Form.Field>
-            <Header as="h4" color="violet">
+            <Header as="h4" color="blue">
               Regulations
             </Header>
             <ReactQuill
@@ -91,7 +95,7 @@ class DashboardForm extends React.Component {
             <Divider hidden />
           </Form.Field>
           <Form.Field>
-            <Header as="h4" color="violet">
+            <Header as="h4" color="blue">
               Number of Users
             </Header>
             <ReactQuill
@@ -104,7 +108,7 @@ class DashboardForm extends React.Component {
             <Divider hidden />
           </Form.Field>
           <Form.Field>
-            <Header as="h4" color="violet">
+            <Header as="h4" color="blue">
               Number of Shares
             </Header>
             <ReactQuill
@@ -117,7 +121,7 @@ class DashboardForm extends React.Component {
             <Divider hidden />
           </Form.Field>
           <Form.Field>
-            <Header as="h4" color="violet">
+            <Header as="h4" color="blue">
               Telegram
             </Header>
             <ReactQuill
@@ -130,7 +134,7 @@ class DashboardForm extends React.Component {
             <Divider hidden />
           </Form.Field>
           <Form.Field>
-            <Header as="h4" color="violet">
+            <Header as="h4" color="blue">
               Invite to Telegram
             </Header>
             <ReactQuill
@@ -146,7 +150,7 @@ class DashboardForm extends React.Component {
             <Divider hidden />
           </Form.Field>
           <Form.Field>
-            <Header as="h4" color="violet">
+            <Header as="h4" color="blue">
               Etherium Wallet
             </Header>
             <ReactQuill
@@ -159,7 +163,7 @@ class DashboardForm extends React.Component {
             <Divider hidden />
           </Form.Field>
           <Form.Field>
-            <Header as="h4" color="violet">
+            <Header as="h4" color="blue">
               Invitation Link
             </Header>
             <ReactQuill
@@ -177,7 +181,7 @@ class DashboardForm extends React.Component {
           <Form.Button
             size="normal"
             floated="right"
-            color="green">
+            color="blue">
             Submit All Changes
           </Form.Button>
         </Form>
@@ -187,13 +191,15 @@ class DashboardForm extends React.Component {
 
   render() {
     return (
-      <Grid>
-        <Grid.Row>
-          <Grid.Column width={16}>
-            {this.dashboard()}
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
+      <Container>
+        <Grid>
+          <Grid.Row>
+            <Grid.Column width={16}>
+              {this.dashboard()}
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      </Container>
     );
   }
 }

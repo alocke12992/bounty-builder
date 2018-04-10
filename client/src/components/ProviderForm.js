@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactQuill from 'react-quill';
-import { toolbar } from './Settings'
+import { setFlash } from '../actions/flash';
+import { toolbar } from './Settings';
 import { updateSettings } from '../actions/settings';
 import {
   Button,
@@ -49,7 +50,12 @@ class ProviderForm extends React.Component {
     const provider = { ...this.state };
     const { dispatch } = this.props;
     dispatch(updateSettings(provider));
-    this.setState({ provider });
+    dispatch(
+      setFlash(
+        'Your changes to the Provider have been submitted and saved.',
+        'blue',
+      ),
+    );
   };
 
   provider = () => {
@@ -132,7 +138,7 @@ class ProviderForm extends React.Component {
           <Form.Button
             size="normal"
             floated="right"
-            color="green">
+            color="blue">
             Submit All Changes
           </Form.Button>
         </Form>
@@ -142,13 +148,15 @@ class ProviderForm extends React.Component {
 
   render() {
     return (
-      <Grid>
-        <Grid.Row>
-          <Grid.Column width={16}>
-            {this.provider()}
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
+      <Container>
+        <Grid>
+          <Grid.Row>
+            <Grid.Column width={16}>
+              {this.provider()}
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      </Container>
     );
   }
 }

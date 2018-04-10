@@ -148,6 +148,7 @@ class Dashboard extends React.Component {
         { !this.props.user.live_stream_confirmed && showLiveStreamForm &&
           <Segment color='red'>
             <p><strong>All participants must enter a code from the weekly live stream to receive any earned rewards.</strong></p>
+            <br />
             <Form onSubmit={this.handleLiveStreamSubmit}>
               <Form.Input
                 value={liveStreamConfirmationCode}
@@ -172,7 +173,6 @@ class Dashboard extends React.Component {
             as={Divider}
             minWidth={992}
           />
-          <Divider />
           <GenerateHtml text={dash_description} />
         </Segment>
         <Segment>

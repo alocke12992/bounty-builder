@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactQuill from 'react-quill';
 import { connect } from 'react-redux';
-import { toolbar } from './Settings'
+import { setFlash } from '../actions/flash';
+import { toolbar } from './Settings';
 import { updateSettings } from '../actions/settings';
 import {
   Button,
@@ -32,7 +33,12 @@ class RulesForm extends React.Component {
     const rules = { ...this.state };
     const { dispatch } = this.props;
     dispatch(updateSettings(rules));
-    this.setState({ rules });
+    dispatch(
+      setFlash(
+        'Your changes to the Rules have been submitted and saved.',
+        'blue',
+      ),
+    );
   };
 
   rules = () => {
@@ -40,16 +46,13 @@ class RulesForm extends React.Component {
 
     return (
       <Container>
-        <Header
-          as="h1"
-          color="teal"
-          textAlign="center">
+        <Header as="h1" color="blue" textAlign="center">
           Rules
         </Header>
         <Divider hidden />
         <Form onSubmit={this.handleSubmit}>
           <Form.Field>
-            <Header as="h4" color="teal">
+            <Header as="h4" color="blue">
               Main Content
             </Header>
             <ReactQuill
@@ -62,7 +65,7 @@ class RulesForm extends React.Component {
             <Divider hidden />
           </Form.Field>
           <Form.Field>
-            <Header as="h4" color="teal">
+            <Header as="h4" color="blue">
               Regulations
             </Header>
             <ReactQuill
@@ -77,7 +80,7 @@ class RulesForm extends React.Component {
           <Form.Button
             size="normal"
             floated="right"
-            color="green">
+            color="blue">
             Submit All Changes
           </Form.Button>
         </Form>
@@ -87,23 +90,21 @@ class RulesForm extends React.Component {
 
   render() {
     return (
-      <Grid>
-        <Grid.Row>
-          <Grid.Column width={16}>
-            {this.rules()}
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
+      <Container>
+        <Grid>
+          <Grid.Row>
+            <Grid.Column width={16}>
+              {this.rules()}
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      </Container>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  const {
-    rules_main,
-    regulations,
-    id,
-  } = state.settings;
+  const { rules_main, regulations, id } = state.settings;
   return {
     rules_main,
     regulations,
