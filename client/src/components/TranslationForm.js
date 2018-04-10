@@ -17,7 +17,8 @@ import {
 class TranslationForm extends React.Component {
   state = {
     translation_rules: '',
-    translation_link: '',
+    is_translator: '',
+    not_translator: '',
   };
 
   componentDidMount() {
@@ -44,7 +45,8 @@ class TranslationForm extends React.Component {
   translation = () => {
     const {
       translation_rules,
-      translation_link,
+      is_translator,
+      not_translator,
     } = this.state;
 
     return (
@@ -71,16 +73,32 @@ class TranslationForm extends React.Component {
             <Divider hidden />
           </Form.Field>
           <Form.Field>
-            <Header as="h4" color="blue">
-              Link
+            <Header as="h4" color="orange">
+              Text For Translators
             </Header>
             <ReactQuill
-              value={translation_link}
+              value={is_translator}
               modules={{ toolbar }}
               onChange={(value) =>
                 this.handleChange(
                   value,
-                  'translation_link',
+                  'is_translator',
+                )
+              }
+            />
+            <Divider hidden />
+          </Form.Field>
+          <Form.Field>
+            <Header as="h4" color="orange">
+              Text For Non-Translators
+            </Header>
+            <ReactQuill
+              value={not_translator}
+              modules={{ toolbar }}
+              onChange={(value) =>
+                this.handleChange(
+                  value,
+                  'not_translator',
                 )
               }
             />
@@ -115,12 +133,14 @@ class TranslationForm extends React.Component {
 const mapStateToProps = (state) => {
   const {
     translation_rules,
-    translation_link,
+    is_translator,
+    not_translator,
     id,
   } = state.settings;
   return {
     translation_rules,
-    translation_link,
+    is_translator,
+    not_translator,
     id,
   };
 };

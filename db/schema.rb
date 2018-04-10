@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180406221322) do
+ActiveRecord::Schema.define(version: 20180410211851) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,16 @@ ActiveRecord::Schema.define(version: 20180406221322) do
     t.string "code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.string "url"
+    t.string "kind"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "reward_id"
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_posts_on_deleted_at"
   end
 
   create_table "rewards", force: :cascade do |t|
@@ -65,7 +75,6 @@ ActiveRecord::Schema.define(version: 20180406221322) do
     t.text "influencer_shares", default: ""
     t.text "influencer_link", default: ""
     t.text "translation_rules", default: ""
-    t.text "translation_link", default: ""
     t.string "logo_url", default: ""
     t.string "primary_color", default: ""
     t.datetime "created_at", null: false
@@ -76,7 +85,8 @@ ActiveRecord::Schema.define(version: 20180406221322) do
     t.boolean "twitter", default: false
     t.boolean "linkedin", default: false
     t.boolean "reddit", default: false
-    t.string "about", default: ""
+    t.text "is_translator", default: ""
+    t.text "not_translator", default: ""
   end
 
   create_table "submissions", force: :cascade do |t|
@@ -143,7 +153,6 @@ ActiveRecord::Schema.define(version: 20180406221322) do
     t.boolean "translator", default: false
     t.boolean "is_influencer", default: false
     t.jsonb "api_token"
-    t.jsonb "github"
     t.boolean "live_stream_confirmed", default: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
@@ -153,6 +162,7 @@ ActiveRecord::Schema.define(version: 20180406221322) do
   end
 
   add_foreign_key "discords", "users"
+  add_foreign_key "rewards", "posts"
   add_foreign_key "rewards", "submissions"
   add_foreign_key "rewards", "users"
   add_foreign_key "submissions", "users"
