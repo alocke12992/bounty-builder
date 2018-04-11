@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactQuill from 'react-quill';
-import { connect } from 'react-redux';
-import { setFlash } from '../actions/flash';
-import { toolbar } from './Settings';
-import { updateSettings } from '../actions/settings';
+import {connect} from 'react-redux';
+import {setFlash} from '../actions/flash';
+import {toolbar} from './Settings';
+import {updateSettings} from '../actions/settings';
 import {
   Button,
   Container,
@@ -21,17 +21,17 @@ class TranslationForm extends React.Component {
   };
 
   componentDidMount() {
-    this.setState({ ...this.props });
+    this.setState({...this.props});
   }
 
   handleChange = (value, name) => {
-    this.setState({ [name]: value });
+    this.setState({[name]: value});
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const translation = { ...this.state };
-    const { dispatch } = this.props;
+    const translation = {...this.state};
+    const {dispatch} = this.props;
     dispatch(updateSettings(translation));
     dispatch(
       setFlash(
@@ -60,7 +60,7 @@ class TranslationForm extends React.Component {
             </Header>
             <ReactQuill
               value={trans_rules}
-              modules={{ toolbar }}
+              modules={{toolbar}}
               onChange={(value) =>
                 this.handleChange(
                   value,
@@ -72,27 +72,11 @@ class TranslationForm extends React.Component {
           </Form.Field>
           <Form.Field>
             <Header as="h4" color="orange">
-              Text For Translators
-            </Header>
-            <ReactQuill
-              value={is_translator}
-              modules={{ toolbar }}
-              onChange={(value) =>
-                this.handleChange(
-                  value,
-                  'is_translator',
-                )
-              }
-            />
-            <Divider hidden />
-          </Form.Field>
-          <Form.Field>
-            <Header as="h4" color="orange">
               Text For Non-Translators
             </Header>
             <ReactQuill
               value={trans_link}
-              modules={{ toolbar }}
+              modules={{toolbar}}
               onChange={(value) =>
                 this.handleChange(
                   value,

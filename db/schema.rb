@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20180410211851) do
-=======
 ActiveRecord::Schema.define(version: 20180411201402) do
->>>>>>> Overhaul schema and refactor client side variables
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
