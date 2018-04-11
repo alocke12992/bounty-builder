@@ -117,9 +117,9 @@ class RightNavs extends React.Component {
 const mapStateToProps = (state) => {
   const {settings} = state
   return {
-    backgroundColor: settings.primary_color,
+    backgroundColor: settings.theme_nav_color,
     user: state.user,
-    logo: settings.logo_url,
+    logo: settings.theme_logo,
   };
 };
 const devRoutes = [

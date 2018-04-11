@@ -17,8 +17,8 @@ import { connect } from 'react-redux';
 
 class ProviderForm extends React.Component {
   state = {
-    provider_social_media: '',
-    provider_rules: '',
+    prov_social_media: '',
+    prov_action_warning: '',
   };
 
   componentDidMount() {
@@ -26,19 +26,19 @@ class ProviderForm extends React.Component {
   }
 
   toggleFacebook = () => {
-    this.setState({ facebook: !this.state.facebook });
+    this.setState({ prov_facebook: !this.state.prov_facebook });
   };
 
   toggleTwitter = () => {
-    this.setState({ twitter: !this.state.twitter });
+    this.setState({ prov_twitter: !this.state.prov_twitter });
   };
 
   toggleLinkedIn = () => {
-    this.setState({ linkedin: !this.state.linkedin });
+    this.setState({ prov_linkedin: !this.state.prov_linkedin });
   };
 
   toggleReddit = () => {
-    this.setState({ reddit: !this.state.reddit });
+    this.setState({ prov_reddit: !this.state.prov_reddit });
   };
 
   handleChange = (value, name) => {
@@ -60,12 +60,12 @@ class ProviderForm extends React.Component {
 
   provider = () => {
     const {
-      provider_social_media,
-      provider_rules,
-      facebook,
-      twitter,
-      linkedin,
-      reddit,
+      prov_social_media,
+      prov_action_warning,
+      prov_facebook,
+      prov_twitter,
+      prov_linkedin,
+      prov_reddit,
     } = this.state;
 
     return (
@@ -80,25 +80,25 @@ class ProviderForm extends React.Component {
           </Header>
           <Form.Group inline>
             <Form.Field
-              checked={facebook === true}
+              checked={prov_facebook === true}
               control={Checkbox}
               label="Facebook"
               onChange={this.toggleFacebook}
             />
             <Form.Field
-              checked={twitter === true}
+              checked={prov_twitter === true}
               control={Checkbox}
               label="Twitter"
               onChange={this.toggleTwitter}
             />
             <Form.Field
-              checked={linkedin === true}
+              checked={prov_linkedin === true}
               control={Checkbox}
               label="LinkedIn"
               onChange={this.toggleLinkedIn}
             />
             <Form.Field
-              checked={reddit === true}
+              checked={prov_reddit === true}
               control={Checkbox}
               label="Reddit"
               onChange={this.toggleReddit}
@@ -110,12 +110,12 @@ class ProviderForm extends React.Component {
               Social Media
             </Header>
             <ReactQuill
-              value={provider_social_media}
+              value={prov_social_media}
               modules={{ toolbar }}
               onChange={(value) =>
                 this.handleChange(
                   value,
-                  'provider_social_media',
+                  'prov_social_media',
                 )
               }
             />
@@ -126,10 +126,10 @@ class ProviderForm extends React.Component {
               Rules
             </Header>
             <ReactQuill
-              value={provider_rules}
+              value={prov_action_warning}
               modules={{ toolbar }}
               onChange={(value) =>
-                this.handleChange(value, 'provider_rules')
+                this.handleChange(value, 'prov_action_warning')
               }
             />
             <Divider hidden />
@@ -163,21 +163,21 @@ class ProviderForm extends React.Component {
 
 const mapStateToProps = (state) => {
   const {
-    provider_social_media,
-    provider_rules,
-    facebook,
-    twitter,
-    linkedin,
-    reddit,
+    prov_social_media,
+    prov_action_warning,
+    prov_facebook,
+    prov_twitter,
+    prov_linkedin,
+    prov_reddit,
     id,
   } = state.settings;
   return {
-    provider_social_media,
-    provider_rules,
-    facebook,
-    twitter,
-    linkedin,
-    reddit,
+    prov_social_media,
+    prov_action_warning,
+    prov_facebook,
+    prov_twitter,
+    prov_linkedin,
+    prov_reddit,
     id,
   };
 };

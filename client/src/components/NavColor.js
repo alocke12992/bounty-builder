@@ -9,7 +9,7 @@ class NavColor extends React.Component {
 
   navChange = (navColor) => {
     const {dispatch, id} = this.props
-    const color = {primary_color: navColor.hex, id}
+    const color = {theme_nav_color: navColor.hex, id}
     dispatch(updateSettings(color))
   };
 
@@ -35,7 +35,7 @@ const mapStateToProps = (state) => {
   const {settings} = state
   return {
     id: settings.id,
-    navColor: settings.primary_color,
+    navColor: settings.theme_nav_color,
   };
 };
 

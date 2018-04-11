@@ -39,10 +39,10 @@ class Home extends React.Component {
 
   toggleRoutes = () => {
     const {
-      facebook,
-      twitter,
-      linkedin,
-      reddit,
+      prov_facebook,
+      prov_twitter,
+      prov_linkedin,
+      prov_reddit,
     } = this.props;
 
     const routes = [
@@ -85,13 +85,13 @@ class Home extends React.Component {
       {
         name: 'Facebook',
         path: '/facebook',
-        active: facebook,
+        active: prov_facebook,
         main: () => <Facebook service="facebook" />,
       },
       {
         name: 'Twitter',
         path: '/twitter',
-        active: twitter,
+        active: prov_twitter,
         main: () => (
           <Twitter service="twitter" submissions={true} />
         ),
@@ -99,7 +99,7 @@ class Home extends React.Component {
       {
         name: 'LinkedIn',
         path: '/linkedin',
-        active: linkedin,
+        active: prov_linkedin,
         main: () => (
           <LinkedIn
             service="linkedin"
@@ -110,7 +110,7 @@ class Home extends React.Component {
       {
         name: 'Reddit',
         path: '/reddit',
-        active: reddit,
+        active: prov_reddit,
         main: () => (
           <Reddit service="reddit" submissions={true} />
         ),
@@ -173,16 +173,16 @@ class Home extends React.Component {
 
 const mapStateToProps = (state) => {
   const {
-    facebook,
-    twitter,
-    linkedin,
-    reddit,
+    prov_facebook,
+    prov_twitter,
+    prov_linkedin,
+    prov_reddit,
   } = state.settings;
   return {
-    facebook,
-    twitter,
-    linkedin,
-    reddit,
+    prov_facebook,
+    prov_twitter,
+    prov_linkedin,
+    prov_reddit,
   };
 };
 export default connect(mapStateToProps)(Home);

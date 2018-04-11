@@ -5,11 +5,11 @@ import { Segment } from 'semantic-ui-react';
 
 class SocialMediaRules extends React.Component {
   render() {
-    const { provider_social_media } = this.props;
+    const { prov_social_media } = this.props;
 
     return (
       <Segment>
-       <GenerateHtml text={provider_social_media} />
+       <GenerateHtml text={prov_social_media} />
       </Segment>
     );
   }
@@ -17,8 +17,8 @@ class SocialMediaRules extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    provider_social_media:
-      state.settings.provider_social_media,
+    prov_social_media:
+      state.settings.prov_social_media,
   };
 };
 

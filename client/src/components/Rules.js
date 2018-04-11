@@ -5,20 +5,19 @@ import { connect } from 'react-redux';
 
 class Rules extends React.Component {
   initialState = {
-    rules_main: '',
-    regulations: '',
+    rules_about: '',
     id: null,
   };
 
   state = { ...this.initialState };
 
   render() {
-    const { rules_main, regulation } = this.props;
+    const { rules_about, regulation } = this.props;
 
     return (
       <Container>
         <Segment>
-          <GenerateHtml text={rules_main} />
+          <GenerateHtml text={rules_about} />
         </Segment>
       </Container>
     );
@@ -26,10 +25,10 @@ class Rules extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  const { rules_main, regulations, id } = state.settings;
+  const { rules_about, regulations, id } = state.settings;
   return {
     user: state.user,
-    rules_main,
+    rules_about,
     regulations,
     id,
   };

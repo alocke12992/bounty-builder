@@ -23,9 +23,9 @@ class LaptopNavBar extends React.Component {
         secondary
         themecolor={backgroundColor}>
         <Menu.Item>
-          <Responsive
-            as={StyledLogo}
+          <Image
             src={logo}
+            style={{height: '65px'}}
             onClick={() =>
               this.props.history.push('/')
             }
@@ -42,8 +42,8 @@ class LaptopNavBar extends React.Component {
 const mapStateToProps = (state) => {
   const {settings} = state
   return {
-    backgroundColor: settings.primary_color,
-    logo: settings.logo_url,
+    backgroundColor: settings.theme_nav_color,
+    logo: settings.theme_logo,
   };
 };
 

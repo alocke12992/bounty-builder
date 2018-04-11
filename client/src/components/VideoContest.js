@@ -47,7 +47,7 @@ class VideoContest extends React.Component {
             <Grid.Column>
               <Segment>
                 <div>
-                 <GenerateHtml text={this.props.settings.video_contest} />
+                 <GenerateHtml text={this.props.settings.video_rules} />
                   <p>&nbsp;</p>
                   <p style={{ lineHeight: '1.56', marginTop: '10pt', marginBottom: '0pt' }}><span style={{ fontFamily: 'arial, helvetica, sans-serif', color: '#000000' }}><strong><span style={{ fontSize: '11pt', backgroundColor: 'transparent', fontVariant: 'normal', textDecoration: 'none', verticalAlign: 'baseline', whiteSpace: 'pre-wrap' }}>*Participants are responsible for knowing the participation rules in their countries and cannot participate if entry is prohibited.*</span></strong></span></p>
                 </div>

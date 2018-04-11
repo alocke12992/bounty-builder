@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20180410211851) do
+=======
+ActiveRecord::Schema.define(version: 20180411201402) do
+>>>>>>> Overhaul schema and refactor client side variables
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,33 +64,30 @@ ActiveRecord::Schema.define(version: 20180410211851) do
   end
 
   create_table "settings", force: :cascade do |t|
-    t.text "dash_description", default: ""
-    t.text "regulations", default: ""
-    t.text "num_users", default: ""
-    t.text "num_shares", default: ""
-    t.text "telegram", default: ""
-    t.text "invitation_link", default: ""
-    t.text "telegram_invite", default: ""
-    t.text "etherium", default: ""
-    t.text "provider_social_media", default: ""
-    t.text "provider_rules", default: ""
-    t.text "rules_main", default: ""
-    t.text "influencer_rules", default: ""
-    t.text "influencer_shares", default: ""
-    t.text "influencer_link", default: ""
-    t.text "translation_rules", default: ""
-    t.string "logo_url", default: ""
-    t.string "primary_color", default: ""
+    t.text "dash_overview", default: ""
+    t.text "dash_users", default: ""
+    t.text "dash_tokens", default: ""
+    t.text "dash_invitation_link", default: ""
+    t.text "dash_telegram", default: ""
+    t.text "dash_ethereum", default: ""
+    t.text "prov_social_media", default: ""
+    t.text "prov_action_warning", default: ""
+    t.text "rules_about", default: ""
+    t.text "infl_submission", default: ""
+    t.text "infl_bounties", default: ""
+    t.text "infl_link", default: ""
+    t.text "trans_rules", default: ""
+    t.text "trans_link", default: ""
+    t.string "theme_logo", default: ""
+    t.string "theme_nav_color", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "button_color", default: ""
-    t.text "video_contest", default: ""
-    t.boolean "facebook", default: false
-    t.boolean "twitter", default: false
-    t.boolean "linkedin", default: false
-    t.boolean "reddit", default: false
-    t.text "is_translator", default: ""
-    t.text "not_translator", default: ""
+    t.string "theme_button_color", default: ""
+    t.text "video_rules", default: ""
+    t.boolean "prov_facebook", default: false
+    t.boolean "prov_twitter", default: false
+    t.boolean "prov_linkedin", default: false
+    t.boolean "prov_reddit", default: false
   end
 
   create_table "submissions", force: :cascade do |t|

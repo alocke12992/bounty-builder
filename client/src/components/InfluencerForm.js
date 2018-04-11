@@ -16,9 +16,9 @@ import { connect } from 'react-redux';
 
 class InfluencerForm extends React.Component {
   state = {
-    influencer_rules: '',
-    influencer_shares: '',
-    influencer_link: '',
+    infl_submission: '',
+    infl_bounties: '',
+    infl_link: '',
   };
 
   componentDidMount() {
@@ -44,9 +44,9 @@ class InfluencerForm extends React.Component {
 
   influencer = () => {
     const {
-      influencer_rules,
-      influencer_shares,
-      influencer_link,
+      infl_submission,
+      infl_bounties,
+      infl_link,
     } = this.state;
 
     return (
@@ -61,12 +61,12 @@ class InfluencerForm extends React.Component {
               Rules
             </Header>
             <ReactQuill
-              value={influencer_rules}
+              value={infl_submission}
               modules={{ toolbar }}
               onChange={(value) =>
                 this.handleChange(
                   value,
-                  'influencer_rules',
+                  'infl_submission',
                 )
               }
             />
@@ -77,12 +77,12 @@ class InfluencerForm extends React.Component {
               Shares
             </Header>
             <ReactQuill
-              value={influencer_shares}
+              value={infl_bounties}
               modules={{ toolbar }}
               onChange={(value) =>
                 this.handleChange(
                   value,
-                  'influencer_shares',
+                  'infl_bounties',
                 )
               }
             />
@@ -93,12 +93,12 @@ class InfluencerForm extends React.Component {
               Link
             </Header>
             <ReactQuill
-              value={influencer_link}
+              value={infl_link}
               modules={{ toolbar }}
               onChange={(value) =>
                 this.handleChange(
                   value,
-                  'influencer_link',
+                  'infl_link',
                 )
               }
             />
@@ -132,15 +132,15 @@ class InfluencerForm extends React.Component {
 
 const mapStateToProps = (state) => {
   const {
-    influencer_rules,
-    influencer_shares,
-    influencer_link,
+    infl_submission,
+    infl_bounties,
+    infl_link,
     id,
   } = state.settings;
   return {
-    influencer_rules,
-    influencer_shares,
-    influencer_link,
+    infl_submission,
+    infl_bounties,
+    infl_link,
     id,
   };
 };

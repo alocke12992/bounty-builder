@@ -72,7 +72,7 @@ class ThemeOptions extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    buttonColor: state.settings.button_color,
+    buttonColor: state.settings.theme_button_color,
   };
 };
 

@@ -12,14 +12,14 @@ import GenerateHtml from './GenerateHtml';
 class Invite extends React.Component {
 
   render() {
-    const { invitation_link } = this.props;
+    const { dash_invitation_link } = this.props;
     return (
       <Container>
         <Grid stackable columns={1}>
           <Grid.Row>
             <Grid.Column>
               <Segment>
-                <GenerateHtml text={invitation_link} />
+                <GenerateHtml text={dash_invitation_link} />
               </Segment>
             </Grid.Column>
           </Grid.Row>
@@ -32,7 +32,7 @@ class Invite extends React.Component {
 const mapStateToProps = (state) => {
   return {
     invite_code: state.user.outgoing_invite_code,
-    invitation_link: state.settings.invitation_link,
+    dash_invitation_link: state.settings.dash_invitation_link,
   };
 };
 

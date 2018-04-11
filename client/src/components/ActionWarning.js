@@ -5,10 +5,10 @@ import { Container } from 'semantic-ui-react';
 
 class ActionWarning extends React.Component {
   render() {
-    const { provider_rules } = this.props;
+    const { prov_action_warning } = this.props;
     return (
       <Container>
-        <GenerateHtml text={provider_rules} />
+        <GenerateHtml text={prov_action_warning} />
       </Container>
     );
   }
@@ -16,7 +16,7 @@ class ActionWarning extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    provider_rules: state.settings.provider_rules,
+    prov_action_warning: state.settings.prov_action_warning,
   };
 };
 export default connect(mapStateToProps)(ActionWarning);

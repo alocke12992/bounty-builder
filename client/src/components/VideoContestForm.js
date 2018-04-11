@@ -14,7 +14,7 @@ import {
 } from 'semantic-ui-react';
 
 class VideoContestForm extends React.Component {
-  state = { video_contest: '' }
+  state = { video_rules: '' }
 
   componentDidMount() {
     this.setState({ ...this.props });
@@ -27,14 +27,13 @@ class VideoContestForm extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const videoContest = { ...this.state };
-    debugger
     const { dispatch } = this.props;
     dispatch(updateSettings(videoContest));
     this.setState({ videoContest });
   };
 
   videoContest = () => {
-    const { video_contest } = this.state
+    const { video_rules } = this.state
     return (
       <Container>
         <Header as="h1" color="red" textAlign="center">
@@ -47,12 +46,12 @@ class VideoContestForm extends React.Component {
               Rules
             </Header>
             <ReactQuill
-              value={video_contest}
+              value={video_rules}
               modules={{ toolbar }}
               onChange={(value) =>
                 this.handleChange(
                   value,
-                  'video_contest',
+                  'video_rules',
                 )
               }
             />
@@ -83,9 +82,9 @@ class VideoContestForm extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  const { video_contest, id } = state.settings
+  const { video_rules, id } = state.settings
   return { 
-    video_contest, id
+    video_rules, id
   }
 }
 

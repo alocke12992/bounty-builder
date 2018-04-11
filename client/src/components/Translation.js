@@ -6,33 +6,37 @@ import { withRouter } from 'react-router-dom';
 import { Button, Container, Grid, Header, Segment, } from 'semantic-ui-react';
 
 class Translation extends React.Component {
-  
+  initialState = {
+    trans_rules: '',
+    trans_link: '',
+    }
+
+  state = { ...this.initialState };
+
   render() {
     const { 
-      translation_rules,
-      is_translator,
-      not_translator, 
+      trans_rules, 
+      trans_link 
     } = this.props;
     return (
       <Container>
-        <Segment>
-          <GenerateHtml text={translation_rules} />
-            {
-              this.props.user.translator ?
-                <div>
-                  <GenerateHtml text={is_translator} />
-                </div>
-              :
-                <div>
-{/* SUBMISSION BUTTON OR LINK GOES HERE */}
-                  <Button color='green' as='a' target="_blank" href="https://goo.gl/forms/Tdqnd3won6vuhz3E3">Submit a Sample Translation</Button>
-                  <GenerateHtml text={not_translator} />
-                </div>
-            }
-        </Segment>
-          { this.props.user.translator &&
-            <Submissions kind={'translation'}/>
-          }
+        <Grid stackable columns={2}>
+          <Grid.Row>
+            <Grid.Column>
+              <Segment>
+                <GenerateHtml text={trans_rules} />
+              </Segment>
+              { this.props.user.translator &&
+                <Submissions kind={'translation'}/>
+              }
+            </Grid.Column>
+            <Grid.Column>
+              <Segment>
+                <GenerateHtml text={trans_link} />
+            </Segment>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
       </Container>
     )
   }
@@ -40,16 +44,14 @@ class Translation extends React.Component {
 
 const mapStateToProps = (state) => {
   const {
-    translation_rules,
-    is_translator,
-    not_translator,
+    trans_rules,
+    trans_link,
     id,
   } = state.settings
   return { 
     user: state.user,
-    is_translator,
-    not_translator,
-    translation_rules,
+    trans_rules,
+    trans_link,
     id,
   }
 }

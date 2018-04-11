@@ -23,7 +23,6 @@ import {
   Responsive,
 } from 'semantic-ui-react';
 var Recaptcha = require('react-recaptcha');
-
 class Dashboard extends React.Component {
   state = {
     captchaVerified: false,
@@ -32,16 +31,13 @@ class Dashboard extends React.Component {
     loading: true,
     showLiveStreamForm: true,
   };
-
   callback = (res) => {
     this.setState({captchaVerified: true});
   };
-
   handleLiveStreamSubmit = (e) => {
     e.preventDefault();
     const { liveStreamConfirmationCode } = this.state;
     const { dispatch } = this.props;
-
     axios.post('/api/confirm_live_stream_code', { code: liveStreamConfirmationCode })
       .then(res => {
         dispatch(setHeaders(res.headers));
@@ -55,12 +51,10 @@ class Dashboard extends React.Component {
         dispatch(setFlash('The confirmation code was incorrect. For account security, you have been logged out.', 'red'));
       })
   };
-
   handleSubmit = (e) => {
     e.preventDefault();
     const { confirmationCode } = this.state;
     const { dispatch } = this.props;
-
     axios.post('/api/confirmations/verify_confirmation', { confirmation_code: confirmationCode })
       .then(res => {
         dispatch(setHeaders(res.headers));
@@ -74,10 +68,8 @@ class Dashboard extends React.Component {
         this.setState({ captchaVerified: false });
       })
   };
-
   renderConfirmationSegment = () => {
     const { captchaVerified, confirmationCode, } = this.state;
-
     return(
       <Segment color="red">
         <p>
@@ -112,7 +104,6 @@ class Dashboard extends React.Component {
       </Segment>
     );
   };
-
   resendConfirmationEmail = () => {
     axios
       .get('/api/confirmations/resend_confirmation_email')
@@ -129,7 +120,6 @@ class Dashboard extends React.Component {
         this.props.dispatch(setHeaders(err.headers));
       });
   };
-
   render() {
     const { 
       captchaVerified, 
@@ -137,8 +127,7 @@ class Dashboard extends React.Component {
       liveStreamConfirmationCode, 
       showLiveStreamForm, 
     } = this.state;
-    const { dash_description, regulations, logo, } = this.props;
-
+    const { dash_overview, logo } = this.props;
     return (
       <Container>
         {/* ---  Confirmation Code  --- */}
@@ -173,10 +162,7 @@ class Dashboard extends React.Component {
             as={Divider}
             minWidth={992}
           />
-          <GenerateHtml text={dash_description} />
-        </Segment>
-        <Segment>
-         <GenerateHtml text={regulations} />
+          <GenerateHtml text={dash_overview} />
         </Segment>
         <Responsive
           as={Card.Group}
@@ -197,7 +183,7 @@ class Dashboard extends React.Component {
           as={Card.Group}
           minWidth={767}
           itemsPerRow={2}>
-          <ChatRules />
+          {/* <ChatRules /> */}
           <Telegram />
           {/*<Discord/>*/}
         </Responsive>
@@ -205,7 +191,7 @@ class Dashboard extends React.Component {
           as={Card.Group}
           maxWidth={767}
           itemsPerRow={1}>
-          <ChatRules />
+          {/* <ChatRules /> */}
           <Telegram />
           {/*<Discord/>*/}
         </Responsive>
@@ -261,17 +247,13 @@ class Dashboard extends React.Component {
     );
   }
 }
-
 const mapStateToProps = (state) => {
   const {user, settings} = state;
-  const {dash_description, regulations} = state.settings;
-
+  const { dash_overview } = state.settings;
   return {
     user,
-    dash_description,
-    regulations,
-    logo: settings.logo_url
+    dash_overview,
+    logo: settings.theme_logo
   };
 };
-
 export default connect(mapStateToProps)(Dashboard);

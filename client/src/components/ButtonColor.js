@@ -9,7 +9,7 @@ class ButtonColor extends React.Component {
 
   buttonChange = (buttonColor) => {
     const {dispatch, id} = this.props
-    const color = {button_color: buttonColor.hex, id}
+    const color = {theme_button_color: buttonColor.hex, id}
     dispatch(updateSettings(color))
   };
 
@@ -35,7 +35,7 @@ const mapStateToProps = (state) => {
   const {settings} = state
   return {
     id: settings.id,
-    buttonColor: settings.button_color,
+    buttonColor: settings.theme_button_color,
   };
 };
 

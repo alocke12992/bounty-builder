@@ -13,9 +13,9 @@ import { Container, Grid, Header, Segment, } from 'semantic-ui-react';
 
 class Social extends React.Component {
   initialState = {
-    influencer_rules: '',
-    influencer_shares: '',
-    influencer_link: '',
+    infl_submission: '',
+    infl_bounties: '',
+    infl_link: '',
     id: null,
   }
 
@@ -48,9 +48,9 @@ class Social extends React.Component {
 
   render() {
     const { 
-      influencer_rules,
-      influencer_shares, 
-      influencer_link,
+      infl_submission,
+      infl_bounties, 
+      infl_link,
     } = this.props;
 
     return (
@@ -59,13 +59,13 @@ class Social extends React.Component {
           <Grid.Row>
             <Grid.Column>
               <Segment>
-               <GenerateHtml text={influencer_rules} />
+               <GenerateHtml text={infl_submission} />
               </Segment>
               <Segment>
-                <GenerateHtml text={influencer_shares} />
+                <GenerateHtml text={infl_bounties} />
               </Segment>
               <Segment>
-                 <GenerateHtml text={influencer_link} />
+                 <GenerateHtml text={infl_link} />
                 </Segment>
             </Grid.Column>
             <Grid.Column>
@@ -80,16 +80,16 @@ class Social extends React.Component {
 
 const mapStateToProps = (state) => {
   const {
-    influencer_rules,
-    influencer_shares,
-    influencer_link,
+    infl_submission,
+    infl_bounties,
+    infl_link,
     id,
   } = state.settings
 
   return {
-    influencer_rules,
-    influencer_shares,
-    influencer_link,
+    infl_submission,
+    infl_bounties,
+    infl_link,
   }
 };
 

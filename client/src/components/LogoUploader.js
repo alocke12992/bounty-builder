@@ -5,20 +5,20 @@ import {updateLogo} from '../actions/settings'
 import {Button, Form, Grid, Header, Image} from 'semantic-ui-react';
 
 class LogoUploader extends React.Component {
-  state = {logo_url: ''}
+  state = {theme_logo: ''}
 
   logoChange = (files) => {
-    this.setState({logo_url: files[0]})
+    this.setState({theme_logo: files[0]})
   }
 
   logoSubmit = () => {
-    const {logo_url} = this.state
+    const {theme_logo} = this.state
     const {dispatch, id} = this.props
-    dispatch(updateLogo(logo_url, id))
+    dispatch(updateLogo(theme_logo, id))
   }
 
   render() {
-    const {logo_url} = this.state
+    const {theme_logo} = this.state
     const {logo} = this.props;
     return (
       <Grid.Column >
@@ -33,7 +33,7 @@ class LogoUploader extends React.Component {
                 onDrop={this.logoChange}
                 multiple={false}
               > Click here to upload
-              {logo_url && <Image size='medium' src={logo_url.preview} />}
+              {theme_logo && <Image size='medium' src={theme_logo.preview} />}
               </Dropzone>
             </Grid.Column>
             <Grid.Column>
@@ -50,7 +50,7 @@ const mapStateToProps = (state) => {
   const {settings} = state
   return {
     id: settings.id,
-    logo: settings.logo_url,
+    logo: settings.theme_logo,
   };
 };
 

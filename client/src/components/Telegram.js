@@ -56,7 +56,7 @@ class Telegram extends React.Component {
 
   render() {
     const { showField, username } = this.state;
-    const { telegram_invite } = this.props;
+    const { dash_telegram } = this.props;
 
     return (
       <Card>
@@ -68,7 +68,7 @@ class Telegram extends React.Component {
         </Card.Header>
         <Divider hidden />
         <Card.Content textAlign="center">
-          <GenerateHtml text={telegram_invite} />
+          <GenerateHtml text={dash_telegram} />
           <Divider hidden />
           <Button
             as="a"
@@ -98,7 +98,7 @@ class Telegram extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    telegram_invite: state.settings.telegram_invite,
+    dash_telegram: state.settings.dash_telegram,
   };
 };
 
