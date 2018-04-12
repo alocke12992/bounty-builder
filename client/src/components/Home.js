@@ -43,6 +43,9 @@ class Home extends React.Component {
       prov_twitter,
       prov_linkedin,
       prov_reddit,
+      infl_show,
+      trans_show,
+      video_show,
     } = this.props;
 
     const routes = [
@@ -52,35 +55,6 @@ class Home extends React.Component {
         exact: true,
         active: true,
         main: () => <Dashboard />,
-      },
-      {
-        name: 'Rules and Overview',
-        path: '/rules',
-        active: true,
-        main: () => <Rules />,
-      },
-      {
-        name: 'Influencer',
-        path: '/influencer',
-        active: true,
-        main: () => (
-          <Social
-            service="influencer"
-            submissions={true}
-          />
-        ),
-      },
-      {
-        name: 'Translation',
-        path: '/translation',
-        active: true,
-        main: () => <Translation />,
-      },
-      {
-        name: 'Video Contest',
-        path: '/contest',
-        active: true,
-        main: () => <VideoContest />,
       },
       {
         name: 'Facebook',
@@ -97,13 +71,13 @@ class Home extends React.Component {
         ),
       },
       {
-        name: 'LinkedIn',
+        name: 'Linkedln',
         path: '/linkedin',
         active: prov_linkedin,
         main: () => (
           <LinkedIn
-            service="linkedin"
-            submissions={true}
+          service="linkedin"
+          submissions={true}
           />
         ),
       },
@@ -114,6 +88,35 @@ class Home extends React.Component {
         main: () => (
           <Reddit service="reddit" submissions={true} />
         ),
+      },
+      {
+        name: 'Influencer',
+        path: '/influencer',
+        active: infl_show,
+        main: () => (
+          <Social
+          service="influencer"
+          submissions={true}
+          />
+        ),
+      },
+      {
+        name: 'Translation',
+        path: '/translation',
+        active: trans_show,
+        main: () => <Translation />,
+      },
+      {
+        name: 'Video Contest',
+        path: '/contest',
+        active: video_show,
+        main: () => <VideoContest />,
+      },
+      {
+        name: 'Rules and Overview',
+        path: '/rules',
+        active: true,
+        main: () => <Rules />,
       },
     ];
     this.setActive(routes);
@@ -177,12 +180,18 @@ const mapStateToProps = (state) => {
     prov_twitter,
     prov_linkedin,
     prov_reddit,
+    infl_show,
+    trans_show,
+    video_show,
   } = state.settings;
   return {
     prov_facebook,
     prov_twitter,
     prov_linkedin,
     prov_reddit,
+    infl_show,
+    trans_show,
+    video_show,
   };
 };
 export default connect(mapStateToProps)(Home);

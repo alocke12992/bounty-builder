@@ -6,6 +6,7 @@ import { toolbar } from './Settings';
 import { updateSettings } from '../actions/settings';
 import {
   Button,
+  Checkbox,
   Container,
   Divider,
   Form,
@@ -24,6 +25,10 @@ class TranslationForm extends React.Component {
     this.setState({ ...this.props });
   }
 
+  toggleTranslation = () => {
+    this.setState({ trans_show: !this.state.trans_show });
+  };
+
   handleChange = (value, name) => {
     this.setState({ [name]: value });
   };
@@ -35,14 +40,14 @@ class TranslationForm extends React.Component {
     dispatch(updateSettings(translation));
     dispatch(
       setFlash(
-        'Your changes to the Translation have been submitted and saved.',
+        'Your changes to Translation have been submitted and saved.',
         'blue',
       ),
     );
   };
 
   translation = () => {
-    const { trans_rules, trans_link } = this.state;
+    const { trans_rules, trans_link, trans_show } = this.state;
 
     return (
       <Container>
@@ -51,6 +56,16 @@ class TranslationForm extends React.Component {
         </Header>
         <Divider hidden />
         <Form onSubmit={this.handleSubmit}>
+          <Header as="h4" color="blue">
+            Enable Translation
+          </Header>
+          <Form.Field
+              checked={trans_show === true}
+              control={Checkbox}
+              label="Yes"
+              onChange={this.toggleTranslation}
+          />
+          <Divider />
           <Form.Field>
             <Header as="h4" color="blue">
               Rules
@@ -104,10 +119,17 @@ class TranslationForm extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  const { trans_rules, trans_link, id } = state.settings;
+  const { 
+    trans_rules, 
+    trans_link,
+    trans_show,
+    id,
+  } = state.settings;
+
   return {
     trans_rules,
     trans_link,
+    trans_show,
     id,
   };
 };

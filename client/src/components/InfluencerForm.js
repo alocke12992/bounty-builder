@@ -5,6 +5,7 @@ import { toolbar } from './Settings';
 import { updateSettings } from '../actions/settings';
 import {
   Button,
+  Checkbox,
   Container,
   Divider,
   Form,
@@ -24,6 +25,10 @@ class InfluencerForm extends React.Component {
   componentDidMount() {
     this.setState({ ...this.props });
   }
+
+  toggleInfluencer = () => {
+    this.setState({ infl_show: !this.state.infl_show });
+  };
 
   handleChange = (value, name) => {
     this.setState({ [name]: value });
@@ -47,6 +52,7 @@ class InfluencerForm extends React.Component {
       infl_submission,
       infl_bounties,
       infl_link,
+      infl_show,
     } = this.state;
 
     return (
@@ -56,9 +62,19 @@ class InfluencerForm extends React.Component {
         </Header>
         <Divider hidden />
         <Form onSubmit={this.handleSubmit}>
+          <Header as="h4" color="blue">
+            Enable Influencer
+          </Header>
+          <Form.Field
+              checked={infl_show === true}
+              control={Checkbox}
+              label="Yes"
+              onChange={this.toggleInfluencer}
+          />
+          <Divider />
           <Form.Field>
             <Header as="h4" color="blue">
-              Rules
+              Submission
             </Header>
             <ReactQuill
               value={infl_submission}
@@ -74,7 +90,7 @@ class InfluencerForm extends React.Component {
           </Form.Field>
           <Form.Field>
             <Header as="h4" color="blue">
-              Shares
+              Bounties
             </Header>
             <ReactQuill
               value={infl_bounties}
@@ -135,12 +151,14 @@ const mapStateToProps = (state) => {
     infl_submission,
     infl_bounties,
     infl_link,
+    infl_show,
     id,
   } = state.settings;
   return {
     infl_submission,
     infl_bounties,
     infl_link,
+    infl_show,
     id,
   };
 };

@@ -54,6 +54,7 @@ class Social extends React.Component {
       infl_link,
     } = this.props;
 
+    // infl_link is currently not being used but can be easily implemented in for a button link.
     return (
       <Container>
         <Grid stackable columns={1}>

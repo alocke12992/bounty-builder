@@ -72,13 +72,13 @@ class Settings extends React.Component {
             onClick={this.handleItemClick}
           />
           <Menu.Item
-            name="provider"
-            active={activeItem === 'provider'}
+            name="rules"
+            active={activeItem === 'rules'}
             onClick={this.handleItemClick}
           />
           <Menu.Item
-            name="rules"
-            active={activeItem === 'rules'}
+            name="provider"
+            active={activeItem === 'provider'}
             onClick={this.handleItemClick}
           />
           <Menu.Item
@@ -102,8 +102,8 @@ class Settings extends React.Component {
           {activeItem === 'theme_options' &&
             this.themeOptions()}
           {activeItem === 'dashboard' && this.dashboard()}
-          {activeItem === 'provider' && this.provider()}
           {activeItem === 'rules' && this.rules()}
+          {activeItem === 'provider' && this.provider()}
           {activeItem === 'influencer' &&
             this.influencer()}
           {activeItem === 'translation' &&

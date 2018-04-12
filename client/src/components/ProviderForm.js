@@ -52,7 +52,7 @@ class ProviderForm extends React.Component {
     dispatch(updateSettings(provider));
     dispatch(
       setFlash(
-        'Your changes to the Provider have been submitted and saved.',
+        'Your changes to Provider have been submitted and saved.',
         'blue',
       ),
     );
@@ -123,7 +123,7 @@ class ProviderForm extends React.Component {
           </Form.Field>
           <Form.Field>
             <Header as="h4" color="blue">
-              Rules
+              Action Warning
             </Header>
             <ReactQuill
               value={prov_action_warning}

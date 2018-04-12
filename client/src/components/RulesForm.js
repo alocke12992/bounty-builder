@@ -34,7 +34,7 @@ class RulesForm extends React.Component {
     dispatch(updateSettings(rules));
     dispatch(
       setFlash(
-        'Your changes to the Rules have been submitted and saved.',
+        'Your changes to Rules have been submitted and saved.',
         'blue',
       ),
     );

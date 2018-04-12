@@ -38,7 +38,7 @@ class DashboardForm extends React.Component {
     dispatch(updateSettings(dashboard));
     dispatch(
       setFlash(
-        'Your changes to the Dashboard have been submitted and saved.',
+        'Your changes to Dashboard have been submitted and saved.',
         'blue',
       ),
     );
@@ -68,10 +68,7 @@ class DashboardForm extends React.Component {
               value={dash_overview}
               modules={{ toolbar }}
               onChange={(value) =>
-                this.handleChange(
-                  value,
-                  'dash_overview',
-                )
+                this.handleChange(value, 'dash_overview')
               }
             />
             <Divider hidden />
@@ -110,17 +107,14 @@ class DashboardForm extends React.Component {
               value={dash_telegram}
               modules={{ toolbar }}
               onChange={(value) =>
-                this.handleChange(
-                  value,
-                  'dash_telegram',
-                )
+                this.handleChange(value, 'dash_telegram')
               }
             />
             <Divider hidden />
           </Form.Field>
           <Form.Field>
             <Header as="h4" color="blue">
-              Etherium Wallet
+              Ethereum Wallet
             </Header>
             <ReactQuill
               value={dash_ethereum}

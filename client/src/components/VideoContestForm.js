@@ -1,10 +1,12 @@
 import React from 'react';
 import ReactQuill from 'react-quill';
 import { connect } from 'react-redux';
+import { setFlash } from '../actions/flash';
 import { toolbar } from './Settings';
 import { updateSettings } from '../actions/settings';
 import {
   Button,
+  Checkbox,
   Container,
   Divider,
   Form,
@@ -20,6 +22,10 @@ class VideoContestForm extends React.Component {
     this.setState({ ...this.props });
   }
 
+  toggleVideoContest = () => {
+    this.setState({ video_show: !this.state.video_show });
+  };
+
   handleChange = (value, name) => {
     this.setState({ [name]: value });
   };
@@ -29,11 +35,16 @@ class VideoContestForm extends React.Component {
     const videoContest = { ...this.state };
     const { dispatch } = this.props;
     dispatch(updateSettings(videoContest));
-    this.setState({ videoContest });
+    dispatch(
+      setFlash(
+        'Your changes to Video Contest have been submitted and saved.',
+        'blue',
+      ),
+    );
   };
 
   videoContest = () => {
-    const { video_rules } = this.state;
+    const { video_rules, video_show } = this.state;
     return (
       <Container>
         <Header as="h1" color="blue" textAlign="center">
@@ -41,6 +52,16 @@ class VideoContestForm extends React.Component {
         </Header>
         <Divider hidden />
         <Form onSubmit={this.handleSubmit}>
+          <Header as="h4" color="blue">
+            Enable Video Contest
+          </Header>
+          <Form.Field
+              checked={video_show === true}
+              control={Checkbox}
+              label="Yes"
+              onChange={this.toggleVideoContest}
+          />
+          <Divider />
           <Form.Field>
             <Header as="h4" color="blue">
               Rules
@@ -57,7 +78,7 @@ class VideoContestForm extends React.Component {
           <Form.Button
             size="normal"
             floated="right"
-            color="green">
+            color="blue">
             Submit All Changes
           </Form.Button>
         </Form>
@@ -79,9 +100,14 @@ class VideoContestForm extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  const { video_rules, id } = state.settings;
+  const {
+    video_rules,
+    video_show,
+    id,
+  } = state.settings;
   return {
     video_rules,
+    video_show,
     id,
   };
 };
