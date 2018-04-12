@@ -24,6 +24,5 @@ class RenameKeysInSettings < ActiveRecord::Migration[5.1]
     rename_column :settings, :twitter, :prov_twitter
     rename_column :settings, :linkedin, :prov_linkedin
     rename_column :settings, :reddit, :prov_reddit
-    remove_column :settings, :about
   end
 end

@@ -36,7 +36,7 @@ class TotalUsersTile extends React.Component {
 
   render() {
     const { progress } = this.state;
-    const { num_users } = this.props;
+    const { dash_users } = this.props;
 
     return (
       <Card>
@@ -46,7 +46,7 @@ class TotalUsersTile extends React.Component {
             <strong>{this.state.users}</strong>
           </Card.Description>
           <Progress percent={progress} indicating />
-          <GenerateHtml text={num_users} />
+          <GenerateHtml text={dash_users} />
         </Card.Content>
       </Card>
     );
@@ -54,6 +54,6 @@ class TotalUsersTile extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { num_users: state.settings.num_users };
+  return { dash_users: state.settings.dash_users };
 };
 export default connect(mapStateToProps)(TotalUsersTile);

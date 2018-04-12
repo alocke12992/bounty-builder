@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactQuill from 'react-quill';
-import {connect} from 'react-redux';
-import {setFlash} from '../actions/flash';
-import {toolbar} from './Settings';
-import {updateSettings} from '../actions/settings';
+import { connect } from 'react-redux';
+import { setFlash } from '../actions/flash';
+import { toolbar } from './Settings';
+import { updateSettings } from '../actions/settings';
 import {
   Button,
   Container,
@@ -20,17 +20,17 @@ class RulesForm extends React.Component {
   };
 
   componentDidMount() {
-    this.setState({...this.props});
+    this.setState({ ...this.props });
   }
 
   handleChange = (value, name) => {
-    this.setState({[name]: value});
+    this.setState({ [name]: value });
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const rules = {...this.state};
-    const {dispatch} = this.props;
+    const rules = { ...this.state };
+    const { dispatch } = this.props;
     dispatch(updateSettings(rules));
     dispatch(
       setFlash(
@@ -41,7 +41,7 @@ class RulesForm extends React.Component {
   };
 
   rules = () => {
-    const {rules_about, } = this.state;
+    const { rules_about } = this.state;
 
     return (
       <Container>
@@ -52,11 +52,11 @@ class RulesForm extends React.Component {
         <Form onSubmit={this.handleSubmit}>
           <Form.Field>
             <Header as="h4" color="blue">
-              Main Content
+              About
             </Header>
             <ReactQuill
               value={rules_about}
-              modules={{toolbar}}
+              modules={{ toolbar }}
               onChange={(value) =>
                 this.handleChange(value, 'rules_about')
               }
@@ -91,7 +91,7 @@ class RulesForm extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  const {rules_about, id} = state.settings;
+  const { rules_about, id } = state.settings;
   return {
     rules_about,
     id,

@@ -1,11 +1,10 @@
 import React from 'react';
 import axios from 'axios';
-import ChatRules from './ChatRules';
 import GenerateHtml from './GenerateHtml';
 import Invite from './Invite';
 import PointsTile from './PointsTile';
 import Telegram from './Telegram';
-import TotalSharesTile from './TotalSharesTile';
+import TotalTokensTile from './TotalTokensTile';
 import TotalUsersTile from './TotalUsersTile';
 import Wallet from './Wallet';
 import {connect} from 'react-redux';
@@ -22,7 +21,9 @@ import {
   Segment,
   Responsive,
 } from 'semantic-ui-react';
+
 var Recaptcha = require('react-recaptcha');
+
 class Dashboard extends React.Component {
   state = {
     captchaVerified: false,
@@ -31,9 +32,11 @@ class Dashboard extends React.Component {
     loading: true,
     showLiveStreamForm: true,
   };
+
   callback = (res) => {
     this.setState({captchaVerified: true});
   };
+
   handleLiveStreamSubmit = (e) => {
     e.preventDefault();
     const { liveStreamConfirmationCode } = this.state;
@@ -51,6 +54,7 @@ class Dashboard extends React.Component {
         dispatch(setFlash('The confirmation code was incorrect. For account security, you have been logged out.', 'red'));
       })
   };
+
   handleSubmit = (e) => {
     e.preventDefault();
     const { confirmationCode } = this.state;
@@ -68,6 +72,7 @@ class Dashboard extends React.Component {
         this.setState({ captchaVerified: false });
       })
   };
+
   renderConfirmationSegment = () => {
     const { captchaVerified, confirmationCode, } = this.state;
     return(
@@ -104,6 +109,7 @@ class Dashboard extends React.Component {
       </Segment>
     );
   };
+
   resendConfirmationEmail = () => {
     axios
       .get('/api/confirmations/resend_confirmation_email')
@@ -120,6 +126,7 @@ class Dashboard extends React.Component {
         this.props.dispatch(setHeaders(err.headers));
       });
   };
+
   render() {
     const { 
       captchaVerified, 
@@ -169,35 +176,17 @@ class Dashboard extends React.Component {
           minWidth={767}
           itemsPerRow={2}>
           <TotalUsersTile />
-          <TotalSharesTile />
+          <TotalTokensTile />
         </Responsive>
         <Responsive
           as={Card.Group}
           maxWidth={767}
           itemsPerRow={1}>
           <TotalUsersTile />
-          <TotalSharesTile />
+          <TotalTokensTile />
         </Responsive>
-        <Responsive
-          Responsive
-          as={Card.Group}
-          minWidth={767}
-          itemsPerRow={2}>
-          {/* <ChatRules /> */}
-          <Telegram />
-          {/*<Discord/>*/}
-        </Responsive>
-        <Responsive
-          as={Card.Group}
-          maxWidth={767}
-          itemsPerRow={1}>
-          {/* <ChatRules /> */}
-          <Telegram />
-          {/*<Discord/>*/}
-        </Responsive>
-        <Card.Group itemsPerRow={1}>
-          <Wallet />
-        </Card.Group>
+        <Telegram />
+        <Wallet />
         <Invite />
         <Segment>
           <Header>Totals</Header>
@@ -247,6 +236,7 @@ class Dashboard extends React.Component {
     );
   }
 }
+
 const mapStateToProps = (state) => {
   const {user, settings} = state;
   const { dash_overview } = state.settings;
@@ -256,4 +246,5 @@ const mapStateToProps = (state) => {
     logo: settings.theme_logo
   };
 };
+
 export default connect(mapStateToProps)(Dashboard);

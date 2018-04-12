@@ -9,25 +9,23 @@ import { connect } from 'react-redux';
 import { setFlash } from '../actions/flash';
 import { setHeaders } from '../actions/headers';
 import { withRouter } from 'react-router-dom';
-import { Container, Grid, Header, Segment, } from 'semantic-ui-react';
+import {
+  Button,
+  Container,
+  Grid,
+  Header,
+  Segment,
+} from 'semantic-ui-react';
 
 class Social extends React.Component {
-  initialState = {
-    infl_submission: '',
-    infl_bounties: '',
-    infl_link: '',
-    id: null,
-  }
-
-  state = { ...this.initialState };
-
   componentDidMount() {
-    axios.get(`/api/${this.props.service}`)
-      .then( res => {
+    axios
+      .get(`/api/${this.props.service}`)
+      .then((res) => {
         this.props.dispatch(setHeaders(res.headers));
         this.setState({ value: res.data });
       });
-  };
+  }
 
   handleChange = (e) => {
     this.setState({ value: e.target.value });
@@ -36,45 +34,67 @@ class Social extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const { value } = this.state;
-    axios.post(`/api/${this.props.service}`, { [`${this.props.service}`]: value } )
-      .then( res => {
+    axios
+      .post(`/api/${this.props.service}`, {
+        [`${this.props.service}`]: value,
+      })
+      .then((res) => {
         this.props.dispatch(setHeaders(res.headers));
         this.props.dispatch(setFlash('Success', 'green'));
       })
-      .catch( err => {
+      .catch((err) => {
         this.props.dispatch(setHeaders(err.headers));
-      })
+      });
   };
 
   render() {
-    const { 
+    const {
       infl_submission,
-      infl_bounties, 
+      infl_bounties,
       infl_link,
     } = this.props;
 
     return (
       <Container>
-        <Grid stackable columns={2}>
+        <Grid stackable columns={1}>
           <Grid.Row>
             <Grid.Column>
               <Segment>
-               <GenerateHtml text={infl_submission} />
+                <GenerateHtml text={infl_submission} />
               </Segment>
               <Segment>
-                <GenerateHtml text={infl_bounties} />
+                {this.props.user.is_influencer ? (
+                  <div>
+                    <p>
+                      You have been approved to submit
+                      influencer posts.
+                    </p>
+                  </div>
+                ) : (
+                  <div>
+                    <Button
+                      as="a"
+                      target="_blank"
+                      href="https://goo.gl/forms/QCQzNDqgoCtO0QeS2"
+                      color="green">
+                      Submit Social Media Account
+                    </Button>
+                    <p>
+                      If you are approved to generate, you
+                      will be contacted by social media.
+                    </p>
+                  </div>
+                )}
               </Segment>
-              <Segment>
-                 <GenerateHtml text={infl_link} />
-                </Segment>
-            </Grid.Column>
-            <Grid.Column>
+              {this.props.user.is_influencer && (
+                <Submissions kind="influencer" />
+              )}
               <BlogRules />
             </Grid.Column>
           </Grid.Row>
         </Grid>
       </Container>
-    )
+    );
   }
 }
 
@@ -84,13 +104,17 @@ const mapStateToProps = (state) => {
     infl_bounties,
     infl_link,
     id,
-  } = state.settings
+  } = state.settings;
+  const { user } = state;
 
   return {
     infl_submission,
     infl_bounties,
     infl_link,
-  }
+    user,
+  };
 };
 
-export default withRouter(connect(mapStateToProps)(Social));
+export default withRouter(
+  connect(mapStateToProps)(Social),
+);

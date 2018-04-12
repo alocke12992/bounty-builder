@@ -15,7 +15,7 @@ import {
 import GenerateHtml from './GenerateHtml';
 
 class Telegram extends React.Component {
-  state = { showField: false, username: '' };
+  state = { username: '', showField: false };
 
   componentDidMount() {
     axios.get('/api/telegram').then((res) => {
@@ -55,27 +55,33 @@ class Telegram extends React.Component {
   };
 
   render() {
-    const { showField, username } = this.state;
+    const { username, showField } = this.state;
     const { dash_telegram } = this.props;
 
     return (
-      <Card>
+      <Card fluid>
         <Card.Header>
           <Divider hidden />
           <Header as="h1" textAlign="center">
             Telegram
           </Header>
         </Card.Header>
-        <Divider hidden />
         <Card.Content textAlign="center">
           <GenerateHtml text={dash_telegram} />
           <Divider hidden />
           <Button
             as="a"
             color="twitter"
-            href="https://t.me/deco_network"
+            href="https://t.me/joinchat/C8JtFgzGzcsN_tjxoYBH1A"
             target="_blank">
-            <Icon name="telegram" /> Telegram
+            <Icon name="telegram" /> Discussion Channel
+          </Button>
+          <Button
+            as="a"
+            color="twitter"
+            href="https://t.me/joinchat/AAAAAFMSM6diX-uJd_AWPg"
+            target="_blank">
+            <Icon name="telegram" /> Announcement Channel
           </Button>
           <Divider hidden />
           <Form onSubmit={this.handleSubmit}>
@@ -87,7 +93,9 @@ class Telegram extends React.Component {
               disabled={!showField}
             />
             {showField && (
-              <Form.Button>Submit for Approval</Form.Button>
+              <Form.Button>
+                Submit for Approval
+              </Form.Button>
             )}
           </Form>
         </Card.Content>

@@ -46,10 +46,10 @@ class Wallet extends React.Component {
 
   render() {
     const { walletAddress } = this.state;
-    const { etherium } = this.props;
+    const { dash_ethereum } = this.props;
 
     return (
-      <Card>
+      <Card fluid>
         <Card.Header>
           <Divider hidden />
           <Header as="h1" textAlign="center">
@@ -77,7 +77,7 @@ class Wallet extends React.Component {
             <Form.Button>Save</Form.Button>
           </Form>
           <Divider hidden />
-           <GenerateHtml text={etherium} />
+           <GenerateHtml text={dash_ethereum} />
           <Image
             src={eth}
             centered
@@ -91,7 +91,7 @@ class Wallet extends React.Component {
   }
 }
 const mapStateToProps = (state) => {
-  return { etherium: state.settings.etherium };
+  return { dash_ethereum: state.settings.dash_ethereum };
 };
 
 export default connect(mapStateToProps)(Wallet);

@@ -1,7 +1,7 @@
-import React from 'react'
+import React from 'react';
 import ReactQuill from 'react-quill';
 import { connect } from 'react-redux';
-import { toolbar } from './Settings'
+import { toolbar } from './Settings';
 import { updateSettings } from '../actions/settings';
 import {
   Button,
@@ -14,7 +14,7 @@ import {
 } from 'semantic-ui-react';
 
 class VideoContestForm extends React.Component {
-  state = { video_rules: '' }
+  state = { video_rules: '' };
 
   componentDidMount() {
     this.setState({ ...this.props });
@@ -33,26 +33,23 @@ class VideoContestForm extends React.Component {
   };
 
   videoContest = () => {
-    const { video_rules } = this.state
+    const { video_rules } = this.state;
     return (
       <Container>
-        <Header as="h1" color="red" textAlign="center">
+        <Header as="h1" color="blue" textAlign="center">
           Video Contest
         </Header>
         <Divider hidden />
         <Form onSubmit={this.handleSubmit}>
           <Form.Field>
-            <Header as="h4" color="red">
+            <Header as="h4" color="blue">
               Rules
             </Header>
             <ReactQuill
               value={video_rules}
               modules={{ toolbar }}
               onChange={(value) =>
-                this.handleChange(
-                  value,
-                  'video_rules',
-                )
+                this.handleChange(value, 'video_rules')
               }
             />
             <Divider hidden />
@@ -82,10 +79,11 @@ class VideoContestForm extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  const { video_rules, id } = state.settings
-  return { 
-    video_rules, id
-  }
-}
+  const { video_rules, id } = state.settings;
+  return {
+    video_rules,
+    id,
+  };
+};
 
-export default connect(mapStateToProps)(VideoContestForm)
+export default connect(mapStateToProps)(VideoContestForm);
