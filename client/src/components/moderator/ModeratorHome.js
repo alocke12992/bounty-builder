@@ -6,9 +6,10 @@ import ModerateDiscords from './ModerateDiscords';
 import ModerateRewards from './ModerateRewards';
 import ModerateSubmissions from './ModerateSubmissions';
 import ModerateTelegrams from './ModerateTelegrams';
+import ModerateNewPost from './ModerateNewPost';
 import NoMatch from '../NoMatch';
 import { connect } from 'react-redux';
-import { Link, Route, Switch, } from 'react-router-dom'
+import { Link, Route, Switch, } from 'react-router-dom';
 import { Container, Grid, Menu, } from 'semantic-ui-react';
 
 class ModeratorHome extends React.Component{
@@ -21,6 +22,7 @@ class ModeratorHome extends React.Component{
             <Grid.Row>
               <Grid.Column mobile={16} tablet={16} computer={5}>
                 <Menu pointing vertical size='large'>
+                <Menu.Item as={Link} to='/moderate/newpost' name='NewPost' active={pathname === '/moderate/newpost'} />
                   <Menu.Item as={Link} to='/moderate' name='Rewards' active={pathname === '/moderate'}/>
                   <Menu.Item as={Link} to='/moderate/submissions' name='Submissions' active={pathname === '/moderate/submissions'}/>
                   <Menu.Item as={Link} to='/moderate/telegram' name='Telegram' active={pathname === '/moderate/telegram'}/>
@@ -50,6 +52,10 @@ class ModeratorHome extends React.Component{
 }
 
 const routes = [
+  {
+    path: '/moderate/newpost',
+    main: () => <ModerateNewPost />
+  },
   {
     path: '/moderate',
     exact: true,

@@ -130,10 +130,6 @@ const devRoutes = [
 ]
 const adminRoutes = [
   {
-    name: 'Admin',
-    path: '/admin',
-  },
-  {
     name: 'Moderate',
     path: '/moderate',
   },
