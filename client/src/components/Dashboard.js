@@ -10,6 +10,7 @@ import Wallet from './Wallet';
 import {connect} from 'react-redux';
 import {setFlash} from '../actions/flash';
 import {setHeaders} from '../actions/headers';
+import StyledButton from '../styledcomponents/StyledButton';
 import {
   Button,
   Card,
@@ -39,43 +40,43 @@ class Dashboard extends React.Component {
 
   handleLiveStreamSubmit = (e) => {
     e.preventDefault();
-    const { liveStreamConfirmationCode } = this.state;
-    const { dispatch } = this.props;
-    axios.post('/api/confirm_live_stream_code', { code: liveStreamConfirmationCode })
+    const {liveStreamConfirmationCode} = this.state;
+    const {dispatch} = this.props;
+    axios.post('/api/confirm_live_stream_code', {code: liveStreamConfirmationCode})
       .then(res => {
         dispatch(setHeaders(res.headers));
-        dispatch({ type: 'LOGIN', user: res.data });
+        dispatch({type: 'LOGIN', user: res.data});
         dispatch(setFlash('Code Confirmed.', 'green'));
-        this.setState({ showLiveStreamForm: false });
+        this.setState({showLiveStreamForm: false});
       })
       .catch(err => {
         dispatch(setHeaders(err.headers));
-        dispatch({ type: 'LOGOUT' });
+        dispatch({type: 'LOGOUT'});
         dispatch(setFlash('The confirmation code was incorrect. For account security, you have been logged out.', 'red'));
       })
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const { confirmationCode } = this.state;
-    const { dispatch } = this.props;
-    axios.post('/api/confirmations/verify_confirmation', { confirmation_code: confirmationCode })
+    const {confirmationCode} = this.state;
+    const {dispatch} = this.props;
+    axios.post('/api/confirmations/verify_confirmation', {confirmation_code: confirmationCode})
       .then(res => {
         dispatch(setHeaders(res.headers));
-        dispatch({ type: 'LOGOUT' })
+        dispatch({type: 'LOGOUT'})
         dispatch(setFlash('Account Confirmed. Please log in again.', 'green'));
       })
       .catch(err => {
-        dispatch({ type: 'LOGOUT' });
+        dispatch({type: 'LOGOUT'});
         dispatch(setFlash('The confirmation code was incorrect.', 'red'));
         dispatch(setHeaders(err.headers));
-        this.setState({ captchaVerified: false });
+        this.setState({captchaVerified: false});
       })
   };
 
   renderConfirmationSegment = () => {
-    const { captchaVerified, confirmationCode, } = this.state;
-    return(
+    const {captchaVerified, confirmationCode, } = this.state;
+    return (
       <Segment color="red">
         <p>
           Your account needs to be confirmed. Please
@@ -93,7 +94,13 @@ class Dashboard extends React.Component {
             required
             placeholder="Confirmation Code"
           />
-          <Form.Button>Submit</Form.Button>
+          <StyledButton
+            backgroundColor={this.props.buttonColor}
+            fontColor={this.props.fontColor}
+            border={this.props.borderColor}
+          >
+            Submit
+              </StyledButton>
         </Form>
         <Divider />
         <Recaptcha
@@ -128,31 +135,37 @@ class Dashboard extends React.Component {
   };
 
   render() {
-    const { 
-      captchaVerified, 
-      confirmationCode, 
-      liveStreamConfirmationCode, 
-      showLiveStreamForm, 
+    const {
+      captchaVerified,
+      confirmationCode,
+      liveStreamConfirmationCode,
+      showLiveStreamForm,
     } = this.state;
-    const { dash_overview, logo } = this.props;
+    const {dash_overview, logo} = this.props;
     return (
       <Container>
         {/* ---  Confirmation Code  --- */}
         {/* {!this.props.user.confirmed && (
           this.renderConfirmationSegment() 
         )} */}
-        { !this.props.user.live_stream_confirmed && showLiveStreamForm &&
+        {!this.props.user.live_stream_confirmed && showLiveStreamForm &&
           <Segment color='red'>
             <p><strong>All participants must enter a code from the weekly live stream to receive any earned rewards.</strong></p>
             <br />
             <Form onSubmit={this.handleLiveStreamSubmit}>
               <Form.Input
                 value={liveStreamConfirmationCode}
-                onChange={(e) => this.setState({ liveStreamConfirmationCode: e.target.value })}
+                onChange={(e) => this.setState({liveStreamConfirmationCode: e.target.value})}
                 required
                 placeholder="Live Stream Code"
               />
-              <Form.Button>Submit</Form.Button>
+              <StyledButton
+                backgroundColor={this.props.buttonColor}
+                fontColor={this.props.fontColor}
+                border={this.props.borderColor}
+              >
+                Submit
+              </StyledButton>
             </Form>
           </Segment>
         }
@@ -239,11 +252,19 @@ class Dashboard extends React.Component {
 
 const mapStateToProps = (state) => {
   const {user, settings} = state;
-  const { dash_overview } = state.settings;
+  const {
+    dash_overview,
+    theme_button_color,
+    theme_button_font_color,
+    theme_button_border_color,
+  } = state.settings;
   return {
     user,
     dash_overview,
-    logo: settings.theme_logo
+    logo: settings.theme_logo,
+    buttonColor: theme_button_color,
+    fontColor: theme_button_font_color,
+    borderColor: theme_button_border_color,
   };
 };
 

@@ -1,9 +1,10 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { registerUser } from '../actions/auth';
-import { setFlash } from '../actions/flash';
-import { baseURL } from '../utils/urls';
-import { Button, Divider, Form, Grid, Image, Segment, } from 'semantic-ui-react';
+import StyledButton from '../styledcomponents/StyledButton';
+import {connect} from 'react-redux';
+import {registerUser} from '../actions/auth';
+import {setFlash} from '../actions/flash';
+import {baseURL} from '../utils/urls';
+import {Button, Divider, Form, Grid, Image, Segment, } from 'semantic-ui-react';
 var Recaptcha = require('react-recaptcha');
 const queryString = require('query-string');
 // var ClientOAuth2 = require('client-oauth2')
@@ -15,26 +16,26 @@ const queryString = require('query-string');
 // })
 
 class Register extends React.Component {
-  state = { 
-    captchaVerified: false, 
-    email: '', 
-    invite_code: '', 
-    password: '', 
-    passwordConfirmation: '', 
+  state = {
+    captchaVerified: false,
+    email: '',
+    invite_code: '',
+    password: '',
+    passwordConfirmation: '',
   };
 
-  componentDidMount(){
+  componentDidMount() {
     const parsed = queryString.parse(this.props.location.search)
     if (parsed.invite_code)
-      this.setState({ invite_code: parsed.invite_code })
+      this.setState({invite_code: parsed.invite_code})
   };
 
   callback = (res) => {
-    this.setState({ captchaVerified: true });
+    this.setState({captchaVerified: true});
   };
 
   deconetOauth = () => {
-    window.open("https://app.deco.network/oauth/authorize?response_type=code&client_id=2d6dbffdce9d62562f2fe8c0be2a0284bdc36b71fda2bc4600372810fa68e5bd&redirect_uri=" + escape(baseURL()) + "%2Fauth%2FDeconet%2Fcallback&state=" + JSON.stringify({ invite_code: this.state.invite_code }));
+    window.open("https://app.deco.network/oauth/authorize?response_type=code&client_id=2d6dbffdce9d62562f2fe8c0be2a0284bdc36b71fda2bc4600372810fa68e5bd&redirect_uri=" + escape(baseURL()) + "%2Fauth%2FDeconet%2Fcallback&state=" + JSON.stringify({invite_code: this.state.invite_code}));
   };
 
   handleChange = event => {
@@ -42,14 +43,14 @@ class Register extends React.Component {
     // const { id, value } = event.target;
     const id = event.target.id;
     const value = event.target.value;
-    this.setState({ [id]: value });
+    this.setState({[id]: value});
   };
 
   handleSubmit = event => {
-    if(this.state.captchaVerified){
+    if (this.state.captchaVerified) {
       event.preventDefault();
-      const { email, password, passwordConfirmation, invite_code} = this.state;
-      const { dispatch, history } = this.props;
+      const {email, password, passwordConfirmation, invite_code} = this.state;
+      const {dispatch, history} = this.props;
       if (password === passwordConfirmation) {
         dispatch(registerUser(email, password, passwordConfirmation, history, invite_code));
       } else dispatch(setFlash('Passwords do not match!, please try again', 'red'));
@@ -57,13 +58,18 @@ class Register extends React.Component {
   };
 
   render() {
-    const { captchaVerified, email, invite_code, password, passwordConfirmation, } = this.state;
+    const {captchaVerified, email, invite_code, password, passwordConfirmation, } = this.state;
 
     return (
       <Grid centered columns={2}>
         <Grid.Column>
           <Segment raised>
-            <Image centered src={require('../assets/images/logo.svg')} style={styles.logo} alt='HN Token'/>
+            <Image
+              src={this.props.logo}
+              centered
+              style={{height: '150px'}}
+              alt="HN Text"
+            />
             <p>Welcome to the bounty program for Health Nexus, the healthcare-safe blockchain. Find more about our project here: <a href='https://token.simplyvitalhealth.com'>https://token.simplyvitalhealth.com/</a></p>
             <Form onSubmit={this.handleSubmit}>
               <Form.Field>
@@ -112,11 +118,27 @@ class Register extends React.Component {
                 verifyCallback={this.callback}
               />
               <Segment basic textAlign='center'>
-                <Button type='submit' disabled={!captchaVerified} >Submit</Button>
+                <StyledButton
+                  backgroundColor={this.props.buttonColor}
+                  fontColor={this.props.fontColor}
+                  border={this.props.borderColor}
+                  disabled={!captchaVerified}
+                >
+                  Submit
+                </StyledButton>
               </Segment>
             </Form>
             <Divider horizontal>Or</Divider>
-            <Button fluid onClick={this.deconetOauth} style={styles.deconetButton}>Register with Deconet</Button>
+            <Segment textAlign='center' basic>
+              <StyledButton
+                backgroundColor={this.props.buttonColor}
+                fontColor={this.props.fontColor}
+                border={this.props.borderColor}
+                onClick={this.deconetOauth}
+              >
+                Register with Deconet
+              </StyledButton>
+            </Segment>
           </Segment>
         </Grid.Column>
       </Grid>
@@ -135,4 +157,19 @@ var styles = {
   },
 };
 
-export default connect()(Register);
+const mapStateToProps = (state) => {
+  const {
+    theme_logo,
+    theme_button_color,
+    theme_button_font_color,
+    theme_button_border_color,
+  } = state.settings;
+  return {
+    logo: theme_logo,
+    buttonColor: theme_button_color,
+    fontColor: theme_button_font_color,
+    borderColor: theme_button_border_color,
+  }
+}
+
+export default connect(mapStateToProps)(Register);

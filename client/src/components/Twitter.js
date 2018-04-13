@@ -2,12 +2,13 @@ import React from 'react';
 import ActionWarning from './ActionWarning';
 import axios from 'axios';
 import SocialMediaRules from './SocialMediaRules';
-import { addReward } from '../actions/rewards';
-import { connect } from 'react-redux';
-import { setFlash } from '../actions/flash';
-import { setHeaders } from '../actions/headers';
-import { Tweet } from 'react-twitter-widgets';
-import { withRouter } from 'react-router-dom';
+import StyledButton from '../styledcomponents/StyledButton';
+import {addReward} from '../actions/rewards';
+import {connect} from 'react-redux';
+import {setFlash} from '../actions/flash';
+import {setHeaders} from '../actions/headers';
+import {Tweet} from 'react-twitter-widgets';
+import {withRouter} from 'react-router-dom';
 import {
   Accordion,
   Button,
@@ -24,28 +25,28 @@ import {
 } from 'semantic-ui-react';
 
 class Twitter extends React.Component {
-  state = { posts: [], value: '', activeIndex: 0 };
+  state = {posts: [], value: '', activeIndex: 0};
 
   componentDidMount() {
     axios
       .get(`/api/${this.props.service}`)
       .then((res) => {
         this.props.dispatch(setHeaders(res.headers));
-        this.setState({ value: res.data });
+        this.setState({value: res.data});
       });
     axios.get(`/api/posts?kind=twitter`).then((res) => {
       this.props.dispatch(setHeaders(res.headers));
-      this.setState({ posts: res.data });
+      this.setState({posts: res.data});
     });
   }
 
   handleChange = (e) => {
-    this.setState({ value: e.target.value });
+    this.setState({value: e.target.value});
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const { value } = this.state;
+    const {value} = this.state;
     axios
       .post(`/api/${this.props.service}`, {
         [`${this.props.service}`]: value,
@@ -70,7 +71,7 @@ class Twitter extends React.Component {
   };
 
   rewardsIncludes = (reason) => {
-    const { rewards } = this.props;
+    const {rewards} = this.props;
     for (var i = 0; i < rewards.length; i++) {
       if (rewards[i].reason === reason) {
         return true;
@@ -112,15 +113,15 @@ class Twitter extends React.Component {
   };
 
   handleClick = (e, titleProps) => {
-    const { index } = titleProps;
-    const { activeIndex } = this.state;
+    const {index} = titleProps;
+    const {activeIndex} = this.state;
     const newIndex = activeIndex === index ? -1 : index;
 
-    this.setState({ activeIndex: newIndex });
+    this.setState({activeIndex: newIndex});
   };
 
   render() {
-    const { value, activeIndex } = this.state;
+    const {value, activeIndex} = this.state;
 
     return (
       <Container>
@@ -137,11 +138,15 @@ class Twitter extends React.Component {
                   placeholder="Username"
                 />
                 <Divider fitted hidden />
-                <Button
+                <StyledButton
+                  backgroundColor={this.props.buttonColor}
+                  fontColor={this.props.fontColor}
+                  border={this.props.borderColor}
                   onClick={this.handleSubmit}
-                  style={styles.saveButton}>
+                  style={styles.saveButton}
+                >
                   Save
-                </Button>
+                  </StyledButton>
               </Segment>
             </Grid.Column>
             <Grid.Column width={8}>
@@ -220,8 +225,16 @@ const styles = {
 };
 
 const mapStateToProps = (state) => {
+  const {
+    theme_button_color,
+    theme_button_font_color,
+    theme_button_border_color,
+  } = state.settings;
   return {
     rewards: state.rewards,
+    buttonColor: theme_button_color,
+    fontColor: theme_button_font_color,
+    borderColor: theme_button_border_color,
   };
 };
 

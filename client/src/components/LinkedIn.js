@@ -2,11 +2,12 @@ import React from 'react';
 import ActionWarning from './ActionWarning';
 import axios from 'axios';
 import SocialMediaRules from './SocialMediaRules';
-import { addReward } from '../actions/rewards';
-import { connect } from 'react-redux';
-import { setFlash } from '../actions/flash';
-import { setHeaders } from '../actions/headers';
-import { withRouter } from 'react-router-dom';
+import StyledButton from '../styledcomponents/StyledButton';
+import {addReward} from '../actions/rewards';
+import {connect} from 'react-redux';
+import {setFlash} from '../actions/flash';
+import {setHeaders} from '../actions/headers';
+import {withRouter} from 'react-router-dom';
 import {
   Accordion,
   Button,
@@ -21,28 +22,28 @@ import {
 } from 'semantic-ui-react';
 
 class LinkedIn extends React.Component {
-  state = { posts: [], value: '', activeIndex: 0 };
+  state = {posts: [], value: '', activeIndex: 0};
 
   componentDidMount() {
     axios
       .get(`/api/${this.props.service}`)
       .then((res) => {
         this.props.dispatch(setHeaders(res.headers));
-        this.setState({ value: res.data });
+        this.setState({value: res.data});
       });
     axios.get(`/api/posts?kind=linkedin`).then((res) => {
       this.props.dispatch(setHeaders(res.headers));
-      this.setState({ posts: res.data });
+      this.setState({posts: res.data});
     });
   }
 
   handleChange = (e) => {
-    this.setState({ value: e.target.value });
+    this.setState({value: e.target.value});
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const { value } = this.state;
+    const {value} = this.state;
     axios
       .post(`/api/${this.props.service}`, {
         [`${this.props.service}`]: value,
@@ -102,7 +103,7 @@ class LinkedIn extends React.Component {
   };
 
   rewardsIncludes = (reason) => {
-    const { rewards } = this.props;
+    const {rewards} = this.props;
     for (var i = 0; i < rewards.length; i++) {
       if (rewards[i].reason === reason) {
         return true;
@@ -112,15 +113,15 @@ class LinkedIn extends React.Component {
   };
 
   handleClick = (e, titleProps) => {
-    const { index } = titleProps;
-    const { activeIndex } = this.state;
+    const {index} = titleProps;
+    const {activeIndex} = this.state;
     const newIndex = activeIndex === index ? -1 : index;
 
-    this.setState({ activeIndex: newIndex });
+    this.setState({activeIndex: newIndex});
   };
 
   render() {
-    const { value, activeIndex } = this.state;
+    const {value, activeIndex} = this.state;
 
     return (
       <Container>
@@ -135,7 +136,13 @@ class LinkedIn extends React.Component {
                     required
                     placeholder="Add URL Link to Profile"
                   />
-                  <Form.Button>Save</Form.Button>
+                  <StyledButton
+                    backgroundColor={this.props.buttonColor}
+                    fontColor={this.props.fontColor}
+                    border={this.props.borderColor}
+                  >
+                    Save
+                  </StyledButton>
                 </Form>
               </Segment>
             </Grid.Column>
@@ -207,7 +214,17 @@ class LinkedIn extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { rewards: state.rewards };
+  const {
+    theme_button_color,
+    theme_button_font_color,
+    theme_button_border_color,
+  } = state.settings;
+  return {
+    rewards: state.rewards,
+    buttonColor: theme_button_color,
+    fontColor: theme_button_font_color,
+    borderColor: theme_button_border_color,
+  };
 };
 
 export default withRouter(

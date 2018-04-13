@@ -1,8 +1,9 @@
 import React from 'react';
 import axios from 'axios';
-import { connect } from 'react-redux';
-import { setFlash } from '../actions/flash';
-import { setHeaders } from '../actions/headers';
+import StyledButton from '../styledcomponents/StyledButton';
+import {connect} from 'react-redux';
+import {setFlash} from '../actions/flash';
+import {setHeaders} from '../actions/headers';
 import {
   Button,
   Card,
@@ -15,7 +16,7 @@ import {
 import GenerateHtml from './GenerateHtml';
 
 class Telegram extends React.Component {
-  state = { username: '', showField: false };
+  state = {username: '', showField: false};
 
   componentDidMount() {
     axios.get('/api/telegram').then((res) => {
@@ -34,16 +35,16 @@ class Telegram extends React.Component {
   }
 
   handleChange = (e) => {
-    this.setState({ username: e.target.value });
+    this.setState({username: e.target.value});
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const { username } = this.state;
+    const {username} = this.state;
     axios
-      .post('/api/telegram', { username })
+      .post('/api/telegram', {username})
       .then((res) => {
-        this.setState({ showField: false });
+        this.setState({showField: false});
         this.props.dispatch(setHeaders(res.headers));
         this.props.dispatch(
           setFlash('Telegram updated', 'green'),
@@ -55,8 +56,8 @@ class Telegram extends React.Component {
   };
 
   render() {
-    const { username, showField } = this.state;
-    const { dash_telegram } = this.props;
+    const {username, showField} = this.state;
+    const {dash_telegram} = this.props;
 
     return (
       <Card fluid>
@@ -93,9 +94,13 @@ class Telegram extends React.Component {
               disabled={!showField}
             />
             {showField && (
-              <Form.Button>
-                Submit for Approval
-              </Form.Button>
+              <StyledButton
+                backgroundColor={this.props.buttonColor}
+                fontColor={this.props.fontColor}
+                border={this.props.borderColor}
+              >
+                Submit For Approval
+              </StyledButton>
             )}
           </Form>
         </Card.Content>
@@ -105,8 +110,16 @@ class Telegram extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+  const {
+    theme_button_color,
+    theme_button_font_color,
+    theme_button_border_color,
+  } = state.settings;
   return {
     dash_telegram: state.settings.dash_telegram,
+    buttonColor: theme_button_color,
+    fontColor: theme_button_font_color,
+    borderColor: theme_button_border_color,
   };
 };
 
