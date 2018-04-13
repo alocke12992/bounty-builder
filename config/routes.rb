@@ -28,6 +28,7 @@ Rails.application.routes.draw do
     post 'moderator/reject_submission', to: 'moderator#reject_submission'
     get 'moderator/get_pending_telegrams', to: 'moderator#get_pending_telegrams'
     post 'moderator/approve_telegram', to: 'moderator#approve_telegram'
+    post 'moderator/approve_all_telegrams', to: 'moderator#approve_all_telegrams'
     post 'moderator/reject_telegram', to: 'moderator#reject_telegram'
     get 'moderator/get_pending_discords', to: 'moderator#get_pending_discords'
     post 'moderator/approve_discord', to: 'moderator#approve_discord'

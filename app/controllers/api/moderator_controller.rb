@@ -58,6 +58,20 @@ class Api::ModeratorController < Api::ApiController
     render json: 'success'
   end
 
+  def approve_all_telegrams
+    unapproved = Telegram.where(approved: false)
+    unapproved.each do |a|
+      a.update(approved: true)
+      a.user.rewards.create(
+        value: 20,
+        reason: 'telegram ' + a.id.to_s,
+        source: 'telegram',
+        moderator_approved: true
+      )
+    end
+    render json: current_user.telegram
+  end
+
   def reject_telegram
     telegram = Telegram.find(params[:id])
     telegram.delete

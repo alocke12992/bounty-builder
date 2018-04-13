@@ -85,10 +85,10 @@ ActiveRecord::Schema.define(version: 20180413005626) do
     t.boolean "prov_linkedin", default: false
     t.boolean "prov_reddit", default: false
     t.string "theme_button_font_color", default: "#000000"
-    t.string "theme_button_border_color", default: ""
     t.boolean "infl_show", default: false
     t.boolean "trans_show", default: false
     t.boolean "video_show", default: false
+    t.string "theme_button_border_color", default: ""
   end
 
   create_table "submissions", force: :cascade do |t|

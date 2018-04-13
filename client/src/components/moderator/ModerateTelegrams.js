@@ -3,10 +3,11 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { setFlash } from '../../actions/flash';
 import { setHeaders } from '../../actions/headers';
-import { Button, Divider, Input, Table, } from 'semantic-ui-react';
+import styled from 'styled-components'
+import { Button, Divider, Input, Table, Loader } from 'semantic-ui-react';
 
 class ModerateTelegrams extends React.Component {
-  state = { telegrams: [] };
+  state = { telegrams: [], loading: true };
 
   componentDidMount() {
     axios.get('/api/moderator/get_pending_telegrams')
@@ -14,20 +15,43 @@ class ModerateTelegrams extends React.Component {
         this.props.dispatch(setHeaders(res.headers));
         this.setState({ telegrams: res.data});
       });
+    this.setState({ loading: false })
   };
+
+  filterState = (response, id) => {
+    let telegrams = this.state.telegrams.filter(response => response.id !== id);
+    this.setState({ telegrams })
+    this.props.dispatch(setHeaders(response.headers));
+  }
 
   confirmReward = (id) => {
     axios.post('/api/moderator/approve_telegram', { id })
       .then(res => {
-        let telegrams = this.state.telegrams.filter(r => r.id !== id);
-        this.setState({ telegrams })
-        this.props.dispatch(setHeaders(res.headers));
+        this.filterState(res, id)
         this.props.dispatch(setFlash('Approved', 'green'));
       })
       .catch(err => {
         this.props.dispatch(setHeaders(err.headers));
       })
   };
+
+  approveAll = () => {
+    const { telegrams, loading } = this.state
+    const { dispatch } = this.props
+    this.setState({ loading: true })
+    axios.post('/api/moderator/approve_all_telegrams')
+      .then( res => {
+        res.data ?
+          this.setState({ telegrams: res.data, loading: false })
+        :
+          this.setState({ telegrams: [], loading: false })
+        dispatch(setHeaders(res.headers))
+        dispatch(setFlash('All Pending Telegrams Approved', 'green'))
+      })
+      .catch(err => {
+        this.props.dispatch(setHeaders(err.headers));
+      })
+  }
 
   rejectSubmission = (id) => {
     axios.post('/api/moderator/reject_telegram', { id })
@@ -68,18 +92,30 @@ class ModerateTelegrams extends React.Component {
   };
 
   render(){
+    const { loading, telegrams } = this.state
     return(
-      <Table stackable>
-        <Table.Header>
-          <Table.Row>
-            <Table.HeaderCell>Username</Table.HeaderCell>
-            <Table.HeaderCell>Actions</Table.HeaderCell>
-          </Table.Row>
-        </Table.Header>
-        <Table.Body>
-          { this.renderRows() }
-        </Table.Body>
-      </Table>
+      loading ?
+        <Loader active size="massive">This may take longer depending on the number of pending Telegrams.</Loader>
+      :
+        <Table stackable>
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell>Username</Table.HeaderCell>
+              <Table.HeaderCell>Actions</Table.HeaderCell>
+            </Table.Row>
+            { 
+              telegrams.length > 0 && 
+                <Divider>
+                  <Button onClick={this.approveAll}>
+                    Approve All
+                  </Button>
+                </Divider>
+            }
+          </Table.Header>
+          <Table.Body>
+            { this.renderRows() }
+          </Table.Body>
+        </Table>
     )
   }
 }

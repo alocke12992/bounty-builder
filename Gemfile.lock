@@ -602,6 +602,8 @@ GEM
       simpleidn
     equalizer (0.0.11)
     erubi (1.7.0)
+    faker (1.8.7)
+      i18n (>= 0.7)
     ffi (1.9.18)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
@@ -756,6 +758,7 @@ DEPENDENCIES
   devise_token_auth
   dotenv-rails
   email_address
+  faker
   httparty
   jbuilder
   kaminari

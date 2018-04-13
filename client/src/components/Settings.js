@@ -118,7 +118,7 @@ class Settings extends React.Component {
 
 export const toolbar = [
   ['bold', 'italic', 'underline', 'strike'],
-  [{ header: 1 }, { header: 2 }],
+  [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
   [{ list: 'ordered' }, { list: 'bullet' }],
   [{ script: 'sub' }, { script: 'super' }],
   [{ indent: '-1' }, { indent: '+1' }],
@@ -126,6 +126,7 @@ export const toolbar = [
   [{ color: [] }, { background: [] }],
   [{ font: [] }],
   [{ align: [] }],
+  ['link'],
   ['clean'],
 ];
 

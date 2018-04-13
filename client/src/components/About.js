@@ -1,15 +1,22 @@
 import React from 'react';
-import { Grid, Segment, } from 'semantic-ui-react';
+import styled from 'styled-components'
+import { Grid, Image, Segment, } from 'semantic-ui-react';
+import { connect } from 'react-redux'
 
 class About extends React.Component {
   render() {
+    const { logo } = this.props
     return (
       <Grid centered columns={2}>
         <Grid.Column>
           <Segment raised>
-            <div style={{textAlign: 'center'}}>
-              <img src={require('../assets/images/logo.svg')} style={styles.logo} alt='HN Token'/>
-            </div>
+            <CenterImage>
+              <Image
+                src={logo}
+                style={{height: '65px'}}
+                alt="HN Text"
+                />
+            </CenterImage>
             <h1>Bounty Program Rules and Distribution</h1>
             <p><br /> <br /> <br /> <strong>Bounty Program 2,000,000 tokens 1.5% of total token allocation </strong>this will be on a sliding scale for users:<br /> <br /> * All users must register to the <a href="https://t.me/HealthNexus">official Telegram Channel Account</a> and to the official <a href="https://discord.gg/2Wfg524">Discord Channel </a>to be eligible for bounty program</p>
             <ul>
@@ -54,6 +61,11 @@ class About extends React.Component {
   }
 }
 
+const CenterImage = styled.div`
+  display: flex !important;
+  justify-content: center !important;
+`
+
 var styles = {
   logo: {
     height: '120px',
@@ -61,4 +73,8 @@ var styles = {
   }
 };
 
-export default About;
+const mapStateToProps = (state) => {
+  return { logo: state.settings.theme_logo }
+}
+
+export default connect(mapStateToProps)(About);
