@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactQuill from 'react-quill';
-import { connect } from 'react-redux';
-import { setFlash } from '../actions/flash';
-import { toolbar } from './Settings';
-import { updateSettings } from '../actions/settings';
+import StyledButton from '../styledcomponents/StyledButton';
+import {connect} from 'react-redux';
+import {setFlash} from '../actions/flash';
+import {toolbar} from './Settings';
+import {updateSettings} from '../actions/settings';
 import {
   Button,
   Container,
@@ -24,17 +25,17 @@ class DashboardForm extends React.Component {
   };
 
   componentDidMount() {
-    this.setState({ ...this.props });
+    this.setState({...this.props});
   }
 
   handleChange = (value, name) => {
-    this.setState({ [name]: value });
+    this.setState({[name]: value});
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const dashboard = { ...this.state };
-    const { dispatch } = this.props;
+    const dashboard = {...this.state};
+    const {dispatch} = this.props;
     dispatch(updateSettings(dashboard));
     dispatch(
       setFlash(
@@ -66,7 +67,7 @@ class DashboardForm extends React.Component {
           <Form.Field>
             <ReactQuill
               value={dash_overview}
-              modules={{ toolbar }}
+              modules={{toolbar}}
               onChange={(value) =>
                 this.handleChange(value, 'dash_overview')
               }
@@ -79,7 +80,7 @@ class DashboardForm extends React.Component {
             </Header>
             <ReactQuill
               value={dash_users}
-              modules={{ toolbar }}
+              modules={{toolbar}}
               onChange={(value) =>
                 this.handleChange(value, 'dash_users')
               }
@@ -92,7 +93,7 @@ class DashboardForm extends React.Component {
             </Header>
             <ReactQuill
               value={dash_tokens}
-              modules={{ toolbar }}
+              modules={{toolbar}}
               onChange={(value) =>
                 this.handleChange(value, 'dash_tokens')
               }
@@ -105,7 +106,7 @@ class DashboardForm extends React.Component {
             </Header>
             <ReactQuill
               value={dash_telegram}
-              modules={{ toolbar }}
+              modules={{toolbar}}
               onChange={(value) =>
                 this.handleChange(value, 'dash_telegram')
               }
@@ -118,7 +119,7 @@ class DashboardForm extends React.Component {
             </Header>
             <ReactQuill
               value={dash_ethereum}
-              modules={{ toolbar }}
+              modules={{toolbar}}
               onChange={(value) =>
                 this.handleChange(value, 'dash_ethereum')
               }
@@ -131,7 +132,7 @@ class DashboardForm extends React.Component {
             </Header>
             <ReactQuill
               value={dash_invitation_link}
-              modules={{ toolbar }}
+              modules={{toolbar}}
               onChange={(value) =>
                 this.handleChange(
                   value,
@@ -141,12 +142,14 @@ class DashboardForm extends React.Component {
             />
             <Divider hidden />
           </Form.Field>
-          <Form.Button
-            size="normal"
-            floated="right"
-            color="blue">
+          <StyledButton
+            backgroundColor={this.props.buttonColor}
+            fontColor={this.props.fontColor}
+            border={this.props.border}
+            floated='right'
+          >
             Submit All Changes
-          </Form.Button>
+          </StyledButton>
         </Form>
       </Container>
     );
@@ -176,6 +179,9 @@ const mapStateToProps = (state) => {
     dash_ethereum,
     dash_invitation_link,
     id,
+    theme_button_color,
+    theme_button_font_color,
+    theme_button_border_color,
   } = state.settings;
   return {
     dash_overview,
@@ -185,6 +191,9 @@ const mapStateToProps = (state) => {
     dash_ethereum,
     dash_invitation_link,
     id,
+    buttonColor: theme_button_color,
+    fontColor: theme_button_font_color,
+    border: theme_button_border_color,
   };
 };
 

@@ -59,6 +59,8 @@ class Api::SettingsController < ApplicationController
         :theme_logo,
         :theme_nav_color, 
         :theme_button_color, 
+        :theme_button_font_color,
+        :theme_button_border_color,
         :video_rules,
         :video_show,
         :prov_facebook,

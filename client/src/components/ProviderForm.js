@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactQuill from 'react-quill';
-import { setFlash } from '../actions/flash';
-import { toolbar } from './Settings';
-import { updateSettings } from '../actions/settings';
+import StyledButton from '../styledcomponents/StyledButton';
+import {setFlash} from '../actions/flash';
+import {toolbar} from './Settings';
+import {updateSettings} from '../actions/settings';
 import {
   Button,
   Checkbox,
@@ -13,7 +14,7 @@ import {
   Header,
   Segment,
 } from 'semantic-ui-react';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 
 class ProviderForm extends React.Component {
   state = {
@@ -22,33 +23,33 @@ class ProviderForm extends React.Component {
   };
 
   componentDidMount() {
-    this.setState({ ...this.props });
+    this.setState({...this.props});
   }
 
   toggleFacebook = () => {
-    this.setState({ prov_facebook: !this.state.prov_facebook });
+    this.setState({prov_facebook: !this.state.prov_facebook});
   };
 
   toggleTwitter = () => {
-    this.setState({ prov_twitter: !this.state.prov_twitter });
+    this.setState({prov_twitter: !this.state.prov_twitter});
   };
 
   toggleLinkedIn = () => {
-    this.setState({ prov_linkedin: !this.state.prov_linkedin });
+    this.setState({prov_linkedin: !this.state.prov_linkedin});
   };
 
   toggleReddit = () => {
-    this.setState({ prov_reddit: !this.state.prov_reddit });
+    this.setState({prov_reddit: !this.state.prov_reddit});
   };
 
   handleChange = (value, name) => {
-    this.setState({ [name]: value });
+    this.setState({[name]: value});
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const provider = { ...this.state };
-    const { dispatch } = this.props;
+    const provider = {...this.state};
+    const {dispatch} = this.props;
     dispatch(updateSettings(provider));
     dispatch(
       setFlash(
@@ -111,7 +112,7 @@ class ProviderForm extends React.Component {
             </Header>
             <ReactQuill
               value={prov_social_media}
-              modules={{ toolbar }}
+              modules={{toolbar}}
               onChange={(value) =>
                 this.handleChange(
                   value,
@@ -127,7 +128,7 @@ class ProviderForm extends React.Component {
             </Header>
             <ReactQuill
               value={prov_action_warning}
-              modules={{ toolbar }}
+              modules={{toolbar}}
               onChange={(value) =>
                 this.handleChange(value, 'prov_action_warning')
               }
@@ -135,12 +136,14 @@ class ProviderForm extends React.Component {
             <Divider hidden />
           </Form.Field>
           <Divider hidden />
-          <Form.Button
-            size="normal"
-            floated="right"
-            color="blue">
+          <StyledButton
+            backgroundColor={this.props.buttonColor}
+            fontColor={this.props.fontColor}
+            border={this.props.borderColor}
+            floated='right'
+          >
             Submit All Changes
-          </Form.Button>
+          </StyledButton>
         </Form>
       </Container>
     );
@@ -170,6 +173,9 @@ const mapStateToProps = (state) => {
     prov_linkedin,
     prov_reddit,
     id,
+    theme_button_color,
+    theme_button_font_color,
+    theme_button_border_color,
   } = state.settings;
   return {
     prov_social_media,
@@ -179,6 +185,9 @@ const mapStateToProps = (state) => {
     prov_linkedin,
     prov_reddit,
     id,
+    buttonColor: theme_button_color,
+    fontColor: theme_button_font_color,
+    borderColor: theme_button_border_color,
   };
 };
 export default connect(mapStateToProps)(ProviderForm);

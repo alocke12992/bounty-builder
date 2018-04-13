@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactQuill from 'react-quill';
-import { connect } from 'react-redux';
-import { setFlash } from '../actions/flash';
-import { toolbar } from './Settings';
-import { updateSettings } from '../actions/settings';
+import StyledButton from '../styledcomponents/StyledButton';
+import {connect} from 'react-redux';
+import {toolbar} from './Settings';
+import {setFlash} from '../actions/flash';
+import {updateSettings} from '../actions/settings';
 import {
   Button,
   Checkbox,
@@ -16,24 +17,24 @@ import {
 } from 'semantic-ui-react';
 
 class VideoContestForm extends React.Component {
-  state = { video_rules: '' };
+  state = {video_rules: ''};
 
   componentDidMount() {
-    this.setState({ ...this.props });
+    this.setState({...this.props});
   }
 
   toggleVideoContest = () => {
-    this.setState({ video_show: !this.state.video_show });
+    this.setState({video_show: !this.state.video_show});
   };
 
   handleChange = (value, name) => {
-    this.setState({ [name]: value });
+    this.setState({[name]: value});
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const videoContest = { ...this.state };
-    const { dispatch } = this.props;
+    const videoContest = {...this.state};
+    const {dispatch} = this.props;
     dispatch(updateSettings(videoContest));
     dispatch(
       setFlash(
@@ -44,7 +45,7 @@ class VideoContestForm extends React.Component {
   };
 
   videoContest = () => {
-    const { video_rules, video_show } = this.state;
+    const {video_rules, video_show} = this.state;
     return (
       <Container>
         <Header as="h1" color="blue" textAlign="center">
@@ -56,10 +57,10 @@ class VideoContestForm extends React.Component {
             Enable Video Contest
           </Header>
           <Form.Field
-              checked={video_show === true}
-              control={Checkbox}
-              label="Yes"
-              onChange={this.toggleVideoContest}
+            checked={video_show === true}
+            control={Checkbox}
+            label="Yes"
+            onChange={this.toggleVideoContest}
           />
           <Divider />
           <Form.Field>
@@ -68,19 +69,21 @@ class VideoContestForm extends React.Component {
             </Header>
             <ReactQuill
               value={video_rules}
-              modules={{ toolbar }}
+              modules={{toolbar}}
               onChange={(value) =>
                 this.handleChange(value, 'video_rules')
               }
             />
             <Divider hidden />
           </Form.Field>
-          <Form.Button
-            size="normal"
-            floated="right"
-            color="blue">
+          <StyledButton
+            backgroundColor={this.props.buttonColor}
+            fontColor={this.props.fontColor}
+            border={this.props.borderColor}
+            floated='right'
+          >
             Submit All Changes
-          </Form.Button>
+          </StyledButton>
         </Form>
       </Container>
     );
@@ -104,11 +107,17 @@ const mapStateToProps = (state) => {
     video_rules,
     video_show,
     id,
+    theme_button_color,
+    theme_button_font_color,
+    theme_button_border_color,
   } = state.settings;
   return {
     video_rules,
     video_show,
     id,
+    buttonColor: theme_button_color,
+    fontColor: theme_button_font_color,
+    borderColor: theme_button_border_color,
   };
 };
 

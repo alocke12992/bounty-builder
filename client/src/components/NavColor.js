@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import styled from 'styled-components';
 import {connect} from 'react-redux';
 import {SketchPicker} from 'react-color';
 import {updateSettings} from '../actions/settings'
-import {Grid, Segment} from 'semantic-ui-react';
+import {Grid, Segment, Divider, Header} from 'semantic-ui-react';
+import Wrapper from '../styledcomponents/StyledBackground';
 
 class NavColor extends React.Component {
 
@@ -16,17 +17,32 @@ class NavColor extends React.Component {
   render() {
     const {navColor} = this.props;
     return (
-      <Grid.Column >
-        <SketchPicker
-          color={navColor}
-          onChangeComplete={this.navChange}
-        />
-        <Segment>
-          <Wrapper color={navColor}>
-            <h1>Nav Color Preview</h1>
-          </Wrapper>
-        </Segment>
-      </Grid.Column>
+      <Grid centered>
+        <Divider hidden />
+        <Grid.Row centered>
+          <Grid.Column width={7}>
+            <Header textAlign='center'>Choose Nav Color</Header>
+            <Divider />
+          </Grid.Column>
+        </Grid.Row>
+        <Grid.Row columns={2}>
+          <Grid.Column width={6}>
+            <SketchPicker
+              color={navColor}
+              onChangeComplete={this.navChange}
+            />
+          </Grid.Column>
+          <Grid.Column width={6}>
+            <Segment textAlign='center'>
+              <h3>Nav Color</h3>
+              <Divider />
+              <Wrapper color={navColor}>
+              </Wrapper>
+            </Segment>
+          </Grid.Column>
+        </Grid.Row>
+        <Divider hidden />
+      </Grid>
     );
   }
 }
@@ -38,10 +54,5 @@ const mapStateToProps = (state) => {
     navColor: settings.theme_nav_color,
   };
 };
-
-const Wrapper = styled.section`
-padding: 4em;
-  background: ${(props) => props.color};
-`;
 
 export default connect(mapStateToProps)(NavColor);

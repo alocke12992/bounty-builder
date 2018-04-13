@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactQuill from 'react-quill';
-import { connect } from 'react-redux';
-import { setFlash } from '../actions/flash';
-import { toolbar } from './Settings';
-import { updateSettings } from '../actions/settings';
+import StyledButton from '../styledcomponents/StyledButton';
+import {connect} from 'react-redux';
+import {setFlash} from '../actions/flash';
+import {toolbar} from './Settings';
+import {updateSettings} from '../actions/settings';
 import {
   Button,
   Container,
@@ -20,17 +21,17 @@ class RulesForm extends React.Component {
   };
 
   componentDidMount() {
-    this.setState({ ...this.props });
+    this.setState({...this.props});
   }
 
   handleChange = (value, name) => {
-    this.setState({ [name]: value });
+    this.setState({[name]: value});
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const rules = { ...this.state };
-    const { dispatch } = this.props;
+    const rules = {...this.state};
+    const {dispatch} = this.props;
     dispatch(updateSettings(rules));
     dispatch(
       setFlash(
@@ -41,7 +42,7 @@ class RulesForm extends React.Component {
   };
 
   rules = () => {
-    const { rules_about } = this.state;
+    const {rules_about} = this.state;
 
     return (
       <Container>
@@ -56,7 +57,7 @@ class RulesForm extends React.Component {
             </Header>
             <ReactQuill
               value={rules_about}
-              modules={{ toolbar }}
+              modules={{toolbar}}
               onChange={(value) =>
                 this.handleChange(value, 'rules_about')
               }
@@ -64,12 +65,14 @@ class RulesForm extends React.Component {
             <Divider hidden />
           </Form.Field>
 
-          <Form.Button
-            size="normal"
-            floated="right"
-            color="blue">
+          <StyledButton
+            backgroundColor={this.props.buttonColor}
+            fontColor={this.props.fontColor}
+            border={this.props.borderColor}
+            floated='right'
+          >
             Submit All Changes
-          </Form.Button>
+          </StyledButton>
         </Form>
       </Container>
     );
@@ -91,10 +94,19 @@ class RulesForm extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  const { rules_about, id } = state.settings;
+  const {
+    rules_about,
+    id,
+    theme_button_color,
+    theme_button_font_color,
+    theme_button_border_color,
+  } = state.settings;
   return {
     rules_about,
     id,
+    buttonColor: theme_button_color,
+    fontColor: theme_button_font_color,
+    borderColor: theme_button_border_color,
   };
 };
 

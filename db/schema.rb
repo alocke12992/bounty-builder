@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180412205430) do
+ActiveRecord::Schema.define(version: 20180413005626) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,6 +84,8 @@ ActiveRecord::Schema.define(version: 20180412205430) do
     t.boolean "prov_twitter", default: false
     t.boolean "prov_linkedin", default: false
     t.boolean "prov_reddit", default: false
+    t.string "theme_button_font_color", default: "#000000"
+    t.string "theme_button_border_color", default: ""
     t.boolean "infl_show", default: false
     t.boolean "trans_show", default: false
     t.boolean "video_show", default: false

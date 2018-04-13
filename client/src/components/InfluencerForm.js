@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactQuill from 'react-quill';
-import { setFlash } from '../actions/flash';
-import { toolbar } from './Settings';
-import { updateSettings } from '../actions/settings';
+import StyledButton from '../styledcomponents/StyledButton';
+import {setFlash} from '../actions/flash';
+import {toolbar} from './Settings';
+import {updateSettings} from '../actions/settings';
 import {
   Button,
   Checkbox,
@@ -13,7 +14,7 @@ import {
   Header,
   Segment,
 } from 'semantic-ui-react';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 
 class InfluencerForm extends React.Component {
   state = {
@@ -23,7 +24,7 @@ class InfluencerForm extends React.Component {
   };
 
   componentDidMount() {
-    this.setState({ ...this.props });
+    this.setState({...this.props});
   }
 
   toggleInfluencer = () => {
@@ -31,13 +32,13 @@ class InfluencerForm extends React.Component {
   };
 
   handleChange = (value, name) => {
-    this.setState({ [name]: value });
+    this.setState({[name]: value});
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const influencer = { ...this.state };
-    const { dispatch } = this.props;
+    const influencer = {...this.state};
+    const {dispatch} = this.props;
     dispatch(updateSettings(influencer));
     dispatch(
       setFlash(
@@ -78,7 +79,7 @@ class InfluencerForm extends React.Component {
             </Header>
             <ReactQuill
               value={infl_submission}
-              modules={{ toolbar }}
+              modules={{toolbar}}
               onChange={(value) =>
                 this.handleChange(
                   value,
@@ -94,7 +95,7 @@ class InfluencerForm extends React.Component {
             </Header>
             <ReactQuill
               value={infl_bounties}
-              modules={{ toolbar }}
+              modules={{toolbar}}
               onChange={(value) =>
                 this.handleChange(
                   value,
@@ -110,7 +111,7 @@ class InfluencerForm extends React.Component {
             </Header>
             <ReactQuill
               value={infl_link}
-              modules={{ toolbar }}
+              modules={{toolbar}}
               onChange={(value) =>
                 this.handleChange(
                   value,
@@ -120,12 +121,14 @@ class InfluencerForm extends React.Component {
             />
             <Divider hidden />
           </Form.Field>
-          <Form.Button
-            size="normal"
-            floated="right"
-            color="blue">
+          <StyledButton
+            backgroundColor={this.props.buttonColor}
+            fontColor={this.props.fontColor}
+            border={this.props.borderColor}
+            floated='right'
+          >
             Submit All Changes
-          </Form.Button>
+          </StyledButton>
         </Form>
       </Container>
     );
@@ -153,6 +156,9 @@ const mapStateToProps = (state) => {
     infl_link,
     infl_show,
     id,
+    theme_button_color,
+    theme_button_font_color,
+    theme_button_border_color,
   } = state.settings;
   return {
     infl_submission,
@@ -160,6 +166,9 @@ const mapStateToProps = (state) => {
     infl_link,
     infl_show,
     id,
+    buttonColor: theme_button_color,
+    fontColor: theme_button_font_color,
+    borderColor: theme_button_border_color,
   };
 };
 
