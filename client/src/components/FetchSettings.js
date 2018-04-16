@@ -23,32 +23,19 @@ class FetchSettings extends React.Component {
 
   componentDidMount() {
     const {dispatch} = this.props;
-    dispatch(fetchSettings(this.toggleLoaded));
+    dispatch(fetchSettings(this.loaded));
   }
 
-  toggleLoaded = () => this.setState({loaded: !this.state.loaded});
+  componentWillReceiveProps() {
+    if (!this.state.loaded) this.loaded();
+  }
+
+  loaded = () => this.setState({loaded: true});
 
   render() {
     const {loaded} = this.state;
 
-    if (loaded) {
-      return (
-        <Switch>
-          <Route exact path='/auth/Deconet/callback' component={DeconetOauth} />
-          <AuthRoute exact path='/login' component={Login} />
-          <AuthRoute exact path='/register' component={Register} />
-          <AuthRoute exact path='/recover_password' component={RecoverPassword} />
-          <Route exact path='/about' component={About} />
-          <Route exact path='/settings' component={Settings} />
-          <AdminRoute exact path='/admin' component={NewPost} />
-          <AdminRoute path='/moderate' component={ModeratorHome} />
-          <ProtectedRoute path="/" component={Home} />
-          <Route component={NoMatch} />
-        </Switch>
-      );
-    } else {
-      return null;
-    }
+    return loaded ? this.props.children : null
   }
 }
 

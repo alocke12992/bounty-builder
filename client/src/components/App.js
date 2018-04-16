@@ -27,9 +27,20 @@ class App extends Component {
         <NavBar />
         <Flash />
         <FetchUser>
-          <Switch>
-            <FetchSettings />
-          </Switch>
+          <FetchSettings>
+            <Switch>
+              <Route exact path='/auth/Deconet/callback' component={DeconetOauth} />
+              <AuthRoute exact path='/login' component={Login} />
+              <AuthRoute exact path='/register' component={Register} />
+              <AuthRoute exact path='/recover_password' component={RecoverPassword} />
+              <Route exact path='/about' component={About} />
+              <Route exact path='/settings' component={Settings} />
+              <AdminRoute exact path='/admin' component={NewPost} />
+              <AdminRoute path='/moderate' component={ModeratorHome} />
+              <ProtectedRoute path="/" component={Home} />
+              <Route component={NoMatch} />
+            </Switch>
+          </FetchSettings>
         </FetchUser>
       </div>
     );
