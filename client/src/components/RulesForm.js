@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactQuill from 'react-quill';
 import StyledButton from '../styledcomponents/StyledButton';
-import {connect} from 'react-redux';
-import {setFlash} from '../actions/flash';
-import {toolbar} from './Settings';
-import {updateSettings} from '../actions/settings';
+import { connect } from 'react-redux';
+import { setFlash } from '../actions/flash';
+import { toolbar } from './Settings';
+import { updateSettings } from '../actions/settings';
 import {
   Button,
   Container,
@@ -21,17 +21,17 @@ class RulesForm extends React.Component {
   };
 
   componentDidMount() {
-    this.setState({...this.props});
+    this.setState({ ...this.props });
   }
 
   handleChange = (value, name) => {
-    this.setState({[name]: value});
+    this.setState({ [name]: value });
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const rules = {...this.state};
-    const {dispatch} = this.props;
+    const rules = { ...this.state };
+    const { dispatch } = this.props;
     dispatch(updateSettings(rules));
     dispatch(
       setFlash(
@@ -42,7 +42,7 @@ class RulesForm extends React.Component {
   };
 
   rules = () => {
-    const {rules_about} = this.state;
+    const { rules_about } = this.state;
 
     return (
       <Container>
@@ -57,7 +57,7 @@ class RulesForm extends React.Component {
             </Header>
             <ReactQuill
               value={rules_about}
-              modules={{toolbar}}
+              modules={{ toolbar }}
               onChange={(value) =>
                 this.handleChange(value, 'rules_about')
               }
@@ -69,8 +69,7 @@ class RulesForm extends React.Component {
             backgroundColor={this.props.buttonColor}
             fontColor={this.props.fontColor}
             border={this.props.borderColor}
-            floated='right'
-          >
+            floated="right">
             Submit All Changes
           </StyledButton>
         </Form>
