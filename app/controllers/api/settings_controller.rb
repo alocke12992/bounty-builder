@@ -11,9 +11,9 @@ class Api::SettingsController < ApplicationController
     file = params[:file]
     begin
       ext = File.extname(file.tempfile)
-      obj = s3.bucket(s3_bucket).object("logos/#{@setting.id}#{ext}")
+      obj = s3.bucket(s3_bucket).object("logos/#{file.original_filename}")
       obj.upload_file(file.tempfile, acl: 'public-read')
-      @setting.logo_url = obj.public_url
+      @setting.theme_logo = obj.public_url
       if @setting.save
         render json: @setting
       else 

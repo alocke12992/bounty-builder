@@ -8,7 +8,7 @@ import StyledButton from '../styledcomponents/StyledButton';
 import Wrapper from '../styledcomponents/StyledBackground';
 
 class ButtonColor extends React.Component {
-  state = {activeItem: 'background'}
+  state = {activeItem: 'Background'}
 
   buttonChange = (buttonColor) => {
     const {dispatch, id} = this.props
@@ -35,8 +35,6 @@ class ButtonColor extends React.Component {
   editBackground = () => {
     return (
       <Fragment>
-        <Header as='h3' textAlign='center'>Background Color</Header>
-        <Divider />
         <SketchPicker
           color={this.props.buttonColor}
           onChangeComplete={this.buttonChange}
@@ -48,8 +46,6 @@ class ButtonColor extends React.Component {
   editFont = () => {
     return (
       <Fragment>
-        <Header as='h3' textAlign='center'>Font Color</Header>
-        <Divider />
         <SketchPicker
           style={{boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important"}}
           color={this.props.fontColor}
@@ -61,8 +57,6 @@ class ButtonColor extends React.Component {
   editBorder = () => {
     return (
       <Fragment>
-        <Header as='h3' textAlign='center'>Border Color</Header>
-        <Divider />
         <SketchPicker
           style={{boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important"}}
           color={this.props.borderColor}
@@ -79,19 +73,22 @@ class ButtonColor extends React.Component {
       <Grid stackable centered columns={3}>
         <Divider hidden />
         <Grid.Row>
+          <Grid.Column width={8}>
+            <Header as='h3' textAlign='center'>Button {activeItem} Color</Header>
+            <Divider />
+          </Grid.Column>
+        </Grid.Row>
+        <Grid.Row>
           <Grid.Column width={3}>
             <Dropdown text='Select'>
               <Dropdown.Menu>
-                <Dropdown.Item text='Button Background' name='background' active={activeItem === 'background'} onClick={this.toggleView} />
-                <Dropdown.Item text='Button Font' name='font' active={activeItem === 'font'} onClick={this.toggleView} />
-                <Dropdown.Item text='Button Border' name='border' active={activeItem === 'border'} onClick={this.toggleView} />
+                <Dropdown.Item text='Button Background' name='Background' active={activeItem === 'Background'} onClick={this.toggleView} />
+                <Dropdown.Item text='Button Font' name='Font' active={activeItem === 'Font'} onClick={this.toggleView} />
+                <Dropdown.Item text='Button Border' name='Border' active={activeItem === 'Border'} onClick={this.toggleView} />
               </Dropdown.Menu>
             </Dropdown>
           </Grid.Column>
           <Grid.Column>
-            {activeItem === 'background' && this.editBackground()}
-            {activeItem === 'font' && this.editFont()}
-            {activeItem === 'border' && this.editBorder()}
             <Divider hidden />
             <StyledButton
               backgroundColor={this.props.buttonColor}
@@ -101,14 +98,18 @@ class ButtonColor extends React.Component {
             >
               Example Button
             </StyledButton>
+            <Divider hidden />
+            {activeItem === 'Background' && this.editBackground()}
+            {activeItem === 'Font' && this.editFont()}
+            {activeItem === 'Border' && this.editBorder()}
           </Grid.Column>
           <Grid.Column>
             <Container textAlign='center'>
               <h3>Background Color</h3>
               <Divider />
               <Swatch
-                name='background'
-                active={activeItem === 'background'}
+                name='Background'
+                active={activeItem === 'Background'}
                 onClick={this.toggleView}
               >
                 <Wrapper color={buttonColor}>
@@ -120,8 +121,8 @@ class ButtonColor extends React.Component {
               <h3>Font Color</h3>
               <Divider />
               <Swatch
-                name='font'
-                active={activeItem === 'font'}
+                name='Font'
+                active={activeItem === 'Font'}
                 onClick={this.toggleView}
               >
                 <Wrapper color={fontColor}>
@@ -133,8 +134,8 @@ class ButtonColor extends React.Component {
               <h3>Border Color</h3>
               <Divider />
               <Swatch
-                name='border'
-                active={activeItem === 'border'}
+                name='Border'
+                active={activeItem === 'Border'}
                 onClick={this.toggleView}
               >
                 <Wrapper color={borderColor}>

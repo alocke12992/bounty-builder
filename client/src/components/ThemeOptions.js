@@ -10,7 +10,7 @@ import styled from 'styled-components';
 class ThemeOptions extends React.Component {
 
   state = {
-    activeItem: 'Nav'
+    activeItem: 'Logo'
   };
 
   handleItemClick = (e, {name, active}) => {

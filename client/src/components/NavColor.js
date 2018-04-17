@@ -33,7 +33,7 @@ class NavColor extends React.Component {
             />
           </Grid.Column>
           <Grid.Column width={6}>
-            <Segment textAlign='center'>
+            <Segment textAlign='center' basic>
               <h3>Nav Color</h3>
               <Divider />
               <Wrapper color={navColor}>
