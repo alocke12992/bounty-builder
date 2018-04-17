@@ -11,7 +11,6 @@ import Home from './Home';
 import Login from './Login';
 import ModeratorHome from './moderator/ModeratorHome';
 import NavBar from './NavBar';
-import NewPost from './NewPost';
 import NoMatch from './NoMatch';
 import ProtectedRoute from './ProtectedRoute';
 import RecoverPassword from './RecoverPassword';
@@ -35,7 +34,6 @@ class App extends Component {
               <AuthRoute exact path='/recover_password' component={RecoverPassword} />
               <Route exact path='/about' component={About} />
               <Route exact path='/settings' component={Settings} />
-              <AdminRoute exact path='/admin' component={NewPost} />
               <AdminRoute path='/moderate' component={ModeratorHome} />
               <ProtectedRoute path="/" component={Home} />
               <Route component={NoMatch} />

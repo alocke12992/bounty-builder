@@ -8,7 +8,6 @@ import Flash from './Flash';
 import Home from './Home';
 import Login from './Login';
 import ModeratorHome from './moderator/ModeratorHome';
-import NewPost from './NewPost';
 import NoMatch from './NoMatch';
 import ProtectedRoute from './ProtectedRoute';
 import RecoverPassword from './RecoverPassword';
