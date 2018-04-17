@@ -26,7 +26,7 @@ class ModeratorHome extends React.Component{
                   <Menu.Item as={Link} to='/moderate' name='Rewards' active={pathname === '/moderate'}/>
                   <Menu.Item as={Link} to='/moderate/submissions' name='Submissions' active={pathname === '/moderate/submissions'}/>
                   <Menu.Item as={Link} to='/moderate/telegram' name='Telegram' active={pathname === '/moderate/telegram'}/>
-                  <Menu.Item as={Link} to='/moderate/discord' name='Discord' active={pathname === '/moderate/discord'}/>
+                  {/* <Menu.Item as={Link} to='/moderate/discord' name='Discord' active={pathname === '/moderate/discord'}/> */}
                   <Menu.Item as={Link} to='/moderate/translators' name='Add Translator' active={pathname === '/moderate/translators'}/>
                   <Menu.Item as={Link} to='/moderate/influencers' name='Add Influencer' active={pathname === '/moderate/influencers'}/>
                 </Menu>
@@ -69,10 +69,10 @@ const routes = [
     path: '/moderate/telegram',
     main: () => <ModerateTelegrams />
   },
-  {
-    path: '/moderate/discord',
-    main: () => <ModerateDiscords />
-  },
+  // {
+  //   path: '/moderate/discord',
+  //   main: () => <ModerateDiscords />
+  // },
   {
     path: '/moderate/translators',
     main: () => <ModerateApproveTranslators />

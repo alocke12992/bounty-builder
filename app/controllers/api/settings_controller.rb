@@ -73,7 +73,8 @@ class Api::SettingsController < ApplicationController
         :prov_facebook_link,
         :prov_twitter_link,
         :prov_linkedin_link,
-        :prov_reddit_link
+        :prov_reddit_link,
+        :mod_new_post
       )
   end 
 

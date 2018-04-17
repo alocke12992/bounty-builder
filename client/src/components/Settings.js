@@ -3,6 +3,7 @@ import ThemeOptions from './ThemeOptions';
 import DashboardForm from './DashboardForm';
 import { fetchSettings } from '../actions/settings';
 import InfluencerForm from './InfluencerForm';
+import ModeratorForm from './ModeratorForm';
 import ProviderForm from './ProviderForm';
 import RulesForm from './RulesForm';
 import styled from 'styled-components';
@@ -27,10 +28,17 @@ class Settings extends React.Component {
     return <ThemeOptions />;
   };
 
+  moderator = () => {
+    return <ModeratorForm />;
+  };
+
   dashboard = () => {
     return <DashboardForm />;
   };
-
+  
+  rules = () => {
+    return <RulesForm />;
+  };
   influencer = () => {
     return <InfluencerForm />;
   };
@@ -39,9 +47,6 @@ class Settings extends React.Component {
     return <ProviderForm />;
   };
 
-  rules = () => {
-    return <RulesForm />;
-  };
 
   translation = () => {
     return <TranslationForm />;
@@ -50,6 +55,7 @@ class Settings extends React.Component {
   videoContest = () => {
     return <VideoContestForm />;
   };
+
 
   render() {
     const { activeItem } = this.state;
@@ -64,6 +70,11 @@ class Settings extends React.Component {
           <Menu.Item
             name="theme_options"
             active={activeItem === 'theme_otions'}
+            onClick={this.handleItemClick}
+          />
+          <Menu.Item
+            name="moderator"
+            active={activeItem === 'moderator'}
             onClick={this.handleItemClick}
           />
           <Menu.Item
@@ -110,6 +121,7 @@ class Settings extends React.Component {
             this.translation()}
           {activeItem === 'video_contest' &&
             this.videoContest()}
+          {activeItem === 'moderator' && this.moderator()}
         </Segment>
       </Container>
     );
@@ -118,7 +130,7 @@ class Settings extends React.Component {
 
 export const toolbar = [
   ['bold', 'italic', 'underline', 'strike'],
-  [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+  [{ header: [1, 2, 3, 4, 5, 6, false] }],
   [{ list: 'ordered' }, { list: 'bullet' }],
   [{ script: 'sub' }, { script: 'super' }],
   [{ indent: '-1' }, { indent: '+1' }],

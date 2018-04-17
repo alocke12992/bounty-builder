@@ -28,12 +28,12 @@ class ModerateApproveInfluencers extends React.Component {
   render() {
     const { email } = this.state;
     return (
-      <Card>
-        <Card.Header>
-          <Divider hidden />
-          <Header as="h1" textAlign="center">Approve User To Be An Influencer</Header>
-        </Card.Header>
+      <Card fluid>
         <Card.Content textAlign="center">
+          <Card.Header>
+            <Header as="h1" textAlign="center">Approve User To Be An Influencer</Header>
+            <Divider />
+          </Card.Header>
           <Form onSubmit={() => this.approveInfluencer(email)}>
             <Form.Input
               value={email}

@@ -34,12 +34,12 @@ class ModerateApproveTranslators extends React.Component {
   render() {
     const { email } = this.state;
     return (
-      <Card>
-        <Card.Header>
-          <Divider hidden />
-          <Header as="h1"textAlign="center">Approve User To Be a Translator</Header>
-        </Card.Header>
+      <Card fluid>
         <Card.Content textAlign="center">
+          <Card.Header>
+            <Header as="h1"textAlign="center">Approve User To Be a Translator</Header>
+            <Divider />
+          </Card.Header>
           <Form onSubmit={() => this.approveTranslator(email)}>
             <Form.Input
               value={email}

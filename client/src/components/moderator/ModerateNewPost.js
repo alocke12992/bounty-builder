@@ -1,5 +1,6 @@
 import React  from 'react';
 import axios from 'axios';
+import GenerateHtml from '../GenerateHtml'
 import { connect } from 'react-redux';
 import { setFlash } from '../../actions/flash';
 import { setHeaders } from '../../actions/headers';
@@ -28,6 +29,8 @@ class ModerateNewPost extends React.Component {
 
   render() {
     const { url, kind } = this.state;
+    const { mod_new_post } = this.props;
+
     return (
       <Container>
         <Segment>
@@ -42,11 +45,7 @@ class ModerateNewPost extends React.Component {
           <Form.Button disabled={url === '' || kind === ''}>Save</Form.Button>
           </Form>
           <Divider />
-          <p>How to copy URLS from Facebook, Twitter, LinkedIn, Reddit</p>
-          <p>Facebook: On your wall, click the timestamp on the top of your facebook post. This will take you to a new url. Copy the url on the top of the browser. For example, 'https://www.facebook.com/SimplyVitalHealth/posts/175276439751750'.</p>
-          <p>Twitter: Click the small dropdown on the top right hand corner of your tweet. Select 'Copy Link to Tweet'. For example, 'https://twitter.com/SimplyVitalHQ/status/956332381358776320'</p>
-          <p>LinkedIn: On the top right hand corner of post use the drop down and select copy link to post.</p>
-          <p>Reddit: On your post, click the share button and then copy Link.</p>
+          <GenerateHtml text={ mod_new_post } />
         </Segment>
       </Container>
     );
@@ -60,4 +59,9 @@ const options = [
   { key: 'reddit', text: 'Reddit', value: 'reddit' }
 ];
 
-export default connect()(ModerateNewPost);
+const mapStateToProps = (state) => {
+  return (
+    { mod_new_post: state.settings.mod_new_post }
+  )
+}
+export default connect(mapStateToProps)(ModerateNewPost);

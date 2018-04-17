@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactQuill from 'react-quill';
 import StyledButton from '../styledcomponents/StyledButton';
-import {connect} from 'react-redux';
-import {setFlash} from '../actions/flash';
-import {toolbar} from './Settings';
-import {updateSettings} from '../actions/settings';
+import { connect } from 'react-redux';
+import { setFlash } from '../actions/flash';
+import { toolbar } from './Settings';
+import { updateSettings } from '../actions/settings';
 import {
   Button,
   Checkbox,
@@ -23,21 +23,21 @@ class TranslationForm extends React.Component {
   };
 
   componentDidMount() {
-    this.setState({...this.props});
+    this.setState({ ...this.props });
   }
 
   toggleTranslation = () => {
-    this.setState({trans_show: !this.state.trans_show});
+    this.setState({ trans_show: !this.state.trans_show });
   };
 
   handleChange = (value, name) => {
-    this.setState({[name]: value});
+    this.setState({ [name]: value });
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const translation = {...this.state};
-    const {dispatch} = this.props;
+    const translation = { ...this.state };
+    const { dispatch } = this.props;
     dispatch(updateSettings(translation));
     dispatch(
       setFlash(
@@ -48,7 +48,11 @@ class TranslationForm extends React.Component {
   };
 
   translation = () => {
-    const {trans_rules, trans_link, trans_show} = this.state;
+    const {
+      trans_rules,
+      trans_link,
+      trans_show,
+    } = this.state;
 
     return (
       <Container>
@@ -73,7 +77,7 @@ class TranslationForm extends React.Component {
             </Header>
             <ReactQuill
               value={trans_rules}
-              modules={{toolbar}}
+              modules={{ toolbar }}
               onChange={(value) =>
                 this.handleChange(value, 'trans_rules')
               }
@@ -87,19 +91,21 @@ class TranslationForm extends React.Component {
             <Form.Input
               value={trans_link}
               onChange={(e) =>
-                this.handleChange(e.target.value, 'trans_link')
+                this.handleChange(
+                  e.target.value,
+                  'trans_link',
+                )
               }
             />
             <Divider hidden />
+            <StyledButton
+              backgroundColor={this.props.buttonColor}
+              fontColor={this.props.fontColor}
+              border={this.props.borderColor}
+              floated="right">
+              Submit All Changes
+            </StyledButton>
           </Form.Field>
-          <StyledButton
-            backgroundColor={this.props.buttonColor}
-            fontColor={this.props.fontColor}
-            border={this.props.borderColor}
-            floated='right'
-          >
-            Submit All Changes
-          </StyledButton>
         </Form>
       </Container>
     );
