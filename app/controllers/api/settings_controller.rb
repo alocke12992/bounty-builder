@@ -44,7 +44,9 @@ class Api::SettingsController < ApplicationController
         :dash_users, 
         :dash_tokens, 
         :dash_invitation_link, 
-        :dash_telegram, 
+        :dash_telegram,
+        :dash_telegram_disc_link,
+        :dash_telegram_anno_link, 
         :dash_ethereum, 
         :prov_social_media, 
         :prov_action_warning,
@@ -63,10 +65,15 @@ class Api::SettingsController < ApplicationController
         :theme_button_border_color,
         :video_rules,
         :video_show,
+        :video_link,
         :prov_facebook,
         :prov_twitter,
         :prov_linkedin,
-        :prov_reddit
+        :prov_reddit,
+        :prov_facebook_link,
+        :prov_twitter_link,
+        :prov_linkedin_link,
+        :prov_reddit_link
       )
   end 
 

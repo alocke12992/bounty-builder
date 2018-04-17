@@ -41,6 +41,7 @@ class VideoContest extends React.Component {
   };
 
   render() {
+    const { video_link } = this.props
     return (
       <Container>
         <Grid stackable columns={1}>
@@ -57,7 +58,7 @@ class VideoContest extends React.Component {
                   fontColor={this.props.fontColor}
                   border={this.props.borderColor}
                   target='_blank'
-                  href='https://goo.gl/forms/Ah5NiLdYASwbzt4d2'
+                  href={`${video_link}`}
                   fluid
                   style={styles.enter}
                 >
@@ -83,6 +84,7 @@ const mapStateToProps = (state) => {
     theme_button_color,
     theme_button_font_color,
     theme_button_border_color,
+    video_link,
   } = state.settings;
   return {
     settings: state.settings,
@@ -90,6 +92,7 @@ const mapStateToProps = (state) => {
     buttonColor: theme_button_color,
     fontColor: theme_button_font_color,
     borderColor: theme_button_border_color,
+    video_link,
   }
 };
 

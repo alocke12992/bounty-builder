@@ -22,6 +22,8 @@ class DashboardForm extends React.Component {
     dash_telegram: '',
     dash_ethereum: '',
     dash_invitation_link: '',
+    dash_telegram_anno_link: '',
+    dash_telegram_disc_link: '',
   };
 
   componentDidMount() {
@@ -53,6 +55,8 @@ class DashboardForm extends React.Component {
       dash_telegram,
       dash_ethereum,
       dash_invitation_link,
+      dash_telegram_disc_link,
+      dash_telegram_anno_link,
     } = this.state;
     return (
       <Container>
@@ -109,6 +113,37 @@ class DashboardForm extends React.Component {
               modules={{toolbar}}
               onChange={(value) =>
                 this.handleChange(value, 'dash_telegram')
+              }
+            />
+            <Divider hidden />
+          </Form.Field>
+          <Form.Field>
+            <Header as="h4" color="blue">
+              Telegram Discussion Link
+            </Header>
+            <Form.Input
+              value={dash_telegram_disc_link}
+              onChange={(e) =>
+                this.handleChange(
+                  e.target.value,
+                  'dash_telegram_disc_link',
+                )
+              }
+            />
+            <Divider hidden />
+          </Form.Field>
+          <Form.Field>
+            <Header as="h4" color="blue">
+              Telegram Announcement Link
+            </Header>
+            <Form.Input
+              value={dash_telegram_anno_link}
+              modules={{toolbar}}
+              onChange={(e) =>
+                this.handleChange(
+                  e.target.value,
+                  'dash_telegram_anno_link',
+                )
               }
             />
             <Divider hidden />
@@ -178,6 +213,8 @@ const mapStateToProps = (state) => {
     dash_telegram,
     dash_ethereum,
     dash_invitation_link,
+    dash_telegram_disc_link,
+    dash_telegram_anno_link,
     id,
     theme_button_color,
     theme_button_font_color,
@@ -190,6 +227,8 @@ const mapStateToProps = (state) => {
     dash_telegram,
     dash_ethereum,
     dash_invitation_link,
+    dash_telegram_disc_link,
+    dash_telegram_anno_link,
     id,
     buttonColor: theme_button_color,
     fontColor: theme_button_font_color,

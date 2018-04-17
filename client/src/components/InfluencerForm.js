@@ -109,12 +109,11 @@ class InfluencerForm extends React.Component {
             <Header as="h4" color="blue">
               Link
             </Header>
-            <ReactQuill
+            <Form.Input
               value={infl_link}
-              modules={{toolbar}}
-              onChange={(value) =>
+              onChange={(e) =>
                 this.handleChange(
-                  value,
+                  e.target.value,
                   'infl_link',
                 )
               }

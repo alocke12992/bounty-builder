@@ -1,5 +1,6 @@
 import React from 'react';
 import GenerateHtml from './GenerateHtml';
+import StyledButton from '../styledcomponents/StyledButton';
 import Submissions from './Submissions';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -37,7 +38,15 @@ class Translation extends React.Component {
             <Grid.Column width={16}>
               <Divider hidden />
               <Segment>
-                <GenerateHtml text={trans_link} />
+                <StyledButton
+                  backgroundColor={this.props.buttonColor}
+                  fontColor={this.props.fontColor}
+                  border={this.props.borderColor}
+                  target="_blank"
+                  href={`${trans_link}`}
+                >
+                  Submit for Approval
+                </StyledButton>
               </Segment>
             </Grid.Column>
           </Grid.Row>
@@ -48,12 +57,22 @@ class Translation extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  const { trans_rules, trans_link, id } = state.settings;
+  const { 
+    trans_rules, 
+    trans_link, 
+    id,
+    buttonColor,
+    fontColor,
+    borderColor, 
+  } = state.settings;
   return {
     user: state.user,
     trans_rules,
     trans_link,
     id,
+    buttonColor,
+    fontColor,
+    borderColor,
   };
 };
 

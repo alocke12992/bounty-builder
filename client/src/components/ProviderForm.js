@@ -20,6 +20,10 @@ class ProviderForm extends React.Component {
   state = {
     prov_social_media: '',
     prov_action_warning: '',
+    prov_facebook_link: '',
+    prov_twitter_link: '',
+    prov_linkedin_link: '',
+    prov_reddit_link: '',
   };
 
   componentDidMount() {
@@ -64,9 +68,13 @@ class ProviderForm extends React.Component {
       prov_social_media,
       prov_action_warning,
       prov_facebook,
+      prov_facebook_link,
       prov_twitter,
+      prov_twitter_link,
       prov_linkedin,
+      prov_linkedin_link,
       prov_reddit,
+      prov_reddit_link,
     } = this.state;
 
     return (
@@ -136,6 +144,54 @@ class ProviderForm extends React.Component {
             <Divider hidden />
           </Form.Field>
           <Divider hidden />
+          <Form.Field>
+            <Header as="h4" color="blue">
+              Facebook Link
+            </Header>
+            <Form.Input 
+              value={prov_facebook_link}
+              onChange={(e) =>
+                this.handleChange(e.target.value, 'prov_facebook_link')
+              }
+              placeholder="Facebook URL goes here"
+            />
+          </Form.Field>
+          <Form.Field>
+            <Header as="h4" color="blue">
+              Twitter Link
+            </Header>
+            <Form.Input 
+              value={prov_twitter_link}
+              onChange={(e) =>
+                this.handleChange(e.target.value, 'prov_twitter_link')
+              }
+              placeholder="Twitter URL goes here"
+            />
+          </Form.Field>
+          <Form.Field>
+            <Header as="h4" color="blue">
+              LinkedIn Link
+            </Header>
+            <Form.Input 
+              value={prov_linkedin_link}
+              onChange={(e) =>
+                this.handleChange(e.target.value, 'prov_linkedin_link')
+              }
+              placeholder="LinkedIn URL goes here"
+            />
+          </Form.Field>
+          <Form.Field>
+            <Header as="h4" color="blue">
+              Reddit Link
+            </Header>
+            <Form.Input 
+              value={prov_reddit_link}
+              onChange={(e) =>
+                this.handleChange(e.target.value, 'prov_reddit_link')
+              }
+              placeholder="Reddit URL goes here"
+            />
+          </Form.Field>
           <StyledButton
             backgroundColor={this.props.buttonColor}
             fontColor={this.props.fontColor}
@@ -169,9 +225,13 @@ const mapStateToProps = (state) => {
     prov_social_media,
     prov_action_warning,
     prov_facebook,
+    prov_facebook_link,
     prov_twitter,
+    prov_twitter_link,
     prov_linkedin,
+    prov_linkedin_link,
     prov_reddit,
+    prov_reddit_link,
     id,
     theme_button_color,
     theme_button_font_color,
@@ -181,9 +241,13 @@ const mapStateToProps = (state) => {
     prov_social_media,
     prov_action_warning,
     prov_facebook,
+    prov_facebook_link,
     prov_twitter,
+    prov_twitter_link,
     prov_linkedin,
+    prov_linkedin_link,
     prov_reddit,
+    prov_reddit_link,
     id,
     buttonColor: theme_button_color,
     fontColor: theme_button_font_color,

@@ -122,6 +122,7 @@ class LinkedIn extends React.Component {
 
   render() {
     const {value, activeIndex} = this.state;
+    const { linkedInLink } = this.props
 
     return (
       <Container>
@@ -189,7 +190,7 @@ class LinkedIn extends React.Component {
                 <Button
                   color="linkedin"
                   as="a"
-                  href="https://www.linkedin.com/company/11268774/"
+                  href={`${linkedInLink}`}
                   target="_blank">
                   <Icon name="linkedin" /> LinkedIn
                 </Button>
@@ -218,12 +219,14 @@ const mapStateToProps = (state) => {
     theme_button_color,
     theme_button_font_color,
     theme_button_border_color,
+    prov_linkedin_link
   } = state.settings;
   return {
     rewards: state.rewards,
     buttonColor: theme_button_color,
     fontColor: theme_button_font_color,
     borderColor: theme_button_border_color,
+    linkedInLink: prov_linkedin_link
   };
 };
 

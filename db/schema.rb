@@ -84,17 +84,10 @@ ActiveRecord::Schema.define(version: 20180416205502) do
     t.boolean "prov_twitter", default: false
     t.boolean "prov_linkedin", default: false
     t.boolean "prov_reddit", default: false
-<<<<<<< HEAD
     t.string "theme_button_font_color", default: "#000000"
     t.boolean "infl_show", default: false
     t.boolean "trans_show", default: false
     t.boolean "video_show", default: false
-    t.string "theme_button_border_color", default: ""
-=======
-    t.boolean "infl_show", default: false
-    t.boolean "trans_show", default: false
-    t.boolean "video_show", default: false
-    t.string "theme_button_font_color", default: "#000000"
     t.string "theme_button_border_color", default: ""
     t.string "prov_facebook_link", default: ""
     t.string "prov_twitter_link", default: ""
@@ -104,7 +97,6 @@ ActiveRecord::Schema.define(version: 20180416205502) do
     t.string "dash_telegram_anno_link", default: ""
     t.string "video_link", default: ""
     t.text "mod_new_post", default: ""
->>>>>>> Add link migrations to schema and refactor model method
   end
 
   create_table "submissions", force: :cascade do |t|

@@ -57,7 +57,11 @@ class Telegram extends React.Component {
 
   render() {
     const {username, showField} = this.state;
-    const {dash_telegram} = this.props;
+    const {
+      dash_telegram,
+      dash_telegram_disc_link,
+      dash_telegram_anno_link,
+    } = this.props;
 
     return (
       <Card fluid>
@@ -73,14 +77,14 @@ class Telegram extends React.Component {
           <Button
             as="a"
             color="twitter"
-            href="https://t.me/joinchat/C8JtFgzGzcsN_tjxoYBH1A"
+            href={`${dash_telegram_disc_link}`}
             target="_blank">
             <Icon name="telegram" /> Discussion Channel
           </Button>
           <Button
             as="a"
             color="twitter"
-            href="https://t.me/joinchat/AAAAAFMSM6diX-uJd_AWPg"
+            href={`${dash_telegram_anno_link}`}
             target="_blank">
             <Icon name="telegram" /> Announcement Channel
           </Button>
@@ -114,12 +118,16 @@ const mapStateToProps = (state) => {
     theme_button_color,
     theme_button_font_color,
     theme_button_border_color,
+    dash_telegram_disc_link,
+    dash_telegram_anno_link,
   } = state.settings;
   return {
     dash_telegram: state.settings.dash_telegram,
     buttonColor: theme_button_color,
     fontColor: theme_button_font_color,
     borderColor: theme_button_border_color,
+    dash_telegram_disc_link,
+    dash_telegram_anno_link,
   };
 };
 

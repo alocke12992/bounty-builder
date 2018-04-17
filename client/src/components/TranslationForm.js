@@ -84,11 +84,10 @@ class TranslationForm extends React.Component {
             <Header as="h4" color="blue">
               Link
             </Header>
-            <ReactQuill
+            <Form.Input
               value={trans_link}
-              modules={{toolbar}}
-              onChange={(value) =>
-                this.handleChange(value, 'trans_link')
+              onChange={(e) =>
+                this.handleChange(e.target.value, 'trans_link')
               }
             />
             <Divider hidden />

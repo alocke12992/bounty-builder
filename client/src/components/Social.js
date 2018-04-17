@@ -79,7 +79,7 @@ class Social extends React.Component {
                         fontColor={this.props.fontColor}
                         border={this.props.borderColor}
                         target="_blank"
-                        href="https://goo.gl/forms/QCQzNDqgoCtO0QeS2"
+                        href={`${infl_link}`}
                       >
                         Submit Social Media Account
                     </StyledButton>

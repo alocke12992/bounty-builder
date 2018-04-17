@@ -119,6 +119,7 @@ class Facebook extends React.Component {
 
   render() {
     const {value, activeIndex} = this.state;
+    const { facebookLink } = this.props
 
     return (
       <Container>
@@ -179,7 +180,7 @@ class Facebook extends React.Component {
                     Follow INSERT NAME HERE Facebook Page:
                   </Header>
                   <Like
-                    href="https://www.facebook.com/DecentralizedCodeNetwork/"
+                    href={`${facebookLink}`}
                     colorScheme="dark"
                     showFaces
                   />
@@ -210,12 +211,14 @@ const mapStateToProps = (state) => {
     theme_button_color,
     theme_button_font_color,
     theme_button_border_color,
+    prov_facebook_link,
   } = state.settings;
   return {
     rewards: state.rewards,
     buttonColor: theme_button_color,
     fontColor: theme_button_font_color,
     borderColor: theme_button_border_color,
+    facebookLink: prov_facebook_link,
   };
 };
 
