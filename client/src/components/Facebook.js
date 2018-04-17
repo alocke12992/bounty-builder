@@ -183,6 +183,7 @@ class Facebook extends React.Component {
                     href={`${facebookLink}`}
                     colorScheme="dark"
                     showFaces
+                    width="60"
                   />
                   <Divider hidden />
                   <Button

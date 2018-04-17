@@ -133,7 +133,7 @@ class Api::ModeratorController < Api::ApiController
 
   private
   def ensure_admin
-    unprocessable('Permission denied.') unless current_user.role == 'admin'
+    unprocessable('Permission denied.') unless current_user.role == 'admin' || 'dev'
   end
 
 end
