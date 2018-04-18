@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { setHeaders } from '../actions/headers';
 import {
   Card,
-  Container,
   Progress,
 } from 'semantic-ui-react';
 

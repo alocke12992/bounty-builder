@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import {registerUser} from '../actions/auth';
 import {setFlash} from '../actions/flash';
 import {baseURL} from '../utils/urls';
-import {Button, Divider, Form, Grid, Image, Segment, } from 'semantic-ui-react';
+import {Divider, Form, Grid, Image, Segment, } from 'semantic-ui-react';
 var Recaptcha = require('react-recaptcha');
 const queryString = require('query-string');
 // var ClientOAuth2 = require('client-oauth2')
@@ -147,17 +147,6 @@ class Register extends React.Component {
     );
   }
 }
-
-var styles = {
-  deconetButton: {
-    backgroundColor: '#2678EA',
-    color: 'white',
-  },
-  logo: {
-    height: 'auto',
-    width: 300,
-  },
-};
 
 const mapStateToProps = (state) => {
   const {

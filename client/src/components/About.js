@@ -66,13 +66,6 @@ const CenterImage = styled.div`
   justify-content: center !important;
 `
 
-var styles = {
-  logo: {
-    height: '120px',
-    width: '120px',
-  }
-};
-
 const mapStateToProps = (state) => {
   return { logo: state.settings.theme_logo }
 }

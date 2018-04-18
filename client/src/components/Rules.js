@@ -1,6 +1,6 @@
 import React from 'react';
 import GenerateHtml from './GenerateHtml';
-import { Container, Segment, Responsive, Divider } from 'semantic-ui-react';
+import { Container, Segment } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 
 class Rules extends React.Component {
@@ -12,7 +12,7 @@ class Rules extends React.Component {
   state = { ...this.initialState };
 
   render() {
-    const { rules_about, regulation } = this.props;
+    const { rules_about } = this.props;
 
     return (
       <Container>
@@ -25,11 +25,10 @@ class Rules extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  const { rules_about, regulations, id } = state.settings;
+  const { rules_about, id } = state.settings;
   return {
     user: state.user,
     rules_about,
-    regulations,
     id,
   };
 };

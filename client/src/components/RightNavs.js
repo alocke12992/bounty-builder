@@ -1,12 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
 import {connect} from 'react-redux';
 import {handleLogout} from '../actions/auth';
 import {Link, withRouter} from 'react-router-dom';
 import {
-  Container,
   Dropdown,
-  Image,
   Menu,
   Responsive,
 } from 'semantic-ui-react';
@@ -23,7 +20,7 @@ class RightNavs extends React.Component {
     );
   };
   adminRouteMap = () => {
-    const {history, user} = this.props
+    const {history} = this.props
     return adminRoutes.map((adminRoute, i) => {
       return (
         <Dropdown.Item
@@ -38,7 +35,7 @@ class RightNavs extends React.Component {
     })
   }
   devRouteMap = () => {
-    const {history, user} = this.props
+    const {history} = this.props
     return devRoutes.map((devRoute, i) => {
       return (
         <Dropdown.Item
@@ -134,40 +131,7 @@ const adminRoutes = [
     path: '/moderate',
   },
 ]
-const routes = [
-  {
-    name: 'Dashboard',
-    path: '/',
-  },
-  {
-    name: 'About Campaign',
-    path: '/rules',
-  },
-  {
-    name: 'Facebook',
-    path: '/facebook',
-  },
-  {
-    name: 'Twitter',
-    path: '/twitter',
-  },
-  {
-    name: 'LinkedIn',
-    path: '/linkedin',
-  },
-  {
-    name: 'Reddit',
-    path: '/reddit',
-  },
-  {
-    name: 'Influencer',
-    path: '/influencer',
-  },
-  {
-    name: 'Translation',
-    path: '/translation',
-  },
-];
+
 var styles = {
   logo: {
     height: '75px',
@@ -178,10 +142,6 @@ var styles = {
   },
 };
 
-const StyledMenu = styled(Menu) `
-  background: ${(props) => props.themecolor} !important;
-  height: '100px';
-`;
 export default withRouter(
   connect(mapStateToProps)(RightNavs)
 );

@@ -3,7 +3,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { setFlash } from '../../actions/flash';
 import { setHeaders } from '../../actions/headers';
-import { Button, Card, Divider, Form, Header, Input, } from 'semantic-ui-react';
+import { Card, Divider, Form, Header } from 'semantic-ui-react';
 
 class ModerateApproveInfluencers extends React.Component {
   state = { reward: '', submissions: [] }

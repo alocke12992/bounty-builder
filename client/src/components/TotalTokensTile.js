@@ -3,7 +3,6 @@ import GenerateHtml from './GenerateHtml';
 import { connect } from 'react-redux';
 import {
   Card,
-  Container,
   Progress,
 } from 'semantic-ui-react';
 

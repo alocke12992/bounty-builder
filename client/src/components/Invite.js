@@ -1,10 +1,8 @@
 import React from 'react';
-import { baseURL } from '../utils/urls';
 import { connect } from 'react-redux';
 import {
   Container,
   Grid,
-  Header,
   Segment,
 } from 'semantic-ui-react';
 import GenerateHtml from './GenerateHtml';

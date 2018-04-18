@@ -1,12 +1,10 @@
 import React from 'react';
 import ThemeOptions from './ThemeOptions';
 import DashboardForm from './DashboardForm';
-import { fetchSettings } from '../actions/settings';
 import InfluencerForm from './InfluencerForm';
 import ModeratorForm from './ModeratorForm';
 import ProviderForm from './ProviderForm';
 import RulesForm from './RulesForm';
-import styled from 'styled-components';
 import TranslationForm from './TranslationForm';
 import WelcomeForm from './WelcomeForm';
 import VideoContestForm from './VideoContestForm';

@@ -3,7 +3,6 @@ import About from './About';
 import AdminRoute from './AdminRoute';
 import AuthRoute from './AuthRoute';
 import DeconetOauth from './DeconetOauth';
-import DevRoute from './DevRoute';
 import FetchSettings from './FetchSettings';
 import FetchUser from './FetchUser';
 import Flash from './Flash';

@@ -3,7 +3,7 @@ import ButtonColor from './ButtonColor';
 import LogoUploader from './LogoUploader';
 import NavColor from './NavColor';
 import {connect} from 'react-redux';
-import {Button, Divider, Grid, Segment, Menu, Sidebar, Icon} from 'semantic-ui-react';
+import {Button, Divider, Grid } from 'semantic-ui-react';
 import MenuItem from '../styledcomponents/SideBarButton';
 import styled from 'styled-components';
 

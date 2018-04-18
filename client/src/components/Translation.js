@@ -5,11 +5,9 @@ import Submissions from './Submissions';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import {
-  Button,
   Container,
   Divider,
   Grid,
-  Header,
   Segment,
 } from 'semantic-ui-react';
 

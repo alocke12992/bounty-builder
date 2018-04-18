@@ -6,14 +6,12 @@ import { setFlash } from '../actions/flash';
 import { toolbar } from './Settings';
 import { updateSettings } from '../actions/settings';
 import {
-  Button,
   Checkbox,
   Container,
   Divider,
   Form,
   Grid,
   Header,
-  Segment,
 } from 'semantic-ui-react';
 
 class TranslationForm extends React.Component {

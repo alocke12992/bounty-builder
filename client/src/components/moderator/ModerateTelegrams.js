@@ -3,8 +3,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { setFlash } from '../../actions/flash';
 import { setHeaders } from '../../actions/headers';
-import styled from 'styled-components'
-import { Button, Divider, Input, Table, Loader } from 'semantic-ui-react';
+import { Button, Divider, Table, Loader } from 'semantic-ui-react';
 
 class ModerateTelegrams extends React.Component {
   state = { telegrams: [], loading: true };
@@ -36,7 +35,6 @@ class ModerateTelegrams extends React.Component {
   };
 
   approveAll = () => {
-    const { telegrams, loading } = this.state
     const { dispatch } = this.props
     this.setState({ loading: true })
     axios.post('/api/moderator/approve_all_telegrams')

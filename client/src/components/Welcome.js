@@ -1,6 +1,6 @@
 import React from 'react';
 import GenerateHtml from './GenerateHtml';
-import { Container, Segment, Responsive, Divider } from 'semantic-ui-react';
+import { Container } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 
 class Welcome extends React.Component {

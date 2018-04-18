@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {connect} from 'react-redux';
 import {SketchPicker} from 'react-color';
 import {updateSettings} from '../actions/settings'
-import {Button, Container, Divider, Grid, Segment, Dropdown, Header} from 'semantic-ui-react';
+import {Button, Container, Divider, Grid, Dropdown, Header} from 'semantic-ui-react';
 import StyledButton from '../styledcomponents/StyledButton';
 import Wrapper from '../styledcomponents/StyledBackground';
 

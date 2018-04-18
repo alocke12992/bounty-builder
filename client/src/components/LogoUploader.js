@@ -21,7 +21,6 @@ class LogoUploader extends React.Component {
 
   render() {
     const {theme_logo} = this.state
-    const {logo} = this.props;
     return (
       <Grid centered>
         <Divider hidden />

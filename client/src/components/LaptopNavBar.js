@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import StyledLogo from '../styledcomponents/StyledLogo';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import RightNavs from './RightNavs';

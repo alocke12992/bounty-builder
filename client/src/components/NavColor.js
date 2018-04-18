@@ -1,5 +1,4 @@
-import React, {Fragment} from 'react';
-import styled from 'styled-components';
+import React from 'react';
 import {connect} from 'react-redux';
 import {SketchPicker} from 'react-color';
 import {updateSettings} from '../actions/settings'

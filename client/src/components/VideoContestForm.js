@@ -6,14 +6,12 @@ import {toolbar} from './Settings';
 import {setFlash} from '../actions/flash';
 import {updateSettings} from '../actions/settings';
 import {
-  Button,
   Checkbox,
   Container,
   Divider,
   Form,
   Grid,
   Header,
-  Segment,
 } from 'semantic-ui-react';
 
 class VideoContestForm extends React.Component {

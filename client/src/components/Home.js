@@ -28,7 +28,6 @@ class Home extends React.Component {
   }
 
   setActive = (routes) => {
-    const { currentRoutes } = this.state;
     const activeRoutes = [];
     routes.map(
       (route) =>

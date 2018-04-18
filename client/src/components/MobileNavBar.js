@@ -7,7 +7,6 @@ import {
   Dropdown,
   Image,
   Menu,
-  Container,
 } from 'semantic-ui-react';
 
 class MobileNavBar extends Component {

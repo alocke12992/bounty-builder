@@ -1,7 +1,7 @@
-import React, {Component, Fragment} from 'react';
+import React, { Component, Fragment } from 'react';
 import LaptopNavBar from './LaptopNavBar';
 import MobileNavBar from './MobileNavBar';
-import {Responsive, Container} from 'semantic-ui-react';
+import { Responsive } from 'semantic-ui-react';
 
 class NavBar extends Component {
 

@@ -3,7 +3,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { setFlash } from '../../actions/flash';
 import { setHeaders } from '../../actions/headers';
-import { Button, Divider, Loader, Table, } from 'semantic-ui-react';
+import { Button, Divider, Table, } from 'semantic-ui-react';
 
 class ModerateRewards extends React.Component {
   state = { page: 1, rewards: [], totalPages: 0 }

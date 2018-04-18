@@ -8,7 +8,6 @@ import {setFlash} from '../actions/flash';
 import {setHeaders} from '../actions/headers';
 import {
   Card,
-  Container,
   Divider,
   Form,
   Header,

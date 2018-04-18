@@ -1,16 +1,12 @@
 import React from 'react';
 import axios from 'axios';
-import BlogRules from './BlogRules';
-import ChatRules from './ChatRules';
 import GenerateHtml from './GenerateHtml'
-import SocialMediaRules from './SocialMediaRules';
 import StyledButton from '../styledcomponents/StyledButton';
-import Submissions from './Submissions';
 import {connect} from 'react-redux';
 import {setFlash} from '../actions/flash';
 import {setHeaders} from '../actions/headers';
 import {withRouter} from 'react-router-dom';
-import {Button, Container, Grid, Header, Segment, } from 'semantic-ui-react';
+import {Container, Grid, Segment, } from 'semantic-ui-react';
 
 class VideoContest extends React.Component {
   state = {value: ''};

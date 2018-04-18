@@ -1,15 +1,12 @@
 import React from 'react';
-import axios from 'axios';
 import StyledButton from '../styledcomponents/StyledButton';
 import Welcome from './Welcome';
 import {connect} from 'react-redux';
 import {baseURL} from '../utils/urls';
 import {handleLogin} from '../actions/auth';
 import {Link} from 'react-router-dom';
-import {setHeaders} from '../actions/headers';
-import {setFlash} from '../actions/flash';
-import {Button, Form, Grid, Image, Segment, } from 'semantic-ui-react';
-const queryString = require('query-string');
+import { Form, Grid, Image, Segment, } from 'semantic-ui-react';
+
 // var ClientOAuth2 = require('client-oauth2');
 //
 // var deconetAuth = new ClientOAuth2({

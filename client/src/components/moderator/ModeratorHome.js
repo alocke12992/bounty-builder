@@ -2,7 +2,6 @@ import React from 'react'
 import GenerateCsv from './GenerateCsv';
 import ModerateApproveInfluencers from './ModerateApproveInfluencers';
 import ModerateApproveTranslators from './ModerateApproveTranslators';
-import ModerateDiscords from './ModerateDiscords';
 import ModerateRewards from './ModerateRewards';
 import ModerateSubmissions from './ModerateSubmissions';
 import ModerateTelegrams from './ModerateTelegrams';

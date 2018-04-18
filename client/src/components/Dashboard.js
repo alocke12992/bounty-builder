@@ -136,8 +136,6 @@ class Dashboard extends React.Component {
 
   render() {
     const {
-      captchaVerified,
-      confirmationCode,
       liveStreamConfirmationCode,
       showLiveStreamForm,
     } = this.state;

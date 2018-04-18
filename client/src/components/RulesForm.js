@@ -6,13 +6,11 @@ import { setFlash } from '../actions/flash';
 import { toolbar } from './Settings';
 import { updateSettings } from '../actions/settings';
 import {
-  Button,
   Container,
   Divider,
   Form,
   Grid,
   Header,
-  Segment,
 } from 'semantic-ui-react';
 
 class RulesForm extends React.Component {
