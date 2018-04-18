@@ -1,5 +1,6 @@
 import React from 'react';
 import StyledButton from '../styledcomponents/StyledButton';
+import Welcome from './Welcome';
 import {connect} from 'react-redux';
 import {registerUser} from '../actions/auth';
 import {setFlash} from '../actions/flash';
@@ -70,7 +71,8 @@ class Register extends React.Component {
               style={{height: '150px'}}
               alt="HN Text"
             />
-            <p>Welcome to the bounty program for Health Nexus, the healthcare-safe blockchain. Find more about our project here: <a href='https://token.simplyvitalhealth.com'>https://token.simplyvitalhealth.com/</a></p>
+            <p><Welcome/></p>
+            <br />
             <Form onSubmit={this.handleSubmit}>
               <Form.Field>
                 <label htmlFor='email'>Email</label>

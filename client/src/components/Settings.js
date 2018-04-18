@@ -8,6 +8,7 @@ import ProviderForm from './ProviderForm';
 import RulesForm from './RulesForm';
 import styled from 'styled-components';
 import TranslationForm from './TranslationForm';
+import WelcomeForm from './WelcomeForm';
 import VideoContestForm from './VideoContestForm';
 import { connect } from 'react-redux';
 import {
@@ -27,11 +28,15 @@ class Settings extends React.Component {
   themeOptions = () => {
     return <ThemeOptions />;
   };
-
+  
   moderator = () => {
     return <ModeratorForm />;
   };
 
+  welcomeForm = () => {
+    return <WelcomeForm />;
+  }
+  
   dashboard = () => {
     return <DashboardForm />;
   };
@@ -42,21 +47,23 @@ class Settings extends React.Component {
   influencer = () => {
     return <InfluencerForm />;
   };
-
+  
   provider = () => {
     return <ProviderForm />;
   };
-
-
+  
+  
   translation = () => {
     return <TranslationForm />;
   };
-
+  
   videoContest = () => {
     return <VideoContestForm />;
   };
-
-
+  
+ 
+  
+  
   render() {
     const { activeItem } = this.state;
 
@@ -75,6 +82,11 @@ class Settings extends React.Component {
           <Menu.Item
             name="moderator"
             active={activeItem === 'moderator'}
+            onClick={this.handleItemClick}
+          />
+           <Menu.Item
+            name="welcome"
+            active={activeItem === 'welcomeForm'}
             onClick={this.handleItemClick}
           />
           <Menu.Item
@@ -107,7 +119,9 @@ class Settings extends React.Component {
             active={activeItem === 'video_contest'}
             onClick={this.handleItemClick}
           />
+         
         </Menu>
+        
         <Divider hidden />
         <Segment>
           {activeItem === 'theme_options' &&
@@ -122,6 +136,7 @@ class Settings extends React.Component {
           {activeItem === 'video_contest' &&
             this.videoContest()}
           {activeItem === 'moderator' && this.moderator()}
+          {activeItem === 'welcome' && this.welcomeForm()}
         </Segment>
       </Container>
     );

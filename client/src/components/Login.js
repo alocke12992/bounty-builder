@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import StyledButton from '../styledcomponents/StyledButton';
+import Welcome from './Welcome';
 import {connect} from 'react-redux';
 import {baseURL} from '../utils/urls';
 import {handleLogin} from '../actions/auth';
@@ -48,7 +49,8 @@ class Login extends React.Component {
               style={{height: '150px'}}
               alt="HN Text"
             />
-            <p>Welcome to the bounty program for Health Nexus, the healthcare-safe blockchain. Find more about our project here: <a href='https://token.simplyvitalhealth.com'>https://token.simplyvitalhealth.com/</a></p>
+            <div><Welcome/></div>
+            <br />
             <Form onSubmit={this.handleSubmit}>
               <Form.Field>
                 <label htmlFor='email'>Email</label>

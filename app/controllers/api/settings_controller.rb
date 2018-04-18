@@ -74,7 +74,8 @@ class Api::SettingsController < ApplicationController
         :prov_twitter_link,
         :prov_linkedin_link,
         :prov_reddit_link,
-        :mod_new_post
+        :mod_new_post,
+        :welc_body
       )
   end 
 

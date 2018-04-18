@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180416205502) do
+ActiveRecord::Schema.define(version: 20180418202806) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,11 +84,11 @@ ActiveRecord::Schema.define(version: 20180416205502) do
     t.boolean "prov_twitter", default: false
     t.boolean "prov_linkedin", default: false
     t.boolean "prov_reddit", default: false
-    t.string "theme_button_font_color", default: "#000000"
-    t.string "theme_button_border_color", default: ""
     t.boolean "infl_show", default: false
     t.boolean "trans_show", default: false
     t.boolean "video_show", default: false
+    t.string "theme_button_font_color", default: "#000000"
+    t.string "theme_button_border_color", default: ""
     t.string "prov_facebook_link", default: ""
     t.string "prov_twitter_link", default: ""
     t.string "prov_linkedin_link", default: ""
@@ -97,6 +97,7 @@ ActiveRecord::Schema.define(version: 20180416205502) do
     t.string "dash_telegram_anno_link", default: ""
     t.string "video_link", default: ""
     t.text "mod_new_post", default: ""
+    t.text "welc_body", default: ""
   end
 
   create_table "submissions", force: :cascade do |t|
