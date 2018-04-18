@@ -1,6 +1,7 @@
 import React from 'react';
 import StyledButton from '../styledcomponents/StyledButton';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 import {setFlash} from '../actions/flash';
 import {recoverPassword, sendPasswordReset, } from '../actions/auth';
 import {Button, Grid, Form, Image, Segment, } from 'semantic-ui-react';
@@ -109,6 +110,15 @@ class RecoverPassword extends React.Component {
                     >
                       Submit
                     </StyledButton>
+                    <Link to='/'>
+                      <StyledButton
+                        backgroundColor={this.props.buttonColor}
+                        fontColor={this.props.fontColor}
+                        border={this.props.borderColor}
+                      >
+                        Back
+                      </StyledButton>
+                    </Link>
                   </Segment>
                 </Form>
             }
