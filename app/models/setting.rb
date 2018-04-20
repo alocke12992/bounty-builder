@@ -26,7 +26,8 @@ class Setting < ApplicationRecord
       dash_telegram_disc_link: "https://t.me/joinchat/C8JtFgzGzcsN_tjxoYBH1A",
       dash_telegram_anno_link: "https://t.me/joinchat/AAAAAFMSM6diX-uJd_AWPg",
       video_link: "https://goo.gl/forms/Ah5NiLdYASwbzt4d2",
-      mod_new_post: "<p>How to copy URLS from Facebook, Twitter, LinkedIn, Reddit</p><p>Facebook: On your wall, click the timestamp on the top of your facebook post. This will take you to a new url. Copy the url on the top of the browser. For example, 'https://www.facebook.com/SimplyVitalHealth/posts/175276439751750'.</p><p>Twitter: Click the small dropdown on the top right hand corner of your tweet. Select 'Copy Link to Tweet'. For example, 'https://twitter.com/SimplyVitalHQ/status/956332381358776320'</p><p>LinkedIn: On the top right hand corner of post use the drop down and select copy link to post.</p><p>Reddit: On your post, click the share button and then copy Link.</p>"
+      mod_new_post: "<p>How to copy URLS from Facebook, Twitter, LinkedIn, Reddit</p><p>Facebook: On your wall, click the timestamp on the top of your facebook post. This will take you to a new url. Copy the url on the top of the browser. For example, 'https://www.facebook.com/SimplyVitalHealth/posts/175276439751750'.</p><p>Twitter: Click the small dropdown on the top right hand corner of your tweet. Select 'Copy Link to Tweet'. For example, 'https://twitter.com/SimplyVitalHQ/status/956332381358776320'</p><p>LinkedIn: On the top right hand corner of post use the drop down and select copy link to post.</p><p>Reddit: On your post, click the share button and then copy Link.</p>",
+      welc_body: "<p>Welcome to Bounty Builder! You can edit this login message within the settings page.</p>"
     )
   end
 end
